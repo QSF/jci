@@ -22,7 +22,7 @@ $request = new Request();
 
 //*****************MOSTRA DO USO DO DOCTRINE****************
 $user = new User();
-$user->setName('Adilson God');
+$user->setName('Joao');
 
 //$em é do tipo entity manager e gerencia o ciclo de vida de nossas  entidades
 //Guardar ess $em na registry
