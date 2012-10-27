@@ -34,3 +34,4 @@
 <input type="text" id="id_xp" name"xp" size="200"> <br/>
 
 
+<input type="checkbox" name="receivedNotification" value="notification"/>Receber Notificações da JCI no seu email <br/>
