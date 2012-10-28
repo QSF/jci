@@ -1,11 +1,10 @@
 <?php
-/**
- * @Entity @Table(name="users")
- **/
 
 //para popular a tabela no bd 
 // digite doctrine orm:schema-tool:create
-
+/**
+ * @Entity @Table(name="users")
+ **/
 class User
 {
     /**
