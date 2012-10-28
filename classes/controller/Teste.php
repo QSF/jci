@@ -8,8 +8,7 @@
 //Interessante ter um script global chamado config.php?
 //Esse script setaria o path dos modulos ou dos componentes do mvc
 //include $view_path/View.php
-require_once (VIEW_PATH . "/View.php");
-require_once (CLASSES_PATH . "/Resource/ServiceLocator.php");
+//require_once (VIEW_PATH . "/View.php");
 
 class Teste{
 	

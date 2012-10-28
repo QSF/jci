@@ -4,6 +4,7 @@ define("LIB_PATH"    		, realpath('../lib')          		);
 define("VIEW_PATH"    		, realpath('../classes/view') 		); 
 define("CONTROLLER_PATH"    , realpath('../classes/controller') );
 define("MODEL_PATH"			, realpath('../classes/model')      ); 
+define("RESOURCE_PATH"		, realpath('../classes/resource')   ); 
 define("CLASSES_PATH"		, realpath('../classes')      		); 
 
 //criar um usuario jci no seu bd, que possa realizar o CRUD
