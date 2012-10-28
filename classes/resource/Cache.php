@@ -15,6 +15,8 @@ class Cache
 
     /**
      * Adiciona um recurso para o array de recursos.
+     * @param  $key   identificador(preferencialmente string) do recurso.
+     * @param  $value valor do recurso.
      * @todo padronizar os nomes(exemplo tudo minúsculo).
      */
     public function add($key, $value)
