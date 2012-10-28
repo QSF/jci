@@ -8,7 +8,7 @@
 //Interessante ter um script global chamado config.php?
 //Esse script setaria o path dos modulos ou dos componentes do mvc
 //include $view_path/View.php
-require_once (VIEW_PATH . "/View.php");
+//require_once (VIEW_PATH . "/View.php");
 
 class Teste{
 	
@@ -18,7 +18,7 @@ class Teste{
 		echo "Construtor da classe de teste<br/>";
 	}
 	
-	public function TesteCadastro(){
+	public function teste(){
 		echo "To no método do controller<br/>";
 
 		// Ilustrativo com user 
@@ -55,8 +55,8 @@ class Teste{
 			//$view = $request->get("registry");
 	//Se eu quisesse uma view feita de outro jeito em todo controller precisaria mudar a declaração abaixo
 	//		$view = $registry->get("View");		
-			$view = new View();
-
+	//		$view = new View();
+			$view = ServiceLocator::getInstance()->getView('View');
 
 			$view->assign("listaUsuarios", "listaUsuarios");
 			$view->add_css("editor");
