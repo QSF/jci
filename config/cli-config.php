@@ -1,7 +1,9 @@
 <?php
-// cli-config.php
-require_once "bootstrap.php";
+require_once "config.php";
 
-$helperSet = new \LIB_PATH\Symfony\Component\Console\Helper\HelperSet(array(
-    'em' => new \LIB_PATH\Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper($em)
+use Symfony\Component\Console\Helper\HelperSet;
+use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
+
+$helperSet = new HelperSet(array(
+   'em' => new EntityManagerHelper($em)
 ));
