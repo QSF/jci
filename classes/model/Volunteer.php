@@ -2,9 +2,10 @@
 
 /**
  * @Entity
+ * @Table(name="volunteer")
  * @InheritanceType("JOINED")
  * @DiscriminatorColumn(name="discr", type="string")
- * @DiscriminatorMap({"person" = "Person", "employee" = "Employee"})
+ * @DiscriminatorMap({"volunteerLegalPerson" = "VolunteerLegalPerson", "volunteerNaturalPerson" = "VolunteerNaturalPerson"})
  */
 abstract class Volunteer extends User
 {	

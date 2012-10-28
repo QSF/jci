@@ -1,6 +1,10 @@
 <?php
-/** @Entity */
-class Entity extends User{
+/** 
+* @Entity 
+* @Table(name="entity")
+*/
+class Entity extends User
+{
 	
 	/** 
 	 * @Column(type="date") 

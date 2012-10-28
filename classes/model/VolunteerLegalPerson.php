@@ -1,21 +1,29 @@
 <?php
+require_once MODEL_PATH . "/Volunteer.php";
 
-/** @Entity */
+/** 
+* @Entity 
+* @Table(name="volunteer_legal_person")
+*/
 class VolunteerLegalPerson extends Volunteer
 {	
-	/**@Column(type="integer", unique = true, nullable=false) 
-	*@var int
+	/** 
+	* @Column(type="integer", unique = true, nullable=false) 
+	* @var int
 	*/
 	protected $cnpj;
-	/**@Column(type="string") 
-	*@var string
+	/** 
+	* @Column(type="string") 
+	* @var string
 	**/
 	protected $companyName;
-	/**@Column(type="integer") 
+	/** 
+	* @Column(type="integer") 
 	* @var int
 	*/
 	protected $stateRegistration;
-	/**@Column(type="integer")
+	/**
+	* @Column(type="integer")
 	* @var int
 	*/
 	protected $ownerPhone;

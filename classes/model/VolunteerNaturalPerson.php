@@ -1,9 +1,14 @@
 <?php
+require_once MODEL_PATH . "/Volunteer.php";
 
-/** @Entity*/
+/** 
+* @Entity
+* @Table(name="volunteer_natural_person")
+*/
 class VolunteerNaturalPerson extends Volunteer
 {	
-	/**@Column(type="integer", unique = true, nullable=false) 
+	/**
+	* @Column(type="integer", unique = true, nullable=false) 
 	* @var int
 	*/
 	protected $cpf;
