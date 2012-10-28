@@ -9,8 +9,8 @@ require_once (RESOURCE_PATH  . "/Cache.php");
 /** Classe responsável por instanciar nossos recursos.
 *
 * Toda parte de instanciar objetos importantes ao nosso sistema serão encapsulados aqui.
-* Ela ainda mantém um chace, para se caso for preciso, reaproveitar um instancia(de um resource).
-* Além disse, para criar esses resources, a classe ResourceRegisters(array de ResourceRegisters) é utilizada.
+* Ela ainda mantém um chace, para se caso for preciso, reaproveitar uma instancia(de um resource).
+* Além disso, para criar esses resources, a classe ResourceRegisters(array de ResourceRegisters) é utilizada.
 * Aqui são instanciados:
 *			DAO  - utilizar um DAOFactory, passado por parâmetro em algum xml.
 *			View - Podendo utilizar também uma simples factory.
@@ -42,6 +42,10 @@ class ServiceLocator
 	*/
 	private $cache;
 
+
+	/**
+	* @var ServiceLocator
+	*/
 	private static $instance;
 	
 	function __construct()
@@ -62,7 +66,7 @@ class ServiceLocator
 	}
 
 	/** Método que pegamos uma instância do nosso service locator.
-	* @return instância do ServiceLocator
+	* @return serviceLocator instância do ServiceLocator
 	*/
 	public static function getInstance(){
 		if ( self::$instance == null ){
@@ -74,10 +78,10 @@ class ServiceLocator
 
 	/** Método geral de criar um resource, para evitar crtl c e crtl v(é command jonas? rsrs)
 	* @param $name nome do resource desejado.
-	* @param $name nome do register que criará o resource.
+	* @param $registerName nome do register que criará o resource.
 	*
-	* @return um resource - se conseguir criar.
-	* @return null, caso não consiga criar.
+	* @return resource um resource - se conseguir criar.
+	* @return null caso não consiga criar.
 	*
 	* @throws Exception - Se não houver register com este nome.
 	*
@@ -106,8 +110,8 @@ class ServiceLocator
 	/** Método que pega a instância de um DAO.
 	* @param $name nome do DAO desejado.
 	*
-	* @return instância do DAO - se conseguir criar.
-	* @return null, caso não consiga criar.
+	* @return dao instância do DAO - se conseguir criar.
+	* @return null caso não consiga criar.
 	*
 	* @todo padronizar este nomes que serão passados.
 	*/
@@ -118,8 +122,8 @@ class ServiceLocator
 	/** Retorna a instância de uma View
 	* @param $name nome da view.
 	*
-	* @return instância da view.
-	* @return null, caso não consiga criar.
+	* @return view instância da view.
+	* @return null caso não consiga criar.
 	*
 	* @todo padronizar este nomes que serão passados.
 	*/

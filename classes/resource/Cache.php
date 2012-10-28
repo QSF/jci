@@ -26,7 +26,7 @@ class Cache
     
     /**
      * @param  $key identificador(preferencialmente string) do recurso.
-     * @return um recurso, caso exista um com este nome.
+     * @return resource um recurso, caso exista um com este nome.
      * @return null caso não exista recurso com este nome.
      * @todo   padronizar os nomes(exemplo tudo minúsculo).
      */

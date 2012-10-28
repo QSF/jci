@@ -1,0 +1,1006 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project version="2.0.0a10" title="">
+  <file path="model/User.php" hash="eef127bba0a3527142635a76a1f4c423" package="Default">
+    <class final="false" abstract="false" namespace="global" line="9" package="Default">
+      <extends/>
+      <name>User</name>
+      <full_name>\User</full_name>
+      <docblock line="2">
+        <description><![CDATA[]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="2" name="Entity" description="Entity" plugin="doctrine" link="http://www.doctrine-project.org/docs/orm/2.1/en/reference/annotations-reference.html#annref-entity" content="Table(name=&quot;users&quot;">
+          <argument field-name="Table(name">"users"</argument>
+        </tag>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="15" namespace="global" package="Default">
+        <name>$id</name>
+        <default><![CDATA[]]></default>
+        <docblock line="11">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="11" name="Id" description="Id" plugin="doctrine" link="http://www.doctrine-project.org/docs/orm/2.1/en/reference/annotations-reference.html#annref-id" content="GeneratedValue @Column(type=&quot;integer&quot;">
+            <argument field-name="GeneratedValue @Column(type">"integer"</argument>
+          </tag>
+          <tag line="11" name="var" description="" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="protected" line="21" namespace="global" package="Default">
+        <name>$name</name>
+        <default><![CDATA[]]></default>
+        <docblock line="17">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="17" name="Column" description="Column" plugin="doctrine" link="http://www.doctrine-project.org/docs/orm/2.1/en/reference/annotations-reference.html#annref-column" content="type=&quot;string&quot;">
+            <argument field-name="type">"string"</argument>
+          </tag>
+          <tag line="17" name="var" description="" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="23" package="Default">
+        <name>getName</name>
+        <full_name>getName</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="27" package="Default">
+        <name>setName</name>
+        <full_name>setName</full_name>
+        <argument line="27">
+          <name>$name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="31" package="Default">
+        <name>getId</name>
+        <full_name>getId</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="35" package="Default">
+        <name>setId</name>
+        <full_name>setId</full_name>
+        <argument line="35">
+          <name>$name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file model/User.php</error>
+      <critical line="2" code="50005">No short description for class \User</critical>
+      <critical line="11" code="50019">No short description for property $id</critical>
+      <critical line="17" code="50019">No short description for property $name</critical>
+      <error line="23" code="50010">No DocBlock was found for method getName()</error>
+      <error line="27" code="50010">No DocBlock was found for method setName()</error>
+      <error line="31" code="50010">No DocBlock was found for method getId()</error>
+      <error line="35" code="50010">No DocBlock was found for method setId()</error>
+    </parse_markers>
+  </file>
+  <file path="Request.php" hash="47f37c75dca0bb398758fa0fb69afe7d" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="Default">
+      <extends/>
+      <name>Request</name>
+      <full_name>\Request</full_name>
+      <docblock line="2">
+        <description><![CDATA[Classe que encapsula a request]]></description>
+        <long-description><![CDATA[<p>Classe que tem o objetivo de pegar a requisicao e encapsulá-la.
+Facilita a manipulação da requisição de outras classes que usarão os arrays superglobais $_POST e $_GET</p>]]></long-description>
+        <tag line="2" name="access" description="public"/>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="18" namespace="global" package="Default">
+        <name>$array_request</name>
+        <default><![CDATA[array()]]></default>
+        <docblock line="14">
+          <description><![CDATA[Array que guarda os atributos da requsição]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="14" name="name" description="array_request"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="26" namespace="global" package="Default">
+        <name>$model_name</name>
+        <default><![CDATA[]]></default>
+        <docblock line="20">
+          <description><![CDATA[Nome do controller recebido por parâmetro na requisição]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="20" name="name" description="module_name"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="33" namespace="global" package="Default">
+        <name>$action_name</name>
+        <default><![CDATA[]]></default>
+        <docblock line="28">
+          <description><![CDATA[Nome da action recebida por parâmetro na requisição]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="28" name="name" description="action_name"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="40" namespace="global" package="Default">
+        <name>$http_method</name>
+        <default><![CDATA[]]></default>
+        <docblock line="35">
+          <description><![CDATA[Atributo que guardo o tipo de método http da requisição
+Pode ser GET ou POST]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="35" name="name" description="method_http"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="46" namespace="global" package="Default">
+        <name>$cookies</name>
+        <default><![CDATA[array()]]></default>
+        <docblock line="42">
+          <description><![CDATA[Atributo que guarda um array de eventuais cookies que iremos precisar]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="42" name="name" description="cookies"/>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="51" package="Default">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="48">
+          <description><![CDATA[Verifica se o método HTTP é GET ou POST e atribui esse array na variavel $array_request]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="73" package="Default">
+        <name>get</name>
+        <full_name>get</full_name>
+        <docblock line="68">
+          <description><![CDATA[Método que pega o atributo do array passado pelo parâmetro]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="68" name="return" description="o atributo da requisição" type="\Retorna">
+            <type by_reference="false">\Retorna</type>
+          </tag>
+        </docblock>
+        <argument line="73">
+          <name>$name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="85" package="Default">
+        <name>set</name>
+        <full_name>set</full_name>
+        <docblock line="79">
+          <description><![CDATA[Método que pega o atributo do array passado pelo parâmetro]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="79" name="param" description="Nome do atributo a ser setado" type="\attr_name" variable="$attr_name">
+            <type by_reference="false">\attr_name</type>
+          </tag>
+          <tag line="79" name="param" description="Objeto que será colocado na requisição" type="object" variable="$object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="85">
+          <name>$attr_name</name>
+          <default><![CDATA[]]></default>
+          <type>\String</type>
+        </argument>
+        <argument line="85">
+          <name>$object</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="89" package="Default">
+        <name>get_model_name</name>
+        <full_name>get_model_name</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="93" package="Default">
+        <name>set_model_name</name>
+        <full_name>set_model_name</full_name>
+        <argument line="93">
+          <name>$model_name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="97" package="Default">
+        <name>get_action_name</name>
+        <full_name>get_action_name</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="101" package="Default">
+        <name>set_action_name</name>
+        <full_name>set_action_name</full_name>
+        <argument line="101">
+          <name>$action_name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="105" package="Default">
+        <name>get_cookies</name>
+        <full_name>get_cookies</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="109" package="Default">
+        <name>set_cookie</name>
+        <full_name>set_cookie</full_name>
+        <argument line="109">
+          <name>$name_cookie</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="109">
+          <name>$value</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file Request.php</error>
+      <error line="68" code="50015">Argument $name is missing from the Docblock of get()</error>
+      <error line="79" code="50016">The type hint of the argument is incorrect for the type definition of the @param tag with argument $attr_name in set()</error>
+      <error line="89" code="50010">No DocBlock was found for method get_model_name()</error>
+      <error line="93" code="50010">No DocBlock was found for method set_model_name()</error>
+      <error line="97" code="50010">No DocBlock was found for method get_action_name()</error>
+      <error line="101" code="50010">No DocBlock was found for method set_action_name()</error>
+      <error line="105" code="50010">No DocBlock was found for method get_cookies()</error>
+      <error line="109" code="50010">No DocBlock was found for method set_cookie()</error>
+    </parse_markers>
+  </file>
+  <file path="Authorization.php" hash="e64caa3f9ac23a4ef74f802855117afc" package="Default">
+    <class final="false" abstract="false" namespace="global" line="15" package="Default">
+      <extends/>
+      <name>Authorization</name>
+      <full_name>\Authorization</full_name>
+      <docblock line="2">
+        <description><![CDATA[Gerencia a permissão dos recursos]]></description>
+        <long-description><![CDATA[<p>Classe que checa se o usuário está autorizado a visualizar o recurso requisitado.
+A ideia é ter em todas requisições o atributo user, que representará o papel do usuário.
+<b>É necessário a atribuição do $_SESSION["role"] no momento do login</b></p>
+
+<p>Obs: O ponto fraco dessa abordagem é a necessidade de em todas as requisições ter o atributo "user"
+O ponto forte é sua simplicidade
+Ainda pode ser melhorado</p>]]></long-description>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="17" namespace="global" package="Default">
+        <name>$request</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="24" package="Default">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="19">
+          <description><![CDATA[Construtor da classe Authorization]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="19" name="param" description="request" type="\Request" variable="$request">
+            <type by_reference="false">\Request</type>
+          </tag>
+        </docblock>
+        <argument line="24">
+          <name>$request</name>
+          <default><![CDATA[]]></default>
+          <type>\Request</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="33" package="Default">
+        <name>get_user_role</name>
+        <full_name>get_user_role</full_name>
+        <docblock line="28">
+          <description><![CDATA[Método que retorna o papel do usuário do site]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="28" name="return" description="Nome do cargo" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="53" package="Default">
+        <name>get_role_attribute</name>
+        <full_name>get_role_attribute</full_name>
+        <docblock line="48">
+          <description><![CDATA[Método que pega o atributo da requisição]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="48" name="return" description="retorna o papel que se encontra no atributo" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="61" package="Default">
+        <name>authorizate</name>
+        <full_name>authorizate</full_name>
+        <docblock line="57">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file Authorization.php</error>
+      <error line="17" code="50018">No DocBlock was found for property $request</error>
+      <error line="57" code="50012">No short description for method authorizate()</error>
+    </parse_markers>
+  </file>
+  <file path="controller/Teste.php" hash="e8c4a2ed0ef22baf1c7f93ac9009729f" package="Default">
+    <class final="false" abstract="false" namespace="global" line="13" package="Default">
+      <extends/>
+      <name>Teste</name>
+      <full_name>\Teste</full_name>
+      <property final="false" static="false" visibility="private" line="15" namespace="global" package="Default">
+        <name>$request</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="17" package="Default">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <argument line="17">
+          <name>$request</name>
+          <default><![CDATA[]]></default>
+          <type>\Request</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="21" package="Default">
+        <name>TesteCadastro</name>
+        <full_name>TesteCadastro</full_name>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file controller/Teste.php</error>
+      <error line="13" code="50000">No DocBlock was found for \Teste</error>
+      <error line="15" code="50018">No DocBlock was found for property $request</error>
+      <error line="17" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="21" code="50010">No DocBlock was found for method TesteCadastro()</error>
+    </parse_markers>
+  </file>
+  <file path="controller/FrontController.php" hash="d4948b69e7dc60ef9ad383fc844c4af3" package="Default">
+    <include line="48" type="Include" package="Default">
+      <name/>
+    </include>
+    <class final="false" abstract="false" namespace="global" line="22" package="Default">
+      <extends/>
+      <name>FrontController</name>
+      <full_name>\FrontController</full_name>
+      <docblock line="2">
+        <description><![CDATA[Controller que canaliza todas as requisições e despacha para a action apropiada]]></description>
+        <long-description><![CDATA[<p>Front Controller é o controlador que recebe todas as requisições, manipula as entradas da requisição
+e a partir delas, determina dinamicamente qual ação seguir.</p>
+
+<p>Há duas soluções. Seguir o pattern Command e a partir dele
+cada ação do sistema teria uma classe com apenas um método.
+O ponto fraco dessa abordagem é o resultado de muitas classes do sistema.
+Exemplo: index.php?action=IntermediarDoações</p>
+
+<p>A outra é separar o sistema pelos módulos e suas respectivas ações
+Exemplo:index.php?model=doacao&amp;action=intermediar</p>
+
+<p>Por ora, foi escolhida a segunda abordagem</p>]]></long-description>
+        <tag line="2" name="link" description="http://martinfowler.com/eaaCatalog/frontController.html" link="http://martinfowler.com/eaaCatalog/frontController.html"/>
+        <tag line="2" name="access" description="public"/>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="24" namespace="global" package="Default">
+        <name>$request</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="31" package="Default">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="25">
+          <description><![CDATA[Inicializa as propriedades do front controller]]></description>
+          <long-description><![CDATA[<p>Construtor que trata os atributos da requisicao, salvando nas variáveis de instância
+o nome da classe e o nome da action dada</p>]]></long-description>
+        </docblock>
+        <argument line="31">
+          <name>$request</name>
+          <default><![CDATA[]]></default>
+          <type>\Request</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="42" package="Default">
+        <name>dispatch</name>
+        <full_name>dispatch</full_name>
+        <docblock line="35">
+          <description><![CDATA[Despacha para as actions de acordo com os atributos da URL]]></description>
+          <long-description><![CDATA[<p>O atributo model aponta para o controller em questão.
+O atributo action é o método dessa classe em questão</p>]]></long-description>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file controller/FrontController.php</error>
+      <error line="24" code="50018">No DocBlock was found for property $request</error>
+      <error line="25" code="50015">Argument $request is missing from the Docblock of __construct()</error>
+    </parse_markers>
+  </file>
+  <file path="resource/ResourceRegisters.php" hash="812607c7acc5dfeb73ec7263006f6e21" package="Default">
+    <class final="false" abstract="false" namespace="global" line="6" package="Default">
+      <extends/>
+      <name>ResourceRegisters</name>
+      <full_name>\ResourceRegisters</full_name>
+      <docblock line="2">
+        <description><![CDATA[Classe que contém vários objetos que criam serviços.]]></description>
+        <long-description><![CDATA[<p>Esta classe possuirá um array de objetos que criam serviços(como factorys).</p>]]></long-description>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="8" namespace="global" package="Default">
+        <name>$registers</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="10" package="Default">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="21" package="Default">
+        <name>add</name>
+        <full_name>add</full_name>
+        <docblock line="15">
+          <description><![CDATA[Adiciona um Register para o array.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="15" name="param" description="nome do register que vai ser adicionado." type="\$name" variable="$name">
+            <type by_reference="false">\$name</type>
+          </tag>
+          <tag line="15" name="param" description="instancia do register adicionado." type="\$value" variable="$value">
+            <type by_reference="false">\$value</type>
+          </tag>
+          <tag line="15" name="todo" description="padronizar os nomes(exemplo tudo minúsculo)."/>
+        </docblock>
+        <argument line="21">
+          <name>$name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="21">
+          <name>$value</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="32" package="Default">
+        <name>get</name>
+        <full_name>get</full_name>
+        <docblock line="26">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="26" name="param" description="nome do register para ser retornado." type="\$name" variable="$name">
+            <type by_reference="false">\$name</type>
+          </tag>
+          <tag line="26" name="return" description="register correspondente ao nome(caso exista)." type="\register">
+            <type by_reference="false">\register</type>
+          </tag>
+          <tag line="26" name="return" description="caso não exista nenhum register com este nome." type="null">
+            <type by_reference="false">null</type>
+          </tag>
+          <tag line="26" name="todo" description="padronizar os nomes(exemplo tudo minúsculo)."/>
+        </docblock>
+        <argument line="32">
+          <name>$name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="40" package="Default">
+        <name>clear</name>
+        <full_name>clear</full_name>
+        <docblock line="37">
+          <description><![CDATA[Limpa o conteúdo do array.]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file resource/ResourceRegisters.php</error>
+      <error line="8" code="50018">No DocBlock was found for property $registers</error>
+      <error line="10" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="26" code="50012">No short description for method get()</error>
+    </parse_markers>
+  </file>
+  <file path="resource/registers/Register.php" hash="2274dc92915fa5f27bfeace66b52db5c" package="Default">
+    <interface namespace="global" line="7" package="Default">
+      <name>Register</name>
+      <full_name>\Register</full_name>
+      <docblock line="3">
+        <description><![CDATA[Interface que nossos registers deverão implementar.]]></description>
+        <long-description><![CDATA[<p>Os Registers deverão implementar está interface visto que na classe ServiceLocator é utilizado o método create.</p>]]></long-description>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="9" package="Default">
+        <name>create</name>
+        <full_name>create</full_name>
+        <argument line="9">
+          <name>$name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </interface>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file resource/registers/Register.php</error>
+      <error line="9" code="50010">No DocBlock was found for method create()</error>
+    </parse_markers>
+  </file>
+  <file path="resource/registers/ViewFactory.php" hash="e13c2c7b8426207ab383d02b2af773cb" package="Default">
+    <include line="3" type="Require Once" package="Default">
+      <name/>
+    </include>
+    <include line="4" type="Require Once" package="Default">
+      <name/>
+    </include>
+    <class final="false" abstract="false" namespace="global" line="9" package="Default">
+      <extends/>
+      <implements>\Register</implements>
+      <name>ViewFactory</name>
+      <full_name>\ViewFactory</full_name>
+      <docblock line="6">
+        <description><![CDATA[]]></description>
+        <long-description><![CDATA[]]></long-description>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="11" package="Default">
+        <name>create</name>
+        <full_name>create</full_name>
+        <argument line="11">
+          <name>$name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="15" package="Default">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file resource/registers/ViewFactory.php</error>
+      <critical line="6" code="50005">No short description for class \ViewFactory</critical>
+      <error line="11" code="50010">No DocBlock was found for method create()</error>
+      <error line="15" code="50010">No DocBlock was found for method __construct()</error>
+    </parse_markers>
+  </file>
+  <file path="resource/ServiceLocator.php" hash="b41f3d587c1d8540914d6adf9798dbb0" package="Default">
+    <include line="4" type="Require Once" package="Default">
+      <name/>
+    </include>
+    <include line="5" type="Require Once" package="Default">
+      <name/>
+    </include>
+    <include line="6" type="Require Once" package="Default">
+      <name/>
+    </include>
+    <class final="false" abstract="false" namespace="global" line="26" package="Default">
+      <extends/>
+      <name>ServiceLocator</name>
+      <full_name>\ServiceLocator</full_name>
+      <docblock line="9">
+        <description><![CDATA[Classe responsável por instanciar nossos recursos.]]></description>
+        <long-description><![CDATA[<p>Toda parte de instanciar objetos importantes ao nosso sistema serão encapsulados aqui.
+Ela ainda mantém um chace, para se caso for preciso, reaproveitar uma instancia(de um resource).
+Além disso, para criar esses resources, a classe ResourceRegisters(array de ResourceRegisters) é utilizada.
+Aqui são instanciados:
+        DAO  - utilizar um DAOFactory, passado por parâmetro em algum xml.
+        View - Podendo utilizar também uma simples factory.
+Está classe é SingleTon e para acessá-la utiliza o método ServiceLocator::getInstance()
+Lembre-se que registros criam resources.</p>]]></long-description>
+        <tag line="9" name="see" description="\global\ResourceRegisters" refers="\global\ResourceRegisters"/>
+        <tag line="9" name="see" description="\global\Register" refers="\global\Register"/>
+        <tag line="9" name="see" description="\global\Cache" refers="\global\Cache"/>
+        <tag line="9" name="todo" description="Adicionar o xml para pegar os nossos registers."/>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="36" namespace="global" package="Default">
+        <name>$resourceRegisters</name>
+        <default><![CDATA[]]></default>
+        <docblock line="28">
+          <description><![CDATA[Variável que mantem um conjunto de objetos que criam recursos.]]></description>
+          <long-description><![CDATA[<p>Possui um array de todos os objetos que vão criar os recursos de nosso sistema, desta forma a dependência é passada para eles.
+Neste array, vão haver basicamente factorys, tanto pada DAO, View e o que mais tiver.</p>]]></long-description>
+          <tag line="28" name="var" description="" type="\ResourceRegisters">
+            <type by_reference="false">\ResourceRegisters</type>
+          </tag>
+          <tag line="28" name="see" description="\global\ResourceRegisters" refers="\global\ResourceRegisters"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="43" namespace="global" package="Default">
+        <name>$cache</name>
+        <default><![CDATA[]]></default>
+        <docblock line="37">
+          <description><![CDATA[Um objeto que possui um array de recursos utilizado para fazer cache.]]></description>
+          <long-description><![CDATA[<p>Um objeto do tipo Cache que manteém um array dos recursos instanciados, desta forma é possível fazer chace e evitar retrabalho.</p>]]></long-description>
+          <tag line="37" name="var" description="" type="\Cache">
+            <type by_reference="false">\Cache</type>
+          </tag>
+          <tag line="37" name="see" description="\global\Cache" refers="\global\Cache"/>
+        </docblock>
+      </property>
+      <property final="false" static="true" visibility="private" line="49" namespace="global" package="Default">
+        <name>$instance</name>
+        <default><![CDATA[]]></default>
+        <docblock line="46">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="46" name="var" description="" type="\ServiceLocator">
+            <type by_reference="false">\ServiceLocator</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="51" package="Default">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="62" package="Default">
+        <name>init</name>
+        <full_name>init</full_name>
+        <docblock line="58">
+          <description><![CDATA[Métod que inicializa os registers.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="58" name="todo" description="ler as configurações de um arquivo xml, onde o nome do mesmo será dado pelo arquivo config.php."/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="71" package="Default">
+        <name>getInstance</name>
+        <full_name>getInstance</full_name>
+        <docblock line="68">
+          <description><![CDATA[Método que pegamos uma instância do nosso service locator.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="68" name="return" description="instância do ServiceLocator" type="\serviceLocator">
+            <type by_reference="false">\serviceLocator</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="90" package="Default">
+        <name>getResource</name>
+        <full_name>getResource</full_name>
+        <docblock line="79">
+          <description><![CDATA[Método geral de criar um resource, para evitar crtl c e crtl v(é command jonas? rsrs)]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="79" name="param" description="nome do resource desejado." type="\$name" variable="$name">
+            <type by_reference="false">\$name</type>
+          </tag>
+          <tag line="79" name="param" description="nome do register que criará o resource." type="\$registerName" variable="$registerName">
+            <type by_reference="false">\$registerName</type>
+          </tag>
+          <tag line="79" name="return" description="um resource - se conseguir criar." type="resource">
+            <type by_reference="false">resource</type>
+          </tag>
+          <tag line="79" name="return" description="caso não consiga criar." type="null">
+            <type by_reference="false">null</type>
+          </tag>
+          <tag line="79" name="throws" description="- Se não houver register com este nome." type="\Exception">
+            <type by_reference="false">\Exception</type>
+          </tag>
+          <tag line="79" name="todo" description="utilizar um padrão para os nomes(como lowercase)."/>
+        </docblock>
+        <argument line="90">
+          <name>$name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="90">
+          <name>$registerName</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="118" package="Default">
+        <name>getDAO</name>
+        <full_name>getDAO</full_name>
+        <docblock line="110">
+          <description><![CDATA[Método que pega a instância de um DAO.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="110" name="param" description="nome do DAO desejado." type="\$name" variable="$name">
+            <type by_reference="false">\$name</type>
+          </tag>
+          <tag line="110" name="return" description="instância do DAO - se conseguir criar." type="\dao">
+            <type by_reference="false">\dao</type>
+          </tag>
+          <tag line="110" name="return" description="caso não consiga criar." type="null">
+            <type by_reference="false">null</type>
+          </tag>
+          <tag line="110" name="todo" description="padronizar este nomes que serão passados."/>
+        </docblock>
+        <argument line="118">
+          <name>$name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="130" package="Default">
+        <name>getView</name>
+        <full_name>getView</full_name>
+        <docblock line="122">
+          <description><![CDATA[Retorna a instância de uma View]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="122" name="param" description="nome da view." type="\$name" variable="$name">
+            <type by_reference="false">\$name</type>
+          </tag>
+          <tag line="122" name="return" description="instância da view." type="\view">
+            <type by_reference="false">\view</type>
+          </tag>
+          <tag line="122" name="return" description="caso não consiga criar." type="null">
+            <type by_reference="false">null</type>
+          </tag>
+          <tag line="122" name="todo" description="padronizar este nomes que serão passados."/>
+        </docblock>
+        <argument line="130">
+          <name>$name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file resource/ServiceLocator.php</error>
+      <critical line="46" code="50019">No short description for property $instance</critical>
+      <error line="51" code="50010">No DocBlock was found for method __construct()</error>
+    </parse_markers>
+  </file>
+  <file path="resource/Cache.php" hash="eae0fe36c3ac8896b4b5c10afabaa4a7" package="Default">
+    <class final="false" abstract="false" namespace="global" line="7" package="Default">
+      <extends/>
+      <name>Cache</name>
+      <full_name>\Cache</full_name>
+      <docblock line="2">
+        <description><![CDATA[Classe que mantém um cache de todos os recursos instanciados no sistem.]]></description>
+        <long-description><![CDATA[<p>Possui um array de objetos, fornecendo uma estrutura para nosso ServiceLocator evitar retrabalho.</p>]]></long-description>
+        <tag line="2" name="see" description="\global\ServiceLocator." refers="\global\ServiceLocator."/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="9" namespace="global" package="Default">
+        <name>$resources</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="11" package="Default">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="22" package="Default">
+        <name>add</name>
+        <full_name>add</full_name>
+        <docblock line="16">
+          <description><![CDATA[Adiciona um recurso para o array de recursos.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="16" name="param" description="identificador(preferencialmente string) do recurso." type="\$key" variable="$key">
+            <type by_reference="false">\$key</type>
+          </tag>
+          <tag line="16" name="param" description="valor do recurso." type="\$value" variable="$value">
+            <type by_reference="false">\$value</type>
+          </tag>
+          <tag line="16" name="todo" description="padronizar os nomes(exemplo tudo minúsculo)."/>
+        </docblock>
+        <argument line="22">
+          <name>$key</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="22">
+          <name>$value</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="33" package="Default">
+        <name>get</name>
+        <full_name>get</full_name>
+        <docblock line="27">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="27" name="param" description="identificador(preferencialmente string) do recurso." type="\$key" variable="$key">
+            <type by_reference="false">\$key</type>
+          </tag>
+          <tag line="27" name="return" description="um recurso, caso exista um com este nome." type="resource">
+            <type by_reference="false">resource</type>
+          </tag>
+          <tag line="27" name="return" description="caso não exista recurso com este nome." type="null">
+            <type by_reference="false">null</type>
+          </tag>
+          <tag line="27" name="todo" description="padronizar os nomes(exemplo tudo minúsculo)."/>
+        </docblock>
+        <argument line="33">
+          <name>$key</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="40" package="Default">
+        <name>clear</name>
+        <full_name>clear</full_name>
+        <docblock line="38">
+          <description><![CDATA[Limpa o array de recursos.]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file resource/Cache.php</error>
+      <error line="9" code="50018">No DocBlock was found for property $resources</error>
+      <error line="11" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="27" code="50012">No short description for method get()</error>
+    </parse_markers>
+  </file>
+  <file path="view/Layout.php" hash="8eff763ec2187febcddd6bf7612076af" package="Default">
+    <include line="31" type="Include" package="Default">
+      <name/>
+    </include>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file view/Layout.php</error>
+    </parse_markers>
+  </file>
+  <file path="view/FormVonlunteerNaturalPerson.php" hash="55c9230bbb1810443949604b2d2ab058" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file view/FormVonlunteerNaturalPerson.php</error>
+    </parse_markers>
+  </file>
+  <file path="view/VolunteerLegalPersonForm.php" hash="583812ee418321e9e006a0001e1e8af2" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file view/VolunteerLegalPersonForm.php</error>
+    </parse_markers>
+  </file>
+  <file path="view/VolunteerMenu.php" hash="d41d8cd98f00b204e9800998ecf8427e" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file view/VolunteerMenu.php</error>
+    </parse_markers>
+  </file>
+  <file path="view/View.php" hash="21e67cc3b8327da1054648aaee8f1076" package="Default">
+    <include line="103" type="Include" package="Default">
+      <name>Layout.php</name>
+    </include>
+    <class final="false" abstract="false" namespace="global" line="15" package="Default">
+      <extends/>
+      <name>View</name>
+      <full_name>\View</full_name>
+      <docblock line="2">
+        <description><![CDATA[Classe que representa a view de nosso sistema]]></description>
+        <long-description><![CDATA[<p>A classe view foi feita pra representar o estado de nossos modelos e formatar nosso layout
+É composto essencialmente de um array que guarda os objetos usados na nossa view.
+Se por exemplo, depois de uma intermediação de dados, há uma lista de entidadades,
+o único trabalho será chamar em nossos controllers $view->assign("lista_voluntarios", $lista)
+Em nossa área de conteúdo, é possível usar o lista_voluntários.
+Para printar o nosso conteúdo na tela, é simplesmente</p>
+
+<p>A view desse jeito será baseada no template engine do php chamado Smarty</p>]]></long-description>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="25" namespace="global" package="Default">
+        <name>$array_param</name>
+        <default><![CDATA[array()]]></default>
+        <docblock line="17">
+          <description><![CDATA[Hash que guarda os parâmetros de requisição setadas pelo controller.]]></description>
+          <long-description><![CDATA[<p>Esse hash ilustra o estado do modelo.
+Os valores serão usados no script que será incluído pelo parâmetro content do método display</p>]]></long-description>
+          <tag line="17" name="name" description="array_param"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="34" namespace="global" package="Default">
+        <name>$array_css</name>
+        <default><![CDATA[array()]]></default>
+        <docblock line="27">
+          <description><![CDATA[Array que guarda nome do script do css.]]></description>
+          <long-description><![CDATA[<p>Não é necessário o nome da extensão.
+Lembrete: Os scripts do CSS e do JS do layout serão carregados por padrão.</p>]]></long-description>
+          <tag line="27" name="name" description="array_css"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="43" namespace="global" package="Default">
+        <name>$array_js</name>
+        <default><![CDATA[array()]]></default>
+        <docblock line="36">
+          <description><![CDATA[Array que guarda o nome dos scripts do JS
+Não é necessário o nome da extensão.]]></description>
+          <long-description><![CDATA[<p>Lembrete: Os scripts do CSS e do JS do layout serão carregados por padrão.</p>]]></long-description>
+          <tag line="36" name="name" description="array_js"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="52" namespace="global" package="Default">
+        <name>$error_message</name>
+        <default><![CDATA[array()]]></default>
+        <docblock line="45">
+          <description><![CDATA[Array que guarda as mensagens de erro de nosso sistema.]]></description>
+          <long-description><![CDATA[<p>Esse array é usado para popular uma parte, de preferência em vermelho, do nosso layout.</p>]]></long-description>
+          <tag line="45" name="name" description="error_message"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="61" namespace="global" package="Default">
+        <name>$success_message</name>
+        <default><![CDATA[array()]]></default>
+        <docblock line="54">
+          <description><![CDATA[Array que guarda as mensagens de sucesso de nosso sistema.]]></description>
+          <long-description><![CDATA[<p>Esse array é usado para popular uma parte, de preferência em verde, do nosso layout.
+É ideal para confirmar um cadastro ou a efetivação de alguma doação</p>]]></long-description>
+          <tag line="54" name="name" description="success_message"/>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="private" line="68" namespace="global" package="Default">
+        <name>$title</name>
+        <default><![CDATA[]]></default>
+        <docblock line="63">
+          <description><![CDATA[String que guarda o título da pagina]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="63" name="name" description="title"/>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="70" package="Default">
+        <name>View</name>
+        <full_name>View</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="74" package="Default">
+        <name>assign</name>
+        <full_name>assign</full_name>
+        <argument line="74">
+          <name>$key</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="74">
+          <name>$value</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="78" package="Default">
+        <name>assign_error</name>
+        <full_name>assign_error</full_name>
+        <argument line="78">
+          <name>$message</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="82" package="Default">
+        <name>assign_success</name>
+        <full_name>assign_success</full_name>
+        <argument line="82">
+          <name>$message</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="86" package="Default">
+        <name>add_js</name>
+        <full_name>add_js</full_name>
+        <argument line="86">
+          <name>$name_js</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="90" package="Default">
+        <name>add_css</name>
+        <full_name>add_css</full_name>
+        <argument line="90">
+          <name>$name_css</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="94" package="Default">
+        <name>display</name>
+        <full_name>display</full_name>
+        <argument line="94">
+          <name>$content</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="106" package="Default">
+        <name>setTitle</name>
+        <full_name>setTitle</full_name>
+        <argument line="106">
+          <name>$title_name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file view/View.php</error>
+      <error line="70" code="50010">No DocBlock was found for method View()</error>
+      <error line="74" code="50010">No DocBlock was found for method assign()</error>
+      <error line="78" code="50010">No DocBlock was found for method assign_error()</error>
+      <error line="82" code="50010">No DocBlock was found for method assign_success()</error>
+      <error line="86" code="50010">No DocBlock was found for method add_js()</error>
+      <error line="90" code="50010">No DocBlock was found for method add_css()</error>
+      <error line="94" code="50010">No DocBlock was found for method display()</error>
+      <error line="106" code="50010">No DocBlock was found for method setTitle()</error>
+    </parse_markers>
+  </file>
+  <file path="view/AdminMenu.php" hash="a32472ce0f29dceb138a02645332fe87" package="Default"/>
+  <file path="view/FormEntity.php" hash="91bfcb449198c4f383b7e0a27544c352" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file view/FormEntity.php</error>
+    </parse_markers>
+  </file>
+  <file path="view/EntityMenu.php" hash="cdecaceb2cc6e05038ee57af6eb00cb0" package="Default"/>
+  <file path="view/Home.php" hash="4d34af1896d4ced06cffdb4234bb4577" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file view/Home.php</error>
+    </parse_markers>
+  </file>
+  <package name="Default" full_name="Default"/>
+  <namespace name="global" full_name="global"/>
+  <marker count="9">todo</marker>
+  <marker count="0">fixme</marker>
+  <deprecated count="0"/>
+</project>

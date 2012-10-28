@@ -5,7 +5,7 @@
 */
 class ResourceRegisters
 {
-	private $registers;
+    private $registers;
 
 	function __construct()
 	{
@@ -14,6 +14,8 @@ class ResourceRegisters
 
 	/**
      * Adiciona um Register para o array.
+     * @param  $name nome do register que vai ser adicionado.
+     * @param  $value instancia do register adicionado.
      * @todo padronizar os nomes(exemplo tudo minúsculo).
      */
     public function add($name, $value)
@@ -22,10 +24,10 @@ class ResourceRegisters
     }
     
     /**
-     * @param $name nome do register para ser retornado.
-     * @return o register correspondente ao nome(caso exista).
+     * @param  $name nome do register para ser retornado.
+     * @return register register correspondente ao nome(caso exista).
      * @return null caso não exista nenhum register com este nome.
-     * @todo padronizar os nomes(exemplo tudo minúsculo).
+     * @todo   padronizar os nomes(exemplo tudo minúsculo).
      */
     public function get($name)
     {
