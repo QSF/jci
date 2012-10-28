@@ -1,0 +1,5 @@
+O ServiceLocator é singleton, portanto basta chamar seu método estático que retorna a instância.
+ServiceLocator::getInstance();
+Ele possui um get para o DAO e um para a View, pelo menos de início.
+Para usá-lo, basta saber isso e mais nada.
+No arquivo teste.php, que está no controler, a viu está sendo criada por ele, de uma olhada.

@@ -1,0 +1,16 @@
+/**Tutorial de como instalar o doctrine via pear**/
+
+instalar o pear(Por favor, adicionem mais opções)
+
+//discover o doctrine
+# sudo pear channel-discover pear.doctrine-project.org
+//discover o symfony
+# sudo pear channel-discover pear.symfony.com
+//instalar symfony/Console
+# sudo pear install pear.symfony.com/Console
+//instalar symfony/Yaml
+# sudo pear install pear.symfony.com/Yaml
+//instalar doctrine
+# sudo pear install doctrine/DoctrineORM
+
+Agora o comando doctrine no console funciona, basta configurar o doctrine com os arquivos de bootstrap

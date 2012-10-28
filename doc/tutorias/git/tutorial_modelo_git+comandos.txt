@@ -1,0 +1,58 @@
+Nosso modelo de branch vai seguir o do pdf neste mesmo diretório.
+
+Branchs:
+master   - conterá as versões(tags) prontas, NÃO iremos desenvolver nela.
+develop  - branch onde será feito o desenvolvimento.
+			origem: master
+			destino:release
+			nome:
+feature  - branch usado para criar uma nova funcionalidade ao sistema,ela será em paralelo(não essencial) e futura.
+		   usar o git merge --no --ff para comitar ao fazer o merge.
+		    origem: develop
+			destino:develop
+			nome:feature-*, ou *(!= de algum existente)
+realease - quando uma versão está para ser lançada, cria-se um branch para dar os pontos finais nela.
+			origem: develop
+			destino:develop e master
+			nome:release-*(versão).
+hot fix  - um branch para resolver um bug(importante) detectado, de uma versão já pronta.
+			origem: master
+			destino:develop e master
+			nome:hotfix-*(versão).
+
+O master só vai conter versões prontas, que rodam.
+
+OBS:
+-por favor, não demore para dar um commit e descreva o que ele fez.
+----------------------------------------------------------------------------------------------------------------------------------------
+Passos com o git:
+//instalar
+//configurar
+//cadastrar no github e gerar uma chama(tutorias no email foram mandados) => olhar mini_tutorial_github.txt
+
+Comandos básicos:
+	A sintaxe nem está certa para todos, apenas um guia rápido, conforme vai vendo erro, arrumem, é apenas um guia simples.
+git clone <add>				 (clona o repositório do github, onde add = https://github.com/viniciusffj/jci)
+git remote add origin <add>  (adiciona um atalho com o endereço do repositório remoto, ficando mais fácil de se comunicar com o git hub)
+git fetch origin [branch]    (pega os arquivos do server - mais seguro)
+git pull origin	 [branch] 	 (faz um git fetch e faz um merge com o repositório local)
+	git add . 					(adiciona todos arquivos modificados para serem commitados)
+	git rm  <nome_arquivo>		(remove os arquivo alterados ou criados)
+	git status 					(mostra o que mudou ou não nos arquivos, que estão ou não para serem commitados)
+	git diff					(Exibe o que mudou de um arquivo para o outro)
+	git commit -m "mensagem" 	(comita com uma mensagem)
+	git log  					(histórico de commits)
+	git reset					(volta à um commit -- perde o que tem)
+	git reverse					(ele realiza um novo commit com o conteúdo de um commit antigo)
+git push origen	<branch>	    (manda as suas atualizações para a origen)
+
+
+//branch e merge
+
+git branch nome_branch   	(cria um branch)
+git checkout nome_branch 	(vai para o branch nome_branch)
+git checkout -c novo_branch (cria e vai para o branch - dois passos anteriores)
+git branch -D nome_branch   (remove um branch)
+
+//merge
+git merge nome_branch (realiza um merge do branch atual com o nome_branch)
