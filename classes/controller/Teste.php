@@ -18,7 +18,7 @@ class Teste{
 		echo "Construtor da classe de teste<br/>";
 	}
 	
-	public function teste(){
+	public function TesteCadastro(){
 		echo "To no método do controller<br/>";
 
 		// Ilustrativo com user 
