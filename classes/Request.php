@@ -117,11 +117,11 @@ class Request{
 		
 		//Checando se o usuário está autenticado no nosso sistema
 		//Se não estiver, significa que é um visitante
-		if(!isset($_SESSION["role"])){
-			$userRole = "VISITANTE";
+		if(!isset($_SESSION["type"])){
+			$userRole = UsersEnum::GUEST;
 		}
 		else{
-			$userRole = $_SESSION["role"];
+			$userRole = $_SESSION["type"];
 		}
 		
 		return $userRole;

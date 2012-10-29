@@ -67,7 +67,11 @@
      */
     private $userType;
 
-    public function __construct($userType){
+    public function __construct($userType = USERS::VISITANTE){
+      $this->userType = $userType;
+    }
+
+    public function setUserType($userType){
       $this->userType = $userType;
     }
 
@@ -107,7 +111,7 @@
       $arrayCss = $this->arrayCss;
   		$arrayJs = $this->arrayJs;
 
-      //método extract serve para pegar as variaveis de uma hash e transformar num variavel
+      //método extract serve para pegar as variaveis de uma map e transformar num variavel
       extract($customView);
       extract($this->paramArray);
 
@@ -123,27 +127,27 @@
      */
     public function getCustomView(){
       $customView = array();
-      if( strcmp($this->userType, "guest")){
+      if( $this->userType === UsersEnum::GUEST){
         $customView['menu'] = "GuestMenu.php";
         $customView['loginSection'] = "LoginSection.php";
       }
         
-      else if( strcmp($this->userType, "entity")){
+      else if( $this->userType === UsersEnum::ENTITY){
         $customView['menu'] = "EntityMenu.php";
         $customView['loginSection'] ="GreetingsUser.php";
       }
 
-      else if( strcmp($this->userType, "volunteer")){
+      else if( $this->userType === UsersEnum::VOLUNTEER_NATURAL_PERSON || $this->userType === UsersEnum::VOLUNTEER_LEGAL_PERSON){
         $customView['menu'] = "VolunteerMenu.php";
         $customView['loginSection'] = "GreetingsUser.php";
       }
 
-      else if(strcmp($this->userType, "admin")){
+      else if($this->userType === UsersEnum::ADMIN)){
         $customView['menu'] = "AdminMenu.php";
         $customView['loginSection'] = "GreetingsUser.php";
       }
 
-      else if(strcmp($this->userType, "moderator")){
+      else if($this->userType === UsersEnum::MODERATOR)){
         $customView['menu'] = "ModeratorMenu.php";
         $customView['loginSection'] = "GreetingsUser.php";
       }

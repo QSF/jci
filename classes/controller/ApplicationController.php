@@ -29,7 +29,10 @@ abstract class ApplicationController{
 		$this->request = $request;
 
 		//$request->getUserType serve para saber o tipo de usuario e montar a view customizada
-		$this->view = new View($this->request->getUserType());
+		//Quando o Service Locator estiver pronto, descomentar essa linha
+		//$this->view = ServiceLocator::getInstance()->getView('View');
+		$this->view = new View();
+		$this->view->setUser($this->request->getUserType());
 	}
 
 	/**
