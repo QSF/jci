@@ -20,7 +20,7 @@ require_once CLASSES_PATH    . "/Request.php";
 require_once (MODEL_PATH . "/VolunteerNaturalPerson.php");
 
 $volunterr = new VolunteerNaturalPerson();
-$volunterr->setCpf(1223);
+$volunterr->setCpf(12234);
 $volunterr->setName('Joaose');
 $volunterr->setReceiveNotification(true);
 $volunterr->setEmail('asdasdas');
