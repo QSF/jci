@@ -24,27 +24,7 @@ class Authorization{
 	public function __construct(Request $request){
 		$this->request = $request;
 	}
-	
-	/**
-	 * Método que retorna o papel do usuário do site
-	 * 
-	 * @return string Nome do cargo 
-	 */
-	public function get_user_role(){
-
 		
-		//Checando se o usuário está autenticado no nosso sistema
-		//Se não estiver, significa que é um visitante
-		if(!isset($_SESSION["role"])){
-			$role_user = "visitante";
-		}
-		else{
-			$role_user = $_SESSION["role"];
-		}
-		
-		return $role_user;
-	}
-	
 	/**
 	 * Método que pega o atributo da requisição
 	 * 

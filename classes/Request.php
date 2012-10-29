@@ -15,7 +15,7 @@ class Request{
 	 * Array que guarda os atributos da requsição
 	 * @name array_request
 	 */
-	private $array_request = array();
+	private $requestArray = array();
 	
 	/**
 	 * Nome do controller recebido por parâmetro na requisição
@@ -23,21 +23,21 @@ class Request{
 	 * @name module_name
 	 * 
 	 */
-	private $model_name;
+	private $controllerName;
 	
 	/**
 	 * Nome da action recebida por parâmetro na requisição
 	 * 
 	 * @name action_name
 	 */
-	private $action_name;
+	private $actionName;
 	
 	/**
 	 * Atributo que guardo o tipo de método http da requisição
 	 * Pode ser GET ou POST
 	 * @name method_http
 	 */
-	private $http_method;
+	private $methodHttp;
 	
 	/**
 	 *Atributo que guarda um array de eventuais cookies que iremos precisar
@@ -50,19 +50,17 @@ class Request{
 	 */
 	public function __construct(){
 		if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-			$this->array_request = $_POST;
-			$this->http_method = "POST";
+			$this->requestArray = $_POST;
+			$this->methodHttp = "POST";
 		}
 		else if ($_SERVER['REQUEST_METHOD'] === 'GET'){
-			$this->array_request = $_GET;
-			$this->http_method = "GET";
+			$this->requestArray = $_GET;
+			$this->methodHttp = "GET";
 		}
 
-		$cookies = $_COOKIE;
-		$this->model_name = $this->get("model");
-		$this->action_name = $this->get("action");
-
-		
+		$this->cookies = $_COOKIE;
+		$this->controllerName = $this->get("controller");
+		$this->actionName = $this->get("action");	
 	}
 	
 	/**
@@ -71,8 +69,8 @@ class Request{
 	 * @return Retorna o atributo da requisição
 	 */
 	public function get($name){
-		if(isset($this->array_request[$name]))
-			return $this->array_request[$name];
+		if(isset($this->requestArray[$name]))
+			return $this->requestArray[$name];
 		return null;
 	}
 	
@@ -82,34 +80,51 @@ class Request{
 	 * @param attr_name  Nome do atributo a ser setado
 	 * @param object  Objeto que será colocado na requisição
 	 */
-	public function set(String $attr_name, $object){
-		$this->array_request[$attr_name] = $object;
+	public function set(String $nameAttr, $object){
+		$this->requestArray[$nameAttr] = $object;
 	}
 	
-	public function get_model_name(){
-		return $this->model_name;
+	public function getControllerName(){
+		return $this->controllerName;
 	}
 	
-	public function set_model_name($model_name){
-		$this->model_name = $model_name;
+	public function setControllerName($controllerName){
+		$this->controllerName = $controllerName;
 	}
 	
-	public function get_action_name(){
-		return $this->action_name;
+	public function getActionName(){
+		return $this->actionName;
 	}
 	
-	public function set_action_name($action_name){
-		$this->action_name = $action_name;
+	public function setActionNamae($actionName){
+		$this->actionName = $actionName;
 	}
 	
-	public function get_cookies(){
+	public function getCoookies(){
 		return $this->cookies;
 	}
 
-	public function set_cookie($name_cookie, $value){
-		$this->cookies[$name_cookie] = $value;
+	public function setCoookies($cookieName, $value){
+		$this->cookies[$cookieName] = $value;
 	}
 
-
+	/**
+	 * Método que retorna o papel do usuário do site
+	 * 
+	 * @return string Nome do cargo 
+	 */
+	public function getUserType(){
+		
+		//Checando se o usuário está autenticado no nosso sistema
+		//Se não estiver, significa que é um visitante
+		if(!isset($_SESSION["role"])){
+			$userRole = "VISITANTE";
+		}
+		else{
+			$userRole = $_SESSION["role"];
+		}
+		
+		return $userRole;
+	}
 }
 ?>

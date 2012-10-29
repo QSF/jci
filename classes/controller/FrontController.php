@@ -42,23 +42,26 @@
 	 public function dispatch(){
 		
 		//ucfirst coloca a primeira letra da variável em caixa alta
-		$controller_name = ucfirst($this->request->get_model_name());
-		$action_name = $this->request->get_action_name();
+		$controllerName = ucfirst($this->request->getControllerName())."Controller";
+		$actionName = $this->request->getActionName();
 
-		include $controller_name.'.php';
+		include_once CONTROLLER_PATH.DIRECTORY_SEPARATOR.$controllerName.".php";
 		
 		$sucesso = false;
 	
-		if(class_exists($controller_name)){
-			$controller_object = new $controller_name($this->request);
+		if(class_exists($controllerName)){
+			$controllerObject = new $controllerName($this->request);
 
-			if(method_exists($controller_object, $action_name)){		
-				$controller_object->{$action_name}();
+			if(method_exists($controllerObject, $actionName)){		
+				$controllerObject->{$actionName}();
 				$sucesso = true;
 			}
 		}
 		
 		if(! $sucesso){
+			//Mandar para uma página de recurso não permitido
+			//Uma boa ideia seria setar uma variavel de pagina nao encontrada no config.php
+			//include_once ERROR_PAGE;
 			echo "URL Invalida";
 		}
 		
