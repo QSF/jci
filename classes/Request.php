@@ -13,14 +13,14 @@ class Request{
 	
 	/**
 	 * Array que guarda os atributos da requsição
-	 * @name array_request
+	 * @name requestArray
 	 */
 	private $requestArray = array();
 	
 	/**
 	 * Nome do controller recebido por parâmetro na requisição
 	 * 
-	 * @name module_name
+	 * @name moduleName
 	 * 
 	 */
 	private $controllerName;
@@ -28,14 +28,14 @@ class Request{
 	/**
 	 * Nome da action recebida por parâmetro na requisição
 	 * 
-	 * @name action_name
+	 * @name actionName
 	 */
 	private $actionName;
 	
 	/**
 	 * Atributo que guardo o tipo de método http da requisição
 	 * Pode ser GET ou POST
-	 * @name method_http
+	 * @name methodHttp
 	 */
 	private $methodHttp;
 	
