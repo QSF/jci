@@ -6,4 +6,4 @@ controller=registration&action=create&user=entidade.
 Cheque na documentação possíveis atributos adicionais para realizar essa ação.
 
 Para carregar uma página diretamente sem precisar fazer um método no controller, a URL ficaria assim:
-controller=registration&action=directDisplay&page=FormEntity
+controller=registration&action=directDisplay&page=FormEntity 
