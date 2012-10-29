@@ -67,7 +67,7 @@
      */
     private $userType;
 
-    public function __construct($userType = USERS::VISITANTE){
+    public function __construct($userType = UsersEnum::GUEST){
       $this->userType = $userType;
     }
 
@@ -137,17 +137,18 @@
         $customView['loginSection'] ="GreetingsUser.php";
       }
 
-      else if( $this->userType === UsersEnum::VOLUNTEER_NATURAL_PERSON || $this->userType === UsersEnum::VOLUNTEER_LEGAL_PERSON){
+      else if( $this->userType === UsersEnum::VOLUNTEER_NATURAL_PERSON || 
+                  $this->userType === UsersEnum::VOLUNTEER_LEGAL_PERSON){
         $customView['menu'] = "VolunteerMenu.php";
         $customView['loginSection'] = "GreetingsUser.php";
       }
 
-      else if($this->userType === UsersEnum::ADMIN)){
+      else if($this->userType === UsersEnum::ADMIN){
         $customView['menu'] = "AdminMenu.php";
         $customView['loginSection'] = "GreetingsUser.php";
       }
 
-      else if($this->userType === UsersEnum::MODERATOR)){
+      else if($this->userType === UsersEnum::MODERATOR){
         $customView['menu'] = "ModeratorMenu.php";
         $customView['loginSection'] = "GreetingsUser.php";
       }
