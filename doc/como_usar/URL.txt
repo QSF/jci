@@ -1,0 +1,9 @@
+Para realizar qualquer ação de nosso sistema é obrigatório setar o atributo controller e action.
+O controller é o nome da classe do controller e a ação é o método dessa classe.
+Para criar uma nova entidade por exemplo, a URL ficaria assim:
+controller=registration&action=create&user=entidade.
+
+Cheque na documentação possíveis atributos adicionais para realizar essa ação.
+
+Para carregar uma página diretamente sem precisar fazer um método no controller, a URL ficaria assim:
+controller=registration&action=directDisplay&page=FormEntity
