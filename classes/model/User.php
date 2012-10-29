@@ -1,9 +1,12 @@
 <?php
 use Doctrine\Common\Collections\ArrayCollection;
 
+require_once MODEL_PATH . "/Entity.php";
+
 /**
  * @Entity 
  * @Table(name="user")
+ * @InheritanceType("JOINED")
  * @DiscriminatorColumn(name="user_type", type="string")
  * @DiscriminatorMap({"volunteer" = "Volunteer", "entity" = "Entity"})
  **/
@@ -18,7 +21,7 @@ abstract class User
     protected $id = null;
 
     /**
-    *@Column(type="boolean")
+    * @Column(type="boolean")
     */
     protected $receiveNotification;
 
@@ -88,8 +91,8 @@ abstract class User
         return $this->id;
     }
 
-    public function setUserId($name){
-        $this->name = $name;
+    public function setUserId($id){
+        $this->id = $id;
     }
 
     public function getEmail(){
@@ -101,7 +104,7 @@ abstract class User
     }
 
     public function getPassword(){
-        return $this->name;
+        return $this->password;
     }
 
     public function setPassword($password){

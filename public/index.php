@@ -22,12 +22,12 @@ require_once (MODEL_PATH . "/VolunteerNaturalPerson.php");
 $volunteerNP = new VolunteerNaturalPerson;
 $volunteerNP->setName('Adivinha');
 $volunteerNP->setCpf(123);
-try {
-	$em->persist($volunteerNP);
-	$em->flush();
-} catch (Exception $e) {
+/*try {*/
+$em->persist($volunteerNP);
+$em->flush();
+/*} catch (Exception $e) {
 	echo $e->getMessage();
-}
+}*/
 
 //Encapsulando a requição
 //$request = new Request();

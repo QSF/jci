@@ -14,19 +14,9 @@ abstract class Volunteer extends User
 	/** @Column(type="string") */
 	protected $experience;
 
-	public function setId($id)
-	{
-		$this->id = $id;
-	}
-
-	public function getId()
-	{
-		return $this->id;
-	}
-
 	public function setExperience($experience)
 	{
-		$this->experience = $id;
+		$this->experience = $experience;
 	}
 
 	public function getExperience()
