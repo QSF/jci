@@ -4,7 +4,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @Entity 
  * @Table(name="user")
- * @DiscriminatorColumn(name="discr", type="string")
+ * @DiscriminatorColumn(name="user_type", type="string")
  * @DiscriminatorMap({"volunteer" = "Volunteer", "entity" = "Entity"})
  **/
 
@@ -15,7 +15,7 @@ abstract class User
      *@Id @Column(type="integer")
      *@GeneratedValue
      **/
-    protected $id;
+    protected $id = null;
 
     /**
     *@Column(type="boolean")

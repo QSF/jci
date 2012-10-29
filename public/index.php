@@ -17,6 +17,14 @@ require_once CONTROLLER_PATH . "/FrontController.php";
 require_once CLASSES_PATH    . "/Authorization.php";
 require_once CLASSES_PATH    . "/Request.php";
 
+require_once (MODEL_PATH . "/VolunteerNaturalPerson.php");
+
+$volunteerNP = new VolunteerNaturalPerson;
+$volunteerNP->setName('Adivinha');
+$volunteerNP->setCpf(123);
+$em->persist($volunteerNP);
+$em->flush();
+
 //Encapsulando a requição
 $request = new Request();
 

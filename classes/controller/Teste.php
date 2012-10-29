@@ -9,7 +9,6 @@
 //Esse script setaria o path dos modulos ou dos componentes do mvc
 //include $view_path/View.php
 //require_once (VIEW_PATH . "/View.php");
-
 class Teste{
 	
 	private $request;
@@ -20,7 +19,6 @@ class Teste{
 	
 	public function TesteCadastro(){
 		echo "To no método do controller<br/>";
-
 		// Ilustrativo com user 
 		//$user = new User
 		//$user->setName($this->request->get("username"));
