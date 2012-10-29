@@ -4,6 +4,7 @@
  * @see config/config.php
  * @TODO: Incluir de uma forma mais elegante
  */
+
 require_once("../config/config.php");  
 /**
  * Script inicial que lida com autorização de visualização de páginas e
@@ -18,9 +19,9 @@ require_once CLASSES_PATH    . "/Authorization.php";
 require_once CLASSES_PATH    . "/Request.php";
 
 require_once (MODEL_PATH . "/VolunteerNaturalPerson.php");
-
+/*
 $volunterr = new VolunteerNaturalPerson();
-$volunterr->setCpf(12234);
+$volunterr->setCpf(rand());
 $volunterr->setName('Joaose');
 $volunterr->setReceiveNotification(true);
 $volunterr->setEmail('asdasdas');
@@ -31,20 +32,20 @@ $volunterr->setPublic('asdasdas');
 $volunterr->setCep(123123);
 $volunterr->setExperience('asdas');
 $em->persist($volunterr);
-$em->flush();
+$em->flush();*/
 /*} catch (Exception $e) {
 	echo $e->getMessage();
 }*/
 
 //Encapsulando a requição
-//$request = new Request();
+$request = new Request();
 
 //$auth = new Authorization($request);
 //Passando um filtro para checar se o usuário tem permissão 
 //$auth->authorizate();
 
-/*
+
 $front_controller = new FrontController($request);
 $front_controller->dispatch();
-*/
+
 ?>

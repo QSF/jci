@@ -22,7 +22,7 @@
      *
      *@name array_param
      */
-  	private $array_param = array();
+  	private $paramArray = array();
 
     /**
      * Array que guarda nome do script do css. 
@@ -31,7 +31,7 @@
      *
      *@name array_css
      */
-  	private $array_css = array();
+  	private $arrayCss = array();
 
     /**
      * Array que guarda o nome dos scripts do JS
@@ -40,7 +40,7 @@
      *
      *@name array_js
      */
-  	private $array_js = array();
+  	private $arrayJs = array();
 
     /**
      * Array que guarda as mensagens de erro de nosso sistema.
@@ -49,7 +49,7 @@
      *
      *@name error_message
      */
-  	private $error_message = array();
+  	private $errorMessage = array();
 
     /**
      * Array que guarda as mensagens de sucesso de nosso sistema.
@@ -58,54 +58,96 @@
      *
      *@name success_message
      */
-  	private $success_message = array();
+  	private $successMessage = array();
 
     /**
-     * String que guarda o título da pagina
-     *
-     *@name title
+     * Guarda o tipo de usuário que está acessando o sistema
+     * 
+     *@name success_message
      */
-    private $title;
+    private $userType;
 
-    public function View(){
-      $this->title = "Sistemas JCI";
+    public function __construct($userType){
+      $this->userType = $userType;
     }
 
   	public function assign($key, $value){
-  		$this->array_param[$key] = $value;
+  		$this->paramArray[$key] = $value;
   	}
 
-  	public function assign_error($message){
-  		array_push($this->error_message, $message);
+  	public function assignError($message){
+  		array_push($this->errorMessage, $message);
   	}
 
-  	public function assign_success($message){
-  		array_push($this->success_message, $message);
+  	public function assignSuccess($message){
+  		array_push($this->successMessage, $message);
   	}
 
-  	public function add_js($name_js){
-  		array_push($this->array_js, $name_js);
+  	public function addJs($nameJs){
+  		array_push($this->arrayJs, $nameJs);
   	}
 
-  	public function add_css($name_css){
-  	 	array_push($this->array_css, $name_css);
+  	public function addCss($nameCss){
+  	 	array_push($this->arrayCss, $nameCss);
   	}
 
+    /**
+     * Método que envia a página de resposta para o usuário
+     * 
+     *
+     *@param content
+     */
   	public function display($content){
 
-      $title = $this->title;
-      $error_message = $this->error_message;
-      $success_message = $this->success_message;
-      $array_css = $this->array_css;
-  		
-      extract($this->array_param);
+      //pegando elementos da view que diferem do usuario
+      $customView = $this->getCustomView();
 
-  		include "Layout.php";
+      $errorMessage = $this->errorMessage;
+      $successMessage = $this->successMessage;
+      $arrayCss = $this->arrayCss;
+  		$arrayJs = $this->arrayJs;
+
+      //método extract serve para pegar as variaveis de uma hash e transformar num variavel
+      extract($customView);
+      extract($this->paramArray);
+
+  		include PAGES_PATH."/Layout.php";
   	}
 
-    public function setTitle($title_name){
-      $this->title = $title_name;
-    }
+    /**
+     * Customiza a página da view do usuário
+     * 
+     * Método que seta as variaveis menu, loginSection dependendo do usuário
+     *
+     * @return customView
+     */
+    public function getCustomView(){
+      $customView = array();
+      if( strcmp($this->userType, "guest")){
+        $customView['menu'] = "GuestMenu.php";
+        $customView['loginSection'] = "LoginSection.php";
+      }
+        
+      else if( strcmp($this->userType, "entity")){
+        $customView['menu'] = "EntityMenu.php";
+        $customView['loginSection'] ="GreetingsUser.php";
+      }
 
+      else if( strcmp($this->userType, "volunteer")){
+        $customView['menu'] = "VolunteerMenu.php";
+        $customView['loginSection'] = "GreetingsUser.php";
+      }
+
+      else if(strcmp($this->userType, "admin")){
+        $customView['menu'] = "AdminMenu.php";
+        $customView['loginSection'] = "GreetingsUser.php";
+      }
+
+      else if(strcmp($this->userType, "moderator")){
+        $customView['menu'] = "ModeratorMenu.php";
+        $customView['loginSection'] = "GreetingsUser.php";
+      }
+      return $customView;
+    }
   }
 ?>

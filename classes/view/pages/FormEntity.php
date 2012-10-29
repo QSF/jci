@@ -1,4 +1,4 @@
-
+<form action="index.php?model=entity&action=register" method="post">
 <label for="id_name">Razão Social:</label>
 <input type="text" id="id_name" name="name"/><br/>
 <label for="id_cnpj">CNPJ:</label>
@@ -46,3 +46,5 @@
 
 
 <input type="checkbox" name="receivedNotification" value="notification"/>Receber Notificações da JCI no seu email <br/>
+<input type="submit" value="Cadastrar"/>
+</form>
