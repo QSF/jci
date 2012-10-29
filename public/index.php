@@ -19,11 +19,18 @@ require_once CLASSES_PATH    . "/Request.php";
 
 require_once (MODEL_PATH . "/VolunteerNaturalPerson.php");
 
-$volunteerNP = new VolunteerNaturalPerson;
-$volunteerNP->setName('Adivinha');
-$volunteerNP->setCpf(123);
-/*try {*/
-$em->persist($volunteerNP);
+$volunterr = new VolunteerNaturalPerson();
+$volunterr->setCpf(1223);
+$volunterr->setName('Joaose');
+$volunterr->setReceiveNotification(true);
+$volunterr->setEmail('asdasdas');
+$volunterr->setPassword('123123');
+$volunterr->setPhone(123123);
+$volunterr->setHowYouKnow('sadfasd');
+$volunterr->setPublic('asdasdas');
+$volunterr->setCep(123123);
+$volunterr->setExperience('asdas');
+$em->persist($volunterr);
 $em->flush();
 /*} catch (Exception $e) {
 	echo $e->getMessage();
