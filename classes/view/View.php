@@ -111,7 +111,7 @@
       extract($customView);
       extract($this->paramArray);
 
-  		include "Layout.php";
+  		include PAGES_PATH."/Layout.php";
   	}
 
     /**
