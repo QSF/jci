@@ -11,13 +11,6 @@ require_once MODEL_PATH . "/VolunteerNaturalPerson.php";
  */
 abstract class Volunteer extends User
 {	
-	/**
-	 * @Id
-	 * @Column(type="integer")
-	 * @generatedValue(strategy="IDENTITY")
-	 * @var int
-	 */
-	protected $id = null;
 	/** @Column(type="string") */
 	protected $experience;
 

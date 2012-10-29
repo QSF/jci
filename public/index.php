@@ -22,18 +22,22 @@ require_once (MODEL_PATH . "/VolunteerNaturalPerson.php");
 $volunteerNP = new VolunteerNaturalPerson;
 $volunteerNP->setName('Adivinha');
 $volunteerNP->setCpf(123);
-$em->persist($volunteerNP);
-$em->flush();
+try {
+	$em->persist($volunteerNP);
+	$em->flush();
+} catch (Exception $e) {
+	echo $e->getMessage();
+}
 
 //Encapsulando a requição
-$request = new Request();
+//$request = new Request();
 
 //$auth = new Authorization($request);
 //Passando um filtro para checar se o usuário tem permissão 
 //$auth->authorizate();
 
-
+/*
 $front_controller = new FrontController($request);
 $front_controller->dispatch();
-
+*/
 ?>
