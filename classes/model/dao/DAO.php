@@ -34,5 +34,17 @@ interface DAO{
 	*	@todo Jogar exceptions	
 	*/
 	public function findById($object);
+
+
+	/** Método que retorna o objeto equivalente à uma coluna do banco que possui o email passado.
+	*
+	*	@param $object objeto que contém o email da tupla que será buscada.
+	*	@return object objeto referente a tupla com este email na tabela.
+	*	@return null caso não tenha nenhuma tupla com este email.
+	*
+	*	@todo Jogar exceptions	
+	*/
+
+	public function findByEmail($email);
 }
 ?>
