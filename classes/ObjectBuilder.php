@@ -11,9 +11,10 @@ require_once MODEL_PATH . "/VolunteerNaturalPerson.php";
 *	@see Request::getUser()
 */
 class ObjectBuilder
-{
-	
-	function __construct(Request $request){
+{	
+	protected $request;
+
+	function __construct($request){
 		$this->request = $request;
 	}
 
@@ -115,7 +116,7 @@ class ObjectBuilder
 		$user->setStatus(false);
 		$user->setSituation(false);
 
-		$receivedNotification = $this->request->get('receivedNewsletter'): true ? false;
+		$receivedNotification = $this->request->get('receivedNewsletter')? true : false;
 		$user->setNewsletter($receivedNotification);
 	}
 

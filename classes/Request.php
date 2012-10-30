@@ -1,5 +1,5 @@
 <?php
-require_once CLASS_PATH . "/ObjectBuilder.php";
+require_once CLASSES_PATH . "/ObjectBuilder.php";
 /**
  * Classe que encapsula a request
  *
@@ -140,7 +140,7 @@ class Request{
 	*	@todo fazer para o moderador
 	*/
 	public function getUser(){
-		ObjectBuilder builder = new ObjectBuilder($this);
+		$builder = new ObjectBuilder($this);
 		//padronizar este user
 		$userType = $this->get('user');
 		if ($userType == null)
@@ -148,13 +148,13 @@ class Request{
 
 		switch ($userType) {
 			case 'entidade':
-				$user = builder->getEntity();
+				$user = $builder->getEntity();
 				break;
 			case 'voluntariopf'://natural person
-				$user = builder->getVolunteerNaturalPerson();
+				$user = $builder->getVolunteerNaturalPerson();
 				break;
 			case 'voluntariopj'://legal person
-				$user = builder->getVolunteerLegalPerson();
+				$user = $builder->getVolunteerLegalPerson();
 				break;
 			default:
 				$user = null;

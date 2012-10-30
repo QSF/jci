@@ -17,11 +17,12 @@ class RegistrationController extends ApplicationController{
 	}
 
 	public function create(){
-		//
+		//pega o tipo de usuário
 		$user = $this->request->getUser();
 		
-		//$dao = $ServiceLocator::getInstance()->getDAO("CRUD");
-		//$dao->create($user);
+		$dao = $ServiceLocator::getInstance()->getDAO("DAO");
+		$dao->create($user);
+
 		$this->view->assignSuccess("Usuário criado com sucesso. Faça login");
 		$this->display("Home");
 	}	
