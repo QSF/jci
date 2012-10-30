@@ -1,0 +1,6 @@
+Nossos controller terão que herdar o ApplicationController que é herdado no index.php.
+Todo o processo de instanciação é feito no ApplicationController.
+O display da view é feito no ApplicationController. 
+Para fazer imprimir a página: $this->display("nome da pagina")
+Para pegar um atributo da requisicao: $this->request->get("atributo")
+Para setar uma variavel da view: $this->view->assign("listaVoluntarios", $listaVol)
