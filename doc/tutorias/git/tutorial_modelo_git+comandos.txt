@@ -49,10 +49,11 @@ git push origen	<branch>	    (manda as suas atualizações para a origen)
 
 //branch e merge
 
-git branch nome_branch   	(cria um branch)
-git checkout nome_branch 	(vai para o branch nome_branch)
-git checkout -c novo_branch (cria e vai para o branch - dois passos anteriores)
-git branch -D nome_branch   (remove um branch)
+git branch nome_branch   		(cria um branch)
+git checkout nome_branch 		(vai para o branch nome_branch)
+git checkout -c novo_branch 	(cria e vai para o branch - dois passos anteriores)
+git branch -D nome_branch   	(remove um branch)
+git push origin :<nome_branch>	(excluir branch remoto)
 
 //merge
 git merge nome_branch (realiza um merge do branch atual com o nome_branch)
