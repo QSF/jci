@@ -1,0 +1,9 @@
+Instale o PHPUnit e o DbUnit seguindo os passos abaixo ou => http://www.phpunit.de/manual/current/en/installation.html
+
+sudo pear channel-discover pear.phpunit.de
+sudo pear install phpunit/PHPUnit
+sudo pear install phpunit/DbUnit
+
+Para executar o teste digite phpunit nomeDoArquivoTeste
+ex: phpunit DAODoctrineTest
+

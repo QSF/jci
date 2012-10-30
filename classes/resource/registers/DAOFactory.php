@@ -1,5 +1,6 @@
 <?php
 require_once (REGISTERS_PATH . "/Register.php");
+require_once (DAO_PATH . "/DAODoctrine.php");
 
 /** Classe pai das factorys do DAO
 * 	Está classe é um padrão de projetos abstract factory que apenas cria DAOs, chamando um método para completar o nome do DAO.
@@ -31,6 +32,7 @@ abstract class DAOFactory implements Register
 	*
 	*	@see DAOFactory::create()
 	*/	
-	protected function getDAOPatternName();
+	protected function getDAOPatternName(){
+	}
 }
 ?>
