@@ -10,7 +10,7 @@
 	<input type="password" id="idPassword" name="password"/><br/>
 
 	<label for="phone">Telefone</label>
-	<input type="text" id="idPhone" name="phone"/><br/>
+	<input type="text" id="idPhone" name="phone" maxlength=12/><br/>
 
 	<label for="howYouKnow">Como ficou sabendo sobre a JCI Londrina/Projeto Canal de Voluntários?</label>
 	<input type="text" id="idHowYouKnow" name"howYouKnow"><br/>
