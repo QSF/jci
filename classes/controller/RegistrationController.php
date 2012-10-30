@@ -20,8 +20,9 @@ class RegistrationController extends ApplicationController{
 		//pega o tipo de usuário
 		$user = $this->request->getUser();
 		
-		$dao = $ServiceLocator::getInstance()->getDAO("DAO");
-		$dao->create($user);
+		//$user->getPublic();
+		//$dao = $ServiceLocator::getInstance()->getDAO("DAO");
+		//$dao->create($user);
 
 		$this->view->assignSuccess("Usuário criado com sucesso. Faça login");
 		$this->display("Home");

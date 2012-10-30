@@ -13,11 +13,17 @@ require_once CLASSES_PATH . "/ObjectBuilder.php";
 class Request{
 	
 	/**
-	 * Array que guarda os atributos da requsição
+	 * Array que guarda os atributos da requsição GET
 	 * @name requestArray
 	 */
-	private $requestArray = array();
-	
+	private $requestGET = array();
+		
+	/**
+	 * Array que guarda os atributos da requsição POST
+	 * @name requestArray
+	 */
+	private $requestPOST = array();
+
 	/**
 	 * Nome do controller recebido por parâmetro na requisição
 	 * 
@@ -50,16 +56,12 @@ class Request{
 	 * Verifica se o método HTTP é GET ou POST e atribui esse array na variavel $array_request
 	 */
 	public function __construct(){
-		if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-			$this->requestArray = $_POST;
-			$this->methodHttp = "POST";
-		}
-		else if ($_SERVER['REQUEST_METHOD'] === 'GET'){
-			$this->requestArray = $_GET;
-			$this->methodHttp = "GET";
-		}
+		
+		$this->requestArrayGET = $_GET;
+		$this->requestArrayPOST = $_POST;
 
 		$this->cookies = $_COOKIE;
+
 		$this->controllerName = $this->get("controller");
 		$this->actionName = $this->get("action");	
 	}
@@ -70,8 +72,14 @@ class Request{
 	 * @return Retorna o atributo da requisição
 	 */
 	public function get($name){
-		if(isset($this->requestArray[$name]))
-			return $this->requestArray[$name];
+		//checando se existe atributo no método GET 
+		if(isset($this->requestArrayGET[$name]))
+			return $this->requestArrayGET[$name];
+
+		//checando se existe atributo no método POST
+		else if (isset($this->requestArrayPOST[$name]))
+			return $this->requestArrayPOST[$name];
+
 		return null;
 	}
 	
@@ -81,8 +89,15 @@ class Request{
 	 * @param attr_name  Nome do atributo a ser setado
 	 * @param object  Objeto que será colocado na requisição
 	 */
-	public function set($nameAttr, $object){
-		$this->requestArray[$nameAttr] = $object;
+	public function set($nameAttr, $object,$method = "GET"){
+		if($method == "GET")
+			$this->requestArrayGET[$nameAttr] = $object;
+
+		else if($method == "POST")
+			$this->requestArrayPOST[$nameAttr] = $object;
+		
+		else
+			return;
 	}
 	
 	public function getControllerName(){
@@ -147,19 +162,20 @@ class Request{
 			return null;
 
 		switch ($userType) {
-			case 'entidade':
+			case 'Entity':
 				$user = $builder->getEntity();
 				break;
-			case 'voluntariopf'://natural person
+			case 'NPVolunteer'://natural person
 				$user = $builder->getVolunteerNaturalPerson();
 				break;
-			case 'voluntariopj'://legal person
+			case 'LPVolunteer'://legal person
 				$user = $builder->getVolunteerLegalPerson();
 				break;
 			default:
 				$user = null;
 				break;
 		}
+
 		return $user;
 	}
 }

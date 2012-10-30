@@ -22,7 +22,7 @@ class ObjectBuilder
 	*
 	*	@return $str string com os públicos atendidos
 	*/
-	protected function getPublic($user){
+	protected function getPublic(){
 		$str = '';
 		//retorna um array das checkbox
 		$public = $this->request->get('public');
@@ -30,7 +30,7 @@ class ObjectBuilder
 			return $str;
 		//para todas as checkbox selecionadas selecionadas
 		for($i = 0; $i < count($public); $i++) {
-            $str += ',' . $public[i];
+            $str += ',' . $public[$i];
         }
         return $str;
 	}
@@ -89,18 +89,24 @@ class ObjectBuilder
 	*	@return user volunteerLegalPerson
 	*/
 	public function getVolunteerLegalPerson(){
-		$user = new volunteerLegalPerson;
+		$user = new VolunteerLegalPerson;
+		
 		$this->getLegalPerson($user);
 		$this->getVolunteer($user);
+
+		return $user;
 	}
 
 	/**
 	*	@return user volunteerNaturalPerson
 	*/
 	public function getVolunteerNaturalPerson(){
-		$user = new volunteerNaturalPerson;
+		$user = new VolunteerNaturalPerson;
+		
 		$this->getNaturalPerson($user);
-		$this->getVolunteer($user);	
+		$this->getVolunteer($user);
+
+		return $user;	
 	}
 
 	/**
@@ -110,6 +116,7 @@ class ObjectBuilder
 	public function getEntity(){
 		$user = new Entity;
 		$this->getLegalPerson($user);
+		$this->getUser($user);
 		$user->setEstablishmentDate($this->request->get('establishmentDate'));
 		$user->setSite($this->request->get('site'));
 		

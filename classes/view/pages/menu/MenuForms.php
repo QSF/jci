@@ -8,5 +8,5 @@
 </a>
 <br/>
 <a href="./index.php?controller=registration&action=directDisplay&page=EntityForm">
-	Formulário Do Voluntário Pessoa Jurídica
+	Formulário Da Entidade
 </a>
