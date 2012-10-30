@@ -2,7 +2,7 @@
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 
-require_once (MODEL_PATH . "/dao/DAO.php");
+require_once (DAO_PATH . "/DAO.php");
 
 /** Classe geral do DAO utiliando o ORM doctrine.
 * Nesta classe, tudo que poder ser generalizado no nosso dao vai ser colocado aqui.
