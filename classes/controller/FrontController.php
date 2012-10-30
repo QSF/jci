@@ -45,25 +45,32 @@
 		$controllerName = ucfirst($this->request->getControllerName())."Controller";
 		$actionName = $this->request->getActionName();
 
-		include_once CONTROLLER_PATH.DIRECTORY_SEPARATOR.$controllerName.".php";
-		
-		$sucesso = false;
-	
-		if(class_exists($controllerName)){
-			$controllerObject = new $controllerName($this->request);
+		try{
+			include_once CONTROLLER_PATH.DIRECTORY_SEPARATOR.$controllerName.".php";
+			
+			if(class_exists($controllerName) ){
+				$controllerObject = new $controllerName($this->request);
 
-			if(method_exists($controllerObject, $actionName)){		
-				$controllerObject->{$actionName}();
-				$sucesso = true;
+				if(method_exists($controllerObject, $actionName)){		
+					$controllerObject->{$actionName}();
+				}
+				else{
+					throw new Exception("Recurso nao encontrado");
+				}
+			}
+			else{
+				throw new Exception("Recurso nao encontrado");
 			}
 		}
-		
-		if(! $sucesso){
-			//Mandar para uma página de recurso não permitido
-			//Uma boa ideia seria setar uma variavel de pagina nao encontrada no config.php
-			//include_once ERROR_PAGE;
-			echo "URL Invalida";
+		catch(Exception $e){
+			//$this->view = ServiceLocator::getInstance()->getView('View');
+			$view = new View();
+			$view->setUserType($this->request->getUserType());
+			$view->display("404");
+
+			//echo $e->getMessage();
 		}
+
 		
 	}
  }
