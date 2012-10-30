@@ -3,3 +3,8 @@ ServiceLocator::getInstance();
 Ele possui um get para o DAO e um para a View, pelo menos de início.
 Para usá-lo, basta saber isso e mais nada.
 No arquivo teste.php, que está no controler, a viu está sendo criada por ele, de uma olhada.
+
+//como usar getDAO($name)
+basta passar o nome geral do DAO de parâmetro para o getDAO, por exemplo, se a gente quiser um UsuarioDAO, ficaria da seguinte forma:
+ServiceLocator::getInstance()->getDAO('UsuarioDAO');
+O service locator saberá como instanciar este DAO. Caso não exista um DAO com o nome passado por parâmentro, uma exception é lançada(Ver sua documentação).
