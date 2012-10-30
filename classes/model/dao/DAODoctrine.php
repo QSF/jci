@@ -78,5 +78,20 @@ class DAODoctrine implements DAO{
 	public function findById($object){
 		return $this->entityManager->find(get_class($object),$object->getId());
 	}
+	
+	/** Método que retorna o objeto equivalente à uma coluna do banco que possui o email passado.
+	*
+	*	É necessário tomar cuidado com as entidades gerenciadas pelo entity manager.
+	*
+	*	@param $email (email) da tupla que será buscada.
+	*	@return object objeto referente a tupla com este email na tabela.
+	*	@return null caso não tenha nenhuma tupla com este email.
+	*
+	*/
+
+	public function findByEmail($object){
+		return $this->entityManager->find(get_class($object), $object->getEmail());
+
+	}
 }
 ?>
