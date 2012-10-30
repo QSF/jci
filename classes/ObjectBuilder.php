@@ -44,15 +44,16 @@ class ObjectBuilder
 	*	@todo implementar field
 	*/
 	protected function getUser($user){
-		$user->setReceiveNotification ( $this->request->get('receivedNotification')	);
-		$user->setName                ( $this->request->get('name')					);
-		$user->setEmail				  ( $this->request->get('email')				);
-		$user->setPassword 			  ( $this->request->get('password')				);
-		$user->setPhone				  ( $this->request->get('phone')				);
-		$user->setHowYouKnow		  ( $this->request->get('howYouKnow')			);
-		$user->setPublic			  ( $this->getPublic() 							);
+		$notification = $this->request->get('receivedNotification') == null ? false : true;
+		$user->setReceiveNotification ( $notification						);
+		$user->setName                ( $this->request->get('name')			);
+		$user->setEmail				  ( $this->request->get('email')		);
+		$user->setPassword 			  ( $this->request->get('password')		);
+		$user->setPhone				  ( $this->request->get('phone')		);
+		$user->setHowYouKnow		  ( $this->request->get('howYouKnow')	);
+		$user->setPublic			  ( $this->getPublic() 					);
 		//temos que implementar o field
-		$user->setCep 				  ( $this->request->get('cep')					);		
+		$user->setCep 				  ( $this->request->get('cep')			);		
 	}
 
 	/** Método que monta um user de acordo com os dados de legal person passados em uma requisição.
@@ -116,7 +117,7 @@ class ObjectBuilder
 		$user->setStatus(false);
 		$user->setSituation(false);
 
-		$receivedNotification = $this->request->get('receivedNewsletter')? true : false;
+		$receivedNotification = $this->request->get('receivedNewsletter') != null ? true : false;
 		$user->setNewsletter($receivedNotification);
 	}
 
