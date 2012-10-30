@@ -30,10 +30,12 @@
 					echo $msg;
 					}?>
 				</div>
-
-				<?php include PAGES_PATH."/".$content.".php"?>
+				
+				<?php include PAGES_PATH."/".$content.".php"; ?>
 			</div>
-		</div>
-			<div 
+			<br/>
+			Formulários<br/>
+			<?php include_once "menu/MenuForms.php"; ?>
+		</div> 
 	</body>
 </html>

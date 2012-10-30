@@ -41,6 +41,15 @@
 	  */
 	 public function dispatch(){
 		
+		//Significa que nao foi passado nenhum parametro.
+		//Redirecionar para a home
+		if($this->request->getControllerName() == null && $this->request->getActionName() == null){
+			$urlName = PUBLIC_PATH."/index.php?controller=Registration&action=directDisplay&page=Home";
+			$this->request->setControllerName("Registration");
+			$this->request->setActionName("directDisplay");
+			$this->request->set("page","Home");
+		}
+
 		//ucfirst coloca a primeira letra da variável em caixa alta
 		$controllerName = ucfirst($this->request->getControllerName())."Controller";
 		$actionName = $this->request->getActionName();

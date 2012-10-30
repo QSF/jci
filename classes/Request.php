@@ -80,7 +80,7 @@ class Request{
 	 * @param attr_name  Nome do atributo a ser setado
 	 * @param object  Objeto que será colocado na requisição
 	 */
-	public function set(String $nameAttr, $object){
+	public function set($nameAttr, $object){
 		$this->requestArray[$nameAttr] = $object;
 	}
 	
@@ -96,7 +96,7 @@ class Request{
 		return $this->actionName;
 	}
 	
-	public function setActionNamae($actionName){
+	public function setActionName($actionName){
 		$this->actionName = $actionName;
 	}
 	
