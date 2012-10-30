@@ -41,8 +41,13 @@ class DAODoctrine implements DAO{
 	*	@param $object objeto a ser persistido.
 	*/
 	public function insert($object){
+		try{
 		$this->entityManager->persist($object);
 		$this->entityManager->flush();
+		}
+		catch(Exception $e){
+			echo $e->getMessage();
+		}
 	}
 
 	/** Método que deleta uma tupla da tabela de acordo com o objeto passado por parâmetro.

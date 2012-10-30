@@ -8,4 +8,4 @@
 	<input type="text" id="idStateRegistration" name="stateRegistration"/><br/>
 
 	<label for="ownerPhone">Telefone do responsável</label>
-	<input type="text" id="idOwnerPhone" name="ownerPhone"/><br/>
+	<input type="text" id="idOwnerPhone" name="ownerPhone" maxlength=12/><br/>

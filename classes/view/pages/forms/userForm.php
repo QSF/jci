@@ -13,7 +13,7 @@
 	<input type="text" id="idPhone" name="phone" maxlength=12/><br/>
 
 	<label for="howYouKnow">Como ficou sabendo sobre a JCI Londrina/Projeto Canal de Voluntários?</label>
-	<input type="text" id="idHowYouKnow" name"howYouKnow"><br/>
+	<input type="text" id="idHowYouKnow" name="howYouKnow"><br/>
 
 	<label>Público</label><br/>
 	<input type="checkbox" name="public[]" value="kids"/>Crianças<br/>

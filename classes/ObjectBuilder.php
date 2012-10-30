@@ -117,7 +117,7 @@ class ObjectBuilder
 		$user = new Entity;
 		$this->getLegalPerson($user);
 		$this->getUser($user);
-		$user->setEstablishmentDate($this->request->get('establishmentDate'));
+		$user->setEstablishmentDate(new \DateTime($this->request->get('establishmentDate')));
 		$user->setSite($this->request->get('site'));
 		
 		//por default, a situação e status é false?
@@ -126,6 +126,7 @@ class ObjectBuilder
 
 		$receivedNotification = $this->request->get('receivedNewsletter') != null ? true : false;
 		$user->setNewsletter($receivedNotification);
+		return $user;
 	}
 
 	/**
