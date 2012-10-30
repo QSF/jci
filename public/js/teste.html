@@ -1,0 +1,85 @@
+<html>
+<head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" ></script>
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.6/jquery.validate.js" ></script>
+<script type="text/javascript" src="jquery.maskedinput-1.3.js" ></script>
+
+<script type="text/javascript">
+            $(document).ready(function(){
+                $('#idUserForm').validate({
+                    rules:{ 
+                        name:{ 
+                            required: true,
+                            minlength: 3
+                        },
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        password: {
+                            required: true
+                        },
+                        confirmPassword:{
+                            required: true,
+                            equalTo: "#idPassword"
+                        },
+                    },
+                    messages:{
+                        name:{ 
+                            required: "Campo Obrigatorio",
+                            minlength: "Minimo de 3 caracteres"
+                        },
+                        email: {
+                            required: "Campo Obrigatorio",
+                            email: "Email invalido"
+                        },
+                        password: {
+                            required: "Campo Obrigatorio",
+                            
+                        },
+                        confirmPassword:{
+                            required: "Campo Obrigatorio",
+                            equalTo: "Senha nao confere"
+                        },
+                    }
+                    
+                });
+            });
+</script>   
+
+<script type="text/javascript">
+jQuery(function($){
+                $("#idDate").mask("99/99/9999");
+                $("#idCep").mask("99999-999");
+                $("#idPhone").mask("(99) 9999-9999");
+});
+</script>
+
+</head>
+<body>
+    <form id="idUserForm" name="userForm" method="post" action="">
+        <label for="name">Nome</label>
+        <input type="text" id="idName" name="name"/><br/>
+
+        <label for="email">E-mail</label>
+        <input type="text" id="idEmail" name="email"/><br/>
+
+        <label for="password">Senha</label>
+        <input type="password" id="idPassword" name="password"/><br/>
+
+        <lable for="confirmPassword">Confirmacao de Senha<br/>
+        <input type="password" name="confirmPassword" id="idConfirmPassword" /><br/>
+
+        <lable for="date">Data</lable>
+        <input type="text" id="idDate" name="date" /><br/>
+
+        <label for="phone">Telefone</label>
+        <input type="text" id="idPhone" name="phone"/><br/>
+
+        <label for="cep">CEP</label>
+        <input type="text" id="idCep" name="cep"/><br/><br/>
+
+        <input type="submit" value="Cadastrar" />
+    </form>
+</body>
+</html>
