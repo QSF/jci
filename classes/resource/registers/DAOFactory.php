@@ -22,7 +22,7 @@ abstract class DAOFactory implements Register
 	*/	
 	public function create ($name){
 		//aqui pode ser feito o include, pq não?
-		$name = $name . $this->getDAOPattern();
+		$name = $name . $this->getDAOPatternName();
 		return (new $name);
 	}
 	/** Método que retorna o padrão do nome do DAO.
@@ -31,6 +31,6 @@ abstract class DAOFactory implements Register
 	*
 	*	@see DAOFactory::create()
 	*/	
-	protected function getDAOPattern();
+	protected function getDAOPatternName();
 }
 ?>

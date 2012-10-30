@@ -16,7 +16,7 @@ class DAODoctrineFactory extends DAOFactory
 	*
 	*	@return 'Doctrine' Padrão do nome do DAO
 	*/	
-	protected function getDAOPattern(){
+	protected function getDAOPatternName(){
 		return 'Doctrine';
 	}
 }
