@@ -13,7 +13,7 @@ interface DAO{
 	*	@param $object objeto que contém o id(chave primária) da tupla que será buscada.
 	*	@todo Jogar exceptions
 	*/
-	public function delete($id);
+	public function delete($object);
 	/** Método que atualiza um objeto no banco.
 	* 	Séra atualizada a tupla que contém o id do objeto passado, com os valores dete objeto.
 	*	@param $object objeto a ser atualizado.
@@ -22,12 +22,13 @@ interface DAO{
 	*/
 	public function update($object);
 	/** Método que retorna o objeto equivalente à uma coluna do banco que possui o id passado.
-	*	@param $id id(chave primária) da tupla que será buscada.
+	*
+	*	@param $object objeto que contém o id(chave primária) da tupla que será buscada.
 	*	@return object objeto referente a tupla com este id na tabela.
 	*	@return null caso não tenha nenhuma tupla com este id.
 	*
 	*	@todo Jogar exceptions	
 	*/
-	public function findById($id);
+	public function findById($object);
 }
 ?>

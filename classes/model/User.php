@@ -87,11 +87,11 @@ abstract class User
         $this->name = $name;
     }
 
-    public function getUserId(){
+    public function getId(){
         return $this->id;
     }
 
-    public function setUserId($id){
+    public function setId($id){
         $this->id = $id;
     }
 
