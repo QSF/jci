@@ -28,10 +28,10 @@ class ObjectBuilder
 		$public = $this->request->get('public');
 		if ($public === null)
 			return $str;
-		//para todas as checkbox selecionadas selecionadas
-		for($i = 0; $i < count($public); $i++) {
-            $str += ',' . $public[$i];
-        }
+		
+		//Transforma um array em uma sequencia de strings separada por uma virgula
+        $str = implode(',',$public);
+
         return $str;
 	}
 

@@ -96,7 +96,6 @@ class DAODoctrine implements DAO{
 
 	public function findByEmail($object){
 		return $this->entityManager->find(get_class($object), $object->getEmail());
-
 	}
 }
 ?>

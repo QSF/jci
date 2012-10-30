@@ -12,11 +12,9 @@
 class RegistrationController extends ApplicationController{
 
 	public function create(){
-		//pega o tipo de usuário
 		$user = $this->request->getUser();
 
 		$dao = ServiceLocator::getInstance()->getDAO("DAO");
-		echo $user->getEmail();
 		$dao->insert($user);
 
 		$this->view->assignSuccess("Usuário criado com sucesso. Faça login");
@@ -24,5 +22,4 @@ class RegistrationController extends ApplicationController{
 	}
 
 }
-
 ?>
