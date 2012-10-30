@@ -1,4 +1,4 @@
-<form action=<?php echo PUBLIC_PATH?>/index.php?controller=registration&action=create>
+<form action="./index.php?controller=registration&action=create" method="post">
 <input type="hidden" value="NPVolunteer" name="userType"/>
 <?php
 	include_once "forms/userForm.php";
