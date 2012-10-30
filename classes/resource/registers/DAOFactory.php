@@ -31,6 +31,6 @@ abstract class DAOFactory implements Register
 	*
 	*	@see DAOFactory::create()
 	*/	
-	protected function getDAOPatternName();
+	protected function getDAOPatternName(){}
 }
 ?>

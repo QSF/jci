@@ -24,7 +24,7 @@ require_once CONTROLLER_PATH . "/ApplicationController.php";
 require_once (MODEL_PATH . "/VolunteerNaturalPerson.php");
 require_once (DAO_PATH   . "/DAODoctrine.php");
 
-$volunterr = new VolunteerNaturalPerson();
+/*$volunterr = new VolunteerNaturalPerson();
 $volunterr->setCpf(rand());
 $volunterr->setName('Joaose');
 $volunterr->setReceiveNotification(true);
@@ -44,21 +44,21 @@ $volunterr = $dao->findById($volunterr);
 echo "Achei o usuario com o id ";
 echo $volunterr->getId();
 echo 'E nome ';
-echo $volunterr->getName();
+echo $volunterr->getName();*/
 /*} catch (Exception $e) {
 	echo $e->getMessage();
 }*/
 
 //Encapsulando a requição
-// $request = new Request();
+$request = new Request();
 
 //$auth = new Authorization($request);
 //Passando um filtro para checar se o usuário tem permissão 
 //$auth->authorizate();
 
 
-/*$front_controller = new FrontController($request);
-$front_controller->dispatch();*/
+$front_controller = new FrontController($request);
+$front_controller->dispatch();
 
 ?>
 
