@@ -20,12 +20,12 @@ class Entity extends User
 	 * @Column(type="boolean") 
 	 * @var boolean 
 	 */
-	protected $situation;
+	protected $situation = false;
 	/** 
 	 * @Column(type="boolean") 
 	 * @var boolean 
 	 */
-	protected $status;
+	protected $status = false;
 	/** 
 	 * @Column(type="boolean") 
 	 * @var boolean 
