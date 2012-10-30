@@ -1,11 +1,12 @@
-<a href=<?php echo PUBLIC_PATH;?>"/index.php?controller=registration&action=directDisplay&page=NPVolunteerForm">
+
+<a href="./index.php?controller=registration&action=directDisplay&page=NPVolunteerForm">
 	Formulário Do Voluntário Pessoa Fisica
 </a>
 <br/>
-<a href=<?php echo PUBLIC_PATH;?>"/index.php?controller=registration&action=directDisplay&page=LPVolunteerForm">
+<a href="./index.php?controller=registration&action=directDisplay&page=LPVolunteerForm">
 	Formulário Do Voluntário Pessoa Jurídica
 </a>
 <br/>
-<a href=<?php echo PUBLIC_PATH;?>"/index.php?controller=registration&action=directDisplay&page=EntityForm">
+<a href="./index.php?controller=registration&action=directDisplay&page=EntityForm">
 	Formulário Do Voluntário Pessoa Jurídica
 </a>
