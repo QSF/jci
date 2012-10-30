@@ -1,4 +1,5 @@
 <?php
+require_once CLASS_PATH . "/ObjectBuilder.php";
 /**
  * Classe que encapsula a request
  *
@@ -125,6 +126,41 @@ class Request{
 		}
 		
 		return $userRole;
+	}
+
+	/** Método que retorna um user de acordo com os dados passados no formulário.
+	*	
+	*	Está classe faz uso de um objeto do tipo ObjectBuilder, sendo que escolhe qual método dele chamar,
+	*	através do parâmetro user passado da url (GET string).
+	*
+	*	@return user Um usuário do nosso sistema, dependendo do nosso tipo de user
+	*	@return null se o valor do parâmetro user não está setado
+	*
+	*	@see ObjectBuilder
+	*	@todo fazer para o moderador
+	*/
+	public function getUser(){
+		ObjectBuilder builder = new ObjectBuilder($this);
+		//padronizar este user
+		$userType = $this->get('user');
+		if ($userType == null)
+			return null;
+
+		switch ($userType) {
+			case 'entidade':
+				$user = builder->getEntity();
+				break;
+			case 'voluntariopf'://natural person
+				$user = builder->getVolunteerNaturalPerson();
+				break;
+			case 'voluntariopj'://legal person
+				$user = builder->getVolunteerLegalPerson();
+				break;
+			default:
+				$user = null;
+				break;
+		}
+		return $user;
 	}
 }
 ?>
