@@ -49,7 +49,6 @@
 			$this->request->setActionName("directDisplay");
 			$this->request->set("page","Home");
 		}
-
 		//ucfirst coloca a primeira letra da variável em caixa alta
 		$controllerName = ucfirst($this->request->getControllerName())."Controller";
 		$actionName = $this->request->getActionName();
