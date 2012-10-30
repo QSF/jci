@@ -15,6 +15,7 @@ require_once("../config/config.php");
 
 require_once RESOURCE_PATH   . "/ServiceLocator.php";
 require_once CONTROLLER_PATH . "/FrontController.php";
+require_once CONTROLLER_PATH . "/ApplicationController.php";
 require_once CLASSES_PATH    . "/Authorization.php";
 require_once CLASSES_PATH    . "/Request.php";
 require_once CLASSES_PATH    . "/UsersEnum.php";

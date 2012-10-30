@@ -33,7 +33,7 @@ abstract class ApplicationController{
 		//Quando o Service Locator estiver pronto, descomentar essa linha
 		//$this->view = ServiceLocator::getInstance()->getView('View');
 		$this->view = new View();
-		$this->view->setUser($this->request->getUserType());
+		$this->view->setUserType($this->request->getUserType());
 	}
 
 	/**
