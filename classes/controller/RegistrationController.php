@@ -11,22 +11,19 @@
 
 class RegistrationController extends ApplicationController{
 
-
-	public function __construct(Request $request){
-		parent::__construct($request);
-	}
-
 	public function create(){
 		//pega o tipo de usuário
 		$user = $this->request->getUser();
-		
+		echo $user->getPassword();
+
 		//$user->getPublic();
 		//$dao = $ServiceLocator::getInstance()->getDAO("DAO");
 		//$dao->create($user);
 
 		$this->view->assignSuccess("Usuário criado com sucesso. Faça login");
 		$this->display("Home");
-	}	
+	}
+
 }
 
 ?>

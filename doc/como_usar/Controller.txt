@@ -4,3 +4,20 @@ O display da view é feito no ApplicationController.
 Para fazer imprimir a página: $this->display("nome da pagina")
 Para pegar um atributo da requisicao: $this->request->get("atributo")
 Para setar uma variavel da view: $this->view->assign("listaVoluntarios", $listaVol)
+
+Para chamar essa action:
+index.php?controller=login&action=authenticate
+Exemplo:
+class LoginAction extends ApplicationController{
+	
+	public function authenticate(){
+		$login = $this->request->get("login");
+		$senha = $this->request->get("senha");
+		
+		$user = ...
+
+		$this->view->assign("user", $user->nome);
+		$this->display("Home");		
+	}
+
+}
