@@ -1,0 +1,50 @@
+<?php 
+
+/**
+* @Entity
+* @Table(name = "administrator")
+*/
+class Administrator
+{
+	/**
+	*	@Id
+	*	@Column(type = "string", nullable = false)
+	*/
+	protected $login;
+	
+	/**
+	*	@Column(type = "string", nullable = false)
+	*/
+	protected $password;
+
+	/**
+     *@Column(type="string")
+     **/
+    protected $email;
+
+	public function getLogin(){
+		return $this->login;
+	}
+
+	public function setLogin($login){
+		$this->login = $login;
+	}
+
+	public function getPassword(){
+		return $this->password;
+	}
+
+	public function setPassword($password){
+		$this->password = $password;
+	}
+
+	public function getEmail(){
+        return $this->email;
+    }
+
+    public function setEmail($email){
+        $this->email = $email;
+    }
+}
+
+?>
