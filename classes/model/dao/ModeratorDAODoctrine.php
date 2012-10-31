@@ -3,8 +3,6 @@
 require_once (DAO_PATH . "/ModeratorDAO.php");
 require_once (DAO_PATH . "/DAODoctrine.php");
 
-require_once (MODEL_PATH . "/Moderator.php");
-
 class ModeratorDAODoctrine extends DAODoctrine implements ModeratorDAO{
 
 
@@ -18,7 +16,7 @@ class ModeratorDAODoctrine extends DAODoctrine implements ModeratorDAO{
 	*	@return null caso não tenha nenhuma tupla com este id.
 	*
 	*/
-	public function findById(Moderator $object){
+	public function findById($object){
 		return $this->entityManager->find(get_class($object),$object->getLogin());
 	}
 }

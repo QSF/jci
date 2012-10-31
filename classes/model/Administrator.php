@@ -17,6 +17,11 @@ class Administrator
 	*/
 	protected $password;
 
+	/**
+     *@Column(type="string")
+     **/
+    protected $email;
+
 	public function getLogin(){
 		return $this->login;
 	}
@@ -32,6 +37,14 @@ class Administrator
 	public function setPassword($password){
 		$this->password = $password;
 	}
+
+	public function getEmail(){
+        return $this->email;
+    }
+
+    public function setEmail($email){
+        $this->email = $email;
+    }
 }
 
 ?>
