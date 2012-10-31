@@ -3,6 +3,8 @@
 require_once (DAO_PATH . "/ModeratorDAO.php");
 require_once (DAO_PATH . "/DAODoctrine.php");
 
+require_once (MODEL_PATH . "/Moderator.php");
+
 class ModeratorDAODoctrine extends DAODoctrine implements ModeratorDAO{
 
 
@@ -18,6 +20,13 @@ class ModeratorDAODoctrine extends DAODoctrine implements ModeratorDAO{
 	*/
 	public function findById($object){
 		return $this->entityManager->find(get_class($object),$object->getLogin());
+	}
+
+	/**
+	*	@return repository repositório da tabela moderador.
+	*/
+	protected function gerRepository(){
+		return $this->entityManager->getRepository('Moderator');
 	}
 }
 
