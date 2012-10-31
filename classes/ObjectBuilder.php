@@ -48,7 +48,7 @@ class ObjectBuilder
 		$user->setReceiveNotification ( $notification						);
 		$user->setName                ( $this->request->get('name')			);
 		$user->setEmail				  ( $this->request->get('email')		);
-		$user->setPassword 			  ( $this->request->get('password')		);
+		$user->setPassword 			  ( md5($this->request->get('password')));
 		$user->setPhone				  ( $this->request->get('phone')		);
 		$user->setHowYouKnow		  ( $this->request->get('howYouKnow')	);
 		$user->setPublic			  ( $this->getPublic() 					);
