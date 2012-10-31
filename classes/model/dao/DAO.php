@@ -34,5 +34,12 @@ interface DAO{
 	*	@todo Jogar exceptions	
 	*/
 	public function findById($object);
+
+	/** Método que retorna todos os objeto de uma determinada tabela(a 'dona' do dao)
+	*
+	*	@return objects lista de todos os objetos da tabela
+	*	@return null caso não há objetos.
+	*/
+	public function findall();
 }
 ?>

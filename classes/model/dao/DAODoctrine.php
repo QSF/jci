@@ -78,5 +78,29 @@ class DAODoctrine implements DAO{
 	public function findById($object){
 		return $this->entityManager->find(get_class($object),$object->getId());
 	}
+
+	/** Método que retorna um repository de acordo com o tipo da entidade.
+	*
+	*	@return repository repositório de acordo com o nome de uma tabela
+	*	@return null se for da classe DAODoctrine.
+	*	
+	*	@todo sempre extender este método nos DAOs expecíficos.
+	*/
+	protected function gerRepository(){
+		return null;
+	}
+
+	/** Método que retorna todos os objeto de uma determinada tabela(a 'dona' do dao)
+	*
+	*	Faz o uso do método getRepository.
+	*
+	*	@return objects lista de todos os objetos da tabela
+	*	@return null caso não há objetos.
+	*
+	*	@see DAODoctrine::getRepository()
+	*/
+	public function findall(){
+		return $this->entityManager->find(get_class($object),$object->getId());
+	}
 }
 ?>
