@@ -1,9 +1,9 @@
 
-<a href="./index.php?controller=registration&action=directDisplay&page=NPVolunteerForm">
+<a href="./index.php?controller=registration&action=directDisplay&page=VolunteerNaturalPersonForm">
 	Formulário Do Voluntário Pessoa Fisica
 </a>
 <br/>
-<a href="./index.php?controller=registration&action=directDisplay&page=LPVolunteerForm">
+<a href="./index.php?controller=registration&action=directDisplay&page=VolunteerLegalPersonForm">
 	Formulário Do Voluntário Pessoa Jurídica
 </a>
 <br/>

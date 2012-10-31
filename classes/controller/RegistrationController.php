@@ -31,7 +31,8 @@ class RegistrationController extends ApplicationController{
 	//UpdateGET pega a página de formulário do usuário
 	public function updatePOST(){
 		$userUpdate = $this->request->getUser();
-		echo $userUpdate->getPublic();
+
+		$userUpdate->setId($this->request->get("user_id"));
 		
 		$this->dao->update($userUpdate);
 
@@ -41,14 +42,13 @@ class RegistrationController extends ApplicationController{
 	}
 
 	public function updateGET(){
-		$page = $this->request->get("form");
+		$userType = $this->request->get("form");
 		
 		//Por enquanto passado por parametro, mas depois pegar da session
 		$userId = $this->request->get("user_id");
 		
-		$user = new Entity;
+		$user = new $userType();
 		$user->setId($userId);
-		echo $user->getId();
 
 		$userForm = $this->dao->findById($user);
 
@@ -58,6 +58,7 @@ class RegistrationController extends ApplicationController{
 		//Seta ação do form, pois o form é usado tanto para editar quanto para criar
 		$this->view->assign("action","updatePOST");
 
+		$page = $userType."Form";
 		$this->view->display($page);
 	}
 
