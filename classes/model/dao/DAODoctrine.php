@@ -70,7 +70,7 @@ class DAODoctrine implements DAO{
 	*
 	*	É necessário tomar cuidado com as entidades gerenciadas pelo entity manager.
 	*
-	*	@param $id id(chave primária) da tupla que será buscada.
+	*	@param $object objeto que contém o id(chave primária) da tupla que será buscada.
 	*	@return object objeto referente a tupla com este id na tabela.
 	*	@return null caso não tenha nenhuma tupla com este id.
 	*
