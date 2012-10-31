@@ -28,7 +28,7 @@ require_once (DAO_PATH   . "/DAODoctrine.php");
 $dao = ServiceLocator::getInstance()->getDAO('UserDAO');
 //$volunterr =  new VolunteerNaturalPerson;
 //$volunterr->setEmail();
-// $volunterr = $dao->findByEmail('andersen@gmail.com');
+// $volunterr = $dao->findByEmail('andre@gmail.com');
 /*$volunterr = new Entity;
 $volunterr->setId(1);
 $volunterr = $dao->findById($volunterr);*/

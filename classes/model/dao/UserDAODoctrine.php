@@ -6,13 +6,13 @@ require_once (MODEL_PATH . "/User.php");
 
 use Doctrine\ORM\Query\ResultSetMapping;
 
-/** 
+/** Classe do DAO do usuário para o doctrine.
+*	@see UsuarioDAO.
 */
 class UserDAODoctrine extends DAODoctrine implements UserDAO{
 
 	/** Método que retorna o objeto equivalente à uma coluna do banco que possui o email passado.
 	*
-	*	Para realizar a pesquisa, o método mágico __call é usado. 
 	*
 	*	@param $email email do usuário que será procurado.
 	*	@return object objeto referente a tupla com este email na tabela.
@@ -33,14 +33,14 @@ class UserDAODoctrine extends DAODoctrine implements UserDAO{
 		$query = $this->entityManager->createNativeQuery('SELECT id,email,user_type FROM user WHERE email = ?', $rsm);
 		$query->setParameter(1, $email);
 
-		//pega o tipo do usuário
+		//pega o tipo do usuário e o seu id
 		$result = $query->getResult();
 
-		if ($result == null)//email não cadastrado.
+		if ($result == null)//caso não tenha ninguém com este email, return null.
 			return null;
 
-		$this->entityManager->detach($result[0]);//tem que estar unmanaged
-	
+		$this->entityManager->detach($result[0]);//tem que estar unmanaged para buscar completo.
+		//o $result[0] é o objeto retornado.
 		return  $this->findById($result[0]);
 	}
 }

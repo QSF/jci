@@ -8,9 +8,10 @@ require_once MODEL_PATH . "/Entity.php";
  * @Table(name="user")
  * @InheritanceType("JOINED")
  * @DiscriminatorColumn(name="user_type", type="string")
- * @DiscriminatorMap({"volunteer" = "Volunteer", "entity" = "Entity", "volunteer_legal_person" = "VolunteerLegalPerson", "volunteer_natural_person" = "VolunteerNaturalPerson"})
+ * @DiscriminatorMap({"entity" = "Entity",
+ *                    "volunteerLegalPerson" = "VolunteerLegalPerson",
+ *                    "volunteerNaturalPerson" = "VolunteerNaturalPerson"})
  **/
-
 abstract class User
 {
 
