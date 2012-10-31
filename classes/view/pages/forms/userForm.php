@@ -8,10 +8,10 @@
 	<label for="email">E-mail</label>
 	<input type="text" id="idEmail" name="email" value="<?php echo $user->getEmail()?>"/><br/>
 
-	<?php if($user->getPassword() != null) : ?>
+	<?php if($user->getId() == null ){ ?>
 	<label for="password">Senha</label>
 	<input type="password" id="idPassword" name="password"/><br/>
-	<?php endif; ?>
+	<?php } ?>
 
 	<label for="phone">Telefone</label>
 	<input type="text" id="idPhone" name="phone" value="<?php  echo $user->getPhone()?>" maxlength=12/><br/>

@@ -22,13 +22,12 @@
 				<?php include_once PAGES_PATH."/Logo.php" ?>  
 			</div>
 			<div id="menu_topo">
-				 <? //include_once "menu_topo.php"?> 
+				 <?php include_once "LoginForm.php"; ?> 
 			</div>
+			<a href="./index.php/controller=login&action=logout">Logout</a>
 			<div id="content">
 				<div class="mensagem_sucesso">
-				<?php  foreach($successMessage as $msg){
-					echo $msg;
-					}?>
+				<?php  foreach($successMessage as $msg){ echo $msg;}?>
 				</div>
 				
 				<?php include PAGES_PATH."/".$content.".php"; ?>

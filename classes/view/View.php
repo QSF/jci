@@ -67,7 +67,7 @@
      */
     private $userType;
 
-    public function __construct($userType = UsersEnum::GUEST){
+    public function __construct($userType = "Guest"){
       $this->userType = $userType;
     }
 
@@ -127,29 +127,29 @@
      */
     public function getCustomView(){
       $customView = array();
-      if( $this->userType === UsersEnum::GUEST){
-        $customView['menu'] = "GuestMenu.php";
-        $customView['loginSection'] = "LoginSection.php";
+      if( $this->userType === "Guest"){
+       // $customView['menu'] = "menu/GuestMenu.php";
+        $customView['loginSection'] = "LoginForm.php";
       }
         
-      else if( $this->userType === UsersEnum::ENTITY){
-        $customView['menu'] = "EntityMenu.php";
+      else if( $this->userType === "Entity"){
+        $customView['menu'] = "menu/EntityMenu.php";
         $customView['loginSection'] ="GreetingsUser.php";
       }
 
-      else if( $this->userType === UsersEnum::VOLUNTEER_NATURAL_PERSON || 
-                  $this->userType === UsersEnum::VOLUNTEER_LEGAL_PERSON){
-        $customView['menu'] = "VolunteerMenu.php";
+      else if( $this->userType === "VolunteerLegalPerson"|| 
+                  $this->userType === "VolunteerNaturalPerson"){
+        $customView['menu'] = "menu/VolunteerMenu.php";
         $customView['loginSection'] = "GreetingsUser.php";
       }
 
-      else if($this->userType === UsersEnum::ADMIN){
-        $customView['menu'] = "AdminMenu.php";
+      else if($this->userType === "Admin"){
+        $customView['menu'] = "menu/AdminMenu.php";
         $customView['loginSection'] = "GreetingsUser.php";
       }
 
-      else if($this->userType === UsersEnum::MODERATOR){
-        $customView['menu'] = "ModeratorMenu.php";
+      else if($this->userType === "Moderator"){
+        $customView['menu'] = "menu/ModeratorMenu.php";
         $customView['loginSection'] = "GreetingsUser.php";
       }
       return $customView;

@@ -133,14 +133,11 @@ class Request{
 		
 		//Checando se o usuário está autenticado no nosso sistema
 		//Se não estiver, significa que é um visitante
-		if(!isset($_SESSION["type"])){
-			$userRole = UsersEnum::GUEST;
-		}
-		else{
-			$userRole = $_SESSION["type"];
+		if(!isset($_SESSION["user"])){
+			return "Guest";
 		}
 		
-		return $userRole;
+		return get_class($_SESSION["user"]);
 	}
 
 	/** Método que retorna um user de acordo com os dados passados no formulário.

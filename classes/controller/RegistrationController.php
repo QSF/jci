@@ -65,6 +65,7 @@ class RegistrationController extends ApplicationController{
 	* Para popular os campos do formulário, é necessário passar como parâmetro o id do usuário.
 	*/
 	public function updateGET(){
+		echo $this->request->getUserType();
 		$userType = $this->request->get("form");
 		
 		//Checar se o usuário tem permissão.
