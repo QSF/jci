@@ -17,7 +17,8 @@ class LoginController extends ApplicationController
 		$dao = ServiceLocator::getInstance()->getDAO("UserDAO");
 		$user = $dao->findByEmail($username);
 
-		$this->setSession($user);
+		if ($user != null)
+			$this->setSession($user);
 		
 		$this->view->display("Home");
 	}
@@ -27,7 +28,8 @@ class LoginController extends ApplicationController
 		if($password === $user->getPassword()){
 			session_start(); 
 
-			$_SESSION["user"] = $user;
+			$_SESSION["type"] = get_class($user);
+			$_SESSION["user"] = serialize($user);
 			//$this->view->setUserType(get_class($user));
 
 			$this->view->assignSuccess("Bem-Vindo ".$user->getName());

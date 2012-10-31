@@ -133,11 +133,11 @@ class Request{
 		
 		//Checando se o usuário está autenticado no nosso sistema
 		//Se não estiver, significa que é um visitante
-		if(!isset($_SESSION["user"])){
+		if(!isset($_SESSION["type"])){
 			return "Guest";
 		}
 		
-		return get_class($_SESSION["user"]);
+		return $_SESSION["type"];
 	}
 
 	/** Método que retorna um user de acordo com os dados passados no formulário.
@@ -174,6 +174,15 @@ class Request{
 		}
 
 		return $user;
+	}
+
+	public function getUserSession(){
+		if($_SESSION["user"] == null)
+			return null;
+		
+		$userSession = unserialize($_SESSION["user"]);
+
+		return $userSession;
 	}
 }
 ?>
