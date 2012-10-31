@@ -6,8 +6,8 @@ define("VIEW_PATH"    		, realpath('../classes/view') 					);
 define("CONTROLLER_PATH"    , realpath('../classes/controller') 			);
 define("MODEL_PATH"			, realpath('../classes/model')      			); 
 define("DAO_PATH"			, realpath('../classes/model/dao')      		); 
-define("RESOURCE_PATH"		, realpath('../classes/resource')   			); 
-define("REGISTERS_PATH"		, realpath('../classes/resource/registers')     ); 
+define("RESOURCE_PATH"		, realpath('../classes/Resource')   			); 
+define("REGISTERS_PATH"		, realpath('../classes/Resource/registers')     ); 
 define("CLASSES_PATH"		, realpath('../classes')      					); 
 define("PAGES_PATH"		    , realpath('../classes/view/pages')      		); 
 
