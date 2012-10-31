@@ -6,8 +6,8 @@ require_once MODEL_PATH . "/VolunteerNaturalPerson.php";
  * @Entity
  * @Table(name="volunteer")
  * @InheritanceType("JOINED")
- * @DiscriminatorColumn(name="user_type", type="string")
- * @DiscriminatorMap({"volunteerLegalPerson" = "VolunteerLegalPerson", "volunteerNaturalPerson" = "VolunteerNaturalPerson"})
+ * @DiscriminatorColumn(name="volunteer_type", type="string")
+ * @DiscriminatorMap({"volunteer_legal_person" = "VolunteerLegalPerson", "volunteer_natural_person" = "VolunteerNaturalPerson"})
  */
 abstract class Volunteer extends User
 {	
