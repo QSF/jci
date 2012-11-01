@@ -43,6 +43,9 @@ class UserDAODoctrine extends DAODoctrine implements UserDAO{
 		//o $result[0] é o objeto retornado.
 		return  $this->findById($result[0]);
 	}
+
+
+
 }
 ?>require_once (DAO_PATH   . "/UserDAO.php");
 require_once (DAO_PATH   . "/DAODoctrine.php");
