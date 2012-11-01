@@ -4,12 +4,16 @@ require_once MODEL_PATH . "/Volunteer.php";
 require_once MODEL_PATH . "/Entity.php";
 require_once MODEL_PATH . "/VolunteerLegalPerson.php";
 require_once MODEL_PATH . "/VolunteerNaturalPerson.php";
+require_once MODEL_PATH . "/Moderator.php";
+require_once MODEL_PATH . "/Administrator.php";
+
 /** Classe que constrói um usuário(qualquer tipo) a partir de uma Request.
 *
 *	Está classe é utilizada para passar os dados de uma request para um objeto de um usuário.
 *	Desta forma, ela seria usada para pegar dados de fomulário de cadastro, edição, etc. 
 *	@see Request::getUser()
 */
+
 class ObjectBuilder
 {	
 	protected $request;
@@ -133,7 +137,15 @@ class ObjectBuilder
 	*	@return user moderador
 	*/
 	public function getModerator(){
-		//falta fazer
+		$user = new Moderator;
+		
+		$user->setLogin($this->request->get("login"));
+
+		$user->setPassword($this->request->get("password"));
+
+		$user->setEmail($this->request->get("email"));
+
+		return $user;
 	}
 }
 

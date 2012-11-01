@@ -10,3 +10,7 @@
 <a href="./index.php?controller=registration&action=directDisplay&page=EntityForm">
 	Formulário Da Entidade
 </a>
+<br/>
+<a href="./index.php?controller=registration&action=directDisplay&page=ModeratorForm">
+	Formulário Do Moderador
+</a>

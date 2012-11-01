@@ -41,7 +41,6 @@ class LoginController extends ApplicationController
 	}
 
 	public function logout(){
-		unset($_SESSION);
 		session_destroy();
 		$this->view->setUserType("Guest");
 		$this->view->display("Home");

@@ -52,7 +52,7 @@ class RegistrationController extends ApplicationController{
 		$userUpdate->setId($this->request->get("user_id"));
 		
 		$this->dao->update($userUpdate);
-
+		echo $userUpdate->getPassword();
 		$this->view->assignSuccess("Usuário editado");
 		$this->display("Home");
 
@@ -65,6 +65,7 @@ class RegistrationController extends ApplicationController{
 	* Para popular os campos do formulário, é necessário passar como parâmetro o id do usuário.
 	*/
 	public function updateGET(){
+
 		$userType = $this->request->get("form");
 		
 		//Checar se o usuário tem permissão.
@@ -73,6 +74,8 @@ class RegistrationController extends ApplicationController{
 		
 		$user = new $userType();
 		$user->setId($userId);
+
+		$this->authorize($user);
 
 		$userForm = $this->dao->findById($user);
 
@@ -92,6 +95,7 @@ class RegistrationController extends ApplicationController{
 	* É necessário se passar o tipo de usuário que irá ser deletado
 	*/
 	public function delete(){
+
 		$userId = $this->request->get("user_id");
 		$userType = $this->request->get("user_type");
 
@@ -99,14 +103,20 @@ class RegistrationController extends ApplicationController{
 		//TODO:
 		$user = new $userType();
 		$user->setId($userId);
+	
+		$this->authorize($user);
 
 		$user = $this->dao->findById($user);
-
+		echo $user->getEmail();
 		$this->dao->delete($user);
 
 		$this->view->assignSuccess("Usuário deletado com sucesso");
 		$this->display("Home");
 	}
 
+	public function authorize($user){
+		//Futuramente terá autorizacao
+		//To pensando em fazer por sql
+	}
 }
 ?>
