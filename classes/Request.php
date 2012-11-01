@@ -162,11 +162,14 @@ class Request{
 			case 'Entity':
 				$user = $builder->getEntity();
 				break;
-			case 'NPVolunteer'://natural person
+			case 'VolunteerNaturalPerson'://natural person
 				$user = $builder->getVolunteerNaturalPerson();
 				break;
-			case 'LPVolunteer'://legal person
+			case 'VolunteerLegalPerson'://legal person
 				$user = $builder->getVolunteerLegalPerson();
+				break;
+			case 'Moderator':
+				$user = $builder->getModerator();
 				break;
 			default:
 				$user = null;
