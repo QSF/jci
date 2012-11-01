@@ -3,13 +3,13 @@
  </a> 
  <br/>
  Cadastre-se<br/>
- <a href="./index.php?controller=application&action=directDisplay&page=VolunteerLegalPersonForm">
+ <a href="./index.php?controller=registration&action=redirectCreate&page=VolunteerLegalPersonForm">
  	Cadastro Pessoa Juridica
  </a><br/>
- <a href="./index.php?controller=application&action=directDisplay&page=VolunteerNaturalPersonForm">
+ <a href="./index.php?controller=registration&action=redirectCreate&page=VolunteerNaturalPersonForm">
  	Cadastro Pessoa Física
  </a><br/>
-  <a href="./index.php?controller=application&action=directDisplay&page=EntityForm">
+  <a href="./index.php?controller=registration&action=redirectCreate&page=EntityForm">
  	Entity Form
  </a><br/>
 

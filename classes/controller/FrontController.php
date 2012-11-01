@@ -53,7 +53,7 @@
 		$controllerName = ucfirst($this->request->getControllerName())."Controller";
 		$actionName = $this->request->getActionName();
 
-		try{
+		//try{
 			include_once CONTROLLER_PATH.DIRECTORY_SEPARATOR.$controllerName.".php";
 			
 			if(class_exists($controllerName) ){
@@ -69,13 +69,13 @@
 			else{
 				throw new Exception("Recurso nao encontrado");
 			}
-		}
-		catch(Exception $e){
-			$this->view = ServiceLocator::getInstance()->getView($this->request->getUserType());
-			$this->view->display("404");
-
-			//echo $e->getMessage();
-		}
+		//}
+		// catch(Exception $e){
+		// 	$this->view = ServiceLocator::getInstance()->getView($this->request->getUserType());
+		// 	//fazer um log aqui.
+		// 	$this->view->assignError($e->getMessage());
+		// 	$this->view->display("404");
+		// }
 
 		
 	}

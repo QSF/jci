@@ -29,20 +29,20 @@ class Field
 	 * @OneToMany(targetEntity="Field", mappedBy="parent", cascade ={"remove"})
 	 * @var ArrayCollection<Field>
 	 **/
-    private $children;
+    protected $children;
 
     /**
      * @ManyToOne(targetEntity="Field", inversedBy="children")
      * @JoinColumn(name="parent_id", referencedColumnName="id")
      * @var Field
      **/
-    private $parent;
+    protected $parent = null;
 
     /**
      * @ManyToMany(targetEntity="User", mappedBy="actingArea")
      * @var ArrayCollection<User>
      **/
-    private $users;
+    protected $users;
 
     /**
      * @OneToMany(targetEntity="Donation", mappedBy="field")
@@ -51,6 +51,10 @@ class Field
 
     //encapsular para o campo filho e pai
 
+    public function getChildren(){
+        return $this->children->toArray();
+    }
+
     /**
     *	Adiciona um novo campo como filho e já seta para este novo campo o seu campo "pai".
     *	
@@ -58,8 +62,9 @@ class Field
     */
     public function addChild(Field $child){
     	if ($child === null)
-    		return;
-    	$this->children->add($child);
+    		return null;
+    	// $this->children->add($child);
+        $this->children[] = $child;
     	$child->setParent($this);
     }
 
@@ -111,11 +116,7 @@ class Field
     	$this->users->remove($user->getId());
     }
 
-    public function getChildren(){
-    	$this->children->toArray();
-    }
-
-    public function setParent(Field $parent){
+    public function setParent(Field $parent = null){
     	$this->parent = $parent;
     }
 
@@ -185,7 +186,7 @@ class Field
     }
 
     public function getDonations(){
-    	$this->donations->toArray();
+    	return $this->donations->toArray();
     }
 }
 

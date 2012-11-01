@@ -43,14 +43,21 @@ class RegistrationController extends ApplicationController{
 	* A permissão da edição é necessário e é feita do seguinte modo:
 	* Checar se o usuário é moderador ou admin. 
 	* Se não for checar se o user_id passado como parâmetro no atributo é o mesmo.
+	* @todo Estudas sobre o lance de gerenciamento e cascata para retirar o clear.
+	* @todo Checar o usuário que é passado.
 	*/
-	public function updatePOST(){
+	public function update(){
 		
 		//TODO: checar se o usuário tem permissão de editar
 		$userUpdate = $this->request->getUser();
-
+		if ($userUpdate === null){
+			$this->view->assignError('Erro ao editar!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
 		$userUpdate->setId($this->request->get("user_id"));
-		
+		$this->dao->clear();
 		$this->dao->update($userUpdate);
 
 		$this->view->assignSuccess("Usuário editado");
@@ -58,49 +65,104 @@ class RegistrationController extends ApplicationController{
 
 	}
 
-	/** 
-	* Método que redireciona para o formulário de edição do usuário.
-	* É necessário setar o nome do usuario pela variável form.
-	* Como é preciso instanciar um usuário, esse atributo TEM QUE ser um nome idêntico ao model.
-	* Para popular os campos do formulário, é necessário passar como parâmetro o id do usuário.
+	/**
+	*	Método que redireciona para uma página de atualizar os dados de um usuário, de acordo
+	*	com o tipo de usuário e id de usuário.
+	*	@param $userType Indica o formulário que será incluso.
+	*	@param $userId Determina qual usuário vai ser editado.
 	*/
-	public function updateGET(){
+	protected function redirectUpdate($userType, $userId,  $password){
+		if ($userType === null || $userId === null){
+			$this->view->assignError('Erro ao editar!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
 
-		$userType = $this->request->get("form");
-		
-		//Checar se o usuário tem permissão.
-		//Ver se for admin ou moderador. Se não o id tem que ser igual
-		$userId = $this->request->get("user_id");
-		
+		if ($userType == 'Guest'){
+			$this->view->assignError('Erro, Guest não é usuário!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
+
 		$user = new $userType();
 		$user->setId($userId);
 
 		$this->authorize($user);
 
-		$userForm = $this->dao->findById($user);
+		$user = $this->dao->findById($user);
 
+		if ($user === null){//nem encontrou o user
+			$this->view->assignError('Erro, usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display('Home');
+			return;
+		}
 		//Seta valores do usuario para ser mostrado na view
-		$this->view->assign("user", $userForm);
+		$this->view->assign("user", $user);
+		//redijitar ou não a senha
+		$this->view->assign("password", $password);
 
 		//Seta ação do form, pois o form é usado tanto para editar quanto para criar
-		$this->view->assign("action","updatePOST");
+		$this->view->assign("action","update");
+
+		$fieldDao = ServiceLocator::getInstance()->getDAO("FieldDAO");
+		$fields = $fieldDao->findAllMacros();//pega todos os campos macros
+		//Todos os campos serão exibidos na view.
+		$this->view->assign("fields", $fields);
+
+		$publicDao = ServiceLocator::getInstance()->getDAO("PublicServedDAO");
+		$publicArray = $publicDao->findAll();
+		//A ação vai ser criar.
+		$this->view->assign("publicArray",$publicArray);
 
 		$page = $userType."Form";
 		$this->view->display($page);
 	}
 
+	/**
+	*	Método que redireciona para uma página de edição de um usuário está logado.
+	*	Os dados são pego de acorco com a session.
+	*	@see self::redirectUpate
+	*/
+	public function redirectLoggedUserUpdate(){
+		$userType = $this->request->getUserType();//e se for guest?
+		$user = $this->request->getUserSession();
+		$this->redirectUpdate($userType, $user->getId(), true);
+	}
+
+	/** 
+	* Método que redireciona para o formulário de edição de usuário que não seja o logado.
+	* É necessário setar o nome do usuario pela variável form.
+	* Como é preciso instanciar um usuário, esse atributo TEM QUE ser um nome idêntico ao model.
+	* Para popular os campos do formulário, é necessário passar como parâmetro o id do usuário.
+	*/
+	public function redirectUserUpdate(){
+		$userType = $this->request->get("form");
+		$userId = $this->request->get("user_id");
+
+		$this->redirectUpdate($userType, $userId, false);
+	}
+
 	/** 
 	* Método que deleta o usuário do BD.
 	* A permissão é feita do mesmo modo que na ação de edição.
-	* É necessário se passar o tipo de usuário que irá ser deletado
+	* É necessário se passar o tipo de usuário que irá ser deletado.
+	* Para que um usuário possa ser removido, o usuário logado deverá confirmar sua senha.
+	* Caso um usuário esteje excluindo sua própria conta, um logout deverá ser feito.
 	*/
 	public function delete(){
-
 		$userId = $this->request->get("user_id");
 		$userType = $this->request->get("user_type");
 
-		//Checar Permissão
-		//TODO:
+		if ($userType === null || $userId === null){
+			$this->view->assignError('Erro ao excluir, usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
+
 		$user = new $userType();
 		$user->setId($userId);
 	
@@ -108,10 +170,158 @@ class RegistrationController extends ApplicationController{
 
 		$user = $this->dao->findById($user);
 
+		if ($user === null){//nem encontrou o user
+			$this->view->assignError('Erro, usuário não encontrado!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display('Home');
+			return;
+		}
+		
+		$password = md5($this->request->get('password'));
+		//pega o usuário da sessão
+		$loggedUser = $this->request->getUserSession();
+		//compara a senha que veio e a senha atual da session.
+		if ($password == null || ($password != $loggedUser->getPassword()) ){
+			$this->view->assignError('Erro, senha inválida!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display('Home');
+			return;	
+		}
+
+		$logOut = false;
+		if ($loggedUser->getId() == $user->getId()){//se usuário removido for o usuário logado.
+			$logOut = true;
+		}
+
 		$this->dao->delete($user);
 
-		$this->view->assignSuccess("Usuário deletado com sucesso");
+		if ($logOut){//realiza logout(pode chamar o método do LoginController)
+			session_destroy();
+			$_SESSION = array();
+			//informar por email, ou alguma coisa assim.
+			$this->view->assignSuccess("Usuário deletado com sucesso!");
+			$this->redirect("Home");
+		}
+		$this->view->assignSuccess("Usuário deletado com sucesso!");
 		$this->display("Home");
+	}
+
+	/**
+	*	Método geral de redirecionamento para a página de deleção.
+	*	Esta página irá pedir para confirmar senha e irá chamar o método delete.
+	*	@param $userType Irá ser passado para o form de deleção, pois será preciso para chamar o método delete.
+	*	@param $userId Determina qual usuário vai ser deletado.
+	*/
+	protected function redirectDelete($userType, $userId){
+		if ($userType === null || $userId === null){
+			$this->view->assignError('Erro ao excluir, usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display("404");
+			return;
+		}
+
+		$user = new $userType();
+		$user->setId($userId);
+		//confirmar se é permitido ou não.
+		$this->authorize($user);
+		//o user precisa ser carregado para informar o nome do usuário ná página de deleção
+		$user = $this->dao->findById($user);
+
+		if ($user === null){//nem encontrou o user
+			$this->view->assignError('Erro, usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display('Home');
+			return;
+		}
+		/*Parâmetros para o form de deleção*/
+
+		//Seta o nome de usuário(checar se é moderador ou não)
+		if ($userType == 'Moderator' || $userType == 'Administrator' )
+			$this->view->assign("userName", $user->getLogin());
+		else
+			$this->view->assign("userName", $user->getName());
+
+		$this->view->assign("userId", $user->getId());
+		$this->view->assign("userType",$userType);
+
+		$page = "DeleteForm";
+		$this->view->display($page);
+	}
+
+	/**
+	*	Método que redireciona para uma página de deleção de um usuário que está logado.
+	*	Os dados são pego de acorco com a session e assim o formulário para deletar será montado
+	*	de acordo com esses dados.
+	*	@see self::redirectDelete
+	*/
+	public function redirectLoggedUserDelete(){
+		$userType = $this->request->getUserType();
+		$user = $this->request->getUserSession();
+
+		$this->redirectDelete($userType, $user->getId());
+	}
+
+	/** 
+	* Método que redireciona para o formulário de deleção de usuário que não seja o logado.
+	* A página que será redirecionada vai ser simplemente para o usuário logado confirmar sua senha.
+	* Para redirecionar uma página, deverá ser passado o tipo de usuário e id de usuário que será deletado.
+	*	@see self::redirectDelete
+	*/
+	public function redirectUserDelete(){
+		$userType = $this->request->get("user_type");
+		$userId = $this->request->get("user_id");
+
+		$this->redirectDelete($userType, $userId);
+	}
+
+	/** 
+	* Carrega lista de campos e público e redireciona para página de cadastro.
+	*/
+	public function redirectCreate(){
+		$fieldDao = ServiceLocator::getInstance()->getDAO("FieldDAO");
+		$fields = $fieldDao->findAllMacros();//pega todos os campos macros
+		//Todos os campos serão exibidos na view.
+		$this->view->assign("fields", $fields);
+
+		$publicDao = ServiceLocator::getInstance()->getDAO("PublicServedDAO");
+		$publicArray = $publicDao->findAll();
+		//A ação vai ser criar.
+		$this->view->assign("publicArray",$publicArray);
+		//O FieldForm vai ser usado tanto no upate quando no cadastro.
+		$this->view->display($this->request->get('page'));
+	}
+
+	protected function doRead($userType, $userId){
+		
+		if ($userType === null || $userId === null){
+			$this->view->assignError('Usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display("404");
+			return;
+		}
+
+		$user = new $userType();
+		$user->setId($userId);
+
+		$user = $this->dao->findById($user);
+
+		if ($user === null){//nem encontrou o user
+			$this->view->assignError('Erro, usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display('Home');
+			return;
+		}
+
+		$this->view->assign("user",$user);
+		$view = $userType."Profile";
+		$this->display($view);
+	}
+
+	public function readLoggedUser(){
+		$userType = $this->request->getUserType();
+		$user = $this->request->getUserSession();
+
+		$this->doRead($userType, $user->getId());
 	}
 
 	public function read(){
@@ -119,19 +329,13 @@ class RegistrationController extends ApplicationController{
 		$userId = $this->request->get("user_id");
 		$userType = $this->request->get("profile");
 
-		$user = new $userType();
-		$user->setId($userId);
-
-		$user = $this->dao->findById($user);
-
-		$this->view->assign("user",$user);
-		$view = $userType."Profile";
-		$this->display($view);
+		$this->doRead($userType, $userId);
 	}
 
 	public function authorize($user){
 		//Futuramente terá autorizacao
 		//To pensando em fazer por sql
 	}
+
 }
 ?>

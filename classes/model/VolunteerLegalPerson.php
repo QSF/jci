@@ -7,8 +7,11 @@ require_once MODEL_PATH . "/Volunteer.php";
 */
 class VolunteerLegalPerson extends Volunteer
 {	
+	 public function __construct(){
+		parent::__construct();	
+    }
 	/** 
-	* @Column(type="integer", unique = true, nullable=false) 
+	* @Column(type="string", length=14, nullable=false)
 	* @var int
 	*/
 	protected $cnpj;

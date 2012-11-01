@@ -5,7 +5,6 @@
 * Controller que realiza o login independente do usuario
 *
 */
-
 class LoginController extends ApplicationController
 {
 	
@@ -21,8 +20,9 @@ class LoginController extends ApplicationController
 			if(!($user instanceof Entity && $user->getSituation() == false))
 				$this->setSession($user);
 		}
-
-		$this->view->assignError("Nome de usuário ou senha inválidos");
+		else
+			$this->view->assignError("Nome de usuário ou senha inválidos");
+		
 		$this->view->display("Home");
 	}
 
@@ -35,7 +35,6 @@ class LoginController extends ApplicationController
 			$_SESSION["type"] = get_class($user);
 			$_SESSION["user"] = serialize($user);
 			//$this->view->setUserType(get_class($user));
-
 			$this->view->assignSuccess("Bem-Vindo ");
 			$this->redirect();
 		}

@@ -8,14 +8,20 @@
 		<?php echo $user->getName()?>
 	</a>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="./index.php?controller=registration&action=updateGET&user_id=<?php echo $user->getId()?>
+	<a href="././index.php?controller=registration&action=redirectUserUpdate&user_id=<?php echo $user->getId()?>
 		&form=<?php echo get_class($user)?>">
 		<img src="PUBLIC_PATH."img/icons/Edit.ico"">
 	</a>
 	&nbsp;&nbsp;
+<<<<<<< HEAD
 	<a href="./index.php?controller=registration&action=delete&user_id=<?php echo $user->getId()?>
 		&user_type=<?php echo get_class($user)?>">
 		<img src="PUBLIC_PATH."img/icons/Delete.ico"">
+=======
+	<a href="./index.php?controller=registration&action=redirectUserDelete&user_id=<?php echo $user->getId();?>
+		&user_type=<?php echo get_class($user);?>">
+		Deletar
+>>>>>>> 3cc065ecb2a4b505d86d040f5b0a70ade63c81a7
 	</a>
 	&nbsp;&nbsp;
 	<?php if(isset($validateAction) && $validateAction === true) {?>

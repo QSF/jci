@@ -2,6 +2,7 @@
 use Doctrine\Common\Collections\ArrayCollection;
 
 require_once MODEL_PATH . "/Entity.php";
+require_once MODEL_PATH . "/PublicServed.php";
 
 /**
  * @Entity 
@@ -14,10 +15,14 @@ require_once MODEL_PATH . "/Entity.php";
  **/
 abstract class User
 {
+    public function __construct(){
+        $this->public = new ArrayCollection();
+        $this->actingArea = new ArrayCollection();
+    }
 
     /**
-     *@Id @Column(type="integer")
-     *@GeneratedValue
+     * @Id @Column(type="integer")
+     * @GeneratedValue
      **/
     protected $id = null;
 
@@ -42,35 +47,35 @@ abstract class User
     protected $password;
 
     /**
-     *@Column(type="integer")
+     * @Column(type="string", length=10, nullable=true)
      **/
     protected $phone;
 
     /**
-     *@Column(type="string")
+     * @Column(type="string")
      **/
     protected $howYouKnow;
 
     /** Relação do publico atendido.
+     * @ManyToMany(targetEntity="PublicServed", inversedBy="users", cascade={"merge"})
+     * @JoinTable(name="users_public")
      *
      * @var ArrayCollection<PublicServed>
      **/
     protected $public;
 
     /** Relação dos campos de cada usuario
+     * @ManyToMany(targetEntity="Field", inversedBy="users", cascade={"merge"})
+     * @JoinTable(name="users_fields")
+     *
      * @var ArrayCollection<Field>
      **/
     protected $actingArea;
 
     /**
-     *@Column(type="integer")
+     * @Column(type="integer")
      **/
     protected $cep;
-
-    public function __construct(){
-        $this->public = new ArrayCollection();
-        $this->actingArea = new ArrayCollection();
-    }
 
     //encapsulamento do public
     public function addPublic (PublicServed $public){
@@ -205,7 +210,7 @@ abstract class User
     }
 
     public function getPublic(){
-        //return $this->public->toArray();
+        return $this->public->toArray();
     }
 
     public function setPublic($public){
@@ -213,7 +218,7 @@ abstract class User
     }
 
     public function getActingArea(){
-      //  return $this->actingArea->toArray();
+       return $this->actingArea->toArray();
     }
 
     public function setActingArea($actingArea){

@@ -13,6 +13,7 @@ abstract class Volunteer extends User{
 	
 	public function __construct() {
         $this->donations = new ArrayCollection();
+        parent::__construct();  
     }
 
 	/** @Column(type="string") */
@@ -35,10 +36,10 @@ abstract class Volunteer extends User{
 
     //encapsular do donations
 
-     /**
-    *	Adiciona uma doação que este voluntário participou.
-    *	
-    *	@param $donation Doação.
+    /**
+     *	Adiciona uma doação que este voluntário participou.
+     *	
+     *	@param $donation Doação.
     */
     public function addDonation(Donation $donation){
     	if ($donation === null)
@@ -79,7 +80,7 @@ abstract class Volunteer extends User{
     }
 
     public function getDonations(){
-    	$this->donations->toArray();
+    	return $this->donations->toArray();
     }
 }
 ?>
