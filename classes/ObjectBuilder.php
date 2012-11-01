@@ -31,30 +31,19 @@ class ObjectBuilder
 	*	@todo implementar field
 	*/
 	protected function getUser($user){
-		$notification = $this->request->get('receivedNotification') == null ? false : true;
-
-		$user->setReceiveNotification ( $notification						);
-		$user->setName                ( $this->request->get('name')			);
-		$user->setEmail				  ( $this->request->get('email')		);
-		$user->setPassword 			  ( md5($this->request->get('password')));
-	
-		$user->setPhone				  ($this->dropCharacter($this->request->get('phone'))); //$this->request->get('phone')	
-		$user->setHowYouKnow		  ( $this->request->get('howYouKnow'));
-		$user->setPublic			  ( $this->getPublic() );
-		//temos que implementar o field
-		$user->setCep 				  ( $this->dropCharacter($this->request->get('cep')));		
-		$user->setReceiveNotification ( $notification								      );
-		$user->setName                ( $this->request->get('name')					      );
-		$user->setEmail				  ( $this->request->get('email')					  );
-		$password = $this->request->get('password');
-		if ($password != null)//evita caso for edição.
-			$user->setPassword 		  ( md5($password)									  );
-		$user->setPhone				  ( $this->dropCharacter($this->request->get('phone')));
-		$user->setHowYouKnow		  ( $this->request->get('howYouKnow')			      );
-		$this->setPublicServed		  ( $user            							      );
-		$this->setActingArea		  (	$user				 						      );
-		$user->setCep 				  ( $this->dropCharacter($this->request->get('cep'))  );		
-	}
+			$notification = $this->request->get('receivedNotification') == null ? false : true;
+			$user->setReceiveNotification ( $notification	);
+			$user->setName ( $this->request->get('name')	);
+			$user->setEmail	( $this->request->get('email')	);
+			$password = $this->request->get('password');
+			if ($password != null)//evita caso for edição.
+			$user->setPassword ( md5($password)	);
+			$user->setPhone	( $this->dropCharacter($this->request->get('phone')));
+			$user->setHowYouKnow	( $this->request->get('howYouKnow')	);
+			$this->setPublicServed	( $user );
+			$this->setActingArea	(	$user	);
+			$user->setCep ( $this->dropCharacter($this->request->get('cep')) );	
+}
 
 	/**
 	 *	Método que pega a lista de público, selecionada pelo usuário, da request.
