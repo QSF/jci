@@ -11,6 +11,7 @@ class Field
 	public function __construct() {
         $this->children = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->donations = new ArrayCollection();
     }
 
 	/**
@@ -42,6 +43,11 @@ class Field
      * @var ArrayCollection<User>
      **/
     private $users;
+
+    /**
+     * @OneToMany(targetEntity="Donation", mappedBy="field")
+     **/
+	protected $donations;
 
     //encapsular para o campo filho e pai
 
@@ -132,6 +138,55 @@ class Field
 	public function setName($name){
 		$this->name = $name;
 	}
+
+	//encapsular do donations
+
+     /**
+    *	Adiciona uma doação que pertence a esta área.
+    *	
+    *	@param $donation Doação.
+    */
+    public function addDonation(Donation $donation){
+    	if ($donation === null)
+    		return;
+    	$this->donations->add($donation);
+    	$donation->setField($this);
+    }
+
+    /**
+    *	Remove uma doação que pertence a esta área.
+    *
+    *	OBS: A doação é removida pela chave, sendo assim, outros campos não são comparados.
+    *	@param $donation Doação.
+    */
+    public function removeDonation(Donation $donation){
+    	if ($donation === null || $this->donations->remove($donation->getId()) === null)
+    		return;
+    	$donation->setField(null);
+    }
+
+    /**
+    *	Remove uma doação que pertence a esta área.
+    *   O campo da doação é setado como nulo.
+    *
+    *	@param $id id da doação para ser removida.
+    */
+    public function removeDonationById($id){
+    	if ($id === null)
+    		return;
+
+    	$donation = $this->donations->get($id);
+
+    	if ($donation === null)
+    		return;
+
+    	$this->donations->remove($id);
+    	$donation->setField(null);
+    }
+
+    public function getDonations(){
+    	$this->donations->toArray();
+    }
 }
 
 ?>
