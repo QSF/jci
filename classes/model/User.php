@@ -51,17 +51,21 @@ abstract class User
      **/
     protected $howYouKnow;
 
-    /**
-     *@Column(type="string")
+    /** Relação do publico atendido.
+     * @ManyToMany(targetEntity="PublicServed", inversedBy="users")
+     * @JoinTable(name="users_public")
+     *
+     * @var ArrayCollection<PublicServed>
      **/
     protected $public;
 
-    //Esse campo terá uma lista de fields
-    //Relacao ManyToMany com classe Field
-    /**
+    /** Relação dos campos de cada usuario
+     * @ManyToMany(targetEntity="Field", inversedBy="users")
+     * @JoinTable(name="users_fields")
      *
+     * @var ArrayCollection<Field>
      **/
-    // protected $actingArea = null;
+    protected $actingArea;
 
     /**
      *@Column(type="integer")
@@ -69,7 +73,84 @@ abstract class User
     protected $cep;
 
     public function __construct(){
-        // $this->actingArea = new ArrayCollection();
+        $this->public = new ArrayCollection();
+        $this->actingArea = new ArrayCollection();
+    }
+
+    //encapsulamento do public
+    public function addPublic (PublicServed $public){
+        if ($public === null)
+            return;
+        $this->public->add($public);
+        $public->addUser($this);
+    }
+
+    /**
+    *   Remove um publico atendido
+    *   O usuário ja é retirado do publico(na classe PublicServed).
+    *   OBS: O publico é removido pela chave, sendo assim, o nome não é comparado.
+    *   @param $public public para ser removido.
+    */
+    public function removePublic (PublicServed $public){
+        if ($public === null || $this->public->remove($public->getId()) === null) //publico não é atendido por este usuário
+            return;
+        $public->removeUser($this);
+    }
+
+    /**
+    *   Remove um publico atendido.
+    *   O usuário ja é retirado do publico(na classe PublicServed).
+    *   @param $id id do publico para ser removido.
+    */
+    public function removePublicById ($id){
+        if ($id === null)
+            return;
+
+        $public = $this->public->get($id);
+
+        if ($public === null)
+            return;
+
+        $this->public->remove($id);
+        $public->removeUser($this);
+    }
+
+    //encapsulamento do field
+    public function addArea (Field $area){
+        if ($area === null)
+            return;
+        $this->actingArea->add($area);
+        $area->addUser($this);
+    }
+
+    /**
+    *   Remove uma área de atuação.
+    *   O usuário ja é retirado do fild(na classe Field).
+    *   OBS: A área de atuação é removida pela chave, sendo assim, o nome não é comparado.
+    *   @param $area area para ser removida.
+    */
+    public function removeArea (Field $area){
+        if ($area === null || $this->actingArea->remove($area->getId()) === null) //publico não é atendido por este usuário
+            return;
+        $area->removeUser($this);
+    }
+
+    /**
+    *   Remove uma área de atuação.
+    *   O usuário ja é retirado do fild(na classe Field).
+    *   @param $id id da área de atuação para ser removida.
+    */
+    public function removeAreaById ($id){
+        if ($id === null)
+            return;
+
+        $area = $this->actingArea->get($id);
+
+        if ($area === null)
+            return;
+
+        $this->actingArea->remove($id);
+        $area->removeUser($this);
     }
 
     public function getReceiveNotification(){
@@ -129,7 +210,7 @@ abstract class User
     }
 
     public function getPublic(){
-        return $this->public;
+        return $this->public->toArray();
     }
 
     public function setPublic($public){
@@ -137,7 +218,7 @@ abstract class User
     }
 
     public function getActingArea(){
-        return $this->actingArea;
+        return $this->actingArea->toArray();
     }
 
     public function setActingArea($actingArea){

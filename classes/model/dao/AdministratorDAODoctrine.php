@@ -19,7 +19,7 @@ class AdministratorDAODoctrine extends DAODoctrine implements AdministratorDAO{
 	*
 	*/
 	public function findById($object){
-		return $this->entityManager->find(get_class($object),$object->getLogin());
+		return $this->getRepository()->find($object->getLogin());
 	}
 
 	/**

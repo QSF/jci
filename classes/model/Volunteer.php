@@ -6,10 +6,19 @@ require_once MODEL_PATH . "/VolunteerNaturalPerson.php";
  * @Entity
  * @Table(name="volunteer")
  */
-abstract class Volunteer extends User
-{	
+abstract class Volunteer extends User{	
+	
+	public function __construct() {
+        $this->donations = new ArrayCollection();
+    }
+
 	/** @Column(type="string") */
 	protected $experience;
+
+	/**
+     * @OneToMany(targetEntity="Donation", mappedBy="volunteer")
+     **/
+	protected $donations;
 
 	public function setExperience($experience)
 	{
@@ -20,5 +29,54 @@ abstract class Volunteer extends User
 	{
 		return $this->experience;
 	}
+
+    //encapsular do donations
+
+     /**
+    *	Adiciona uma doação que este voluntário participou.
+    *	
+    *	@param $donation Doação.
+    */
+    public function addDonation(Donation $donation){
+    	if ($donation === null)
+    		return;
+    	$this->donations->add($donation);
+    	$donation->setVolunteer($this);
+    }
+
+    /**
+    *	Remove uma doação que este voluntário participou.
+    *
+    *	OBS: A doação é removida pela chave, sendo assim, outros campos não são comparados.
+    *	@param $donation Doação.
+    */
+    public function removeDonation(Donation $donation){
+    	if ($donation === null || $this->donations->remove($donation->getId()) === null)
+    		return;
+    	$donation->setVolunteer(null);
+    }
+
+    /**
+    *	Remove uma doação que este voluntário participou.
+    *   O voluntário da doação é setado como nulo.
+    *
+    *	@param $id id da doação para ser removida.
+    */
+    public function removeDonationById($id){
+    	if ($id === null)
+    		return;
+
+    	$donation = $this->donations->get($id);
+
+    	if ($donation === null)
+    		return;
+
+    	$this->donations->remove($id);
+    	$donation->setVolunteer(null);
+    }
+
+    public function getDonations(){
+    	$this->donations->toArray();
+    }
 }
 ?>

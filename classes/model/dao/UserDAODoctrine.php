@@ -43,5 +43,12 @@ class UserDAODoctrine extends DAODoctrine implements UserDAO{
 		//o $result[0] é o objeto retornado.
 		return  $this->findById($result[0]);
 	}
+
+	/**
+	*	@return repository repositório da tabela User.
+	*/
+	protected function getRepository(){
+		return $this->entityManager->getRepository('User');
+	}
 }
 ?>
