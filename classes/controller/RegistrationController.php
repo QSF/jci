@@ -52,7 +52,7 @@ class RegistrationController extends ApplicationController{
 		$userUpdate->setId($this->request->get("user_id"));
 		
 		$this->dao->update($userUpdate);
-		echo $userUpdate->getPassword();
+
 		$this->view->assignSuccess("Usuário editado");
 		$this->display("Home");
 

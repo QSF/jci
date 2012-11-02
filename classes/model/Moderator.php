@@ -13,17 +13,17 @@ class Moderator
 	protected $id;
 
 	/**
-	*@Column(type = "string", unique=true,  nullable = false)
+	* @Column(type = "string", unique=true,  nullable = false)
 	*/
 	protected $login;
 
 	/**
-	*@Column(type = "string", nullable = false)
+	* @Column(type = "string", nullable = false)
 	*/
 	protected $password;
 
 	/**
-    *@Column(type="string")
+    * @Column(type="string")
     **/
     protected $email;
 
