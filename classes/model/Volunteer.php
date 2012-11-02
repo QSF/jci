@@ -2,6 +2,9 @@
 require_once MODEL_PATH . "/User.php";
 require_once MODEL_PATH . "/VolunteerLegalPerson.php";
 require_once MODEL_PATH . "/VolunteerNaturalPerson.php";
+
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * @Entity
  * @Table(name="volunteer")
