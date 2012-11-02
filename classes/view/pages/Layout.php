@@ -10,8 +10,12 @@
 		</title>
 		<!-- CSS Geral -->
 		<link rel=stylesheet href="css/main.css" type="text/css" media=screen>
-		<?php  foreach($arrayCss as $css){?>
-			<link rel=stylesheet href="css/<?php echo PUBLIC_PATH."/css/".$css;?>.css" type="text/css" media=screen>
+		<?php  foreach($arrayCSS as $css){?>
+			<link rel=stylesheet href="css/<?php echo $css;?>" type="text/css" media=screen>
+		<?php }?>
+
+		<?php  foreach($arrayJS as $js){?>
+			<link rel=stylesheet href="js/<?php echo $js?>" type="text/css">
 		<?php }?>
 
 	</head>
@@ -21,24 +25,27 @@
 			<div id="logo">
 				<?php include_once PAGES_PATH."/Logo.php" ?>  
 			</div>
-			<div id="menu_topo">
-				 <a href="./index.php?controller=login&action=getForm&type=User">
-				 	Logue-se aqui
-				 </a> 
-			</div>
-			<a href="./index.php?controller=login&action=logout">Logout</a>
-			<div id="content">
-				<div class="mensagem_sucesso">
+			<?php if(isset($guestSection)) include $guestSection ?>
+			<?php if(isset($userSection)) include $userSection; ?> <br/>
+				<?php //Mensagens que voce poderá enviar se teve sucesso em alguma ação
+					//Uma sugestão é colocar o sucesso como verde e o erro como vermelho?>
+				<div class="success">
 				<?php  foreach($successMessage as $msg){ echo $msg;}?>
 				</div>
 				
+				<br/>
+				<div class="error">
+				<?php  foreach($errorMessage as $msg){ echo $msg;}?>
+				</div>
+
+				<br/>
+				<div id="menu_topo">
+					<?php if(isset($menu)) include "menu/".$menu ?>
+				</div><br/>
+
 				<?php include PAGES_PATH."/".$content.".php"; ?>
 			</div>
 			<br/>
-			<a href="./index.php?controller=login&action=getForm&type=Admin">
-				Área da Administração
-			</a><br/><br/>
-
 		</div> 
 	</body>
 </html>

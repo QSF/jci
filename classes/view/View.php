@@ -12,7 +12,7 @@
   * A view desse jeito será baseada no template engine do php chamado Smarty
   */
   
-  class View{
+abstract class View{
 
     /**
      * Hash que guarda os parâmetros de requisição setadas pelo controller. 
@@ -31,7 +31,7 @@
      *
      *@name array_css
      */
-  	protected $arrayCss = array();
+  	protected $arrayCSS = array();
 
     /**
      * Array que guarda o nome dos scripts do JS
@@ -40,7 +40,7 @@
      *
      *@name array_js
      */
-  	protected $arrayJs = array();
+  	protected $arrayJS = array();
 
     /**
      * Array que guarda as mensagens de erro de nosso sistema.
@@ -61,17 +61,14 @@
   	protected $successMessage = array();
 
     /**
-     * Guarda o tipo de usuário que está acessando o sistema
-     * 
-     *@name success_message
+     * Atributo layout te dá liberdade de escolher outro layout.
+     *
+     *@name layout
      */
-    protected $userType;
+    protected $layoutName;
 
-    protected $layout;
-
-    public function __construct($userType = "Guest", $layout = "Layout"){
-      $this->userType = $userType;
-      $this->layout = $layout;
+    public function __construct($layoutName = "Layout"){
+      $this->layoutName = $layoutName;
     }
 
     public function setUserType($userType){
@@ -90,13 +87,21 @@
   		array_push($this->successMessage, $message);
   	}
 
-  	public function addJs($nameJs){
-  		array_push($this->arrayJs, $nameJs);
+  	public function addJS($nameJs){
+  		array_push($this->arrayJS, $nameJs);
   	}
 
-  	public function addCss($nameCss){
-  	 	array_push($this->arrayCss, $nameCss);
+  	public function addCSS($nameCss){
+  	 	array_push($this->arrayCSS, $nameCss);
   	}
+
+    public function getLayout(){
+      return $this->layoutName;
+    }
+
+    public function setLayout($layoutName){
+      return $this->layoutName = $layoutName;
+    }
 
     /**
      * Método que envia a página de resposta para o usuário
@@ -106,56 +111,46 @@
      */
   	public function display($content = "Home"){
 
-      //pegando elementos da view que diferem do usuario
-      $customView = $this->getCustomView();
-
       $errorMessage = $this->errorMessage;
       $successMessage = $this->successMessage;
-      $arrayCss = $this->arrayCss;
-  		$arrayJs = $this->arrayJs;
+      $this->loadResources($content);
+
+      $arrayCSS = $this->arrayCSS;
+  		$arrayJS = $this->arrayJS;
 
       //método extract serve para pegar as variaveis de uma map e transformar num variavel
-      extract($customView);
+     // extract($customView);
       extract($this->paramArray);
       
-  		include PAGES_PATH."/".$this->layout.".php";
+  		include PAGES_PATH."/".$this->layoutName.".php";
   	}
 
     /**
-     * Customiza a página da view do usuário
+     * Método que aloca recursos de JS e CSS para cada página especifica
      * 
-     * Método que seta as variaveis menu, loginSection dependendo do usuário
+     * Esse método procura a página de conteudo que o usuário quer acessar e 
+     * pega os atributos de JS e CSS para colocar no layout.
      *
-     * @return customView
+     *@see config-view.xml
+     *@param content
      */
-    public function getCustomView(){
-      $customView = array();
-      if( $this->userType === "Guest"){
-       // $customView['menu'] = "menu/GuestMenu.php";
-        $customView['loginSection'] = "LoginForm.php";
-      }
-        
-      else if( $this->userType === "Entity"){
-        $customView['menu'] = "menu/EntityMenu.php";
-        $customView['loginSection'] ="GreetingsUser.php";
-      }
+    public function loadResources($content){
+      //carrega o arquivo xml passado
+      $resources = simplexml_load_file(VIEW_PATH."/config-view.xml");
 
-      else if( $this->userType === "VolunteerLegalPerson"|| 
-                  $this->userType === "VolunteerNaturalPerson"){
-        $customView['menu'] = "menu/VolunteerMenu.php";
-        $customView['loginSection'] = "GreetingsUser.php";
-      }
+      foreach($resources->children() as $page)
 
-      else if($this->userType === "Admin"){
-        $customView['menu'] = "menu/AdminMenu.php";
-        $customView['loginSection'] = "GreetingsUser.php";
-      }
-
-      else if($this->userType === "Moderator"){
-        $customView['menu'] = "menu/ModeratorMenu.php";
-        $customView['loginSection'] = "GreetingsUser.php";
-      }
-      return $customView;
+        if($page["content"] == $content)
+          foreach($page->children() as $viewResources)
+            
+            if($viewResources->getName() == "JS")
+            foreach($viewResources->children() as $file)
+              $this->addJS($file);
+            
+            else if($viewResources->getName() == "CSS")
+              foreach($viewResources->children() as $file)
+                $this->addCSS($file);
     }
+
   }
 ?>

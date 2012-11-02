@@ -29,11 +29,7 @@ class ApplicationController{
 		$this->request = $request;
 
 		//$request->getUserType serve para saber o tipo de usuario e montar a view customizada
-
-		//Quando o Service Locator estiver pronto, descomentar essa linha
-		//$this->view = ServiceLocator::getInstance()->getView('View');
-		$this->view = new View();
-		$this->view->setUserType($this->request->getUserType());
+		$this->view = ServiceLocator::getInstance()->getView($this->request->getUserType());
 	}
 
 	/**
@@ -44,6 +40,7 @@ class ApplicationController{
 	  * É OBRIGATÓRIO SETAR O ATRIBUTO "page" NA REQUISIÇÃO
 	  */
 	public function directDisplay(){
+		
 		$contentName = $this->request->get("page");
 		$this->display($contentName);
 	}
@@ -71,6 +68,13 @@ class ApplicationController{
 
 	}
 
+	/**
+	  * Redireciona o usuario
+	  * 
+	  * Faz uma nova request para o servidor.
+	  * Atributo page é a página que o usuário quer carrega
+	  *
+	  */
 	protected function redirect($page = "Home"){
 		$url = "./index.php?controller=Application&action=directDisplay&page=".$page;
 		header("Location:".$url);
