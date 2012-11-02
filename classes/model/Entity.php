@@ -3,9 +3,11 @@
 * @Entity 
 * @Table(name="entity")
 */
-class Entity extends User
-{
+class Entity extends User{
 	
+	public function __construct() {
+        $this->donations = new ArrayCollection();
+    }
 	/** 
 	 * @Column(type="date") 
 	 * @var date
@@ -129,11 +131,7 @@ class Entity extends User
 		return $this->ownerPhone;
 	}	
 
-	public function __construct() {
-        $this->donations = new ArrayCollection();
-    }
-
-	        //encapsular do donations
+	//encapsular do donations
 
      /**
     *	Adiciona uma doação que esta entidade recebeu.

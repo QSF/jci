@@ -6,8 +6,12 @@ require_once MODEL_PATH . "/VolunteerNaturalPerson.php";
  * @Entity
  * @Table(name="volunteer")
  */
-abstract class Volunteer extends User
-{	
+abstract class Volunteer extends User{	
+	
+	public function __construct() {
+        $this->donations = new ArrayCollection();
+    }
+
 	/** @Column(type="string") */
 	protected $experience;
 
@@ -26,11 +30,7 @@ abstract class Volunteer extends User
 		return $this->experience;
 	}
 
-	public function __construct() {
-        $this->donations = new ArrayCollection();
-    }
-
-        //encapsular do donations
+    //encapsular do donations
 
      /**
     *	Adiciona uma doação que este voluntário participou.
@@ -73,6 +73,10 @@ abstract class Volunteer extends User
 
     	$this->donations->remove($id);
     	$donation->setVolunteer(null);
+    }
+
+    public function getDonations(){
+    	$this->donations->toArray();
     }
 }
 ?>

@@ -4,8 +4,12 @@
 * @Entity
 * @Table(name = "moderator")
 */
-class Moderator
-{
+class Moderator{
+
+    public function __construct() {
+        $this->donations = new ArrayCollection();
+    }
+
 	/**
      *@Id @Column(type="integer")
      *@GeneratedValue
@@ -107,6 +111,10 @@ class Moderator
 
     	$this->donations->remove($id);
     	$donation->setModerator(null);
+    }
+
+    public function getDonations(){
+        $this->donations->toArray();
     }
 
 }
