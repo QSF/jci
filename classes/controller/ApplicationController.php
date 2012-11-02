@@ -8,7 +8,7 @@
  * Nome baseado no controller pai do Rails 
  */
 
-abstract class ApplicationController{
+class ApplicationController{
 
 	/**
 	 * Nossa view será declarada manipulada para exibição na classe pai
@@ -69,6 +69,11 @@ abstract class ApplicationController{
 	  */
 	protected function displayJSON($arrayJSON){
 
+	}
+
+	protected function redirect($page = "Home"){
+		$url = "./index.php?controller=Application&action=directDisplay&page=".$page;
+		header("Location:".$url);
 	}
 }
 
