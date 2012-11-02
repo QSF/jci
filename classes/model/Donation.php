@@ -67,6 +67,15 @@ class Donation
      **/
     protected $field;
 
+    /**
+     * @PrePersist
+     *
+     *  Função que seta o tempo da doação com o horário atual.
+     **/
+    public function beforePersist(){
+        $this->setDate(new DateTime());
+    }
+
     public function getId(){
         return $this->id;
     }
@@ -85,6 +94,7 @@ class Donation
 
     public function setFeedBackVolunteer($feedBackVolunteer){
         $this->feedBackVolunteer = $feedBackVolunteer;
+        $this->setDateFeedBackVolunteer(new DateTime);
     }
 
     public function getFeedBackVolunteer(){
@@ -101,6 +111,7 @@ class Donation
 
     public function setFeedBackEntity($feedBackEntity){
         $this->feedBackEntity = $feedBackEntity;
+        $this->setDateFeedEntity(new DateTime);
     }
 
     public function getFeedBackEntity(){

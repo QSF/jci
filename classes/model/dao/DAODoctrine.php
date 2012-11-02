@@ -99,8 +99,8 @@ class DAODoctrine implements DAO{
 	*
 	*	@see DAODoctrine::getRepository()
 	*/
-	public function findall(){
-		return $this->entityManager->find(get_class($object),$object->getId());
+	public function findAll(){
+		return $this->getRepository()->find($object->getId());
 	}
 }
 ?>

@@ -40,6 +40,6 @@ interface DAO{
 	*	@return objects lista de todos os objetos da tabela
 	*	@return null caso não há objetos.
 	*/
-	public function findall();
+	public function findAll();
 }
 ?>

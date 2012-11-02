@@ -12,7 +12,6 @@ require_once('spl_autoload_register.php');
  * <b>Obs: Todas as requisições passarão por esse script.</b>
  * 
  */
-
 // require_once (RESOURCE_PATH   . "/ServiceLocator.php"		);
 // require_once (CONTROLLER_PATH . "/FrontController.php"		);
 // require_once (CONTROLLER_PATH . "/ApplicationController.php");
