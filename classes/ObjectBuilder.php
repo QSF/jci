@@ -141,7 +141,7 @@ class ObjectBuilder
 		
 		$user->setLogin($this->request->get("login"));
 
-		$user->setPassword($this->request->get("password"));
+		$user->setPassword(md5($this->request->get("password")));
 
 		$user->setEmail($this->request->get("email"));
 

@@ -22,7 +22,7 @@
      *
      *@name array_param
      */
-  	private $paramArray = array();
+  	protected $paramArray = array();
 
     /**
      * Array que guarda nome do script do css. 
@@ -31,7 +31,7 @@
      *
      *@name array_css
      */
-  	private $arrayCss = array();
+  	protected $arrayCss = array();
 
     /**
      * Array que guarda o nome dos scripts do JS
@@ -40,7 +40,7 @@
      *
      *@name array_js
      */
-  	private $arrayJs = array();
+  	protected $arrayJs = array();
 
     /**
      * Array que guarda as mensagens de erro de nosso sistema.
@@ -49,7 +49,7 @@
      *
      *@name error_message
      */
-  	private $errorMessage = array();
+  	protected $errorMessage = array();
 
     /**
      * Array que guarda as mensagens de sucesso de nosso sistema.
@@ -58,17 +58,20 @@
      *
      *@name success_message
      */
-  	private $successMessage = array();
+  	protected $successMessage = array();
 
     /**
      * Guarda o tipo de usuário que está acessando o sistema
      * 
      *@name success_message
      */
-    private $userType;
+    protected $userType;
 
-    public function __construct($userType = "Guest"){
+    protected $layout;
+
+    public function __construct($userType = "Guest", $layout = "Layout"){
       $this->userType = $userType;
+      $this->layout = $layout;
     }
 
     public function setUserType($userType){
@@ -101,7 +104,7 @@
      *
      *@param content
      */
-  	public function display($content){
+  	public function display($content = "Home"){
 
       //pegando elementos da view que diferem do usuario
       $customView = $this->getCustomView();
@@ -114,8 +117,8 @@
       //método extract serve para pegar as variaveis de uma map e transformar num variavel
       extract($customView);
       extract($this->paramArray);
-
-  		include PAGES_PATH."/Layout.php";
+      
+  		include PAGES_PATH."/".$this->layout.".php";
   	}
 
     /**

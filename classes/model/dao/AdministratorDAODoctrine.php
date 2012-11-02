@@ -1,11 +1,11 @@
 <?php 
 
-require_once (DAO_PATH . "/ModeratorDAO.php");
+require_once (DAO_PATH . "/AdministratorDAO.php");
 require_once (DAO_PATH . "/DAODoctrine.php");
 
-require_once (MODEL_PATH . "/Moderator.php");
+require_once (MODEL_PATH . "/Administrator.php");
 
-class ModeratorDAODoctrine extends DAODoctrine implements ModeratorDAO{
+class AdministratorDAODoctrine extends DAODoctrine implements AdministratorDAO{
 
 
 	/** Método que retorna o objeto equivalente à uma coluna do banco que possui o id passado.
@@ -26,7 +26,7 @@ class ModeratorDAODoctrine extends DAODoctrine implements ModeratorDAO{
 	*	@return repository repositório da tabela moderador.
 	*/
 	protected function getRepository(){
-		return $this->entityManager->getRepository('Moderator');
+		return $this->entityManager->getRepository('Administrator');
 	}
 
 	public function findByLogin($username){

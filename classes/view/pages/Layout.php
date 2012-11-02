@@ -22,9 +22,11 @@
 				<?php include_once PAGES_PATH."/Logo.php" ?>  
 			</div>
 			<div id="menu_topo">
-				 <?php include_once "LoginForm.php"; ?> 
+				 <a href="./index.php?controller=login&action=getForm&type=User">
+				 	Logue-se aqui
+				 </a> 
 			</div>
-			<a href="./index.php/controller=login&action=logout">Logout</a>
+			<a href="./index.php?controller=login&action=logout">Logout</a>
 			<div id="content">
 				<div class="mensagem_sucesso">
 				<?php  foreach($successMessage as $msg){ echo $msg;}?>
@@ -33,8 +35,10 @@
 				<?php include PAGES_PATH."/".$content.".php"; ?>
 			</div>
 			<br/>
-			Formulários<br/>
-			<?php include_once "menu/MenuForms.php"; ?>
+			<a href="./index.php?controller=login&action=getForm&type=Admin">
+				Área da Administração
+			</a><br/><br/>
+
 		</div> 
 	</body>
 </html>
