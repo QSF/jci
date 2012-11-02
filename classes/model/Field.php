@@ -10,6 +10,7 @@ class Field
 {
 	public function __construct() {
         $this->children = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
 	/**
@@ -38,11 +39,11 @@ class Field
 
     /**
      * @ManyToMany(targetEntity="User", mappedBy="actingArea")
-     * @var User
+     * @var ArrayCollection<User>
      **/
     private $users;
 
-    //encapsular
+    //encapsular para o campo filho e pai
 
     /**
     *	Adiciona um novo campo como filho e já seta para este novo campo o seu campo "pai".
@@ -50,6 +51,8 @@ class Field
     *	@param $child campo filho para ser adicionado.
     */
     public function addChild(Field $child){
+    	if ($child === null)
+    		return;
     	$this->children->add($child);
     	$child->setParent($this);
     }
@@ -61,7 +64,8 @@ class Field
     *	@param $child campo filho para ser removido.
     */
     public function removeChild(Field $child){
-    	$this->children->remove($child->getId());
+    	if ($child === null || $this->children->remove($child->getId()) === null)//este campo não é filho
+    		return;
     	$child->setParent(null);
     }
 
@@ -71,9 +75,34 @@ class Field
     *	@param $id id do campo filho para ser removido.
     */
     public function removeChildById($id){
+    	if ($id === null)
+    		return;
+
     	$child = $this->children->get($id);
+
+    	if ($child === null)
+    		return;
+
     	$this->children->remove($id);
     	$child->setParent(null);
+    }
+
+    //encapsular para a relação com o usuário
+
+    public function addUser(User $user){
+    	if ($user === null)
+    		return;
+    	$this->users->add($user);
+    }
+
+    /**
+    *	O método remove o usuário pela chave, não checando outros campos.
+    *
+    */
+    public function removeUser(User $user){
+    	if ($user === null)
+    		return;
+    	$this->users->remove($user->getId());
     }
 
     public function getChildren(){
