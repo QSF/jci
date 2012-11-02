@@ -140,7 +140,9 @@ class ObjectBuilder
 		$user = new Moderator;
 		
 		$user->setLogin($this->request->get("login"));
+
 		$user->setPassword(md5($this->request->get("password")));
+
 		$user->setEmail($this->request->get("email"));
 
 		return $user;
