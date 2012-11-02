@@ -51,17 +51,21 @@ abstract class User
      **/
     protected $howYouKnow;
 
-    /**
-     *@Column(type="string")
+    /** Relação do publico atendido.
+     * @ManyToMany(targetEntity="PublicServed", inversedBy="users")
+     * @JoinTable(name="users_public")
+     *
+     * @var ArrayCollection<PublicServed>
      **/
     protected $public;
 
-    //Esse campo terá uma lista de fields
-    //Relacao ManyToMany com classe Field
-    /**
+    /** Relação dos campos de cada usuario
+     * @ManyToMany(targetEntity="Field", inversedBy="users")
+     * @JoinTable(name="users_fields")
      *
+     * @var ArrayCollection<Field>
      **/
-    // protected $actingArea = null;
+    protected $actingArea;
 
     /**
      *@Column(type="integer")
@@ -69,7 +73,7 @@ abstract class User
     protected $cep;
 
     public function __construct(){
-        // $this->actingArea = new ArrayCollection();
+        $this->actingArea = new ArrayCollection();
     }
 
     public function getReceiveNotification(){
