@@ -210,7 +210,7 @@ abstract class User
     }
 
     public function getPublic(){
-        //return $this->public->toArray();
+        return $this->public->toArray();
     }
 
     public function setPublic($public){
