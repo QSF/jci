@@ -36,7 +36,7 @@ class Field
      * @JoinColumn(name="parent_id", referencedColumnName="id")
      * @var Field
      **/
-    private $parent;
+    private $parent = null;
 
     /**
      * @ManyToMany(targetEntity="User", mappedBy="actingArea")

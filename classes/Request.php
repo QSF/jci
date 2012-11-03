@@ -187,5 +187,39 @@ class Request{
 
 		return $userSession;
 	}
+
+	/** Método que retorna um field de acordo com a ação.
+	*	
+	*	Está classe faz uso de um objeto do tipo ObjectBuilder, sendo que escolhe qual método dele chamar,
+	*	através dos parâmetros da url (GET string), action e controller.
+	*
+	*	@return field Um campo de acordo com a request.
+	*	@return null caso a request não esteja de acordo.
+	*
+	*	@see ObjectBuilder
+	*/
+	public function getField(){
+		$builder = new ObjectBuilder($this);
+
+		switch ($this->getActionName()) {
+			case 'update':
+				$field = $builder->getUpdateField();
+				break;
+			case 'create':
+				$field = $builder->getCreateField();
+				break;
+			case 'delete':
+				$field = $builder->getSingleField();
+				break;
+			case 'redirectUpadate':
+				$field = $builder->getSingleField();
+				break;
+			default:
+				$field = null;
+				break;
+		}
+
+		return $field;
+	}
 }
 ?>

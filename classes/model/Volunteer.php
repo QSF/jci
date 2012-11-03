@@ -35,10 +35,10 @@ abstract class Volunteer extends User{
 
     //encapsular do donations
 
-     /**
-    *	Adiciona uma doação que este voluntário participou.
-    *	
-    *	@param $donation Doação.
+    /**
+     *	Adiciona uma doação que este voluntário participou.
+     *	
+     *	@param $donation Doação.
     */
     public function addDonation(Donation $donation){
     	if ($donation === null)

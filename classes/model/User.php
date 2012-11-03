@@ -55,6 +55,8 @@ abstract class User
      * @ManyToMany(targetEntity="PublicServed", inversedBy="users")
      * @JoinTable(name="users_public")
      *
+     * @JoinColumn (nullable = true)
+     *
      * @var ArrayCollection<PublicServed>
      **/
     protected $public;
@@ -62,6 +64,8 @@ abstract class User
     /** Relação dos campos de cada usuario
      * @ManyToMany(targetEntity="Field", inversedBy="users")
      * @JoinTable(name="users_fields")
+     *
+     * @JoinColumn (nullable = true)
      *
      * @var ArrayCollection<Field>
      **/
