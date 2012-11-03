@@ -29,7 +29,7 @@ class Field
 	 * @OneToMany(targetEntity="Field", mappedBy="parent", cascade ={"remove"})
 	 * @var ArrayCollection<Field>
 	 **/
-    protected $children;
+    public $children;
 
     /**
      * @ManyToOne(targetEntity="Field", inversedBy="children")
@@ -62,7 +62,12 @@ class Field
     	$this->children->add($child);
     	$child->setParent($this);
     }
-
+    public function addChildren(Field $child){
+        if ($child === null)
+            return null;
+        $this->children->add($child);
+        $child->setParent($this);
+    }
     /**
     *	Remove um campo filho e seta seu pai como null.
     *

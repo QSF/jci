@@ -18,7 +18,10 @@ function listFields($var,$field){
 	} //coloar label?>
 	<input type="radio" name="id" value="<?php echo $var->getID()?>" <?php echo $checked ?> > <?php echo $var->getName() ?>
 	<ul>
-	<?php foreach ($var->getChildren() as $child) { ?>
-		<li><?php listFields($child); }?>
+		
+	<?php 
+
+	foreach ($var->children as $child) { ?>
+		<li><?php listFields($child,$field); }?>
 	</ul>
 <?php } ?>
