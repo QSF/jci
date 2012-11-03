@@ -29,20 +29,20 @@ class Field
 	 * @OneToMany(targetEntity="Field", mappedBy="parent", cascade ={"remove"})
 	 * @var ArrayCollection<Field>
 	 **/
-    private $children;
+    protected $children;
 
     /**
      * @ManyToOne(targetEntity="Field", inversedBy="children")
      * @JoinColumn(name="parent_id", referencedColumnName="id")
      * @var Field
      **/
-    private $parent = null;
+    protected $parent = null;
 
     /**
      * @ManyToMany(targetEntity="User", mappedBy="actingArea")
      * @var ArrayCollection<User>
      **/
-    private $users;
+    protected $users;
 
     /**
      * @OneToMany(targetEntity="Donation", mappedBy="field")
