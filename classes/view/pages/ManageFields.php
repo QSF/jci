@@ -1,4 +1,4 @@
-<h1> Campos de formulário</h1>
+<h3> Campos de formulário</h3>
 
 <a href="./index.php?controller=field&action=redirectCreate">Cadastrar novo grupo</a><br/>
 
@@ -6,7 +6,7 @@
 <!-- o action do form é colocado pelo java script de acordo com a opção-->
 <form name="formFieldManage" action="" method="post">
 	<!-- listar todos os capos-->
-	<?php require_once VIEW_PATH . "/pages/forms/ListFields.php"; ?>
+	<?php require_once VIEW_PATH . "/pages/forms/listFields.php"; ?>
 	
 	<input type="submit" name="update" value="Editar" onclick="update()"/>
 	<input type="submit" name="remove" value="Excluir" onclick="remove()"/>

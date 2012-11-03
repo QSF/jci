@@ -2,6 +2,7 @@
 use Doctrine\Common\Collections\ArrayCollection;
 
 require_once MODEL_PATH . "/Entity.php";
+require_once MODEL_PATH . "/PublicServed.php";
 
 /**
  * @Entity 

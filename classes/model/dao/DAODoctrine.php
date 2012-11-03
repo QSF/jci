@@ -100,7 +100,7 @@ class DAODoctrine implements DAO{
 	*	@see DAODoctrine::getRepository()
 	*/
 	public function findAll(){
-		return $this->getRepository()->find($object->getId());
+		return $this->getRepository()->findAll();
 	}
 }
 ?>

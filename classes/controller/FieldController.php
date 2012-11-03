@@ -21,10 +21,20 @@ class FieldController extends ApplicationController{
 	*/
 	public function create(){
 		$field = $this->request->getField();//aqui seria getPublic.
+
+		if ($field === null){
+			$this->view->assignError('O campo não existe!');
+			$this->display('Home');
+			return;
+		}
+
+		if ($field->getParent() !== null)//se for null é macro
+			$parentField = $this->dao->findById($field->getParent());
 		
-		if ($field === null)
+		if ($parentField === null)
 			$this->view->assignError('O campo não existe!');
 		else {
+			$field->setParent($parentField);
 			$this->dao->insert($field);
 			$this->view->assignSuccess('Campo criado com sucesso.');
 		}
@@ -38,7 +48,7 @@ class FieldController extends ApplicationController{
 	*	@todo No form de edição, tem que passar o id do campo.
 	*/
 	public function update(){
-		$field = $this->request->getField();.
+		$field = $this->request->getField();
 		
 		$this->dao->update($field);
 
@@ -109,7 +119,7 @@ class FieldController extends ApplicationController{
 		//A ação vai ser editar.
 		$this->view->assign("action","update");
 		//O FieldForm vai ser usado tanto no upate quando no cadastro.
-		$page = get_class($field)."Form";
+		$page = "FieldForm";
 		$this->view->display($page);
 	}
 
@@ -124,7 +134,7 @@ class FieldController extends ApplicationController{
 		//A ação vai ser criar.
 		$this->view->assign("action","create");
 		//O FieldForm vai ser usado tanto no upate quando no cadastro.
-		$page = get_class($field)."Form";
+		$page = "FieldForm";
 		$this->view->display($page);
 	}
 

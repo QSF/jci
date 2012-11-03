@@ -115,7 +115,7 @@ class Field
     	$this->children->toArray();
     }
 
-    public function setParent(Field $parent){
+    public function setParent(Field $parent = null){
     	$this->parent = $parent;
     }
 

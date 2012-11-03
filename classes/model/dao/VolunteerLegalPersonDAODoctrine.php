@@ -1,6 +1,7 @@
 <?php
 
 require_once (DAO_PATH . "/VolunteerDAODoctrine.php");
+require_once (DAO_PATH . "/VolunteerLegalPersonDAO.php");
 
 
 class VolunteerLegalPersonDAODoctrine extends VolunteerDAODoctrine implements VolunteerLegalPersonDAO{

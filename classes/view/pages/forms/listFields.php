@@ -1,26 +1,25 @@
 <?php
 if(!isset($field)){
-		$var = new Field;
-}
+		$field = new Field;
+}?>
 
-echo "<ul>";
+<ul>
+<?php
 //para cada campo macro chama o listar campos
-foreach ($fields as &$var) {
-	listFields($var);
-}
-echo "</ul>";
-
-public function listFields($field){
+foreach ($fields as &$var) {?>
+	<li> <?php listFields($var,$field);
+}?>
+</ul>
+<?php 
+function listFields($var,$field){
 	
-	if($field == global $field->getParent()){
+	if($var == $field->getParent()){
 		$checked = "CHECKED";
-	}
-	echo "<li><input type=\"radio\" name=\"id\" value=\"" . $field->getID() . "\"" . $checked . ">" . $field->getName() "</li>";
-	echo "<ul>";
-	foreach ($field->getChildren() as &$child) {
-	echo " <li><input type=\"radio\" name=\"id\" value=\"" . $child->getID() . "\"" . $checked . ">" . $child->getName() "</li>";
-		listFields($child);
-	}
-	echo "</ul>";
-}
-?>
+	} //coloar label?>
+	<input type="radio" name="id" value="<?php echo $var->getID()?>" <?php echo $checked ?> > <?php echo $var->getName() ?>
+	<ul>
+	<?php foreach ($var->getChildren() as $child) { ?>
+	<li><input type="radio" name="id" value="<?php echo $child->getID()?>" <?php echo $checked ?> > <?php echo $child->getName() ?>
+		<?php listFields($child); }?>
+	</ul>
+<?php } ?>

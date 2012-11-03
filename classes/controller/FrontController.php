@@ -72,6 +72,7 @@
 		}
 		catch(Exception $e){
 			$view = ServiceLocator::getInstance()->getView($this->request->getUserType());
+			$view->assignError($e->getMessage());
 			$view->display("404");
 		}
 	}
