@@ -1,5 +1,7 @@
 <?php 
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
 * @Entity
 * @Table(name = "moderator")

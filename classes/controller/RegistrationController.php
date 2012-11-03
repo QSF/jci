@@ -53,7 +53,6 @@ class RegistrationController extends ApplicationController{
 		
 		$this->dao->update($userUpdate);
 
-		echo $userUpdate->getCpf();
 		$this->view->assignSuccess("Usuário editado");
 		$this->display("Home");
 
