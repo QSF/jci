@@ -52,17 +52,12 @@ abstract class User
     protected $howYouKnow;
 
     /** Relação do publico atendido.
-     * @ManyToMany(targetEntity="PublicServed", inversedBy="users")
-     * @JoinTable(name="users_public")
      *
      * @var ArrayCollection<PublicServed>
      **/
     protected $public;
 
     /** Relação dos campos de cada usuario
-     * @ManyToMany(targetEntity="Field", inversedBy="users")
-     * @JoinTable(name="users_fields")
-     *
      * @var ArrayCollection<Field>
      **/
     protected $actingArea;
