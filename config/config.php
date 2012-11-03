@@ -9,7 +9,8 @@ define("DAO_PATH"			, realpath('../classes/model/dao')      		);
 define("RESOURCE_PATH"		, realpath('../classes/resource')   			); 
 define("REGISTERS_PATH"		, realpath('../classes/resource/registers')     ); 
 define("CLASSES_PATH"		, realpath('../classes')      					); 
-define("PAGES_PATH"		    , realpath('../classes/view/pages')      		); 
+define("PAGES_PATH"		    , realpath('../classes/view/pages')      		);
+define("HELPER_PATH"		    , realpath('../classes/view/pages/helpers')     );  
 
 //arquivo que configura o doctrine
 require_once "bootstrap.php";
