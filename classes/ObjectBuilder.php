@@ -244,7 +244,7 @@ class ObjectBuilder
 		if ($name === null)//o valor não foi passado.
 			return null;
 
-		$field->setName($name);
+		$public->setName($name);
 
 		return $public;
 	}

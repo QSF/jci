@@ -7,5 +7,5 @@ if(!isset($public)){
 <?php
 //lista todos os públicos
 foreach ($publics as $var) {?>
-	<li> <input type="radio" name="id" value="<?php echo $var->getID()?>" > <?php echo $var->getName() }?>
+	<li> <input type="radio" name="id" value="<?php echo $var->getID()?>" > <?php echo $var->getName(); };?>
 </ul>

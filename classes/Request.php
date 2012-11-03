@@ -235,7 +235,6 @@ class Request{
 	*/
 	public function getPublic(){
 		$builder = new ObjectBuilder($this);
-		$public = $builder->getPublic();
 
 		switch ($this->getActionName()) {
 			case 'update':

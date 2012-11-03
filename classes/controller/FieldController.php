@@ -111,7 +111,6 @@ class FieldController extends ApplicationController{
 			$this->redirectManage();
 			return;
 		}
-		echo $field->getId();
 		$field = $this->dao->findById($field);//busca o campo completo do banco
 
 		if ($field === null){
