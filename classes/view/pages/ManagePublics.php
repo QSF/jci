@@ -8,6 +8,6 @@
 	<!-- listar todos públicos-->
 	<?php require_once VIEW_PATH . "/pages/forms/listPublics.php"; ?>
 	
-	<input type="submit" name="update" value="Editar" onclick="update()"/>
-	<input type="submit" name="remove" value="Excluir" onclick="remove()"/>
+	<input type="submit" name="u" value="Editar" onclick="update()"/>
+	<input type="submit" name="r" value="Excluir" onclick="remove()"/>
 </form>
