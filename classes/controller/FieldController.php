@@ -17,14 +17,13 @@ class FieldController extends ApplicationController{
 	
 	/** 
 	* Método que cria um novo campo.
-	* @todo Criar um método getField() na request e object builder, que já sera o campo pai e tudo mais.
 	*/
 	public function create(){
 		$field = $this->request->getField();//aqui seria getPublic.
 
 		if ($field === null){
 			$this->view->assignError('O campo não existe!');
-			$this->display('Home');
+			$this->redirectManage();
 			return;
 		}
 
@@ -39,7 +38,7 @@ class FieldController extends ApplicationController{
 		$this->dao->insert($field);
 		$this->view->assignSuccess('Campo criado com sucesso.');
 
-		$this->display('Home');//seria melhor exibir os campos, né?
+		$this->redirectManage();
 	}
 
 	/** 
@@ -52,14 +51,20 @@ class FieldController extends ApplicationController{
 
 		if ($field === null){
 			$this->view->assignError('O campo não existe!');
-			$this->display('Home');
+			$this->redirectManage();
+			return;
+		}
+
+		if ($field->getParent() != null && $field->getId() == $field->getParent()->getId() ){//ele não pode ser pai dele mesmo.
+			$this->view->assignError('O campo não pode ser subcampo dele mesmo!');
+			$this->redirectUpdate();
 			return;
 		}
 		
 		$this->dao->update($field);
 
-		$this->view->assignSuccess('O campo' . $field->getName() . 'foi editado com sucesso!');
-		$this->display('Home');//gerencia de campos
+		$this->view->assignSuccess('O campo ' . $field->getName() . ' foi editado com sucesso!');
+		$this->redirectManage();
 	}
 
 	/** 
@@ -72,7 +77,7 @@ class FieldController extends ApplicationController{
 
 		if ($field === null){
 			$this->view->assignError('O campo não existe!');
-			$this->display('Home');
+			$this->redirectManage();
 			return;
 		}
 		
@@ -80,7 +85,7 @@ class FieldController extends ApplicationController{
 		$field = $this->dao->findById($field);
 		if ($field === null){
 			$this->view->assignError('O campo não existe!');
-			$this->display('Home');
+			$this->redirectManage();
 			return;
 		}
 		
@@ -91,7 +96,7 @@ class FieldController extends ApplicationController{
 		} catch(Exception $e){//pegar a exception exata se há ou não usuário ou doação com este campo
 	    	$this->view->assignError('O campo não pode ser removido!');
 	    }	
-	    $this->display('Home');//gerencia de campos   
+	    $this->redirectManage();
 	}
 
 	/** 
@@ -103,7 +108,7 @@ class FieldController extends ApplicationController{
 
 		if ($field === null){
 			$this->view->assignError('O campo não existe!');
-			$this->display('Home');
+			$this->redirectManage();
 			return;
 		}
 		echo $field->getId();
@@ -111,7 +116,7 @@ class FieldController extends ApplicationController{
 
 		if ($field === null){
 			$this->view->assignError('O campo não existe!');
-			$this->display('Home');
+			$this->redirectManage();
 			return;
 		}
 
@@ -150,14 +155,6 @@ class FieldController extends ApplicationController{
 	public function redirectManage(){
 		$fields = $this->dao->findAllMacros();//pega todos os campos macros
 		//Todos os campos serão exibidos na view.
-
-		// foreach ($fields[0]->getChildren() as $value) {
-		// 	echo $value->getId() . ' ' . $value->getName();
-		// }
-		// $field = $fields[0]->getChildren();
-		// $field = $this->dao->findById($field[0]);
-		// echo $field->getName();
-
 		$this->view->assign("fields", $fields);
 
 		$page = 'ManageFields';
