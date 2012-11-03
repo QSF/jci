@@ -4,7 +4,7 @@
 
 <!-- form de cadastro ou edição de campos -->
 <form name="formField" action="./index.php?controller=field&action=<?php echo $action?>" method="post">
-	<input type="radio" name="id" value="macro" <?php if($action =="create"){echo "CHECKED";}?> > Este campo é macro<br>
+	<input type="radio" name="id" value="macro" <?php if($field->getParent()===null){echo "checked=\"checked\"";}?> > Este campo é macro<br>
 	<!-- lista todos os campos para selecionar um deles como pai -->
 	<?php require_once VIEW_PATH . "/pages/forms/listFields.php"; ?>
 	

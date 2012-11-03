@@ -26,7 +26,7 @@ class ObjectBuilder
 	*
 	*	@return $str string com os públicos atendidos
 	*/
-	protected function getPublic(){
+/*	protected function getPublic(){
 		$str = '';
 		//retorna um array das checkbox
 		$public = $this->request->get('public');
@@ -37,7 +37,7 @@ class ObjectBuilder
         $str = implode(',',$public);
 
         return $str;
-	}
+	}*/
 
 	/** Método que monta um User de acordo com os dados passados em uma requisição.
 	*
