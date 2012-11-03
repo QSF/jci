@@ -1,11 +1,11 @@
 <?php
-if(!isset($field)){
-		$field = new Field;
+if(!isset($public)){
+		$public = new PublicServed;
 }?>
 
 <ul>
 <?php
-//para cada campo macro chama o listar campos
-foreach ($fields as $var) {?>
+//lista todos os públicos
+foreach ($publics as $var) {?>
 	<li> <input type="radio" name="id" value="<?php echo $var->getID()?>" > <?php echo $var->getName() }?>
 </ul>
