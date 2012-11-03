@@ -58,7 +58,7 @@ class Field
     */
     public function addChild(Field $child){
     	if ($child === null)
-    		return;
+    		return null;
     	$this->children->add($child);
     	$child->setParent($this);
     }

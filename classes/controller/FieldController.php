@@ -27,17 +27,16 @@ class FieldController extends ApplicationController{
 			$this->display('Home');
 			return;
 		}
-		$parentField = null;
-		if ($field->getParent() !== null)//se for null é macro
+
+		if ($field->getParent() !== null){//se for null é macro
 			$parentField = $this->dao->findById($field->getParent());
-		
-		if ($parentField === null)
-			$this->view->assignError('O campo não existe!');
-		else {
+
+			if ($parentField === null)
+				$this->view->assignError('O campo não existe!');
 			$field->setParent($parentField);
-			$this->dao->insert($field);
-			$this->view->assignSuccess('Campo criado com sucesso.');
 		}
+		$this->dao->insert($field);
+		$this->view->assignSuccess('Campo criado com sucesso.');
 
 		$this->display('Home');//seria melhor exibir os campos, né?
 	}
@@ -145,16 +144,15 @@ class FieldController extends ApplicationController{
 		$fields = $this->dao->findAllMacros();//pega todos os campos macros
 		//Todos os campos serão exibidos na view.
 
-		$children = $this->dao->findChildren($fields[0]);
-		echo $children[0]->getName();
+		// $children = $this->dao->findChildren($fields[0]);
+		// echo $children[0]->getName();
 		
-		foreach ($children as $value) {
-			if ($value === null)
-				echo 'null';
-			$fields[0]->addChild($value);
-		}
-		$children = $fields[0]->getChildren();
-		echo $children->get(0)->getName();
+		// foreach ($children as $value) {
+		// 	if ($value === null)
+		// 		echo 'null';
+		// 	$fields[0]->addChild($value);
+		// }
+		// $children = $fields[0]->getChildren();
 
 		$this->view->assign("fields", $fields);
 
