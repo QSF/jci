@@ -26,7 +26,12 @@
 	</page>
 	<page content="ManageFields">
 		<JS>
-			<file>ActionField.js</file>
+			<file>action.field.js</file>
+		</JS>
+	</page>
+	<page content="ManagePublics">
+		<JS>
+			<file>action.public.js</file>
 		</JS>
 	</page>
 </pages>
