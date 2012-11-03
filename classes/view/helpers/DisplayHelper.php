@@ -1,7 +1,10 @@
 <?php
 	function displayAttribute($array){
 		foreach($array as $key=>$value){
-			echo $key;
+			if($value !== null && $value !== ""){
+				echo $key ."   ". $value;
+				echo "<br/>";
+			}
 		}
 	}
 ?>

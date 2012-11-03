@@ -213,7 +213,7 @@ abstract class User
     }
 
     public function getActingArea(){
-        return $this->actingArea->toArray();
+      //  return $this->actingArea->toArray();
     }
 
     public function setActingArea($actingArea){

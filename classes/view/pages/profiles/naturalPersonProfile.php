@@ -1,3 +1,3 @@
 <?php
-	$arrayAtributes['CPF'] => $user->getCpf());
+	$arrayAttributes['CPF'] = $user->getCpf();
 ?>

@@ -52,7 +52,8 @@ class RegistrationController extends ApplicationController{
 		$userUpdate->setId($this->request->get("user_id"));
 		
 		$this->dao->update($userUpdate);
-		echo $userUpdate->getPassword();
+
+		echo $userUpdate->getCpf();
 		$this->view->assignSuccess("Usuário editado");
 		$this->display("Home");
 
@@ -112,6 +113,21 @@ class RegistrationController extends ApplicationController{
 
 		$this->view->assignSuccess("Usuário deletado com sucesso");
 		$this->display("Home");
+	}
+
+	public function read(){
+
+		$userId = $this->request->get("user_id");
+		$userType = $this->request->get("profile");
+
+		$user = new $userType();
+		$user->setId($userId);
+
+		$user = $this->dao->findById($user);
+
+		$this->view->assign("user",$user);
+		$view = $userType."Profile";
+		$this->display($view);
 	}
 
 	public function authorize($user){

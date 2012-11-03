@@ -1,9 +1,9 @@
 <?php 
-	$arrayAtributes['Nome'] = $user->getName();
-	$arrayAtributes['E-mail'] = $user->getEmail();
-	$arrayAtributes['Telefone'] = $user->getPhone();
-	$arrayAtributes['Como soube da JCI?'] = $user->getHowYouKnow();
-	$arrayAtributes['Público'] = $user->getPublic();
-	$arrayAtributes['Área de Atuacao'] = $user->getActingArea():
-	$arrayAtrubutes['CEP'] = $user->getCep();
+	$arrayAttributes['Nome'] = $user->getName();
+	$arrayAttributes['E-mail'] = $user->getEmail();
+	$arrayAttributes['Telefone'] = $user->getPhone();
+	$arrayAttributes['Como soube da JCI?'] = $user->getHowYouKnow();
+	$arrayAttributes['Público'] = $user->getPublic();
+	$arrayAttributes['Área de Atuacao'] = $user->getActingArea();
+	$arrayAttributes['CEP'] = $user->getCep();
 ?>

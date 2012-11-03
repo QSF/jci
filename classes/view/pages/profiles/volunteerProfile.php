@@ -1,3 +1,3 @@
 <?php 
-	$arrayAtributes['Experiência com trabalhos voluntários'] => $user->getExperience());
+	$arrayAttributes['Experiência com trabalhos voluntários'] = $user->getExperience();
 ?> 	

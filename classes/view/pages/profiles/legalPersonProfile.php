@@ -1,7 +1,6 @@
 <?php 
-	$arrayAtributes['CNPJ'] => $user->getCnpj());
-	$arrayAtributes['Razão Social'] = $user->getNewsletter();
+	$arrayAttributes['CNPJ'] = $user->getCnpj();
+	$arrayAttributes['Razão Social'] = $user->getCompanyName();
 	$arrayAtributes['Registro Estadual'] = $user->getStateRegistration(); 
-	$arrayAtributes['Telefone do Responsável'] = $user->getOwnerPhone();
-	
+	$arrayAtributes['Telefone do Responsável'] = $user->getOwnerPhone();	
 ?>
