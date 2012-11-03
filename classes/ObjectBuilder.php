@@ -221,6 +221,58 @@ class ObjectBuilder
 
 		return $field;
 	}
+
+	/** 
+	*	@param $update se é ação update, ou seja, para saber se procura o id ou não.
+	*	@return public publico.
+	*	@return null caso nada o nome não seja passadou(ou o id, em caso de $update = true).
+	*/
+	protected function getPublic($update){
+		$public = new PublicServed;
+
+		$id = -1;
+
+		if ($update == true){
+			$id = $this->request->get("id");
+
+			if ($id === null)//não existe
+				return null;
+		}
+		$public->setId($id);
+		$name = $this->request->get('name');
+
+		if ($name === null)//o valor não foi passado.
+			return null;
+
+		$field->setName($name);
+
+		return $public;
+	}
+
+	public function getUpdatePublic(){
+		return $this->getPublic(true);
+	}
+
+	public function getCreatePublic(){
+		return $this->getPublic(false);
+	}
+
+	/** 
+	*	@return public publico.
+	*	@return null caso nada seja passado(ou o id não seja passado).
+	*/
+	public function getSinglePublic(){
+		$public = new PublicServed;
+
+		$id = $this->request->get("id");
+
+		if ($id === null)//não existe
+			return null;
+
+		$public->setId($id);
+
+		return $public;
+	}
 }
 
 ?>

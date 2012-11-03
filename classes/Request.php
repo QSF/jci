@@ -140,7 +140,8 @@ class Request{
 		return $_SESSION["type"];
 	}
 
-	/** Método que retorna um user de acordo com os dados passados no formulário.
+	/** 
+	*	Método que retorna um user de acordo com os dados passados no formulário.
 	*	
 	*	Está classe faz uso de um objeto do tipo ObjectBuilder, sendo que escolhe qual método dele chamar,
 	*	através do parâmetro user passado da url (GET string).
@@ -188,7 +189,8 @@ class Request{
 		return $userSession;
 	}
 
-	/** Método que retorna um field de acordo com a ação.
+	/** 
+	*	Método que retorna um field de acordo com a ação.
 	*	
 	*	Está classe faz uso de um objeto do tipo ObjectBuilder, sendo que escolhe qual método dele chamar,
 	*	através dos parâmetros da url (GET string), action e controller.
@@ -220,6 +222,39 @@ class Request{
 		}
 
 		return $field;
+	}
+
+	/** 
+	*	Método que retorna um publico.
+	*	O método que será chamado no ObjectBuilder é baseado pelo action da url
+	*
+	*	@return public Um publico de acordo com a request.
+	*	@return null caso a request não esteja de acordo.
+	*
+	*	@see ObjectBuilder
+	*/
+	public function getPublic(){
+		$builder = new ObjectBuilder($this);
+		$public = $builder->getPublic();
+
+		switch ($this->getActionName()) {
+			case 'update':
+				$public = $builder->getUpdatePublic();
+				break;
+			case 'create':
+				$public = $builder->getCreatePublic();
+				break;
+			case 'delete':
+				$public = $builder->getSinglePublic();
+				break;
+			case 'redirectUpdate':
+				$public = $builder->getSinglePublic();
+				break;
+			default:
+				$public = null;
+				break;
+		}
+		return $public;
 	}
 }
 ?>
