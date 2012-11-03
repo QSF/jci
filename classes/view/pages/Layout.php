@@ -15,7 +15,7 @@
 		<?php }?>
 
 		<?php  foreach($arrayJS as $js){?>
-			<link rel=stylesheet href="js/<?php echo $js?>" type="text/css">
+			<link rel=stylesheet href="js/<?php echo $js?>" type="text/javascript">
 		<?php }?>
 
 	</head>

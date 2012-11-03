@@ -2,26 +2,42 @@
 <pages>
 	<page content="EntityForm">
 		<JS>
-			<file>Validation.js</file>
+			<file>jquery.click-calendario-1.0.js</file>
+			<file>jquery.maskedinput-1.3.js</file>
+			<file>jquery.validate.js</file>
 		</JS>
+		<CSS>
+			<file>jquery.click-calendario-1.0.css</file>
+		</CSS>
 	</page>
 	<page content="VolunteerNaturalPersonForm">
 		<JS>
-			<file>Validation.js</file>
+			<file>jquery.click-calendario-1.0.js</file>
+			<file>jquery.maskedinput-1.3.js</file>
+			<file>jquery.validate.js</file>
 		</JS>
+		<CSS>
+			<file>jquery.click-calendario-1.0.css</file>
+		</CSS>
 	</page>
 	<page content="VolunteerLegalPersonForm">
 		<JS>
+			<file>jquery.click-calendario-1.0.js</file>
+			<file>jquery.maskedinput-1.3.js</file>
 			<file>jquery.validate.js</file>
-			<file>ABC.js</file>
 		</JS>
 		<CSS>
-			<file>pqpq.css</file>
+			<file>jquery.click-calendario-1.0.css</file>
 		</CSS>
 	</page>
 	<page content="ModeratorForm">
 		<JS>
-			<file>Validation.js</file>
+			<file>jquery.click-calendario-1.0.js</file>
+			<file>jquery.maskedinput-1.3.js</file>
+			<file>jquery.validate.js</file>
 		</JS>
+		<CSS>
+			<file>jquery.click-calendario-1.0.css</file>
+		</CSS>
 	</page>
 </pages>
