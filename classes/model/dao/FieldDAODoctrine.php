@@ -16,8 +16,8 @@ class FieldDAODoctrine extends DAODoctrine implements FieldDAO{
 	*	@todo fazer com opção de paginação.
 	*	@return Collection<Field> campos macros.
 	*/
-	public function getMacro(){
-		$this->getRepository()->find
+	public function findAllMacros(){
+		$this->getRepository()->findBy(array('parent' => NULL));
 	}
 }
 

@@ -112,7 +112,7 @@ class FieldController extends ApplicationController{
 		//Seta valores do campo para ser mostrado na view
 		$this->view->assign("field", $field);
 
-		$fields = $this->dao->findAll();//pega todos os campos
+		$fields = $this->dao->findAllMacros();//pega todos os campos macros
 		//Todos os campos serão exibidos na view.
 		$this->view->assign("fields", $fields);
 
@@ -127,7 +127,7 @@ class FieldController extends ApplicationController{
 	* Redireciona para a página específica de cadastrar um campo.
 	*/
 	public function redirectCreate(){
-		$fields = $this->dao->findAll();//pega todos os campos
+		$fields = $this->dao->findAllMacros();//pega todos os campos macros
 		//Todos os campos serão exibidos na view.
 		$this->view->assign("fields", $fields);
 
@@ -142,7 +142,8 @@ class FieldController extends ApplicationController{
 	* Redireciona para a página específica de cadastrar um campo.
 	*/
 	public function redirectManage(){
-		$fields = $this->dao->findAll();//pega todos os campos
+		$fields = $this->dao->findAllMacros();//pega todos os campos macros
+		var_dump($fields);
 		//Todos os campos serão exibidos na view.
 		$this->view->assign("fields", $fields);
 
