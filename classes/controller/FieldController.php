@@ -27,7 +27,7 @@ class FieldController extends ApplicationController{
 			$this->display('Home');
 			return;
 		}
-
+		$parentField = null;
 		if ($field->getParent() !== null)//se for null é macro
 			$parentField = $this->dao->findById($field->getParent());
 		
@@ -143,8 +143,19 @@ class FieldController extends ApplicationController{
 	*/
 	public function redirectManage(){
 		$fields = $this->dao->findAllMacros();//pega todos os campos macros
-		var_dump($fields);
 		//Todos os campos serão exibidos na view.
+
+		$children = $this->dao->findChildren($fields[0]);
+		echo $children[0]->getName();
+		
+		foreach ($children as $value) {
+			if ($value === null)
+				echo 'null';
+			$fields[0]->addChild($value);
+		}
+		$children = $fields[0]->getChildren();
+		echo $children->get(0)->getName();
+
 		$this->view->assign("fields", $fields);
 
 		$page = 'ManageFields';

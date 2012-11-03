@@ -17,7 +17,16 @@ class FieldDAODoctrine extends DAODoctrine implements FieldDAO{
 	*	@return Collection<Field> campos macros.
 	*/
 	public function findAllMacros(){
-		$this->getRepository()->findBy(array('parent' => NULL));
+		return $this->getRepository()->findBy(array('parent' => NULL));
+	}
+
+	/**
+	*	Método que busca todos os campos filhos de um determinado campo.
+	*	@todo fazer com opção de paginação.
+	*	@return Collection<Field> campos filhos.
+	*/
+	public function findChildren($field){
+		return $this->getRepository()->findBy(array('parent' => $field));
 	}
 }
 

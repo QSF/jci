@@ -6,7 +6,7 @@ if(!isset($field)){
 <ul>
 <?php
 //para cada campo macro chama o listar campos
-foreach ($fields as &$var) {?>
+foreach ($fields as $var) {?>
 	<li> <?php listFields($var,$field);
 }?>
 </ul>
@@ -19,7 +19,6 @@ function listFields($var,$field){
 	<input type="radio" name="id" value="<?php echo $var->getID()?>" <?php echo $checked ?> > <?php echo $var->getName() ?>
 	<ul>
 	<?php foreach ($var->getChildren() as $child) { ?>
-	<li><input type="radio" name="id" value="<?php echo $child->getID()?>" <?php echo $checked ?> > <?php echo $child->getName() ?>
-		<?php listFields($child); }?>
+		<li><?php listFields($child); }?>
 	</ul>
 <?php } ?>
