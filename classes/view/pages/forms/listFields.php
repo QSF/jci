@@ -12,9 +12,9 @@ foreach ($fields as $var) {?>
 </ul>
 <?php 
 function listFields($var,$field){
-	
-	if($var == $field->getParent()){
-		$checked = "CHECKED";
+	$checked = "";
+	if($field->getParent() != null && $var->getId() == $field->getParent()->getId()){
+		$checked = "checked=\"checked\"";
 	} //coloar label?>
 	<input type="radio" name="id" value="<?php echo $var->getID()?>" <?php echo $checked ?> > <?php echo $var->getName() ?>
 	<ul>
