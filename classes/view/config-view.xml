@@ -24,4 +24,9 @@
 			<file>Validation.js</file>
 		</JS>
 	</page>
+	<page content="ManageFields">
+		<JS>
+			<file>ActionField.js</file>
+		</JS>
+	</page>
 </pages>
