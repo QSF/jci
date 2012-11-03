@@ -28,11 +28,21 @@ class FieldController extends ApplicationController{
 			return;
 		}
 
-		if ($field->getParent() !== null){//se for null é macro
-			$parentField = $this->dao->findById($field->getParent());
+		if ($field->getParent() != null){//se for null é macro
+			if ($field->getParent()->getParent() === null){
+				echo 'its null';
+				$grand = new Field;
+				$grand->setId(1);
+				$field->getParent()->setParent($grand);
+			}else
+				echo 'its not null';
 
+			$parentField = $this->dao->findById($field->getParent());
+			
 			if ($parentField === null)
 				$this->view->assignError('O campo não existe!');
+			else echo 'nem é null';
+
 			$field->setParent($parentField);
 		}
 		$this->dao->insert($field);
@@ -48,6 +58,12 @@ class FieldController extends ApplicationController{
 	*/
 	public function update(){
 		$field = $this->request->getField();
+
+		if ($field === null){
+			$this->view->assignError('O campo não existe!');
+			$this->display('Home');
+			return;
+		}
 		
 		$this->dao->update($field);
 

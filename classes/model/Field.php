@@ -29,7 +29,7 @@ class Field
 	 * @OneToMany(targetEntity="Field", mappedBy="parent", cascade ={"remove"})
 	 * @var ArrayCollection<Field>
 	 **/
-    public $children;
+    protected $children;
 
     /**
      * @ManyToOne(targetEntity="Field", inversedBy="children")
@@ -51,6 +51,10 @@ class Field
 
     //encapsular para o campo filho e pai
 
+    public function getChildren(){
+        return $this->children->toArray();
+    }
+
     /**
     *	Adiciona um novo campo como filho e já seta para este novo campo o seu campo "pai".
     *	
@@ -59,15 +63,11 @@ class Field
     public function addChild(Field $child){
     	if ($child === null)
     		return null;
-    	$this->children->add($child);
+    	// $this->children->add($child);
+        $this->children[] = $child;
     	$child->setParent($this);
     }
-    public function addChildren(Field $child){
-        if ($child === null)
-            return null;
-        $this->children->add($child);
-        $child->setParent($this);
-    }
+
     /**
     *	Remove um campo filho e seta seu pai como null.
     *
@@ -114,10 +114,6 @@ class Field
     	if ($user === null)
     		return;
     	$this->users->remove($user->getId());
-    }
-
-    public function getChildren(){
-    	$this->children->toArray();
     }
 
     public function setParent(Field $parent = null){

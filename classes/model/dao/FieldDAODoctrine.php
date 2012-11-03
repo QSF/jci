@@ -26,7 +26,7 @@ class FieldDAODoctrine extends DAODoctrine implements FieldDAO{
 	*	@return Collection<Field> campos filhos.
 	*/
 	public function findChildren($field){
-		return $this->getRepository()->findBy(array('parent' => $field));
+		return $this->getRepository()->findBy(array('parent' => $field))->toArray();
 	}
 }
 

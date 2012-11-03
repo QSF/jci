@@ -21,7 +21,7 @@ function listFields($var,$field){
 		
 	<?php 
 
-	foreach ($var->children as $child) { ?>
+	foreach ($var->getChildren() as $child) { ?>
 		<li><?php listFields($child,$field); }?>
 	</ul>
 <?php } ?>
