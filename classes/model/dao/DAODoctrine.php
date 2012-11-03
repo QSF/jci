@@ -29,8 +29,14 @@ class DAODoctrine implements DAO{
  		global $paths;
 		global $isDevMode;
 		global $dbParams;
+		global $proxyDir;
+		global $proxyNamespace;
 
 		$config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
+		//Novo local dos objetos do proxy
+		$config->setProxyDir($proxyDir);
+		//Nome do namespace
+		$config->setProxyNamespace($proxyNamespace);
 		//cria um entity manager
 		$this->entityManager = EntityManager::create($dbParams, $config);
  	}
