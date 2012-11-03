@@ -64,12 +64,19 @@ class PublicController extends ApplicationController{
 			$this->redirectManage();
 			return;
 		}
+		$public = $this->dao->findById($public);
 
+		if ($public === null){
+			$this->view->assignError('O publico não existe!');
+			$this->redirectManage();
+			return;
+		}
+		
 		try{
 			$this->dao->delete($public);
 			$this->view->assignSuccess('O publico' . $public->getName() . 'foi removido com sucesso!');
 		} catch(Exception $e){//pegar a exception exata se há ou não usuário ou doação com este campo
-	    	$this->view->assignError('O publico não pode ser removido!');
+	    	$this->view->assignError('O publico não pode ser removido!' . $e->getMessage());
 	    }	
 	    $this->redirectManage();
 	}
