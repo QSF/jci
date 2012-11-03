@@ -29,19 +29,10 @@ class FieldController extends ApplicationController{
 		}
 
 		if ($field->getParent() != null){//se for null é macro
-			if ($field->getParent()->getParent() === null){
-				echo 'its null';
-				$grand = new Field;
-				$grand->setId(1);
-				$field->getParent()->setParent($grand);
-			}else
-				echo 'its not null';
-
 			$parentField = $this->dao->findById($field->getParent());
 			
 			if ($parentField === null)
 				$this->view->assignError('O campo não existe!');
-			else echo 'nem é null';
 
 			$field->setParent($parentField);
 		}
@@ -115,7 +106,7 @@ class FieldController extends ApplicationController{
 			$this->display('Home');
 			return;
 		}
-
+		echo $field->getId();
 		$field = $this->dao->findById($field);//busca o campo completo do banco
 
 		if ($field === null){
@@ -160,15 +151,12 @@ class FieldController extends ApplicationController{
 		$fields = $this->dao->findAllMacros();//pega todos os campos macros
 		//Todos os campos serão exibidos na view.
 
-		// $children = $this->dao->findChildren($fields[0]);
-		// echo $children[0]->getName();
-		
-		// foreach ($children as $value) {
-		// 	if ($value === null)
-		// 		echo 'null';
-		// 	$fields[0]->addChild($value);
+		// foreach ($fields[0]->getChildren() as $value) {
+		// 	echo $value->getId() . ' ' . $value->getName();
 		// }
-		// $children = $fields[0]->getChildren();
+		// $field = $fields[0]->getChildren();
+		// $field = $this->dao->findById($field[0]);
+		// echo $field->getName();
 
 		$this->view->assign("fields", $fields);
 

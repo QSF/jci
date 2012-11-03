@@ -211,7 +211,7 @@ class Request{
 			case 'delete':
 				$field = $builder->getSingleField();
 				break;
-			case 'redirectUpadate':
+			case 'redirectUpdate':
 				$field = $builder->getSingleField();
 				break;
 			default:
