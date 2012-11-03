@@ -13,8 +13,11 @@
 	<input type="password" id="idPassword" name="password"/><br/>
 	<?php } ?>
 
+	<label for="confirmPassword">Confirmação de Senha</label>
+	<input type="password" id="idConfirmPassword" name="confirmPassword"/><br/>
+
 	<label for="phone">Telefone</label>
-	<input type="text" id="idPhone" name="phone" value="<?php  echo $user->getPhone()?>" maxlength=12/><br/>
+	<input type="text" id="idPhone" name="phone" value="<?php  echo $user->getPhone()?>"/><br/>
 
 	<label for="howYouKnow">Como ficou sabendo sobre a JCI Londrina/Projeto Canal de Voluntários?</label>
 	<input type="text" id="idHowYouKnow" name="howYouKnow" value="<?php echo $user->getHowYouKnow()?>"><br/>
