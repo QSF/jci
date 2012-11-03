@@ -8,6 +8,6 @@
 	<!-- listar todos os capos-->
 	<?php require_once VIEW_PATH . "/pages/forms/listFields.php"; ?>
 	
-	<input type="submit" name="botton_atualizar" value="Editar" onclick="update()"/>
-	<input type="submit" name="botton_remover" value="Excluir" onclick="remove()"/>
+	<input type="submit" name="u" value="Editar" onclick="update()"/>
+	<input type="submit" name="r" value="Excluir" onclick="remove()"/>
 </form>
