@@ -43,28 +43,5 @@ class UserDAODoctrine extends DAODoctrine implements UserDAO{
 		//o $result[0] é o objeto retornado.
 		return  $this->findById($result[0]);
 	}
-
-	/**
-	*	@return repository repositório da tabela User.
-	*/
-	protected function getRepository(){
-		return $this->entityManager->getRepository('User');
-	}
-
-
-	/** Método que retorna as entidades esperando aprovação
-	*
-	*
-	*	@param $email email do usuário que será procurado.
-	*	@return object objeto referente a tupla com este email na tabela.
-	*	@return null caso não tenha nenhuma tupla com este email.
-	*
-	*	@link http://docs.doctrine-project.org/en/2.0.x/reference/working-with-objects.html#by-simple-conditions
-	*	@todo Jogar exceptions	
-	*	@todo Se o doctrine deixar, colocar o latest como link.	
-	*/
-	public function getEntitiesNegativeSituation(){
-
-	}
 }
 ?>
