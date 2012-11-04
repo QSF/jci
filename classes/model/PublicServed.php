@@ -27,7 +27,7 @@ class PublicServed
      * @ManyToMany(targetEntity="User", mappedBy="public")
      * @var ArrayCollection<User>
      **/
-    private $users;
+    protected $users;
 
     //encapsular para a relação com o usuário
 
@@ -45,6 +45,10 @@ class PublicServed
         if ($user === null)
             return;
         $this->users->remove($user->getId());
+    }
+
+    public function getUsers(){
+        return $this->users->toArray();
     }
 
     public function getId(){

@@ -108,5 +108,9 @@ class DAODoctrine implements DAO{
 	public function findAll(){
 		return $this->getRepository()->findAll();
 	}
+
+	public function clear(){
+		$this->entityManager->clear();
+	}
 }
 ?>

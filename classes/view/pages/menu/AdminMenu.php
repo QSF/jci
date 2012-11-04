@@ -1,6 +1,6 @@
 <ul>
-	<li><a href="" >Visualizar Log</a></li>
-	<li><a href="">Inserir Moderador</a></li>
-	<li><a href="">Alterar Moderador</a></li>
-	<li><a href="">Excluir Moderador</a></li>
+	<li><a href="">Visualizar Log		</a></li>
+	<li><a href="">Cadastrar Moderador	</a></li>
+	<li><a href="">Exibir Moderadores(editar e excluir)	</a></li>
+	<li><a href="">Perfil(editar e exibir)	</a></li>
 </ul>

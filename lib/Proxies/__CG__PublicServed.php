@@ -54,6 +54,12 @@ class PublicServed extends \PublicServed implements \Doctrine\ORM\Proxy\Proxy
         return parent::removeUser($user);
     }
 
+    public function getUsers()
+    {
+        $this->__load();
+        return parent::getUsers();
+    }
+
     public function getId()
     {
         $this->__load();

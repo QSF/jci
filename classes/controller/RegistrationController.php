@@ -47,13 +47,13 @@ class RegistrationController extends ApplicationController{
 	* Checar se o usuário é moderador ou admin. 
 	* Se não for checar se o user_id passado como parâmetro no atributo é o mesmo.
 	*/
-	public function updatePOST(){
+	public function update(){
 		
 		//TODO: checar se o usuário tem permissão de editar
 		$userUpdate = $this->request->getUser();
-
 		$userUpdate->setId($this->request->get("user_id"));
-		
+		echo 'aqui';
+		$this->dao->clear();
 		$this->dao->update($userUpdate);
 
 		$this->view->assignSuccess("Usuário editado");
@@ -61,35 +61,82 @@ class RegistrationController extends ApplicationController{
 
 	}
 
-	/** 
-	* Método que redireciona para o formulário de edição do usuário.
-	* É necessário setar o nome do usuario pela variável form.
-	* Como é preciso instanciar um usuário, esse atributo TEM QUE ser um nome idêntico ao model.
-	* Para popular os campos do formulário, é necessário passar como parâmetro o id do usuário.
+	/**
+	*	Método que redireciona para uma página de atualizar os dados de um usuário, de acordo
+	*	com o tipo de usuário e id de usuário.
+	*	@param $userType Indica o formulário que será incluso.
+	*	@param $userId Determina qual usuário vai ser editado.
 	*/
-	public function updateGET(){
+	protected function redirectUpdate($userType, $userId){
+		if ($userType === null || $userId === null){
+			$this->view->assignError('Erro ao editar!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
 
-		$userType = $this->request->get("form");
-		
-		//Checar se o usuário tem permissão.
-		//Ver se for admin ou moderador. Se não o id tem que ser igual
-		$userId = $this->request->get("user_id");
-		
+		if ($userType == 'Guest'){
+			$this->view->assignError('Erro, Guest não é usuário!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
+
 		$user = new $userType();
 		$user->setId($userId);
 
 		$this->authorize($user);
 
-		$userForm = $this->dao->findById($user);
+		$user = $this->dao->findById($user);
 
+		if ($user === null){//nem encontrou o user
+			$this->view->assignError('Erro, usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display('Home');
+			return;
+		}
 		//Seta valores do usuario para ser mostrado na view
-		$this->view->assign("user", $userForm);
+		$this->view->assign("user", $user);
 
 		//Seta ação do form, pois o form é usado tanto para editar quanto para criar
-		$this->view->assign("action","updatePOST");
+		$this->view->assign("action","update");
+
+		$fieldDao = ServiceLocator::getInstance()->getDAO("FieldDAO");
+		$fields = $fieldDao->findAllMacros();//pega todos os campos macros
+		//Todos os campos serão exibidos na view.
+		$this->view->assign("fields", $fields);
+
+		$publicDao = ServiceLocator::getInstance()->getDAO("PublicServedDAO");
+		$publicArray = $publicDao->findAll();
+		//A ação vai ser criar.
+		$this->view->assign("publicArray",$publicArray);
 
 		$page = $userType."Form";
 		$this->view->display($page);
+	}
+
+	/**
+	*	Método que redireciona para uma página de edição de um usuário está logado.
+	*	Os dados são pego de acorco com a session.
+	*	@see self::redirectUpate
+	*/
+	public function redirectLoggedUserUpdate(){
+		$userType = $this->request->getUserType();//e se for guest?
+		$user = $this->request->getUserSession();
+		$this->redirectUpdate($userType, $user->getId());
+	}
+
+	/** 
+	* Método que redireciona para o formulário de edição de usuário que não seja o logado.
+	* É necessário setar o nome do usuario pela variável form.
+	* Como é preciso instanciar um usuário, esse atributo TEM QUE ser um nome idêntico ao model.
+	* Para popular os campos do formulário, é necessário passar como parâmetro o id do usuário.
+	*/
+	public function redirectUserUpdate(){
+		$userType = $this->request->get("form");
+		$userId = $this->request->get("user_id");
+
+		$this->redirectUpdate($userType, $userId);
 	}
 
 	/** 
