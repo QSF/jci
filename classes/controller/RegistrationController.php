@@ -29,6 +29,9 @@ class RegistrationController extends ApplicationController{
 	*/
 	public function create(){
 		$user = $this->request->getUser();
+		foreach ($user->getPublic() as $p) {
+			echo "\n " . $p->getName();
+		}
 
 		$this->dao->insert($user);
 
