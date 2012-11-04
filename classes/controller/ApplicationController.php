@@ -27,7 +27,6 @@ class ApplicationController{
 
 	public function __construct(Request $request){
 		$this->request = $request;
-
 		//$request->getUserType serve para saber o tipo de usuario e montar a view customizada
 		$this->view = ServiceLocator::getInstance()->getView($this->request->getUserType());
 	}
