@@ -1,36 +1,36 @@
 <table width="40%">
 		<tr>
-			<td width=70%><input type="checkbox" name="receivedNotification" 
+			<td><input type="checkbox" name="receivedNotification" 
 	<?php if($user->getReceiveNotification()) echo "checked=yes";?>
 	value="yes"/>Receber notificações da JCI por email<br/></td>
 		</tr>
 		<tr>
-			<td width=70%><label for="idName">Nome</label></td>
+			<td width=70% style="text-align:right"><label for="name">Nome</label></td>
 			<td width=50%><input type="text" id="idName" name="name" value="<?php echo $user->getName()?>"/><br/></td>
 		</tr>
 		<tr>
-			<td width=70%>	<label for="email">E-mail</label></td>
+			<td width=70% style="text-align:right">	<label for="email">E-mail</label></td>
 			<td width=50%><input type="text" id="idEmail" name="email" value="<?php echo $user->getEmail()?>"/><br/></td>
 		</tr>
 		<tr>
-			<td width=70%><?php if($user->getId() == null ){ ?>
+			<td width=70% style="text-align:right"><?php if($user->getId() == null ){ ?>
 	<label for="password">Senha</label></td>
 			<td width=50%><input type="password" id="idPassword" name="password"/><br/><?php } ?></td>
 		</tr>
 		<tr>
-			<td width=70%><label for="confirmPassword">Confirmação de Senha</label></td>
+			<td width=70% style="text-align:right"><label for="confirmPassword">Confirmação de Senha</label></td>
 			<td width=50%><input type="password" id="idConfirmPassword" name="confirmPassword"/><br/></td>
 		</tr>
 		<tr>
-			<td width=70%><label for="phone">Telefone</label></td>
+			<td width=70% style="text-align:right"><label for="phone">Telefone</label></td>
 			<td width=50%><input type="text" id="idPhone" name="phone" value="<?php  echo $user->getPhone()?>"/><br/></td>
 		</tr>
 		<tr>
-			<td width=70%><label for="howYouKnow">Como ficou sabendo sobre a JCI Londrina/Projeto Canal de Voluntários?</label></td>
+			<td width=70% style="text-align:right"><label for="howYouKnow">Como ficou sabendo sobre a JCI Londrina/ <br/> Projeto Canal de Voluntários?</label></td>
 			<td width=50%>	<input type="text" id="idHowYouKnow" name="howYouKnow" value="<?php echo $user->getHowYouKnow()?>"><br/></td>
 		</tr>
 		<tr>
-			<td width=70%><label>Público</label><br/>
+			<td><label>Público</label><br/>
 				<?php $publicArray = explode(',',$user->getPublic());?>
 				<input type="checkbox" name="public[]" value="kids"
 				<?php if(in_array("kids", $publicArray)) echo "checked=yes"?>/>Crianças<br/>
@@ -43,7 +43,8 @@
 				<input type="checkbox" name="public[]" value="deficient"
 				<?php if(in_array("deficient", $publicArray)) echo "checked=yes"?>/>Portadores de necessidades<br/><br/>
 			</td>
-			<td width=50%><label >Área de atuação</label><br/>
+		
+			<td><label >Área de atuação</label><br/>
 				<input type="checkbox" name="actingArea[]" value="legal"/>Juridica <br/>
 				<input type="checkbox" name="actingArea[]" value="administrative"/>Administrativa<br/>
 				<input type="checkbox" name="actingArea[]" value="recreation"/>Recreação <br/>
@@ -53,7 +54,7 @@
 			
 		</tr>
 		<tr>
-			<td width=70%><label for="cep">CEP</label></td>
+			<td width=70% style="text-align:right"><label for="cep">CEP</label></td>
 			<td width=50%><input type="text" id="idCep" name="cep" value="<?php echo $user->getCep()?>"/><br/></td>
 		</tr>
 	</table>
