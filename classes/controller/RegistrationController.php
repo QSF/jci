@@ -46,6 +46,7 @@ class RegistrationController extends ApplicationController{
 	* A permissão da edição é necessário e é feita do seguinte modo:
 	* Checar se o usuário é moderador ou admin. 
 	* Se não for checar se o user_id passado como parâmetro no atributo é o mesmo.
+	* @todo Estudas sobre o lance de gerenciamento e cascata para retirar o clear.
 	*/
 	public function update(){
 		

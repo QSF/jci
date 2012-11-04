@@ -57,7 +57,7 @@ abstract class User
     protected $howYouKnow;
 
     /** Relação do publico atendido.
-     * @ManyToMany(targetEntity="PublicServed", inversedBy="users")
+     * @ManyToMany(targetEntity="PublicServed", inversedBy="users", cascade={"merge"})
      * @JoinTable(name="users_public")
      *
      * @JoinColumn (nullable = true)
@@ -67,7 +67,7 @@ abstract class User
     protected $public;
 
     /** Relação dos campos de cada usuario
-     * @ManyToMany(targetEntity="Field", inversedBy="users")
+     * @ManyToMany(targetEntity="Field", inversedBy="users", cascade={"merge"})
      * @JoinTable(name="users_fields")
      *
      * @JoinColumn (nullable = true)
