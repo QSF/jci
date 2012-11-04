@@ -1,7 +1,11 @@
-function update(){
-        document.formPublicManage.action="./index.php?controller=public&action=redirectUpdate";
-}
-function remove(){
-        document.formPublicManage.action="./index.php?controller=public&action=delete";
-}
+$(document).ready(function() {
+	$("#idUpdate").click(function() {
+		$("#idformPublicManage").attr("action", "./index.php?controller=public&action=redirectUpdate");
+	});
+});
 
+$(document).ready(function() {
+	$("#idRemove").click(function() {
+		$("#idformPublicManage").attr("action", "./index.php?controller=public&action=delete");
+	});
+});

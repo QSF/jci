@@ -22,23 +22,6 @@ class ObjectBuilder
 		$this->request = $request;
 	}
 
-	/** Método que monta o público atendido, convertendo os checkboxs para string
-	*
-	*	@return $str string com os públicos atendidos
-	*/
-/*	protected function getPublic(){
-		$str = '';
-		//retorna um array das checkbox
-		$public = $this->request->get('public');
-		if ($public === null)
-			return $str;
-		
-		//Transforma um array em uma sequencia de strings separada por uma virgula
-        $str = implode(',',$public);
-
-        return $str;
-	}*/
-
 	/** Método que monta um User de acordo com os dados passados em uma requisição.
 	*
 	*	Este método é uma generalização para pegar os dados de todos os tipos de usuário.

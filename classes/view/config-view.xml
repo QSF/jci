@@ -26,11 +26,13 @@
 	</page>
 	<page content="ManageFields">
 		<JS>
+			<file>jquery.js</file>
 			<file>action.field.js</file>
 		</JS>
 	</page>
 	<page content="ManagePublics">
 		<JS>
+			<file>jquery.js</file>
 			<file>action.public.js</file>
 		</JS>
 	</page>
