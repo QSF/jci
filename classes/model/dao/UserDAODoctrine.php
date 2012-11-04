@@ -47,6 +47,10 @@ class UserDAODoctrine extends DAODoctrine implements UserDAO{
 		return  $this->findById($result[0]);
 	}
 
+	protected function getRepository(){
+		return $this->entityManager->getRepository('user');
+	}
+
 	protected function resultPaginated($dql, $positionResults, $maxResults, $joinCollection){
 		$query = $this->entityManager->createQuery($dql)
 	                       	->setFirstResult($positionResults)
@@ -65,6 +69,10 @@ class UserDAODoctrine extends DAODoctrine implements UserDAO{
 	public function search($searchWord, $attributeType, $positionResults, $maxResults){
 		$dql = "SELECT u FROM user u WHERE u.". $attributeType ." LIKE '%$searchWord%' ORDER BY u.name";
 		return $this->resultPaginated($dql, $positionResults, $maxResults, false);
+	}
+
+	public function getAllNotifiedUsers(){
+		return $this->getRepository()->findBy(array('receiveNotification' => true));
 	}
 }
 ?>

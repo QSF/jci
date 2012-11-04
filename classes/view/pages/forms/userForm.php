@@ -8,15 +8,29 @@
 		<tr width=70% style="text-align:right">	<label for="email">E-mail</label><br/>
 			<input type="text" id="idEmail" name="email" value="<?php echo $user->getEmail()?>"/><br/>
 		</tr>
+<<<<<<< HEAD
 		<tr width=70% style="text-align:right"><?php if($user->getId() == null ){ ?>
 	<label for="password">Senha</label><br/>
 			<input type="password" id="idPassword" name="password"/><br/><?php } ?><br/>
+=======
+		<tr>
+			<td width=70% style="text-align:right"><?php if($user->getId() == null ){ ?>
+	<label for="password">Senha</label></td>
+			<td width=50%><input type="password" id="idPassword" name="password"/><br/></td>
+>>>>>>> 5da1ba8e877c7bdf0fdb21abfd245c5f2340ac11
 		</tr>
 		<tr width=70% style="text-align:right"><label for="confirmPassword">Confirmação de Senha</label><br/>
 			<input type="password" id="idConfirmPassword" name="confirmPassword"/><br/>
 		</tr>
+<<<<<<< HEAD
 		<tr width=70% style="text-align:right"><label for="phone">Telefone</label><br/>
 			<input type="text" id="idPhone" name="phone" value="<?php  echo $user->getPhone()?>"/><br/>
+=======
+		<?php } ?>
+		<tr>
+			<td width=70% style="text-align:right"><label for="phone">Telefone</label></td>
+			<td width=50%><input type="text" id="idPhone" name="phone" value="<?php  echo $user->getPhone()?>"/><br/></td>
+>>>>>>> 5da1ba8e877c7bdf0fdb21abfd245c5f2340ac11
 		</tr>
 		<tr width=70% style="text-align:right"><label for="howYouKnow">Como ficou sabendo sobre a JCI Londrina/ <br/> Projeto Canal de Voluntários?</label><br/>
 			<textarea style="resize:none"  cols="60" rows="5" name="howYouKnow" id="idHowYouKnow" value="<?php echo $user->getHowYouKnow()?>"></textarea><br/>
@@ -49,9 +63,3 @@
 			<input type="text" id="idCep" name="cep" value="<?php echo $user->getCep()?>"/><br/>
 		</tr>
 	</table>
-
-
-
-	
-	
-	
