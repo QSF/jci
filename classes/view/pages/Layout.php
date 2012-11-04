@@ -25,27 +25,34 @@
 			<div id="logo">
 				<?php include_once PAGES_PATH."/Logo.php" ?>  
 			</div>
-			<?php if(isset($guestSection)) include $guestSection ?>
-			<?php if(isset($userSection)) include $userSection; ?> <br/>
-				<?php //Mensagens que voce poderá enviar se teve sucesso em alguma ação
-					//Uma sugestão é colocar o sucesso como verde e o erro como vermelho?>
-				<div class="success">
-				<?php  foreach($successMessage as $msg){ echo $msg;}?>
-				</div>
-				
-				<br/>
-				<div class="error">
-				<?php  foreach($errorMessage as $msg){ echo $msg;}?>
-				</div>
 
-				<br/>
-				<div id="menu_topo">
-					<?php if(isset($menu)) include "menu/".$menu ?>
-				</div><br/>
+			<div id= "menu">
+				<?php if(isset($guestSection)) include $guestSection ?>
+				<?php if(isset($userSection)) include $userSection; ?> <br/>
+			</div>
 
+			<div id="user_menu">
+				<?php if(isset($menu)) include "menu/".$menu ?>
+			</div>
+			
+			<!-- Aqui deverá ser um id para trabalhar melhor no css e as coisas em comum ficam na classe messages-->
+			<div id="success_msg" class="messages">
+				<ul><?php foreach($successMessage as $msg){?><li> <?php echo $msg;}?>
+				</ul>
+			</div>
+
+			<div id="error_msg" class="messages">
+				<ul> <?php  foreach($errorMessage as $msg){?><li> <?php echo $msg;}?>
+				</ul>
+			</div>
+
+			<div id="content">
 				<?php include PAGES_PATH."/".$content.".php"; ?>
 			</div>
-			<br/>
+
+			<div id="footer">
+				<?php include PAGES_PATH."/Footer.php"; ?>
+			</div>
 		</div> 
 	</body>
 </html>
