@@ -1,33 +1,25 @@
 <table width="40%">
-		<tr>
-			<td><input type="checkbox" name="receivedNotification" 
-	<?php if($user->getReceiveNotification()) echo "checked=yes";?>
-	value="yes"/>Receber notificações da JCI por email<br/></td>
+		<tr><input type="checkbox" name="receivedNotification" <?php if($user->getReceiveNotification()) echo "checked=yes";?>
+	value="yes"/>Receber notificações da JCI por email<br/>
 		</tr>
-		<tr>
-			<td width=70% style="text-align:right"><label for="name">Nome</label></td>
-			<td width=50%><input type="text" id="idName" name="name" value="<?php echo $user->getName()?>"/><br/></td>
+		<tr width=70% style="text-align:right"><label for="name">Nome</label><br/>
+			<input type="text" id="idName" name="name" value="<?php echo $user->getName()?>"/><br/>
 		</tr>
-		<tr>
-			<td width=70% style="text-align:right">	<label for="email">E-mail</label></td>
-			<td width=50%><input type="text" id="idEmail" name="email" value="<?php echo $user->getEmail()?>"/><br/></td>
+		<tr width=70% style="text-align:right">	<label for="email">E-mail</label><br/>
+			<input type="text" id="idEmail" name="email" value="<?php echo $user->getEmail()?>"/><br/>
 		</tr>
-		<tr>
-			<td width=70% style="text-align:right"><?php if($user->getId() == null ){ ?>
-	<label for="password">Senha</label></td>
-			<td width=50%><input type="password" id="idPassword" name="password"/><br/><?php } ?></td>
+		<tr width=70% style="text-align:right"><?php if($user->getId() == null ){ ?>
+	<label for="password">Senha</label><br/>
+			<input type="password" id="idPassword" name="password"/><br/><?php } ?><br/>
 		</tr>
-		<tr>
-			<td width=70% style="text-align:right"><label for="confirmPassword">Confirmação de Senha</label></td>
-			<td width=50%><input type="password" id="idConfirmPassword" name="confirmPassword"/><br/></td>
+		<tr width=70% style="text-align:right"><label for="confirmPassword">Confirmação de Senha</label><br/>
+			<input type="password" id="idConfirmPassword" name="confirmPassword"/><br/>
 		</tr>
-		<tr>
-			<td width=70% style="text-align:right"><label for="phone">Telefone</label></td>
-			<td width=50%><input type="text" id="idPhone" name="phone" value="<?php  echo $user->getPhone()?>"/><br/></td>
+		<tr width=70% style="text-align:right"><label for="phone">Telefone</label><br/>
+			<input type="text" id="idPhone" name="phone" value="<?php  echo $user->getPhone()?>"/><br/>
 		</tr>
-		<tr>
-			<td width=70% style="text-align:right"><label for="howYouKnow">Como ficou sabendo sobre a JCI Londrina/ <br/> Projeto Canal de Voluntários?</label></td>
-			<td width=50%>	<input type="text" id="idHowYouKnow" name="howYouKnow" value="<?php echo $user->getHowYouKnow()?>"><br/></td>
+		<tr width=70% style="text-align:right"><label for="howYouKnow">Como ficou sabendo sobre a JCI Londrina/ <br/> Projeto Canal de Voluntários?</label><br/>
+			<textarea style="resize:none"  cols="60" rows="5" name="howYouKnow" id="idHowYouKnow" value="<?php echo $user->getHowYouKnow()?>"></textarea><br/>
 		</tr>
 		<tr>
 			<td><label>Público</label><br/>
@@ -53,9 +45,8 @@
 			</td>
 			
 		</tr>
-		<tr>
-			<td width=70% style="text-align:right"><label for="cep">CEP</label></td>
-			<td width=50%><input type="text" id="idCep" name="cep" value="<?php echo $user->getCep()?>"/><br/></td>
+		<tr width=70% style="text-align:right"><label for="cep">CEP</label><br/>
+			<input type="text" id="idCep" name="cep" value="<?php echo $user->getCep()?>"/><br/>
 		</tr>
 	</table>
 
