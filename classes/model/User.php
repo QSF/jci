@@ -15,6 +15,10 @@ require_once MODEL_PATH . "/PublicServed.php";
  **/
 abstract class User
 {
+    public function __construct(){
+        $this->public = new ArrayCollection();
+        $this->actingArea = new ArrayCollection();
+    }
 
     /**
      *@Id @Column(type="integer")
@@ -76,11 +80,6 @@ abstract class User
      *@Column(type="integer")
      **/
     protected $cep;
-
-    public function __construct(){
-        $this->public = new ArrayCollection();
-        $this->actingArea = new ArrayCollection();
-    }
 
     //encapsulamento do public
     public function addPublic (PublicServed $public){

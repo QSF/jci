@@ -114,7 +114,7 @@ class Moderator{
     }
 
     public function getDonations(){
-        $this->donations->toArray();
+        return $this->donations->toArray();
     }
 
 }

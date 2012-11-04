@@ -20,24 +20,12 @@
 	<input type="text" id="idHowYouKnow" name="howYouKnow" value="<?php echo $user->getHowYouKnow()?>"><br/>
 
 	<label>Público</label><br/>
-	<?php $publicArray = explode(',',$user->getPublic());?>
-	<input type="checkbox" name="public[]" value="kids"
-	<?php if(in_array("kids", $publicArray)) echo "checked=yes"?>/>Crianças<br/>
-	<input type="checkbox" name="public[]" value="adult" 
-	<?php if(in_array("adult", $publicArray)) echo "checked=yes"?>/>Adultos<br/>
-	<input type="checkbox" name="public[]" value="teens"
-	<?php if(in_array("teens", $publicArray)) echo "checked=yes"?>/>Adolescentes<br/>
-	<input type="checkbox" name="public[]" value="elderly"
-	<?php if(in_array("elderly", $publicArray)) echo "checked=yes"?>/>Melhor Idades<br/>
-	<input type="checkbox" name="public[]" value="deficient"
-	<?php if(in_array("deficient", $publicArray)) echo "checked=yes"?>/>Portadores de necessidades<br/><br/>
+	<?php require_once VIEW_PATH . "/pages/forms/listPublicsCheckbox.php"; ?>
+
 
 	<label >Área de atuação</label><br/>
-	<input type="checkbox" name="actingArea[]" value="legal"/>Juridica <br/>
-	<input type="checkbox" name="actingArea[]" value="administrative"/>Administrativa<br/>
-	<input type="checkbox" name="actingArea[]" value="recreation"/>Recreação <br/>
-	<input type="checkbox" name="actingArea[]" value="health"/>Saúde <br/>
-	<input type="checkbox" name="actingArea[]" value="education"/>Educação<br/><br/>
+	<?php require_once VIEW_PATH . "/pages/forms/listFieldsCheckbox.php"; ?>
+
 
 	<label for="cep">CEP</label>
 	<input type="text" id="idCep" name="cep" value="<?php echo $user->getCep()?>"/><br/>

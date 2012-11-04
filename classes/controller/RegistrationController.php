@@ -114,9 +114,29 @@ class RegistrationController extends ApplicationController{
 		$this->display("Home");
 	}
 
+	/** 
+	* Carrega lista de campos e público e redireciona para página de cadastro.
+	*/
+	public function redirectCreate(){
+		$fieldDao = ServiceLocator::getInstance()->getDAO("FieldDAO");
+		$fields = $fieldDao->findAllMacros();//pega todos os campos macros
+		//Todos os campos serão exibidos na view.
+		$this->view->assign("fields", $fields);
+
+		$publicDao = ServiceLocator::getInstance()->getDAO("PublicServedDAO");
+		$publicArray = $publicDao->findAll();
+		//A ação vai ser criar.
+		$this->view->assign("publicArray",$publicArray);
+		//O FieldForm vai ser usado tanto no upate quando no cadastro.
+		
+		$this->view->display($this->request->get('page'));
+	}
+
+
 	public function authorize($user){
 		//Futuramente terá autorizacao
 		//To pensando em fazer por sql
 	}
+
 }
 ?>

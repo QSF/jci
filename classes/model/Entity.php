@@ -10,6 +10,7 @@ class Entity extends User{
 	
 	public function __construct() {
         $this->donations = new ArrayCollection();
+		parent::__construct();
     }
 	/** 
 	 * @Column(type="date") 
@@ -180,7 +181,7 @@ class Entity extends User{
     }
 
 	public function getDonations(){
-    	$this->donations->toArray();
+    	return $this->donations->toArray();
     }
 }
 ?>
