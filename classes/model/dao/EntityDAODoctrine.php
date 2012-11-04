@@ -14,8 +14,7 @@ class EntityDAODoctrine extends UserDAODoctrine implements EntityDAO{
 	public function getEntitiesNegativeSituation($positionResults, $maxResults){
 		//return $this->getRepository()->findBy(array('situation'=>false));
 
-		//$dql = "SELECT e FROM Entity e  WHERE e.situation = false ";
-		$dql = "SELECT u FROM User u";
+		$dql = "SELECT e FROM Entity e  WHERE e.situation = false";
 		$query = $this->entityManager->createQuery($dql)
 	                       	->setFirstResult($positionResults)
 	                        ->setMaxResults($maxResults);
