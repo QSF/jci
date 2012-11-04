@@ -4,10 +4,11 @@
 
 <!-- moderador seleciona um campo da lista para remover ou editar -->
 <!-- o action do form é colocado pelo java script de acordo com a opção-->
-<form id="formFieldManage" name="formFieldManage" action="" method="post">
+<form id="idformFieldManage" name="formFieldManage" action="" method="post">
 	<!-- listar todos os capos-->
 	<?php require_once VIEW_PATH . "/pages/forms/listFields.php"; ?>
 	
-	<input type="submit" name="u" value="Editar" onclick="update()"/>
-	<input type="submit" name="r" value="Excluir" onclick="remove()"/>
+	<input type="submit" id="idUpdate" name="update" value="Editar"/>
+	<input type="submit" id="idRemove" name="remove" value="Excluir"/>
 </form>
+
