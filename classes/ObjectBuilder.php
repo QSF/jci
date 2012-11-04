@@ -38,9 +38,45 @@ class ObjectBuilder
 		$user->setPassword 			  ( md5($this->request->get('password')));
 		$user->setPhone				  ( $this->request->get('phone')		);
 		$user->setHowYouKnow		  ( $this->request->get('howYouKnow')	);
-		//$user->setPublic			  ( $this->getPublic() 					);
-		//temos que implementar o field
+		$this->setPublicServed		  ( $user            					);
+		$this->setActingArea		  (	$user				 				);
 		$user->setCep 				  ( $this->request->get('cep')			);		
+	}
+
+	/**
+	 *	Método que pega a lista de público, selecionada pelo usuário, da request.
+	 *  E seta para o user passado como parametro.
+	 *  @param $user usuário que receberá os valores
+	 */
+	protected function setPublicServed($user){
+		$publics = $this->request->get('public');
+		$dao = ServiceLocator::getInstance()->getDAO("DAO");
+		foreach ($publics as $pid) {
+			$public = new PublicServed;
+			$public->setId($pid);
+			$public = $dao->findById($public);
+			if($public != null){
+				$user->addPublic($public);
+			}
+				
+		}
+	}
+
+	/**
+	 *	Método que pega a lista de campos (área de atuação), selecionada pelo usuário, da request.
+	 *  E seta para o user passado como parametro.
+	 *  @param $user usuário que receberá os valores
+	 */
+	protected function setActingArea($user){
+		$fields = $this->request->get('actingArea');
+		$dao = ServiceLocator::getInstance()->getDAO("DAO");
+		foreach ($fields as $fid) {
+			$field = new Field;
+			$field->setId($fid);
+			$field = $dao->findById($field);
+			if($field != null)
+				$user->addArea($field);
+		}
 	}
 
 	/** Método que monta um user de acordo com os dados de legal person passados em uma requisição.
