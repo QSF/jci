@@ -107,7 +107,7 @@ class RegistrationController extends ApplicationController{
 		$this->authorize($user);
 
 		$user = $this->dao->findById($user);
-		echo $user->getEmail();
+
 		$this->dao->delete($user);
 
 		$this->view->assignSuccess("Usuário deletado com sucesso");

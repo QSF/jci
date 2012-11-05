@@ -106,6 +106,7 @@ class ModeratorController extends ApplicationController
 			return;
 		}
 		
+		//Colocando moderador como managed
 		$dao = ServiceLocator::getInstance()->getDAO("DAO");
 		
 		$mod = $dao->findById($mod);
@@ -113,8 +114,17 @@ class ModeratorController extends ApplicationController
 		$news->setAuthor($mod);
 		$dao->insert($news);
 
-		$userDao =  ServiceLocator::getInstance()->getDAO("UserDAO");
-		$users = $userDao->getAllNotifiedUsers();
+		//Nao sei se eh melhor fazer o envio de noticias mandar por e-mail
+		//ou fazer a gerencia
+
+		$this->view->assignSuccess("Notícia Enviada");
+		$this->view->display("Home");
+	}	
+
+	public function sendNewsByEmail(){
+
+	$userDao =  ServiceLocator::getInstance()->getDAO("UserDAO");
+	$users = $userDao->getAllNotifiedUsers();
 
 		foreach($users as $user){
 			$emailTo = $user->getEmail();
@@ -124,9 +134,10 @@ class ModeratorController extends ApplicationController
 			//Tem que configurar o servidor de e-mail para funcionar
 			//$this->sendEmail($emailTo, $title, $content, $emailFrom);
 		}
+	}
 
-		$this->view->assignSuccess("Notícia Enviada");
-		$this->view->display("Home");
-	}		
+	public function generateReport(){
+		
+	}	
 }
 ?>
