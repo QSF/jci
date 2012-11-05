@@ -8,10 +8,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 */
 class News{
 
-    public function __construct() {
-        $this->donations = new ArrayCollection();
-    }
-
     /**
      *@Id @Column(type="integer")
      *@GeneratedValue

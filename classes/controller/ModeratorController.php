@@ -43,6 +43,9 @@ class ModeratorController extends ApplicationController
 		$dao = ServiceLocator::getInstance()->getDAO("EntityDAO");
 		$dao->validateEntity($entity);
 
+		//Variavel que precisa ser setada para mostrar a acao de validar no UsersList
+		$this->view->assign("validateAction",true);
+
 		$this->view->display("Home");
 	}
 
@@ -84,5 +87,42 @@ class ModeratorController extends ApplicationController
 		$this->display("UsersList");
 	}
 
+	public function sendNews(){
+		$news = new News;
+	
+		$public = $this->request->get('public') == null ? false : true;
+		$news->setPublic($public);
+
+		$news->setTitle($this->request->get("title"));
+
+		$news->setContent($this->request->get("content"));
+
+		$mod = $this->request->getUserSession();
+		if(get_class($mod) != "Moderator"){
+			return;
+		}
+		
+		$dao = ServiceLocator::getInstance()->getDAO("DAO");
+		
+		$mod = $dao->findById($mod);
+		
+		$news->setAuthor($mod);
+		$dao->insert($news);
+
+		$userDao =  ServiceLocator::getInstance()->getDAO("UserDAO");
+		$users = $userDao->getAllNotifiedUsers();
+
+		foreach($users as $user){
+			$emailTo = $user->getEmail();
+			$title = $news->getTitle();
+			$content = $news->getContent();
+			$emailFrom = "From:". emailJCI;
+			//Tem que configurar o servidor de e-mail para funcionar
+			//$this->sendEmail($emailTo, $title, $content, $emailFrom);
+		}
+
+		$this->view->assignSuccess("Notícia Enviada");
+		$this->view->display("Home");
+	}		
 }
 ?>

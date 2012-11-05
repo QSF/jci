@@ -40,22 +40,6 @@ class ApplicationController{
 		$this->maxResults = 2;
 		//$request->getUserType serve para saber o tipo de usuario e montar a view customizada
 		$this->view = ServiceLocator::getInstance()->getView($this->request->getUserType());
-
-		$mod = $this->request->getUserSession();
-
-		$dao = ServiceLocator::getInstance()->getDAO("DAO");
-		$em = $dao->getEm();
-
-		$news = new News;
-		$news->setTitle("Ola");
-		$news->setContent("Oi");
-		//$news->setAuthor($mod);
-		$mod = $em->find(get_class($mod),$mod->getId());
-
-		$mod->getNews()->add($news);
-
-		$em->merge($mod);
-		$em->flush();
 	}
 
 	/**
@@ -106,6 +90,12 @@ class ApplicationController{
 		header("Location:".$url);
 	}
 
+	/**
+	  * Encontra a página que o usuário se encontra na paginação
+	  * 
+	  * Atributo page é o número que o usuário se encontra
+	  *
+	  */
 	protected function getPage(){
 		$page = $this->request->get("page");
 
@@ -115,6 +105,12 @@ class ApplicationController{
 		return $page;
 	}
 
+	/**
+	  * Realiza toda a lógica para imprimir paginação
+	  * 
+	  * Lógica de paginação que guarda na view o número total de páginas, a página atual do usuário e os usuários
+	  *
+	  */
 	protected function assignPagination($currentPage, $users, $attributes){
 
 		$pagesNum = ceil(count($users)/$this->maxResults);
@@ -130,17 +126,12 @@ class ApplicationController{
 		//Página atual que o usuário está 
 		$this->view->assign("currentPage", $currentPage);
 
-		//Variavel que precisa ser setada para mostrar a acao de validar no UsersList
-		$this->view->assign("validateAction",true);
-
 		//Lista de usuários para nossa view iterar sobre
 		$this->view->assign("users", $users);
 	}
 
-	
-
-	
-
+	public function sendEmail($mailTo, $subject, $message, $headers){
+		mail($mailTo, $subject, $message, $headers);
+	}
 }
-
 ?>

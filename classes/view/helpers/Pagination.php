@@ -15,7 +15,7 @@
 			</a>
 		<?php } ?>
 		
-		<?php if($currentPage != $pagesNum) { ?>
+		<?php if($currentPage < $pagesNum - 1) { ?>
 			<a href="<?php echo $url.($currentPage + 1)?>">
 				&nbsp; Próxima
 			</a>

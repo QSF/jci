@@ -52,4 +52,11 @@
 			<file>jquery.click-calendario-1.0.css</file>
 		</CSS>
 	</page>
+	<page content="NewsForm">
+		<JS>
+			<file>/tinymce/jscripts/tiny_mce/tiny_mce.js</file>
+			<file>/tinymce/jscripts/tiny_mce/plugins/tinybrowser/tb_tinymce.js.php</file>
+			<file>/tinymce/jscripts/init_mce.js</file>
+		</JS>
+	</page>
 </pages>

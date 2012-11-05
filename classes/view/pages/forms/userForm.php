@@ -11,11 +11,13 @@
 	<?php if($user->getId() == null ){ ?>
 	<label for="password">Senha</label>
 	<input type="password" id="idPassword" name="password"/><br/>
-	<?php } ?>
+	
 
 	<label for="confirmPassword">Confirmação de Senha</label>
 	<input type="password" id="idConfirmPassword" name="confirmPassword"/><br/>
 
+	<?php } ?>
+	
 	<label for="phone">Telefone</label>
 	<input type="text" id="idPhone" name="phone" value="<?php  echo $user->getPhone()?>"/><br/>
 

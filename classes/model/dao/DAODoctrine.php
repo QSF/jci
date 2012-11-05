@@ -34,10 +34,7 @@ class DAODoctrine implements DAO{
 		//cria um entity manager
 		$this->entityManager = EntityManager::create($dbParams, $config);
  	}
-
- 	public function getEm(){
- 		return $this->entityManager;
- 	}
+ 	
 	/** Método que persiste um objeto no banco.
 	*	Este método dá um persiste e depois faz o flush, apenas isso.
 	*	É necessário tomar cuidado com as entidades gerenciadas pelo entity manager.
