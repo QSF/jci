@@ -6,6 +6,7 @@
     <option value="email">E-mail</option>
   </select><br/>
 
+
   <input type="text" name="searchField" id="searchField"/><br/>
 	<input type="submit" value="Procurar" id="searchButton"/>
 </form>
