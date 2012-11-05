@@ -8,6 +8,7 @@ $config = Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
 $em = EntityManager::create($dbParams, $config);
 
 use Symfony\Component\Console\Helper\HelperSet;
+use Doctrine\ORM\Tools\Console\Helper;
 use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
 
 $helperSet = new HelperSet(array(

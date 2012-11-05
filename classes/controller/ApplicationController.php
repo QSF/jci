@@ -8,6 +8,8 @@
  * Nome baseado no controller pai do Rails 
  */
 
+include_once MODEL_PATH."/News.php";
+
 class ApplicationController{
 
 	/**
@@ -38,6 +40,22 @@ class ApplicationController{
 		$this->maxResults = 2;
 		//$request->getUserType serve para saber o tipo de usuario e montar a view customizada
 		$this->view = ServiceLocator::getInstance()->getView($this->request->getUserType());
+
+		$mod = $this->request->getUserSession();
+
+		$dao = ServiceLocator::getInstance()->getDAO("DAO");
+		$em = $dao->getEm();
+
+		$news = new News;
+		$news->setTitle("Ola");
+		$news->setContent("Oi");
+		//$news->setAuthor($mod);
+		$mod = $em->find(get_class($mod),$mod->getId());
+
+		$mod->getNews()->add($news);
+
+		$em->merge($mod);
+		$em->flush();
 	}
 
 	/**

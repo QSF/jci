@@ -10,6 +10,7 @@ class Moderator{
 
     public function __construct() {
         $this->donations = new ArrayCollection();
+        $this->news = new ArrayCollection();   
     }
 
 	/**
@@ -37,6 +38,11 @@ class Moderator{
      * @OneToMany(targetEntity="Donation", mappedBy="moderator")
      **/
 	protected $donations;
+
+    /**
+     * @OneToMany(targetEntity="News", mappedBy="author")
+     **/
+    protected $news;
 
 	public function getLogin(){
 		return $this->login;
@@ -68,6 +74,14 @@ class Moderator{
 
     public function setId($id){
     	$this->id = $id;
+    }
+
+    public function getNews(){
+        return $this->news;
+    }
+
+    public function setNews($news){
+        $this->news = $news;
     }
 
     //encapsular do donations

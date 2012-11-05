@@ -23,18 +23,6 @@ require_once('../config/spl_autoload_register.php');
 // require_once (MODEL_PATH . "/Entity.php"				);
 // require_once (DAO_PATH   . "/DAODoctrine.php"			);
 
-$dao = ServiceLocator::getInstance()->getDAO('UserDAO');
-//$volunterr =  new VolunteerNaturalPerson;
-//$volunterr->setEmail();
-// $volunterr = $dao->findByEmail('andre@gmail.com');
-/*$volunterr = new Entity;
-$volunterr->setId(1);
-$volunterr = $dao->findById($volunterr);*/
-
-// echo 'Nome: ';
-// echo $volunterr->getName();
-//echo 'Cpf: ' . $volunterr->getCpf();
-
 //Encapsulando a requição
 $request = new Request();
 

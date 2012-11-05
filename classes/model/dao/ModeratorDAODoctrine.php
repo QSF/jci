@@ -19,7 +19,7 @@ class ModeratorDAODoctrine extends DAODoctrine implements ModeratorDAO{
 	*
 	*/
 	public function findById($object){
-		return $this->getRepository()->find($object->getLogin());
+		return $this->getRepository()->find($object->getId());
 	}
 
 	/**
