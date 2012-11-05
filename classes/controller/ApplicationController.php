@@ -35,7 +35,7 @@ class ApplicationController{
 	public function __construct(Request $request){
 		$this->request = $request;
 		//Setando como 10 o valor do maximo de paginas
-		$this->maxResults = 10;
+		$this->maxResults = 2;
 		//$request->getUserType serve para saber o tipo de usuario e montar a view customizada
 		$this->view = ServiceLocator::getInstance()->getView($this->request->getUserType());
 	}
@@ -96,6 +96,43 @@ class ApplicationController{
 
 		return $page;
 	}
+
+	protected function assignPagination($currentPage, $users, $attributes){
+
+		$pagesNum = floor(count($users)/$this->maxResults);
+
+		$url = $this->getRequestUrl($attributes);
+		//setar a url para ser usada na view
+		$this->view->assign("url", $url);
+
+		//Número de paginas totais 
+		$this->view->assign("pagesNum", $pagesNum);
+
+		//Página atual que o usuário está 
+		$this->view->assign("currentPage", $currentPage);
+
+		//Variavel que precisa ser setada para mostrar a acao de validar no UsersList
+		$this->view->assign("validateAction",true);
+
+		//Lista de usuários para nossa view iterar sobre
+		$this->view->assign("users", $users);
+	}
+
+	public function setRequest($controller, $action){
+		$this->request->set("controller", $controller);
+		$this->request->set("action", $action);
+	}
+
+	public function getRequestUrl($attributes = null){
+		$url = "./index.php?controller=".$this->request->getControllerName()."&action=".$this->request->getActionName();
+		if(isset($attributes)){
+			foreach($attributes as $key => $value){
+				$url = $url."&".$key."=".$value;
+			} 
+		}
+		return $url;
+	}
+
 }
 
 ?>

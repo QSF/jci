@@ -89,15 +89,12 @@ class Request{
 	 * @param attr_name  Nome do atributo a ser setado
 	 * @param object  Objeto que será colocado na requisição
 	 */
-	public function set($nameAttr, $object,$method = "GET"){
-		if($method == "GET")
+	public function set($nameAttr, $object, $method="GET"){
+		if(isset($this->requestArrayGET[$nameAttr]) || $method === "GET")
 			$this->requestArrayGET[$nameAttr] = $object;
 
-		else if($method == "POST")
-			$this->requestArrayPOST[$nameAttr] = $object;
-		
-		else
-			return;
+		else if (isset($this->requestArrayPOST[$nameAttr]) || $method === "POST")
+			$this->requestArrayPOST[$nameAttr] = $object ;
 	}
 	
 	public function getControllerName(){

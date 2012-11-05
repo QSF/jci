@@ -25,22 +25,8 @@ class ModeratorController extends ApplicationController
 		$dao = ServiceLocator::getInstance()->getDAO("EntityDAO");
 		$users = $dao-> getEntitiesNegativeSituation($pagePosition, $this->maxResults);
 
-		$pagesNum = floor(count($users)/$this->maxResults);
-
-		//setar a url para ser usada na view
-		$this->view->assign("url", "./index.php?controller=moderator&action=getEntitiesWaitingApproval");
-		
-		//Número de paginas totais 
-		$this->view->assign("pagesNum", $pagesNum);
-
-		//Página atual que o usuário está 
-		$this->view->assign("currentPage", $page);
-
-		//Variavel que precisa ser setada para mostrar a acao de validar no UsersList
-		$this->view->assign("validateAction",true);
-
-		//Lista de usuários para nossa view iterar sobre
-		$this->view->assign("users", $users);
+		$this->setRequest("moderator", "getEntitiesWaitingApproval");
+		$this->assignPagination($page, $users, null);
 
 		$this->display("UsersList");
 	}
@@ -67,18 +53,33 @@ class ModeratorController extends ApplicationController
 		$userType = $this->request->get("userType");
 
 		$dao = ServiceLocator::getInstance()->getDAO("VolunteerDAO");
-		$volunteers = $dao->findAllPaginated($userType, $page, $this->maxResults);
+		$users = $dao->findAllPaginated($userType, $page, $this->maxResults);
 
-		$pagesNum = floor(count($volunteers)/$this->maxResults);
-
-		//setar a url para ser usada na view
-		$this->view->assign("url", "./index.php?controller=moderator&action=findAllVolunteer");
-		
-		$this->view->assign("pagesNum", $pagesNum);
-		$this->view->assign("currentPage", $page);
-		$this->view->assign("users", $volunteers);
+		$this->setRequest("moderator", "findAll");
+		$attributes['userType'] = "Volunteer";
+		$this->assignPagination($page, $users, $attributes);
 
 		$this->display("UsersList");
 	}
+
+	public function search(){
+
+		$searchOption = $this->request->get("searchOption");
+		$searchWord = $this->request->get("searchField");
+
+		$currentPage = $this->getPage();
+
+		$dao = ServiceLocator::getInstance()->getDAO("UserDAO");
+		if($searchOption == 'documents'){}
+			//$this->setDocuments();
+		
+		$users = $dao->search($searchWord, $searchOption, $currentPage, $this->maxResults);
+
+		$this->setRequest("moderator", "search");
+		$this->assignPagination($currentPage, $users, null);
+
+		$this->display("UsersList");
+	}
+
 }
 ?>
