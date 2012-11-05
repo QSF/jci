@@ -10,17 +10,17 @@
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<a href="./index.php?controller=registration&action=updateGET&user_id=<?php echo $user->getId()?>
 		&form=<?php echo get_class($user)?>">
-		<img src="PUBLIC_PATH."img/icons/edit_icon.png"" border="0">
+		<img src="PUBLIC_PATH."img/icons/Edit.ico"">
 	</a>
 	&nbsp;&nbsp;
 	<a href="./index.php?controller=registration&action=delete&user_id=<?php echo $user->getId()?>
 		&user_type=<?php echo get_class($user)?>">
-		<img src="PUBLIC_PATH."img/icons/delete_icon.png"" border="0">
+		<img src="PUBLIC_PATH."img/icons/Delete.ico"">
 	</a>
 	&nbsp;&nbsp;
 	<?php if(isset($validateAction) && $validateAction === true) {?>
 	<a href="./index.php?controller=moderator&action=validateEntity&user_id=<?php echo $user->getId()?>">
-		<img src=" PUBLIC_PATH."img/icons/validate_icon.png"" border="0">
+		<img src=" PUBLIC_PATH."img/icons/Validate.ico"">
 	</a>
 	<?php } ?>
 	<br/>
