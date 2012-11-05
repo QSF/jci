@@ -15,12 +15,13 @@
 		<tr>
 			<td width=70% style="text-align:right"><?php if($user->getId() == null ){ ?>
 	<label for="password">Senha</label></td>
-			<td width=50%><input type="password" id="idPassword" name="password"/><br/><?php } ?></td>
+			<td width=50%><input type="password" id="idPassword" name="password"/><br/></td>
 		</tr>
 		<tr>
 			<td width=70% style="text-align:right"><label for="confirmPassword">Confirmação de Senha</label></td>
 			<td width=50%><input type="password" id="idConfirmPassword" name="confirmPassword"/><br/></td>
 		</tr>
+		<?php } ?>
 		<tr>
 			<td width=70% style="text-align:right"><label for="phone">Telefone</label></td>
 			<td width=50%><input type="text" id="idPhone" name="phone" value="<?php  echo $user->getPhone()?>"/><br/></td>
