@@ -8,6 +8,8 @@
  * Nome baseado no controller pai do Rails 
  */
 
+include_once MODEL_PATH."/News.php";
+
 class ApplicationController{
 
 	/**
@@ -88,6 +90,12 @@ class ApplicationController{
 		header("Location:".$url);
 	}
 
+	/**
+	  * Encontra a página que o usuário se encontra na paginação
+	  * 
+	  * Atributo page é o número que o usuário se encontra
+	  *
+	  */
 	protected function getPage(){
 		$page = $this->request->get("page");
 
@@ -97,6 +105,12 @@ class ApplicationController{
 		return $page;
 	}
 
+	/**
+	  * Realiza toda a lógica para imprimir paginação
+	  * 
+	  * Lógica de paginação que guarda na view o número total de páginas, a página atual do usuário e os usuários
+	  *
+	  */
 	protected function assignPagination($currentPage, $users, $attributes){
 
 		$pagesNum = ceil(count($users)/$this->maxResults);
@@ -116,10 +130,9 @@ class ApplicationController{
 		$this->view->assign("users", $users);
 	}
 
-	
-
-	
-
+	public function sendEmail($mailTo, $subject, $message, $headers){
+		$subject = "JCI - Londrina: ". $subject;
+		mail($mailTo, $subject, $message, $headers);
+	}
 }
-
 ?>

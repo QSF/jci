@@ -113,7 +113,7 @@ abstract class View{
 
       $errorMessage = $this->errorMessage;
       $successMessage = $this->successMessage;
-     // $this->loadResources($content);
+      $this->loadResources($content);
 
       $arrayCSS = $this->arrayCSS;
   		$arrayJS = $this->arrayJS;
