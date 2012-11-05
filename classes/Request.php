@@ -155,24 +155,9 @@ class Request{
 		if ($userType == null)
 			return null;
 
-		switch ($userType) {
-			case 'Entity':
-				$user = $builder->getEntity();
-				break;
-			case 'VolunteerNaturalPerson'://natural person
-				$user = $builder->getVolunteerNaturalPerson();
-				break;
-			case 'VolunteerLegalPerson'://legal person
-				$user = $builder->getVolunteerLegalPerson();
-				break;
-			case 'Moderator':
-				$user = $builder->getModerator();
-				break;
-			default:
-				$user = null;
-				break;
-		}
-
+		$methodName = "get".$userType;
+		$user = $builder->{$methodName}();
+		
 		return $user;
 	}
 
