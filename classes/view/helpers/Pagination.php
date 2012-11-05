@@ -1,7 +1,6 @@
 <?php
 
 	function echoPagination($pagesNum, $currentPage, $url){
-
 		if($pagesNum > 1){ //Area da Paginação ?>
 		<?php $url= $url."&page=";?>
 		<?php if($currentPage != 0) { //Verificando se nao é a primeira página. Caso for, não mostra o link anterior?>
@@ -10,7 +9,7 @@
 		</a>
 		<?php } ?>
 			
-		<?php for($i = 0; $i < $pagesNum + 1; $i++) { ?>
+		<?php for($i = 0; $i < $pagesNum; $i++) { ?>
 			<a href="<?php echo $url.$i ?>">
 				<?php echo $i+1 ?>&nbsp;
 			</a>

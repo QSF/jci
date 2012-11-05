@@ -99,9 +99,10 @@ class ApplicationController{
 
 	protected function assignPagination($currentPage, $users, $attributes){
 
-		$pagesNum = floor(count($users)/$this->maxResults);
+		$pagesNum = ceil(count($users)/$this->maxResults);
+		
+		$url = $this->request->getRequestUrl($attributes);
 
-		$url = $this->getRequestUrl($attributes);
 		//setar a url para ser usada na view
 		$this->view->assign("url", $url);
 
@@ -118,20 +119,9 @@ class ApplicationController{
 		$this->view->assign("users", $users);
 	}
 
-	public function setRequest($controller, $action){
-		$this->request->set("controller", $controller);
-		$this->request->set("action", $action);
-	}
+	
 
-	public function getRequestUrl($attributes = null){
-		$url = "./index.php?controller=".$this->request->getControllerName()."&action=".$this->request->getActionName();
-		if(isset($attributes)){
-			foreach($attributes as $key => $value){
-				$url = $url."&".$key."=".$value;
-			} 
-		}
-		return $url;
-	}
+	
 
 }
 

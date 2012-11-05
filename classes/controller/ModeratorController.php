@@ -25,9 +25,8 @@ class ModeratorController extends ApplicationController
 		$dao = ServiceLocator::getInstance()->getDAO("EntityDAO");
 		$users = $dao-> getEntitiesNegativeSituation($pagePosition, $this->maxResults);
 
-		$this->setRequest("moderator", "getEntitiesWaitingApproval");
+		$this->request->setRequestAction("moderator", "getEntitiesWaitingApproval");
 		$this->assignPagination($page, $users, null);
-
 		$this->display("UsersList");
 	}
 
@@ -52,11 +51,12 @@ class ModeratorController extends ApplicationController
 		$page = $this->getPage("page");
 		$userType = $this->request->get("userType");
 
-		$dao = ServiceLocator::getInstance()->getDAO("VolunteerDAO");
-		$users = $dao->findAllPaginated($userType, $page, $this->maxResults);
+		$pagePosition = $page * $this->maxResults;
+		$dao = ServiceLocator::getInstance()->getDAO("UserDAO");
+		$users = $dao->findAllPaginated($userType, $pagePosition, $this->maxResults);
 
-		$this->setRequest("moderator", "findAll");
-		$attributes['userType'] = "Volunteer";
+		$this->request->setRequestAction("moderator", "findAll");
+		$attributes['userType'] = $userType;
 		$this->assignPagination($page, $users, $attributes);
 
 		$this->display("UsersList");
@@ -67,16 +67,19 @@ class ModeratorController extends ApplicationController
 		$searchOption = $this->request->get("searchOption");
 		$searchWord = $this->request->get("searchField");
 
-		$currentPage = $this->getPage();
+		$page = $this->getPage();
 
+		$pagePosition = $page * $this->maxResults;
 		$dao = ServiceLocator::getInstance()->getDAO("UserDAO");
 		if($searchOption == 'documents'){}
 			//$this->setDocuments();
 		
-		$users = $dao->search($searchWord, $searchOption, $currentPage, $this->maxResults);
+		$users = $dao->search($searchWord, $searchOption, $pagePosition, $this->maxResults);
 
-		$this->setRequest("moderator", "search");
-		$this->assignPagination($currentPage, $users, null);
+		$this->request->setRequestAction("moderator", "search");
+		$attributes['searchOption'] = $searchOption;
+		$attributes['searchField'] = $searchWord;
+		$this->assignPagination($page, $users, $attributes);
 
 		$this->display("UsersList");
 	}

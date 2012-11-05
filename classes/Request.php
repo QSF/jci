@@ -176,6 +176,21 @@ class Request{
 		return $user;
 	}
 
+	public function setRequestAction($controller, $action){
+		$this->setControllerName($controller);
+		$this->setActionName($action);
+	}
+
+	public function getRequestUrl($attributes = null){
+		$url = "./index.php?controller=".$this->getControllerName()."&action=".$this->getActionName();
+		if(isset($attributes)){
+			foreach($attributes as $key => $value){
+				$url = $url."&".$key."=".$value;
+			} 
+		}
+		return $url;
+	}
+
 	public function getUserSession(){
 		if($_SESSION["user"] == null)
 			return null;
