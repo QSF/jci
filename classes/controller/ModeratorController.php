@@ -27,6 +27,10 @@ class ModeratorController extends ApplicationController
 
 		$this->request->setRequestAction("moderator", "getEntitiesWaitingApproval");
 		$this->assignPagination($page, $users, null);
+
+		//Variavel que precisa ser setada para mostrar a acao de validar no UsersList
+		$this->view->assign("validateAction",true);
+
 		$this->display("UsersList");
 	}
 

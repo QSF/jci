@@ -18,7 +18,7 @@
 		Deletar
 	</a>
 	&nbsp;&nbsp;
-	<?php if(isset($validateAction) && $validateAction) {?>
+	<?php if(isset($validateAction) && $validateAction === true) {?>
 	<a href="./index.php?controller=moderator&action=validateEntity&user_id=<?php echo $user->getId()?>">
 		Validar
 	</a>

@@ -112,9 +112,6 @@ class ApplicationController{
 		//Página atual que o usuário está 
 		$this->view->assign("currentPage", $currentPage);
 
-		//Variavel que precisa ser setada para mostrar a acao de validar no UsersList
-		$this->view->assign("validateAction",true);
-
 		//Lista de usuários para nossa view iterar sobre
 		$this->view->assign("users", $users);
 	}
