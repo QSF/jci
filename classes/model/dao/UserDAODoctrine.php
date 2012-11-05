@@ -62,5 +62,11 @@ class UserDAODoctrine extends DAODoctrine implements UserDAO{
 		return $this->resultPaginated($dql, $positionResults, $maxResults, false);
 	}
 
+	public function search($searchWord, $attributeType, $positionResults, $maxResults){
+		$dql = "SELECT u FROM user u WHERE u.". $attributeType ." LIKE '%$searchWord%'";
+
+		return $this->resultPaginated($dql, $positionResults, $maxResults, false);
+	}
+
 }
 ?>

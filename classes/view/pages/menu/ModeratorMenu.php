@@ -5,7 +5,7 @@
 	<li><a href="./index.php?controller=Moderator&action=findAll&userType=Entity" >
 		Gerência de Entidades
 	</a></li>
-	<li><a href="./index.php?controller=Moderator&action=getEntitiesWaitingApproval" >
+	<li><a href="./index.php?controller=Moderator&action=directDisplay&page=Search" >
 		Procurar Usuários
 	</a></li>
 	<li><a href="./index.php?controller=Moderator&action=getEntitiesWaitingApproval">

@@ -96,6 +96,26 @@ class ApplicationController{
 
 		return $page;
 	}
+
+	public function assignPagination($url, $currentPage, $users){
+
+		$pagesNum = floor(count($users)/$this->maxResults);
+
+		//setar a url para ser usada na view
+		$this->view->assign("url", $url);
+
+		//Número de paginas totais 
+		$this->view->assign("pagesNum", $pagesNum);
+
+		//Página atual que o usuário está 
+		$this->view->assign("currentPage", $currentPage);
+
+		//Variavel que precisa ser setada para mostrar a acao de validar no UsersList
+		$this->view->assign("validateAction",true);
+
+		//Lista de usuários para nossa view iterar sobre
+		$this->view->assign("users", $users);
+	}
 }
 
 ?>
