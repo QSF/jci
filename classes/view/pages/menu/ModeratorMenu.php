@@ -1,5 +1,13 @@
 <ul>
-	<li><a href="" >Gerência Usuários</a></li>
+	<li><a href="./index.php?controller=Moderator&action=findAll&userType=Volunteer" >
+		Gerência de Voluntários
+	</a></li>
+	<li><a href="./index.php?controller=Moderator&action=findAll&userType=Entity" >
+		Gerência de Entidades
+	</a></li>
+	<li><a href="./index.php?controller=Moderator&action=getEntitiesWaitingApproval" >
+		Procurar Usuários
+	</a></li>
 	<li><a href="./index.php?controller=Moderator&action=getEntitiesWaitingApproval">
 			Validar Entidade
 	</a></li>

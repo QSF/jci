@@ -25,9 +25,17 @@ class ApplicationController{
 	 */
 	protected $request;
 
+	/**
+	 * Maximo de resultados que se terá numa página
+	 * 
+	 * @name request
+	 */
+	protected $maxResults;
+
 	public function __construct(Request $request){
 		$this->request = $request;
-
+		//Setando como 10 o valor do maximo de paginas
+		$this->maxResults = 10;
 		//$request->getUserType serve para saber o tipo de usuario e montar a view customizada
 		$this->view = ServiceLocator::getInstance()->getView($this->request->getUserType());
 	}
@@ -78,6 +86,15 @@ class ApplicationController{
 	protected function redirect($page = "Home"){
 		$url = "./index.php?controller=Application&action=directDisplay&page=".$page;
 		header("Location:".$url);
+	}
+
+	protected function getPage(){
+		$page = $this->request->get("page");
+
+		if($page === null)
+			$page = 0;
+
+		return $page;
 	}
 }
 

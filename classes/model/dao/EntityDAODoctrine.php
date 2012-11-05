@@ -2,7 +2,8 @@
 
 require_once (DAO_PATH . "/EntityDAO.php");
 
-		use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 class EntityDAODoctrine extends UserDAODoctrine implements EntityDAO{
 	/**
 	*	@return repository repositório da tabela entity.
@@ -12,16 +13,10 @@ class EntityDAODoctrine extends UserDAODoctrine implements EntityDAO{
 	}
 
 	public function getEntitiesNegativeSituation($positionResults, $maxResults){
-		//return $this->getRepository()->findBy(array('situation'=>false));
 
 		$dql = "SELECT e FROM Entity e  WHERE e.situation = false";
-		$query = $this->entityManager->createQuery($dql)
-	                       	->setFirstResult($positionResults)
-	                        ->setMaxResults($maxResults);
 
-		$paginator = new Paginator($query, $fetchJoinCollection = false);
-
-		return $paginator;
+		return $this->resultPaginated($dql, $positionResults, $maxResults, false);
 	}
 
 	public function validateEntity($entity){

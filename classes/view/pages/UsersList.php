@@ -18,9 +18,11 @@
 		Deletar
 	</a>
 	&nbsp;&nbsp;
+	<?php if(isset($validateAction) && $validateAction) {?>
 	<a href="./index.php?controller=moderator&action=validateEntity&user_id=<?php echo $user->getId()?>">
 		Validar
 	</a>
+	<?php } ?>
 	<br/>
 	<?php } //end foreach dos usuarios?>
 

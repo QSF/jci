@@ -16,18 +16,16 @@ class ModeratorController extends ApplicationController
 	* Para mostrar os resultados ele seta o numero de paginas totais e a página atual que usuário está. 
 	*/
 	public function getEntitiesWaitingApproval(){
-		$page = $this->request->get("page");
-
-		if($page === null)
-			$page = 0;
-		$maxResults = 10;
+		
+		//Pegando pagina enviada pelo usuario no AppController
+		$page = $this->getPage();
 
 		//Saber qual a posição que essas páginas estão no DAO
-		$pagePosition = $page * $maxResults;
+		$pagePosition = $page * $this->maxResults;
 		$dao = ServiceLocator::getInstance()->getDAO("EntityDAO");
-		$users = $dao-> getEntitiesNegativeSituation($pagePosition, $maxResults);
+		$users = $dao-> getEntitiesNegativeSituation($pagePosition, $this->maxResults);
 
-		$pagesNum = floor(count($users)/$maxResults);
+		$pagesNum = floor(count($users)/$this->maxResults);
 
 		//setar a url para ser usada na view
 		$this->view->assign("url", "./index.php?controller=moderator&action=getEntitiesWaitingApproval");
@@ -37,6 +35,9 @@ class ModeratorController extends ApplicationController
 
 		//Página atual que o usuário está 
 		$this->view->assign("currentPage", $page);
+
+		//Variavel que precisa ser setada para mostrar a acao de validar no UsersList
+		$this->view->assign("validateAction",true);
 
 		//Lista de usuários para nossa view iterar sobre
 		$this->view->assign("users", $users);
@@ -58,6 +59,26 @@ class ModeratorController extends ApplicationController
 		$dao->validateEntity($entity);
 
 		$this->view->display("Home");
+	}
+
+	public function findAll(){
+
+		$page = $this->getPage("page");
+		$userType = $this->request->get("userType");
+
+		$dao = ServiceLocator::getInstance()->getDAO("VolunteerDAO");
+		$volunteers = $dao->findAllPaginated($userType, $page, $this->maxResults);
+
+		$pagesNum = floor(count($volunteers)/$this->maxResults);
+
+		//setar a url para ser usada na view
+		$this->view->assign("url", "./index.php?controller=moderator&action=findAllVolunteer");
+		
+		$this->view->assign("pagesNum", $pagesNum);
+		$this->view->assign("currentPage", $page);
+		$this->view->assign("users", $volunteers);
+
+		$this->display("UsersList");
 	}
 }
 ?>
