@@ -1,3 +1,1 @@
-<?php
-	echo "Logo JCI";
-?>
+<h1><img alt="JCI Londrina" src="./assets/img/logo.png"></h1>
