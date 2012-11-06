@@ -29,9 +29,6 @@ class RegistrationController extends ApplicationController{
 	*/
 	public function create(){
 		$user = $this->request->getUser();
-		foreach ($user->getPublic() as $p) {
-			echo "\n " . $p->getName();
-		}
 
 		$this->dao->insert($user);
 
@@ -53,7 +50,6 @@ class RegistrationController extends ApplicationController{
 		//TODO: checar se o usuário tem permissão de editar
 		$userUpdate = $this->request->getUser();
 		$userUpdate->setId($this->request->get("user_id"));
-		echo 'aqui';
 		$this->dao->clear();
 		$this->dao->update($userUpdate);
 

@@ -1,6 +1,4 @@
 <!-- Menu geral dos usuários. -->
-<li>	<a href="./index.php?controller=registration&action=redirectLoggedUserUpdate">Alterar Dados</a></li>
-<li>	<a href="./index.php?controller=registration&action=redirectLoggedUserDelete">Excluir conta(confirmar senha)</a>	</li>
-<li>	<a href="">Perfil</a>							</li>
+<?php require_once(PAGES_PATH . '/menu/AccountMenu.php');?>
 <li>	<a href="">Realizar feedback</a>				</li>
 <li>	<a href="">Histórico</a>						</li>
