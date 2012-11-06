@@ -25,7 +25,7 @@ class DonationController extends ApplicationController{
 		$donation = new Donation();
 		$donation->setId($donationId);
 	
-		$this->authorize($user);
+		//$this->authorize($user);
 
 		$donation = $this->dao->findById($donation);
 
@@ -36,7 +36,7 @@ class DonationController extends ApplicationController{
 		}
 		
 		if ($this->getUserPermission($donation)){//tem permissão de deletar
-			$this->dao->delete($user);
+			$this->dao->delete($donation);
 			$this->view->assignSuccess("Doação deletado com sucesso!");
 		}else {
 			$this->view->assignError('Erro, permissão negada!');
