@@ -82,8 +82,8 @@ class ObjectBuilder
 	protected function getNaturalPerson($user){
 		$this->getUser($user);
 		$user->setCpf($this->dropCharacter($this->request->get('cpf')));
-	}
-
+	
+}
 	/** Método que monta um user de acordo com os dados de voluntario passados em uma requisição.
 	*
 	*	@param user usuário que receberá os valores dos campos de volunteer
@@ -124,7 +124,12 @@ class ObjectBuilder
 		$user = new Entity;
 		$this->getLegalPerson($user);
 		$this->getUser($user);
-		$user->setEstablishmentDate(new \DateTime($this->request->get('establishmentDate')));
+		//seta a data como mm/dd/ano para o bd
+		//$date = new \DateTime($this->request->get('establishmentDate'));
+		$date = date('m-d-Y', strtotime($this->request->get('establishmentDate')));
+		$date = new \DateTime($date);
+
+		$user->setEstablishmentDate($date);
 		$user->setSite($this->request->get('site'));
 		
 		//por default, a situação e status é false?
