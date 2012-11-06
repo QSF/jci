@@ -8,11 +8,11 @@
 	<!-- lista todos os campos para selecionar um deles como pai -->
 	<?php require_once VIEW_PATH . "/pages/forms/listFields.php"; ?>
 	
-	<input type="text" name="name" value="<?php echo $field->getName()?>"/>
 	<!-- field_id é o ID do campo que está sendo editado -->
 	<input type="hidden" name="field_id" value="<?php echo $field->getId()?>"/>
+	<label><input type="text" name="name" value="<?php echo $field->getName()?>"/>
 
-
-	<input type="submit" value="Concluir"/>
+	</label>
+	<button type="submit" class="btn">Concluir</button>
 </form>
 
