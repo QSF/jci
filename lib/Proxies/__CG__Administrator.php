@@ -78,10 +78,22 @@ class Administrator extends \Administrator implements \Doctrine\ORM\Proxy\Proxy
         return parent::setEmail($email);
     }
 
+    public function getId()
+    {
+        $this->__load();
+        return parent::getId();
+    }
+
+    public function setId($id)
+    {
+        $this->__load();
+        return parent::setId($id);
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'login', 'password', 'email');
+        return array('__isInitialized__', 'id', 'login', 'password', 'email');
     }
 
     public function __clone()

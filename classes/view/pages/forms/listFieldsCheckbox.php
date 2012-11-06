@@ -20,6 +20,7 @@
 function listFields($var,$user){
 	$arrayFields = array(); 
 	?>
+	
 	<input type="checkbox" name="actingArea[]" value="<?php echo $var->getID();?>" 
 	id="checkbox<?php echo $var->getId()?>" class="actingArea"
 	<?php if( hasId($var->getId(),$user->getActingArea()) ){
@@ -27,6 +28,7 @@ function listFields($var,$user){
 	}
 	?> >
 	<?php echo $var->getName() ?>
+	</label>
 	<ul>
 	<?php 
 		foreach ($var->getChildren() as $child){

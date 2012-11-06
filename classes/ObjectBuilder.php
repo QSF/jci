@@ -32,15 +32,17 @@ class ObjectBuilder
 	*/
 	protected function getUser($user){
 		$notification = $this->request->get('receivedNotification') == null ? false : true;
-		$user->setReceiveNotification ( $notification						);
-		$user->setName                ( $this->request->get('name')			);
-		$user->setEmail				  ( $this->request->get('email')		);
-		$user->setPassword 			  ( md5($this->request->get('password')));
-		$user->setPhone				  ( $this->request->get('phone')		);
-		$user->setHowYouKnow		  ( $this->request->get('howYouKnow')	);
-		$this->setPublicServed		  ( $user            					);
-		$this->setActingArea		  (	$user				 				);
-		$user->setCep 				  ( $this->request->get('cep')			);		
+		$user->setReceiveNotification ( $notification								      );
+		$user->setName                ( $this->request->get('name')					      );
+		$user->setEmail				  ( $this->request->get('email')					  );
+		$password = $this->request->get('password');
+		if ($password != null)//evita caso for edição.
+			$user->setPassword 		  ( md5($password)									  );
+		$user->setPhone				  ( $this->dropCharacter($this->request->get('phone')));
+		$user->setHowYouKnow		  ( $this->request->get('howYouKnow')			      );
+		$this->setPublicServed		  ( $user            							      );
+		$this->setActingArea		  (	$user				 						      );
+		$user->setCep 				  ( $this->dropCharacter($this->request->get('cep'))  );		
 	}
 
 	/**
@@ -85,10 +87,10 @@ class ObjectBuilder
 	*/
 	protected function getLegalPerson($user){
 		$this->getUser($user);
-		$user->setCnpj 				( $this->request->get('cnpj')				);
-		$user->setCompanyName 		( $this->request->get('companyName')		);
-		$user->setStateRegistration ( $this->request->get('stateRegistration')	);
-		$user->setOwnerPhone 		( $this->request->get('ownerPhone')			);
+		$user->setCnpj 				( $this->dropCharacter($this->request->get('cnpj'))             );
+		$user->setCompanyName 		( $this->request->get('companyName')		                    );
+		$user->setStateRegistration ( $this->dropCharacter($this->request->get('stateRegistration')));
+		$user->setOwnerPhone 		( $this->dropCharacter($this->request->get('ownerPhone'))       );
 	}
 
 	/** Método que monta um user de acordo com os dados de natural person passados em uma requisição.
@@ -97,7 +99,7 @@ class ObjectBuilder
 	*/
 	protected function getNaturalPerson($user){
 		$this->getUser($user);
-		$user->setCpf($this->request->get('cpf'));
+		$user->setCpf($this->dropCharacter($this->request->get('cpf')));
 	}
 
 	/** Método que monta um user de acordo com os dados de voluntario passados em uma requisição.
@@ -132,6 +134,12 @@ class ObjectBuilder
 		return $user;	
 	}
 
+	protected function formatDate($date){
+		$date = explode("/", $date); 
+		$newDate =  $date[2] . '-' . $date[1] . '-' . $date[0];
+		return $newDate;
+	}
+
 	/**
 	*	@return user entity
 	*	@todo ver o os valores default de status e situation
@@ -139,13 +147,13 @@ class ObjectBuilder
 	public function getEntity(){
 		$user = new Entity;
 		$this->getLegalPerson($user);
-		$this->getUser($user);
-		$user->setEstablishmentDate(new \DateTime($this->request->get('establishmentDate')));
+		$user->setEstablishmentDate(new \DateTime($this->formatDate($this->request->get('establishmentDate')) ));
 		$user->setSite($this->request->get('site'));
 		
-		//por default, a situação e status é false?
+		$situation =  $this->request->get('situation') != null ? true : false;
+		$user->setSituation($situation);
 		$user->setStatus(false);
-		$user->setSituation(false);
+		
 
 		$receivedNotification = $this->request->get('receivedNewsletter') != null ? true : false;
 		$user->setNewsletter($receivedNotification);
@@ -293,6 +301,16 @@ class ObjectBuilder
 		$public->setId($id);
 
 		return $public;
+	}
+
+	public function dropCharacter($attribute) {
+		$attribute = str_replace("(", "", $attribute);
+		$attribute = str_replace(")", "", $attribute);
+		$attribute = str_replace("-", "", $attribute);
+		$attribute = str_replace(".", "", $attribute);
+		$attribute = str_replace("/", "", $attribute);
+		$attribute = str_replace(" ", "", $attribute);
+		return $attribute;
 	}
 }
 

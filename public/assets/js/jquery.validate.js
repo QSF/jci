@@ -223,7 +223,7 @@ $(document).ready(function() {
     $(this).calendario({
       target:'#idStablishmentDate',
       //top: 0,
-      //left: 180
+      //left: 
     });
   });
 });

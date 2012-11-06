@@ -3,6 +3,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>JCI - Londrina</title>
+  <?php foreach($arrayJS as $js) { ?>
+  <script type="text/javascript" src="./assets/js/<?php echo $js?>"></script>
+  <?php } ?>
   <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   <!--[if (gte IE 6)&(lte IE 8)]>
     <script src="//raw.github.com/keithclark/selectivizr/master/selectivizr.js"></script>
@@ -16,11 +19,8 @@
   <!--[if IE 8]><link rel="stylesheet" href="./assets/css/ie8.css" media="all"><![endif]-->
   <!--[if IE 7]><link rel="stylesheet" href="./assets/css/ie7.css" media="all"><![endif]-->
   <!--[if IE 6]><link rel="stylesheet" href="./assets/css/ie6.css" media="all"><![endif]-->
-  <?php  foreach($arrayCSS as $css){?>
-    <link rel=stylesheet href="css/<?php echo $css;?>" type="text/css" media=screen>
-  <?php }?>
-  <?php  foreach($arrayJS as $js){?>
-    <script type="text/javascript" src="js/<?php echo $js?>"></script>
+  <?php foreach($arrayCSS as $css ){ ?>
+  <link rel=stylesheet href="./assets/css/<?php echo $css;?>" type="text/css">
   <?php }?>
 </head>
 <body>
@@ -36,11 +36,12 @@
     <div class="container_12">
       <div class="grid_7">
         <ul>
-          <li><a class="active" href="#">Quem somos?</a></li>
+          <li><a href="./index.php">Home</a></li>
+          <li><a href="#">Quem somos?</a></li>
           <li><a href="#">O que fazemos?</a></li>
           <li><a href="#">Notícias</a></li>
           <li><a href="#">Contato</a></li>
-          <li><a href="#">Página 5</a></li>
+          <!-- <li><a class="active" href="#">...</a></li> -->
         </ul>
       </div>
       <div class="grid_5">
@@ -83,7 +84,8 @@
       <?php include PAGES_PATH."/Footer.php"; ?>
     </div>
   </div>
+  <!--
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  <script src="./assets/js/setup.js"></script>
+  <script src="./assets/js/setup.js"></script> -->
 </body>
 </html>

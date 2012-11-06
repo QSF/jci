@@ -50,6 +50,12 @@ class RegistrationController extends ApplicationController{
 		
 		//TODO: checar se o usuário tem permissão de editar
 		$userUpdate = $this->request->getUser();
+		if ($userUpdate === null){
+			$this->view->assignError('Erro ao editar!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
 		$userUpdate->setId($this->request->get("user_id"));
 		$this->dao->clear();
 		$this->dao->update($userUpdate);
@@ -65,7 +71,7 @@ class RegistrationController extends ApplicationController{
 	*	@param $userType Indica o formulário que será incluso.
 	*	@param $userId Determina qual usuário vai ser editado.
 	*/
-	protected function redirectUpdate($userType, $userId){
+	protected function redirectUpdate($userType, $userId,  $password){
 		if ($userType === null || $userId === null){
 			$this->view->assignError('Erro ao editar!');
 			//carregar no log de erros, com informações para o dev.
@@ -95,6 +101,8 @@ class RegistrationController extends ApplicationController{
 		}
 		//Seta valores do usuario para ser mostrado na view
 		$this->view->assign("user", $user);
+		//redijitar ou não a senha
+		$this->view->assign("password", $password);
 
 		//Seta ação do form, pois o form é usado tanto para editar quanto para criar
 		$this->view->assign("action","update");
@@ -121,7 +129,7 @@ class RegistrationController extends ApplicationController{
 	public function redirectLoggedUserUpdate(){
 		$userType = $this->request->getUserType();//e se for guest?
 		$user = $this->request->getUserSession();
-		$this->redirectUpdate($userType, $user->getId());
+		$this->redirectUpdate($userType, $user->getId(), true);
 	}
 
 	/** 
@@ -134,7 +142,7 @@ class RegistrationController extends ApplicationController{
 		$userType = $this->request->get("form");
 		$userId = $this->request->get("user_id");
 
-		$this->redirectUpdate($userType, $userId);
+		$this->redirectUpdate($userType, $userId, false);
 	}
 
 	/** 
@@ -208,7 +216,7 @@ class RegistrationController extends ApplicationController{
 		if ($userType === null || $userId === null){
 			$this->view->assignError('Erro ao excluir, usuário não existe!');
 			//carregar no log de erros, com informações para o dev.
-			$view->display("404");
+			$this->view->display("404");
 			return;
 		}
 
@@ -260,7 +268,7 @@ class RegistrationController extends ApplicationController{
 	*	@see self::redirectDelete
 	*/
 	public function redirectUserDelete(){
-		$userType = $this->request->get("userType");
+		$userType = $this->request->get("user_type");
 		$userId = $this->request->get("user_id");
 
 		$this->redirectDelete($userType, $userId);
@@ -283,19 +291,45 @@ class RegistrationController extends ApplicationController{
 		$this->view->display($this->request->get('page'));
 	}
 
-	public function read(){
-
-		$userId = $this->request->get("user_id");
-		$userType = $this->request->get("profile");
+	protected function doRead($userType, $userId){
+		
+		if ($userType === null || $userId === null){
+			$this->view->assignError('Usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display("404");
+			return;
+		}
 
 		$user = new $userType();
 		$user->setId($userId);
 
 		$user = $this->dao->findById($user);
 
+		if ($user === null){//nem encontrou o user
+			$this->view->assignError('Erro, usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display('Home');
+			return;
+		}
+
 		$this->view->assign("user",$user);
 		$view = $userType."Profile";
 		$this->display($view);
+	}
+
+	public function readLoggedUser(){
+		$userType = $this->request->getUserType();
+		$user = $this->request->getUserSession();
+
+		$this->doRead($userType, $user->getId());
+	}
+
+	public function read(){
+
+		$userId = $this->request->get("user_id");
+		$userType = $this->request->get("profile");
+
+		$this->doRead($userType, $userId);
 	}
 
 	public function authorize($user){
