@@ -1,10 +1,14 @@
-<ul>
+<ul  list-style-type:none> 
 <?php
 	//lista todos os públicos
 	foreach ($publicArray as $var) { ?>
-		<li><input type="checkbox" name="public[]" value="<?php echo $var->getId()?>" 
-				<?php if( hasId($var->getId(),$user->getPublic()) ){ echo "checked=yes";}?> > 
-			<?php echo $var->getName(); } ?>
+		<li><label class="checkbox">
+      			<input type="checkbox" name="public[]" value="<?php echo $var->getId()?>" 
+					<?php if( hasId($var->getId(),$user->getPublic()) ){ echo "checked=yes";}?> > 
+					<?php echo $var->getName(); } ?>
+    		</label>
+
+			
 	
 	<?php	
 	function hasId($id,$array){
@@ -20,3 +24,4 @@
 	}
 ?>
 </ul>
+
