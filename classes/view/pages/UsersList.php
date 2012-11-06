@@ -8,12 +8,12 @@
 		<?php echo $user->getName()?>
 	</a>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="./index.php?controller=registration&action=updateGET&user_id=<?php echo $user->getId()?>
+	<a href="././index.php?controller=registration&action=redirectUserUpdate&user_id=<?php echo $user->getId()?>
 		&form=<?php echo get_class($user)?>">
 		Editar
 	</a>
 	&nbsp;&nbsp;
-	<a href="./index.php?controller=registration&action=delete&user_id=<?php echo $user->getId()?>
+	<a href="./index.php?controller=registration&action=redirectUserDelete&user_id=<?php echo $user->getId()?>
 		&user_type=<?php echo get_class($user)?>">
 		Deletar
 	</a>
