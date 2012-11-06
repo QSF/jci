@@ -18,10 +18,10 @@
   <!--[if IE 7]><link rel="stylesheet" href="./assets/css/ie7.css" media="all"><![endif]-->
   <!--[if IE 6]><link rel="stylesheet" href="./assets/css/ie6.css" media="all"><![endif]-->
   <?php  foreach($arrayCSS as $css){?>
-    <link rel=stylesheet href="./assets/css/<?php echo $css;?>" type="text/css" media=screen>
+    <link rel=stylesheet href="css/<?php echo $css;?>" type="text/css" media=screen>
   <?php }?>
   <?php  foreach($arrayJS as $js){?>
-    <script type="text/javascript" src="./assets/js/<?php echo $js?>"></script>
+    <script type="text/javascript" src="js/<?php echo $js?>"></script>
   <?php }?>
 </head>
 <body>
