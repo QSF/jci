@@ -50,6 +50,12 @@ class RegistrationController extends ApplicationController{
 		
 		//TODO: checar se o usuário tem permissão de editar
 		$userUpdate = $this->request->getUser();
+		if ($userUpdate === null){
+			$this->view->assignError('Erro ao editar!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
 		$userUpdate->setId($this->request->get("user_id"));
 		$this->dao->clear();
 		$this->dao->update($userUpdate);
@@ -283,19 +289,45 @@ class RegistrationController extends ApplicationController{
 		$this->view->display($this->request->get('page'));
 	}
 
-	public function read(){
-
-		$userId = $this->request->get("user_id");
-		$userType = $this->request->get("profile");
+	protected function doRead($userType, $userId){
+		
+		if ($userType === null || $userId === null){
+			$this->view->assignError('Usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display("404");
+			return;
+		}
 
 		$user = new $userType();
 		$user->setId($userId);
 
 		$user = $this->dao->findById($user);
 
+		if ($user === null){//nem encontrou o user
+			$this->view->assignError('Erro, usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display('Home');
+			return;
+		}
+
 		$this->view->assign("user",$user);
 		$view = $userType."Profile";
 		$this->display($view);
+	}
+
+	public function readLoggedUser(){
+		$userType = $this->request->getUserType();
+		$user = $this->request->getUserSession();
+
+		$this->doRead($userType, $user->getId());
+	}
+
+	public function read(){
+
+		$userId = $this->request->get("user_id");
+		$userType = $this->request->get("profile");
+
+		$this->doRead($userType, $userId);
 	}
 
 	public function authorize($user){
