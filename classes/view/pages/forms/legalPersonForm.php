@@ -12,7 +12,7 @@
 		</tr><br/>
 
 		<tr width=70% style="text-align:right">	<label for="ownerPhone">Telefone do responsável</label><br/>
-			<input type="text" id="idOwnerPhone" name="ownerPhone"  value="<?php echo $user->getOwnerPhone()?>" maxlength=12/><br/></td>
+			<input type="text" id="idOwnerPhone" name="ownerPhone"  value="<?php echo $user->getOwnerPhone()?>"/><br/></td>
 		</tr><br/>
 	</table>
 
