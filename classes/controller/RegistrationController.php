@@ -71,7 +71,7 @@ class RegistrationController extends ApplicationController{
 	*	@param $userType Indica o formulário que será incluso.
 	*	@param $userId Determina qual usuário vai ser editado.
 	*/
-	protected function redirectUpdate($userType, $userId){
+	protected function redirectUpdate($userType, $userId,  $password){
 		if ($userType === null || $userId === null){
 			$this->view->assignError('Erro ao editar!');
 			//carregar no log de erros, com informações para o dev.
@@ -101,6 +101,8 @@ class RegistrationController extends ApplicationController{
 		}
 		//Seta valores do usuario para ser mostrado na view
 		$this->view->assign("user", $user);
+		//redijitar ou não a senha
+		$this->view->assign("password", $password);
 
 		//Seta ação do form, pois o form é usado tanto para editar quanto para criar
 		$this->view->assign("action","update");
@@ -127,7 +129,7 @@ class RegistrationController extends ApplicationController{
 	public function redirectLoggedUserUpdate(){
 		$userType = $this->request->getUserType();//e se for guest?
 		$user = $this->request->getUserSession();
-		$this->redirectUpdate($userType, $user->getId());
+		$this->redirectUpdate($userType, $user->getId(), true);
 	}
 
 	/** 
@@ -140,7 +142,7 @@ class RegistrationController extends ApplicationController{
 		$userType = $this->request->get("form");
 		$userId = $this->request->get("user_id");
 
-		$this->redirectUpdate($userType, $userId);
+		$this->redirectUpdate($userType, $userId, false);
 	}
 
 	/** 
