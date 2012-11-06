@@ -150,6 +150,13 @@ class RegistrationController extends ApplicationController{
 		$userId = $this->request->get("user_id");
 		$userType = $this->request->get("user_type");
 
+		if ($userType === null || $userId === null){
+			$this->view->assignError('Erro ao excluir, usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
+
 		//Checar Permissão
 		//TODO:
 		$user = new $userType();
@@ -158,11 +165,94 @@ class RegistrationController extends ApplicationController{
 		$this->authorize($user);
 
 		$user = $this->dao->findById($user);
-		echo $user->getEmail();
+		if ($user === null){//nem encontrou o user
+			$this->view->assignError('Erro, usuário não encontrado!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display('Home');
+			return;
+		}
+		//compara a senha que veio e a senha atual da session.
+		$password = $this->request->get('password');
+		$loggedUser = md5($this->request->getUser());
+		
+		if ($password == null || ($password != $loggedUser->getPassword()) ){
+			$this->view->assignError('Erro, senha inválida!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display('Home');
+			return;	
+		}
 		$this->dao->delete($user);
 
-		$this->view->assignSuccess("Usuário deletado com sucesso");
+		$this->view->assignSuccess("Usuário deletado com sucesso!");
 		$this->display("Home");
+	}
+
+	/**
+	*	Método geral de redirecionamento para a página de deleção.
+	*	Esta página irá pedir para confirmar senha e irá chamar o método delete.
+	*	@param $userType Irá ser passado para o form de deleção, pois será preciso para chamar o método delete.
+	*	@param $userId Determina qual usuário vai ser deletado.
+	*/
+	protected function redirectDelete($userType, $userId){
+		if ($userType === null || $userId === null){
+			$this->view->assignError('Erro ao excluir, usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
+
+		$user = new $userType();
+		$user->setId($userId);
+		//confirmar se é permitido ou não.
+		$this->authorize($user);
+		//o user precisa ser carregado para informar o nome do usuário ná página de deleção
+		$user = $this->dao->findById($user);
+
+		if ($user === null){//nem encontrou o user
+			$this->view->assignError('Erro, usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display('Home');
+			return;
+		}
+		/*Parâmetros para o form de deleção*/
+
+		//Seta o nome de usuário(checar se é moderador ou não)
+		if ($userType == 'Moderator')
+			$this->view->assign("userName", $user->getLogin());
+		else
+			$this->view->assign("userName", $user->getName());
+
+		$this->view->assign("userId", $user->getId());
+		$this->view->assign("userType",$userType);
+
+		$page = "DeleteForm";
+		$this->view->display($page);
+	}
+
+	/**
+	*	Método que redireciona para uma página de deleção de um usuário que está logado.
+	*	Os dados são pego de acorco com a session e assim o formulário para deletar será montado
+	*	de acordo com esses dados.
+	*	@see self::redirectDelete
+	*/
+	public function redirectLoggedUserDelete(){
+		$userType = $this->request->getUserType();
+		$user = $this->request->getUserSession();
+
+		$this->redirectDelete($userType, $user->getId());
+	}
+
+	/** 
+	* Método que redireciona para o formulário de deleção de usuário que não seja o logado.
+	* A página que será redirecionada vai ser simplemente para o usuário logado confirmar sua senha.
+	* Para redirecionar uma página, deverá ser passado o tipo de usuário e id de usuário que será deletado.
+	*	@see self::redirectDelete
+	*/
+	public function redirectUserDelete(){
+		$userType = $this->request->get("userType");
+		$userId = $this->request->get("user_id");
+
+		$this->redirectDelete($userType, $userId);
 	}
 
 	/** 
