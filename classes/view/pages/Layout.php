@@ -37,11 +37,12 @@
     <div class="container_12">
       <div class="grid_7">
         <ul>
-          <li><a class="active" href="#">Quem somos?</a></li>
+          <li><a href="./index.php">Home</a></li>
+          <li><a href="#">Quem somos?</a></li>
           <li><a href="#">O que fazemos?</a></li>
           <li><a href="#">Notícias</a></li>
           <li><a href="#">Contato</a></li>
-          <li><a href="#">Página 5</a></li>
+          <!-- <li><a class="active" href="#">...</a></li> -->
         </ul>
       </div>
       <div class="grid_5">
