@@ -47,12 +47,12 @@ abstract class User
     protected $password;
 
     /**
-     *@Column(type="integer")
+     * @Column(type="string", length=10, nullable=true)
      **/
     protected $phone;
 
     /**
-     *@Column(type="string")
+     * @Column(type="string")
      **/
     protected $howYouKnow;
 
