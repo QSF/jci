@@ -1,11 +1,5 @@
 <form  action="./index.php?controller=login&action=<?php echo $action?>" method="post">
-<table width="40%">
-	<tr>
-		<td><?php echo $nameDisplay ?><input type="text" name="<?php echo $inputType?>"/><br/>
-		<td>Senha <input type="password" name="password"/><br/></td>
-		<td><input type="submit" value="Login"/></td>
-	</tr>
-</table>
-	
-
+	<?php echo $nameDisplay ?><input type="text" name="<?php echo $inputType?>"/><br/>
+	Senha <input type="password" name="password"/><br/>
+	<input type="submit" value="Login"/>
 </form>
