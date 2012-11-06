@@ -6,6 +6,9 @@ require_once (MODEL_PATH . "/User.php");
 
 use Doctrine\ORM\Query\ResultSetMapping;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
+
 /** Classe do DAO do usuário para o doctrine.
 *	@see UsuarioDAO.
 */
@@ -44,11 +47,32 @@ class UserDAODoctrine extends DAODoctrine implements UserDAO{
 		return  $this->findById($result[0]);
 	}
 
-	/**
-	*	@return repository repositório da tabela User.
-	*/
 	protected function getRepository(){
-		return $this->entityManager->getRepository('User');
+		return $this->entityManager->getRepository('user');
+	}
+
+	protected function resultPaginated($dql, $positionResults, $maxResults, $joinCollection){
+		$query = $this->entityManager->createQuery($dql)
+	                       	->setFirstResult($positionResults)
+	                        ->setMaxResults($maxResults);
+
+		$paginator = new Paginator($query, $fetchJoinCollection = $joinCollection);
+
+		return $paginator;
+	}
+
+	public function findAllPaginated($userType, $positionResults, $maxResults){
+		$dql = "SELECT u FROM " . $userType ." u". " ORDER BY u.name";
+		return $this->resultPaginated($dql, $positionResults, $maxResults, false);
+	}
+
+	public function search($searchWord, $attributeType, $positionResults, $maxResults){
+		$dql = "SELECT u FROM user u WHERE u.". $attributeType ." LIKE '%$searchWord%' ORDER BY u.name";
+		return $this->resultPaginated($dql, $positionResults, $maxResults, false);
+	}
+
+	public function getAllNotifiedUsers(){
+		return $this->getRepository()->findBy(array('receiveNotification' => true));
 	}
 }
 ?>

@@ -89,15 +89,12 @@ class Request{
 	 * @param attr_name  Nome do atributo a ser setado
 	 * @param object  Objeto que será colocado na requisição
 	 */
-	public function set($nameAttr, $object,$method = "GET"){
-		if($method == "GET")
+	public function set($nameAttr, $object, $method="GET"){
+		if(isset($this->requestArrayGET[$nameAttr]) || $method === "GET")
 			$this->requestArrayGET[$nameAttr] = $object;
 
-		else if($method == "POST")
-			$this->requestArrayPOST[$nameAttr] = $object;
-		
-		else
-			return;
+		else if (isset($this->requestArrayPOST[$nameAttr]) || $method === "POST")
+			$this->requestArrayPOST[$nameAttr] = $object ;
 	}
 	
 	public function getControllerName(){
@@ -159,25 +156,25 @@ class Request{
 		if ($userType == null)
 			return null;
 
-		switch ($userType) {
-			case 'Entity':
-				$user = $builder->getEntity();
-				break;
-			case 'VolunteerNaturalPerson'://natural person
-				$user = $builder->getVolunteerNaturalPerson();
-				break;
-			case 'VolunteerLegalPerson'://legal person
-				$user = $builder->getVolunteerLegalPerson();
-				break;
-			case 'Moderator':
-				$user = $builder->getModerator();
-				break;
-			default:
-				$user = null;
-				break;
-		}
-
+		$methodName = "get".$userType;
+		$user = $builder->{$methodName}();
+		
 		return $user;
+	}
+
+	public function setRequestAction($controller, $action){
+		$this->setControllerName($controller);
+		$this->setActionName($action);
+	}
+
+	public function getRequestUrl($attributes = null){
+		$url = "./index.php?controller=".$this->getControllerName()."&action=".$this->getActionName();
+		if(isset($attributes)){
+			foreach($attributes as $key => $value){
+				$url = $url."&".$key."=".$value;
+			} 
+		}
+		return $url;
 	}
 
 	public function getUserSession(){

@@ -1,0 +1,10 @@
+<?php
+
+$dbParams = array(
+    'dbname' => 'jci',
+    'user' => 'root',
+    'password' => 'lesantin',
+    'host' => 'localhost',
+    'driver' => 'pdo_mysql',
+);
+?>

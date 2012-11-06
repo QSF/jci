@@ -29,9 +29,6 @@ class RegistrationController extends ApplicationController{
 	*/
 	public function create(){
 		$user = $this->request->getUser();
-		foreach ($user->getPublic() as $p) {
-			echo "\n " . $p->getName();
-		}
 
 		$this->dao->insert($user);
 
@@ -47,13 +44,13 @@ class RegistrationController extends ApplicationController{
 	* Checar se o usuário é moderador ou admin. 
 	* Se não for checar se o user_id passado como parâmetro no atributo é o mesmo.
 	* @todo Estudas sobre o lance de gerenciamento e cascata para retirar o clear.
+	* @todo Checar o usuário que é passado.
 	*/
 	public function update(){
 		
 		//TODO: checar se o usuário tem permissão de editar
 		$userUpdate = $this->request->getUser();
 		$userUpdate->setId($this->request->get("user_id"));
-		echo 'aqui';
 		$this->dao->clear();
 		$this->dao->update($userUpdate);
 
@@ -143,26 +140,130 @@ class RegistrationController extends ApplicationController{
 	/** 
 	* Método que deleta o usuário do BD.
 	* A permissão é feita do mesmo modo que na ação de edição.
-	* É necessário se passar o tipo de usuário que irá ser deletado
+	* É necessário se passar o tipo de usuário que irá ser deletado.
+	* Para que um usuário possa ser removido, o usuário logado deverá confirmar sua senha.
+	* Caso um usuário esteje excluindo sua própria conta, um logout deverá ser feito.
 	*/
 	public function delete(){
-
 		$userId = $this->request->get("user_id");
 		$userType = $this->request->get("user_type");
 
-		//Checar Permissão
-		//TODO:
+		if ($userType === null || $userId === null){
+			$this->view->assignError('Erro ao excluir, usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
+
 		$user = new $userType();
 		$user->setId($userId);
 	
 		$this->authorize($user);
 
 		$user = $this->dao->findById($user);
-		echo $user->getEmail();
+
+		if ($user === null){//nem encontrou o user
+			$this->view->assignError('Erro, usuário não encontrado!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display('Home');
+			return;
+		}
+		
+		$password = md5($this->request->get('password'));
+		//pega o usuário da sessão
+		$loggedUser = $this->request->getUserSession();
+		//compara a senha que veio e a senha atual da session.
+		if ($password == null || ($password != $loggedUser->getPassword()) ){
+			$this->view->assignError('Erro, senha inválida!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display('Home');
+			return;	
+		}
+
+		$logOut = false;
+		if ($loggedUser->getId() == $user->getId()){//se usuário removido for o usuário logado.
+			$logOut = true;
+		}
+
 		$this->dao->delete($user);
 
-		$this->view->assignSuccess("Usuário deletado com sucesso");
+		if ($logOut){//realiza logout(pode chamar o método do LoginController)
+			session_destroy();
+			$_SESSION = array();
+			//informar por email, ou alguma coisa assim.
+			$this->view->assignSuccess("Usuário deletado com sucesso!");
+			$this->redirect("Home");
+		}
+		$this->view->assignSuccess("Usuário deletado com sucesso!");
 		$this->display("Home");
+	}
+
+	/**
+	*	Método geral de redirecionamento para a página de deleção.
+	*	Esta página irá pedir para confirmar senha e irá chamar o método delete.
+	*	@param $userType Irá ser passado para o form de deleção, pois será preciso para chamar o método delete.
+	*	@param $userId Determina qual usuário vai ser deletado.
+	*/
+	protected function redirectDelete($userType, $userId){
+		if ($userType === null || $userId === null){
+			$this->view->assignError('Erro ao excluir, usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
+
+		$user = new $userType();
+		$user->setId($userId);
+		//confirmar se é permitido ou não.
+		$this->authorize($user);
+		//o user precisa ser carregado para informar o nome do usuário ná página de deleção
+		$user = $this->dao->findById($user);
+
+		if ($user === null){//nem encontrou o user
+			$this->view->assignError('Erro, usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display('Home');
+			return;
+		}
+		/*Parâmetros para o form de deleção*/
+
+		//Seta o nome de usuário(checar se é moderador ou não)
+		if ($userType == 'Moderator')
+			$this->view->assign("userName", $user->getLogin());
+		else
+			$this->view->assign("userName", $user->getName());
+
+		$this->view->assign("userId", $user->getId());
+		$this->view->assign("userType",$userType);
+
+		$page = "DeleteForm";
+		$this->view->display($page);
+	}
+
+	/**
+	*	Método que redireciona para uma página de deleção de um usuário que está logado.
+	*	Os dados são pego de acorco com a session e assim o formulário para deletar será montado
+	*	de acordo com esses dados.
+	*	@see self::redirectDelete
+	*/
+	public function redirectLoggedUserDelete(){
+		$userType = $this->request->getUserType();
+		$user = $this->request->getUserSession();
+
+		$this->redirectDelete($userType, $user->getId());
+	}
+
+	/** 
+	* Método que redireciona para o formulário de deleção de usuário que não seja o logado.
+	* A página que será redirecionada vai ser simplemente para o usuário logado confirmar sua senha.
+	* Para redirecionar uma página, deverá ser passado o tipo de usuário e id de usuário que será deletado.
+	*	@see self::redirectDelete
+	*/
+	public function redirectUserDelete(){
+		$userType = $this->request->get("userType");
+		$userId = $this->request->get("user_id");
+
+		$this->redirectDelete($userType, $userId);
 	}
 
 	/** 
@@ -179,10 +280,23 @@ class RegistrationController extends ApplicationController{
 		//A ação vai ser criar.
 		$this->view->assign("publicArray",$publicArray);
 		//O FieldForm vai ser usado tanto no upate quando no cadastro.
-		
 		$this->view->display($this->request->get('page'));
 	}
 
+	public function read(){
+
+		$userId = $this->request->get("user_id");
+		$userType = $this->request->get("profile");
+
+		$user = new $userType();
+		$user->setId($userId);
+
+		$user = $this->dao->findById($user);
+
+		$this->view->assign("user",$user);
+		$view = $userType."Profile";
+		$this->display($view);
+	}
 
 	public function authorize($user){
 		//Futuramente terá autorizacao

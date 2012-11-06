@@ -1,5 +1,7 @@
 <?php 
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
 * @Entity
 * @Table(name = "moderator")
@@ -8,6 +10,7 @@ class Moderator{
 
     public function __construct() {
         $this->donations = new ArrayCollection();
+        $this->news = new ArrayCollection();   
     }
 
 	/**
@@ -17,17 +20,17 @@ class Moderator{
 	protected $id;
 
 	/**
-	* @Column(type = "string", unique=true,  nullable = false)
+	*@Column(type = "string", unique=true,  nullable = false)
 	*/
 	protected $login;
 
 	/**
-	* @Column(type = "string", nullable = false)
+	*@Column(type = "string", nullable = false)
 	*/
 	protected $password;
 
 	/**
-    * @Column(type="string")
+    *@Column(type="string")
     **/
     protected $email;
 
@@ -35,6 +38,11 @@ class Moderator{
      * @OneToMany(targetEntity="Donation", mappedBy="moderator")
      **/
 	protected $donations;
+
+    /**
+     * @OneToMany(targetEntity="News", mappedBy="author")
+     **/
+    protected $news;
 
 	public function getLogin(){
 		return $this->login;
@@ -66,6 +74,14 @@ class Moderator{
 
     public function setId($id){
     	$this->id = $id;
+    }
+
+    public function getNews(){
+        return $this->news;
+    }
+
+    public function setNews($news){
+        $this->news = $news;
     }
 
     //encapsular do donations
