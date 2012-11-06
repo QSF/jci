@@ -74,5 +74,12 @@ class UserDAODoctrine extends DAODoctrine implements UserDAO{
 	public function getAllNotifiedUsers(){
 		return $this->getRepository()->findBy(array('receiveNotification' => true));
 	}
+
+	public function getUsersByField($field){
+
+		$query = $this->entityManager->createQuery('SELECT u FROM user u JOIN u.actingArea a WHERE a.id = '.$field->getId());
+		$users = $query->getResult();
+		return $users;
+	}
 }
 ?>
