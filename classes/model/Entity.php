@@ -49,7 +49,7 @@ class Entity extends User{
 	 */
 	protected $companyName;
 	/** 
-	 * @Column(type="integer") 
+	 * @Column(type="string", length=10, nullable=false)
 	 * @var int
 	 */
 	protected $stateRegistration;
