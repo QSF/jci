@@ -260,7 +260,7 @@ class RegistrationController extends ApplicationController{
 	*	@see self::redirectDelete
 	*/
 	public function redirectUserDelete(){
-		$userType = $this->request->get("userType");
+		$userType = $this->request->get("user_type");
 		$userId = $this->request->get("user_id");
 
 		$this->redirectDelete($userType, $userId);
