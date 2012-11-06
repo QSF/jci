@@ -27,4 +27,5 @@
 	<li><a href="./index.php?controller=Moderator&action=directDisplay&page=NewsForm">
 		Enviar Notícias
 	</a></li>
+	<li><a href="./index.php?controller=login&action=logout">Logout</a></li>
 </ul>

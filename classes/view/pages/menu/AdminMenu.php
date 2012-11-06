@@ -4,4 +4,5 @@
 	<li><a href="">Cadastrar Moderador	</a></li>
 	<li><a href="">Exibir Moderadores(editar e excluir)	</a></li>
 	<li><a href="">Perfil(editar e exibir)	</a></li>
+	<li><a href="./index.php?controller=login&action=logout">Logout</a></li>
 </ul>
