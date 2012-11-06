@@ -87,51 +87,6 @@ class ModeratorController extends ApplicationController
 		$this->display("UsersList");
 	}
 
-	public function sendNews(){
-		$news = new News;
-	
-		$public = $this->request->get('public') == null ? false : true;
-		$news->setPublic($public);
-
-		$news->setTitle($this->request->get("title"));
-
-		$news->setContent($this->request->get("content"));
-
-		$mod = $this->request->getUserSession();
-		if(get_class($mod) != "Moderator"){
-			return;
-		}
-		
-		//Colocando moderador como managed
-		$dao = ServiceLocator::getInstance()->getDAO("DAO");
-		
-		$mod = $dao->findById($mod);
-		
-		$news->setAuthor($mod);
-		$dao->insert($news);
-
-		//Nao sei se eh melhor fazer o envio de noticias mandar por e-mail
-		//ou fazer a gerencia
-
-		$this->view->assignSuccess("Notícia Enviada");
-		$this->view->display("Home");
-	}	
-
-	public function sendNewsByEmail(){
-
-	$userDao =  ServiceLocator::getInstance()->getDAO("UserDAO");
-	$users = $userDao->getAllNotifiedUsers();
-
-		foreach($users as $user){
-			$emailTo = $user->getEmail();
-			$title = $news->getTitle();
-			$content = $news->getContent();
-			$emailFrom = "From:". emailJCI;
-			//Tem que configurar o servidor de e-mail para funcionar
-			//$this->sendEmail($emailTo, $title, $content, $emailFrom);
-		}
-	}
-
 	public function generateReport(){
 		
 	}	
