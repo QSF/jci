@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+	<page content="EntityForm">
+		<JS>
+			<file>jquery-1.8.2.min.js</file>
+			<file>jquery.validate.min.js</file>
+			<file>additional-methods.min.js</file>
+			<file>jquery.maskedinput-1.3.js</file>
+			<file>jquery.validate.js</file>
+			<file>jquery.click-calendario-1.0.js</file>	
+		</JS>
+		<CSS>
+			<file>jquery.click-calendario-1.0.css</file>
+		</CSS>
+	</page>
+	<page content="VolunteerNaturalPersonForm">
+		<JS>
+			<file>jquery-1.8.2.min.js</file>
+			<file>jquery.validate.min.js</file>
+			<file>additional-methods.min.js</file>
+			<file>jquery.maskedinput-1.3.js</file>
+			<file>jquery.validate.js</file>
+			<file>jquery.click-calendario-1.0.js</file>	
+		</JS>
+		<CSS>
+			<file>jquery.click-calendario-1.0.css</file>
+		</CSS>
+	</page>
+	<page content="VolunteerLegalPersonForm">
+		<JS>
+			<file>jquery-1.8.2.min.js</file>
+			<file>jquery.validate.min.js</file>
+			<file>additional-methods.min.js</file>
+			<file>jquery.maskedinput-1.3.js</file>
+			<file>jquery.validate.js</file>
+			<file>jquery.click-calendario-1.0.js</file>	
+		</JS>
+		<CSS>
+			<file>jquery.click-calendario-1.0.css</file>
+		</CSS>
+	</page>
+	<page content="ModeratorForm">
+		<JS>
+			<file>jquery-1.8.2.min.js</file>
+			<file>jquery.validate.min.js</file>
+			<file>additional-methods.min.js</file>
+			<file>jquery.maskedinput-1.3.js</file>
+			<file>jquery.validate.js</file>
+			<file>jquery.click-calendario-1.0.js</file>	
+		</JS>
+		<CSS>
+			<file>jquery.click-calendario-1.0.css</file>
+		</CSS>
+	</page>
+	<page content="NewsForm">
+		<JS>
+			<file>/tinymce/jscripts/tiny_mce/tiny_mce.js</file>
+			<file>/tinymce/jscripts/tiny_mce/plugins/tinybrowser/tb_tinymce.js.php</file>
+			<file>/tinymce/jscripts/init_mce.js</file>
+		</JS>
+	</page>
+	<page content="ManageFields">
+		<JS>
+			<file>jquery.js</file>
+			<file>action.field.js</file>
+		</JS>
+	</page>
+	<page content="ManagePublics">
+		<JS>
+			<file>jquery.js</file>
+			<file>action.public.js</file>
+		</JS>
+	</page>
+</pages>

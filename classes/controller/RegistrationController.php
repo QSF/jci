@@ -44,6 +44,7 @@ class RegistrationController extends ApplicationController{
 	* Checar se o usuário é moderador ou admin. 
 	* Se não for checar se o user_id passado como parâmetro no atributo é o mesmo.
 	* @todo Estudas sobre o lance de gerenciamento e cascata para retirar o clear.
+	* @todo Checar o usuário que é passado.
 	*/
 	public function update(){
 		
@@ -160,6 +161,7 @@ class RegistrationController extends ApplicationController{
 		$this->authorize($user);
 
 		$user = $this->dao->findById($user);
+
 		if ($user === null){//nem encontrou o user
 			$this->view->assignError('Erro, usuário não encontrado!');
 			//carregar no log de erros, com informações para o dev.
@@ -278,10 +280,23 @@ class RegistrationController extends ApplicationController{
 		//A ação vai ser criar.
 		$this->view->assign("publicArray",$publicArray);
 		//O FieldForm vai ser usado tanto no upate quando no cadastro.
-		
 		$this->view->display($this->request->get('page'));
 	}
 
+	public function read(){
+
+		$userId = $this->request->get("user_id");
+		$userType = $this->request->get("profile");
+
+		$user = new $userType();
+		$user->setId($userId);
+
+		$user = $this->dao->findById($user);
+
+		$this->view->assign("user",$user);
+		$view = $userType."Profile";
+		$this->display($view);
+	}
 
 	public function authorize($user){
 		//Futuramente terá autorizacao

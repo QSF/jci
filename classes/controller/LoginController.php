@@ -16,10 +16,13 @@ class LoginController extends ApplicationController
 		$dao = ServiceLocator::getInstance()->getDAO("UserDAO");
 		$user = $dao->findByEmail($username);
 
-		if ($user != null)
-			$this->setSession($user);
+		if ($user != null ){
+			if(!($user instanceof Entity && $user->getSituation() == false))
+				$this->setSession($user);
+		}
 		else
 			$this->view->assignError("Nome de usuário ou senha inválidos");
+		
 		$this->view->display("Home");
 	}
 

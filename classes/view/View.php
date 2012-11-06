@@ -136,7 +136,7 @@ abstract class View{
      */
     public function loadResources($content){
       //carrega o arquivo xml passado
-      $resources = simplexml_load_file(VIEW_PATH."/config-view.xml");
+      $resources = simplexml_load_file(CONFIG_PATH."/config-view.xml");
 
       foreach($resources->children() as $page)
 
