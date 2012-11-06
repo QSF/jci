@@ -7,7 +7,8 @@
 			<file>additional-methods.min.js</file>
 			<file>jquery.maskedinput-1.3.js</file>
 			<file>jquery.validate.js</file>
-			<file>jquery.click-calendario-1.0.js</file>	
+			<file>jquery.click-calendario-1.0.js</file>
+			<file>loadChildFields.js</file>	
 		</JS>
 		<CSS>
 			<file>jquery.click-calendario-1.0.css</file>
@@ -21,6 +22,7 @@
 			<file>jquery.maskedinput-1.3.js</file>
 			<file>jquery.validate.js</file>
 			<file>jquery.click-calendario-1.0.js</file>	
+			<file>loadChildFields.js</file>
 		</JS>
 		<CSS>
 			<file>jquery.click-calendario-1.0.css</file>
@@ -33,7 +35,8 @@
 			<file>additional-methods.min.js</file>
 			<file>jquery.maskedinput-1.3.js</file>
 			<file>jquery.validate.js</file>
-			<file>jquery.click-calendario-1.0.js</file>	
+			<file>jquery.click-calendario-1.0.js</file>
+			<file>loadChildFields.js</file>	
 		</JS>
 		<CSS>
 			<file>jquery.click-calendario-1.0.css</file>
@@ -46,7 +49,8 @@
 			<file>additional-methods.min.js</file>
 			<file>jquery.maskedinput-1.3.js</file>
 			<file>jquery.validate.js</file>
-			<file>jquery.click-calendario-1.0.js</file>	
+			<file>jquery.click-calendario-1.0.js</file>
+			<file>loadChildFields.js</file>	
 		</JS>
 		<CSS>
 			<file>jquery.click-calendario-1.0.css</file>

@@ -1,6 +1,15 @@
 <?php
 
+include_once CLASSES_PATH."/PDF.php";
+
+function fieldCompare($a,$b){
+	if(count($a->getActingArea())  == count($b->getActingArea()))
+		return 0;
+	   return (count($a->getActingArea()) < count($b->getActingArea()) ? -1 : 1);
+}
+
 class ReportController extends ApplicationController{
+
 
 	public function redirectSet(){
 		
@@ -14,7 +23,7 @@ class ReportController extends ApplicationController{
 
 	public function generateReportField(){
 		$fieldId = $this->request->get("id");
-		
+
 		$field = new Field;
 		$field->setId($fieldId);
 
@@ -23,8 +32,30 @@ class ReportController extends ApplicationController{
 
 		$userDao = ServiceLocator::getInstance()->getDAO("UserDAO");
 
-
+		//Pegando usuários que tem o mesmo campo
 		$users = $userDao->getUsersByField($field);
+
+		//dois arrays para manipulação dos dados
+		$volunteersArray = array();
+		$entitiesArray = array();
+
+		//Separando as entidades dos voluntários
+		foreach($users as $user){
+			if(get_class($user) == "Entity"){
+				array_push($entitiesArray,$user);
+			}
+			else{
+				array_push($volunteersArray,$user);
+			}
+		}
+
+		usort($entitiesArray, 'fieldCompare');
+		usort($volunteersArray, 'fieldCompare');
+
+		$moderator = $this->request->getUserSession();
+
+		$pdf = new PdfGenerator($moderator);
+		$pdf->generateReportField($volunteersArray, $entitiesArray, $field);  
 	}
 
 	public function generateReportUser(){

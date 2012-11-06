@@ -13,7 +13,7 @@
 <div id="childFields"> </div>
 
 <script type="text/javascript"> var arrayJSONChildren = 
-<?php echo utf8_encode(json_encode($arrayFieldsChild));?> </script>
+<?php echo utf8_decode(json_encode($arrayFieldsChild));?> </script>
 
 <?php
 

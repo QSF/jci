@@ -178,7 +178,7 @@ class Request{
 	}
 
 	public function getUserSession(){
-		if($_SESSION["user"] == null)
+		if(!isset($_SESSION) || $_SESSION["user"] == null)
 			return null;
 		
 		$userSession = unserialize($_SESSION["user"]);
