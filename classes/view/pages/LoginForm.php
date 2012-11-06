@@ -2,7 +2,7 @@
   <div class="control-group">
     <label class="control-label" for="inputEmail"><?php echo $nameDisplay ?></label>
     <div class="controls">
-      <input type="text" id="inputEmail" name="<?php echo $inputType?>" placeholder="Email">
+      <input type="text" id="inputEmail" name="<?php echo $inputType?>">
     </div>
   </div>
   <div class="control-group">

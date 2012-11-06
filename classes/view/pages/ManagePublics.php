@@ -1,13 +1,13 @@
-<h3> Gerencia das opções de público</h3>
-
-<a href="./index.php?controller=public&action=redirectCreate">Cadastrar nova opção de público</a><br/>
-
 <!-- moderador seleciona um público da lista para remover ou editar -->
 <!-- o action do form é colocado pelo java script de acordo com a opção-->
 <form id="idformPublicManage" name="formPublicManage" action="" method="post">
-	<!-- listar todos públicos-->
+  <fieldset>
+    <legend>Gerencia das opções de público</legend>
+    	<!-- listar todos públicos-->
 	<?php require_once VIEW_PATH . "/pages/forms/listPublics.php"; ?>
-	
-	<input type="submit" id="idUpdate" name="update" value="Editar"/>
-	<input type="submit" id="idRemove" name="remove" value="Excluir"/>
+    <button type="submit" class="btn" id="idUpdate" name="update" value="Editar">Editar</button>
+    <button type="submit" class="btn" id="idRemove" name="remove" value="Excluir">Excluir</button>
+  </fieldset>
 </form>
+
+<a href="./index.php?controller=public&action=redirectCreate"><button href="./index.php?controller=field&action=redirectCreate" class="btn btn-inverse">Cadastrar nova opção de público</button></a>
