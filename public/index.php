@@ -16,7 +16,7 @@ require_once('../config/spl_autoload_register.php');
 
 //não sei ao certo, mas parece que para a session funcionar, devemos usar o session_start. Desta forma
 //devomos escolher um lugar melhor do que aqui.
-session_start();
+//session_start();
 
 //Encapsulando a requição
 $request = new Request();

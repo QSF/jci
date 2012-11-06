@@ -3,7 +3,7 @@
 <?php if(!isset($action)) $action = "./index.php?controller=news&action=sendNews"; ?>
 <form action="<?php echo $action?>" method="post">
 	<input type="hidden" name="news_id" value="<?php echo $news->getId()?>"/>
-	<input type="hidden" name="author_id" value="<?php echo $news->getAuthor()->getId()?>"/>
+	<input type="hidden" name="author_id" value="<?php if($news->getAuthor() !== null) echo $news->getAuthor()->getId()?>"/>
 
 	<label for="title" >
 		Título</label><br/>

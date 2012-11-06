@@ -25,7 +25,9 @@
 	<li><a href="./index.php?controller=news&action=directDisplay&page=NewsForm">
 		Enviar Notícias
 	</a></li>
-
+	<li><a href="./index.php?controller=news&action=getNews">
+		Gerência de Notícias
+	</a></li>
 	<li><a href="./index.php?controller=login&action=logout">Logout</a></li>
 
 </ul>
