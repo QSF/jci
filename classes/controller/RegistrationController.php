@@ -208,7 +208,7 @@ class RegistrationController extends ApplicationController{
 		if ($userType === null || $userId === null){
 			$this->view->assignError('Erro ao excluir, usuário não existe!');
 			//carregar no log de erros, com informações para o dev.
-			$view->display("404");
+			$this->view->display("404");
 			return;
 		}
 

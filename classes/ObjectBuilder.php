@@ -139,7 +139,6 @@ class ObjectBuilder
 	public function getEntity(){
 		$user = new Entity;
 		$this->getLegalPerson($user);
-		$this->getUser($user);
 		$user->setEstablishmentDate(new \DateTime($this->request->get('establishmentDate')));
 		$user->setSite($this->request->get('site'));
 		

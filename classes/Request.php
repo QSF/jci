@@ -157,6 +157,7 @@ class Request{
 			return null;
 
 		$methodName = "get".$userType;
+		echo $methodName;
 		$user = $builder->{$methodName}();
 		
 		return $user;
