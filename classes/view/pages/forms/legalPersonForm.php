@@ -15,8 +15,3 @@
 			<input type="text" id="idOwnerPhone" name="ownerPhone"  value="<?php echo $user->getOwnerPhone()?>" maxlength=12/><br/></td>
 		</tr><br/>
 	</table>
-
-
-
-
-

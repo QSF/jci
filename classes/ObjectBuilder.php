@@ -53,7 +53,11 @@ class ObjectBuilder
 		$user->setName                ( $this->request->get('name')			);
 		$user->setEmail				  ( $this->request->get('email')		);
 		$user->setPassword 			  ( md5($this->request->get('password')));
-		$user->setPhone				  ( $this->request->get('phone')		);
+		$phone = str_replace("(", "", $this->request->get('phone'));
+		$phone = str_replace(")", "", $phone);
+		$phone = str_replace("-", "", $phone);
+		echo $phone;
+		$user->setPhone				  ($phone); //$this->request->get('phone')	
 		$user->setHowYouKnow		  ( $this->request->get('howYouKnow')	);
 		$user->setPublic			  ( $this->getPublic() 					);
 		//temos que implementar o field
@@ -66,10 +70,14 @@ class ObjectBuilder
 	*/
 	protected function getLegalPerson($user){
 		$this->getUser($user);
-		$user->setCnpj 				( $this->request->get('cnpj')				);
+		$user->setCnpj 				( $this->request->get('cnpj'));
+
+
 		$user->setCompanyName 		( $this->request->get('companyName')		);
 		$user->setStateRegistration ( $this->request->get('stateRegistration')	);
-		$user->setOwnerPhone 		( $this->request->get('ownerPhone')			);
+		//setar o telefone sem os caracters ()-
+		
+		$user->setOwnerPhone( $phone);	
 	}
 
 	/** Método que monta um user de acordo com os dados de natural person passados em uma requisição.
@@ -146,6 +154,14 @@ class ObjectBuilder
 		$user->setEmail($this->request->get("email"));
 
 		return $user;
+	}
+
+	public function dropCharacter($attribute){
+		$attribute = str_replace("(", "", $attribute );
+		$atrribute = str_replace(")", "", $atrribute);
+		$atrribute = str_replace("-", "", $atrribute);
+		$atrribute = str_replace(".", "", $atrribute);
+		$atrribute = str_replace("/", "", $atrribute);
 	}
 }
 
