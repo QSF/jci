@@ -53,15 +53,12 @@ class ObjectBuilder
 		$user->setName                ( $this->request->get('name')			);
 		$user->setEmail				  ( $this->request->get('email')		);
 		$user->setPassword 			  ( md5($this->request->get('password')));
-		$phone = str_replace("(", "", $this->request->get('phone'));
-		$phone = str_replace(")", "", $phone);
-		$phone = str_replace("-", "", $phone);
-		echo $phone;
-		$user->setPhone				  ($phone); //$this->request->get('phone')	
-		$user->setHowYouKnow		  ( $this->request->get('howYouKnow')	);
-		$user->setPublic			  ( $this->getPublic() 					);
+	
+		$user->setPhone				  ($this->dropCharacter($this->request->get('phone'))); //$this->request->get('phone')	
+		$user->setHowYouKnow		  ( $this->request->get('howYouKnow'));
+		$user->setPublic			  ( $this->getPublic() );
 		//temos que implementar o field
-		$user->setCep 				  ( $this->request->get('cep')			);		
+		$user->setCep 				  ( $this->dropCharacter($this->request->get('cep')));		
 	}
 
 	/** Método que monta um user de acordo com os dados de legal person passados em uma requisição.
@@ -70,14 +67,12 @@ class ObjectBuilder
 	*/
 	protected function getLegalPerson($user){
 		$this->getUser($user);
-		$user->setCnpj 				( $this->request->get('cnpj'));
+		$user->setCnpj 				($this->dropCharacter($this->request->get('cnpj')));
 
 
 		$user->setCompanyName 		( $this->request->get('companyName')		);
 		$user->setStateRegistration ( $this->request->get('stateRegistration')	);
-		//setar o telefone sem os caracters ()-
-		
-		$user->setOwnerPhone( $phone);	
+		$user->setOwnerPhone($this->dropCharacter($this->request->get('ownerPhone')));	
 	}
 
 	/** Método que monta um user de acordo com os dados de natural person passados em uma requisição.
@@ -86,7 +81,7 @@ class ObjectBuilder
 	*/
 	protected function getNaturalPerson($user){
 		$this->getUser($user);
-		$user->setCpf($this->request->get('cpf'));
+		$user->setCpf($this->dropCharacter($this->request->get('cpf')));
 	}
 
 	/** Método que monta um user de acordo com os dados de voluntario passados em uma requisição.
@@ -156,12 +151,18 @@ class ObjectBuilder
 		return $user;
 	}
 
+	/**
+	*   @return atributo sem caracteres não numericos
+	*/
+
 	public function dropCharacter($attribute){
 		$attribute = str_replace("(", "", $attribute );
-		$atrribute = str_replace(")", "", $atrribute);
-		$atrribute = str_replace("-", "", $atrribute);
-		$atrribute = str_replace(".", "", $atrribute);
-		$atrribute = str_replace("/", "", $atrribute);
+		$attribute = str_replace(")", "", $attribute);
+		$attribute = str_replace("-", "", $attribute);
+		$attribute = str_replace(".", "", $attribute);
+		$attribute = str_replace("/", "", $attribute);
+		$attribute = str_replace(" ", "", $attribute);
+		return $attribute;
 	}
 }
 
