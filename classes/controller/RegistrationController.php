@@ -143,10 +143,11 @@ class RegistrationController extends ApplicationController{
 	/** 
 	* Método que deleta o usuário do BD.
 	* A permissão é feita do mesmo modo que na ação de edição.
-	* É necessário se passar o tipo de usuário que irá ser deletado
+	* É necessário se passar o tipo de usuário que irá ser deletado.
+	* Para que um usuário possa ser removido, o usuário logado deverá confirmar sua senha.
+	* Caso um usuário esteje excluindo sua própria conta, um logout deverá ser feito.
 	*/
 	public function delete(){
-
 		$userId = $this->request->get("user_id");
 		$userType = $this->request->get("user_type");
 
@@ -157,8 +158,6 @@ class RegistrationController extends ApplicationController{
 			return;
 		}
 
-		//Checar Permissão
-		//TODO:
 		$user = new $userType();
 		$user->setId($userId);
 	
@@ -182,9 +181,21 @@ class RegistrationController extends ApplicationController{
 			$this->view->display('Home');
 			return;	
 		}
-		
+
+		$logOut = false;
+		if ($loggedUser->getId() == $user->getId()){//se usuário removido for o usuário logado.
+			$logOut = true;
+		}
+
 		$this->dao->delete($user);
 
+		if ($logOut){//realiza logout(pode chamar o método do LoginController)
+			session_destroy();
+			$_SESSION = array();
+			//informar por email, ou alguma coisa assim.
+			$this->view->assignSuccess("Usuário deletado com sucesso!");
+			$this->redirect("Home");
+		}
 		$this->view->assignSuccess("Usuário deletado com sucesso!");
 		$this->display("Home");
 	}
