@@ -35,7 +35,9 @@ class ObjectBuilder
 		$user->setReceiveNotification ( $notification								      );
 		$user->setName                ( $this->request->get('name')					      );
 		$user->setEmail				  ( $this->request->get('email')					  );
-		$user->setPassword 			  ( md5($this->request->get('password'))			  );
+		$password = $this->request->get('password');
+		if ($password != null)//evita caso for edição.
+			$user->setPassword 		  ( md5($password)									  );
 		$user->setPhone				  ( $this->dropCharacter($this->request->get('phone')));
 		$user->setHowYouKnow		  ( $this->request->get('howYouKnow')			      );
 		$this->setPublicServed		  ( $user            							      );
@@ -148,9 +150,10 @@ class ObjectBuilder
 		$user->setEstablishmentDate(new \DateTime($this->formatDate($this->request->get('establishmentDate')) ));
 		$user->setSite($this->request->get('site'));
 		
-		//por default, a situação e status é false?
+		$situation =  $this->request->get('situation') != null ? true : false;
+		$user->setSituation($situation);
 		$user->setStatus(false);
-		$user->setSituation(false);
+		
 
 		$receivedNotification = $this->request->get('receivedNewsletter') != null ? true : false;
 		$user->setNewsletter($receivedNotification);

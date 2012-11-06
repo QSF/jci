@@ -7,19 +7,24 @@
 class Administrator
 {
 	/**
-	*	@Id
-	*	@Column(type = "string", nullable = false)
+     *@Id @Column(type="integer")
+     *@GeneratedValue
+     **/
+	protected $id;
+
+	/**
+	*@Column(type = "string", unique=true,  nullable = false)
 	*/
 	protected $login;
-	
+
 	/**
-	*	@Column(type = "string", nullable = false)
+	*@Column(type = "string", nullable = false)
 	*/
 	protected $password;
 
 	/**
-     *@Column(type="string")
-     **/
+    *@Column(type="string")
+    **/
     protected $email;
 
 	public function getLogin(){
@@ -44,6 +49,14 @@ class Administrator
 
     public function setEmail($email){
         $this->email = $email;
+    }
+
+    public function getId(){
+    	return $this->id;
+    }
+
+    public function setId($id){
+    	$this->id = $id;
     }
 }
 
