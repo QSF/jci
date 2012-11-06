@@ -22,8 +22,10 @@
 	<li><a href="./index.php?controller=Moderator&action=getEntitiesWaitingApproval">
 			Validar Entidade
 	</a></li>
-	<li><a href="./index.php?controller=Moderator&action=directDisplay&page=NewsForm">
+	<li><a href="./index.php?controller=news&action=directDisplay&page=NewsForm">
 		Enviar Notícias
 	</a></li>
+
 	<li><a href="./index.php?controller=login&action=logout">Logout</a></li>
+
 </ul>
