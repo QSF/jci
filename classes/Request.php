@@ -252,5 +252,11 @@ class Request{
 		}
 		return $public;
 	}
+
+	public function getDonation()
+	{
+		$builder = new ObjectBuilder($this);
+		return $builder->getDonation();
+	}
 }
 ?>

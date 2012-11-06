@@ -126,7 +126,7 @@ class Donation
         return $this->dateFeedBackEntity;
     }
 
-    public function setVolunteer(Volunteer $volunteer){
+    public function setVolunteer(Volunteer $volunteer = null){
         $this->volunteer = $volunteer;
     }
 
@@ -134,7 +134,7 @@ class Donation
         return $this->volunteer;
     }
 
-    public function setEntity(Entity $entity){
+    public function setEntity(Entity $entity = null){
         $this->entity = $entity;
     }
 
@@ -142,7 +142,7 @@ class Donation
         return $this->entity;
     }
 
-    public function setModerator(Moderator $moderator){
+    public function setModerator(Moderator $moderator = null){
         $this->moderator = $moderator;
     }
 
@@ -150,7 +150,7 @@ class Donation
         return $this->moderator;
     }
 
-    public function setField(Field $field){
+    public function setField(Field $field = null){
         $this->field = $field;
     }
 

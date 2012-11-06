@@ -312,6 +312,33 @@ class ObjectBuilder
 		$attribute = str_replace(" ", "", $attribute);
 		return $attribute;
 	}
+
+	public function getDonation(){
+		$donation = new Donation;
+		$entity = new Entity;
+		$volunteer = new VolunteerLegalPerson; //aqui pode ser qlq tipo de usuário, o ideal seria volunteer mais é abstrata
+		
+		$volunteerId = $this->request->get('id_voluntario');
+		$volunteer->setId($volunteerId);
+		$entityId = $this->request->get('id_entidade');
+		$entity->setId($entityId);
+		
+		$dao = ServiceLocator::getInstance()->getDAO("DAO");
+		$volunteer = $dao->findById($volunteer);
+		$entity = $dao->findById($entity);
+		$field = $this->getSingleField();
+		$date = date('Y-m-d', strtotime($this->request->get('date')));
+		$date = new \DateTime($date);
+		if($field === null || $volunteer === null || $field === null || $date === null){
+			return null;
+		}
+		$donation->setField($field);
+		$donation->setVolunteer($volunteer);
+		$donation->setEntity($entity);
+		$donation->setDate($date);
+
+		return $donation;
+	}
 }
 
 ?>
