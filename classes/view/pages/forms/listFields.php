@@ -18,8 +18,10 @@ function listFields($var,$field){
 	$checked = "";
 	if($field->getParent() != null && $var->getId() == $field->getParent()->getId()){
 		$checked = "checked=\"checked\"";
-	} //coloar label?>
+	}?>
+	<label class="radio">
 	<input type="radio" name="id" value="<?php echo $var->getID()?>" <?php echo $checked ?> > <?php echo $var->getName() ?>
+	</label>
 	<ul>
 	<?php 
 		foreach ($var->getChildren() as $child){ ?>
