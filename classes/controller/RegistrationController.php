@@ -236,7 +236,7 @@ class RegistrationController extends ApplicationController{
 		/*Parâmetros para o form de deleção*/
 
 		//Seta o nome de usuário(checar se é moderador ou não)
-		if ($userType == 'Moderator')
+		if ($userType == 'Moderator' || $userType == 'Administrator' )
 			$this->view->assign("userName", $user->getLogin());
 		else
 			$this->view->assign("userName", $user->getName());
