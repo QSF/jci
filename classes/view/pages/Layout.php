@@ -8,13 +8,14 @@
 		<title>
 		JCI - Londrina
 		</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js" type="text/javascript"></script>
 		<!-- JS -->
 		<?php  foreach($arrayJS as $js){?>
 			<script type="text/javascript" src="js/<?php echo $js?>"></script>
 		<?php }?>
 
 		<!-- CSS Geral -->
-		<link rel=stylesheet href="css/main.css" type="text/css" media=screen>
+		<!--<link rel=stylesheet href="css/main.css" type="text/css" media=screen>-->
 		<?php  foreach($arrayCSS as $css){?>
 			<link rel=stylesheet href="css/<?php echo $css;?>" type="text/css" media=screen>
 		<?php }?>

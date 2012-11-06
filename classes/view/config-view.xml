@@ -2,7 +2,7 @@
 <pages>
 	<page content="EntityForm">
 		<JS>
-			<file>Validation.js</file>
+			<file>loadChildFields.js</file>
 		</JS>
 	</page>
 	<page content="VolunteerNaturalPersonForm">
