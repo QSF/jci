@@ -79,10 +79,13 @@ class DonationController extends ApplicationController{
 			$this->view->display("404");
 			return;
 		}
-		
+		echo "CHEGUEI";
 		$loggedUser = $this->request->getUserSession();
+		$loggedUser = $this->dao->findById($loggedUser);
 		$donation->setModerator($loggedUser);
+		
 
+		echo "AQUI";
 		$this->dao->insert($donation);
 
 		$this->view->assignSuccess("Doação registrada com sucesso!");
@@ -108,6 +111,7 @@ class DonationController extends ApplicationController{
 		}
 
 		$this->view->assign("donation",$donation);
+		$this->view->assign("action","update");
 
 		$this->redirectCreate();
 	}
@@ -131,11 +135,17 @@ class DonationController extends ApplicationController{
 			$this->view->display("404");
 			return;
 		}
-		$donation->setId($this->request->get("id_donation!"));
+		if ($this->request->get("id_donation") == null) 
+			echo "null";
+		$donation->setId($this->request->get("id_donation"));
 		$oldDonation = $this->dao->findById($donation);
-		
+		if ($oldDonation == null)
+			echo "NULLLLL";
 		if ($this->getUserPermission($oldDonation)){
 			//$this->dao->clear();
+			$loggedUser = $this->request->getUserSession();
+			$loggedUser = $this->dao->findById($loggedUser);
+			$donation->setModerator($loggedUser);
 			$this->dao->update($donation);
 			$this->view->assignSuccess("Doação editado!");	
 		}else {

@@ -325,11 +325,19 @@ class ObjectBuilder
 		
 		$dao = ServiceLocator::getInstance()->getDAO("DAO");
 		$volunteer = $dao->findById($volunteer);
+		if ($volunteer == null){
+			$volunteer = new VolunteerNaturalPerson;
+			$volunteer->setId($volunteerId);
+			$volunteer = $dao->findById($volunteer);
+		}
 		$entity = $dao->findById($entity);
 		$field = $this->getSingleField();
+		$field = $dao->findById($field);
 		$date = date('Y-m-d', strtotime($this->request->get('date')));
 		$date = new \DateTime($date);
-		if($field === null || $volunteer === null || $field === null || $date === null){
+
+		echo $volunteer->getName();
+		if($field === null || $volunteer === null || $entity === null || $date === null){
 			return null;
 		}
 		$donation->setField($field);
