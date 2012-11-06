@@ -171,16 +171,18 @@ class RegistrationController extends ApplicationController{
 			$this->view->display('Home');
 			return;
 		}
-		//compara a senha que veio e a senha atual da session.
-		$password = $this->request->get('password');
-		$loggedUser = md5($this->request->getUser());
 		
+		$password = md5($this->request->get('password'));
+		//pega o usuário da sessão
+		$loggedUser = $this->request->getUserSession();
+		//compara a senha que veio e a senha atual da session.
 		if ($password == null || ($password != $loggedUser->getPassword()) ){
 			$this->view->assignError('Erro, senha inválida!');
 			//carregar no log de erros, com informações para o dev.
 			$this->view->display('Home');
 			return;	
 		}
+		
 		$this->dao->delete($user);
 
 		$this->view->assignSuccess("Usuário deletado com sucesso!");
