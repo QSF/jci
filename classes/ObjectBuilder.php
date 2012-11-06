@@ -85,10 +85,10 @@ class ObjectBuilder
 	*/
 	protected function getLegalPerson($user){
 		$this->getUser($user);
-		$user->setCnpj 				( $this->dropCharacter($this->request->get('cnpj'))      );
-		$user->setCompanyName 		( $this->request->get('companyName')		             );
-		$user->setStateRegistration ( $this->request->get('stateRegistration')	             );
-		$user->setOwnerPhone 		( $this->dropCharacter($this->request->get('ownerPhone')));
+		$user->setCnpj 				( $this->dropCharacter($this->request->get('cnpj'))             );
+		$user->setCompanyName 		( $this->request->get('companyName')		                    );
+		$user->setStateRegistration ( $this->dropCharacter($this->request->get('stateRegistration')));
+		$user->setOwnerPhone 		( $this->dropCharacter($this->request->get('ownerPhone'))       );
 	}
 
 	/** Método que monta um user de acordo com os dados de natural person passados em uma requisição.
