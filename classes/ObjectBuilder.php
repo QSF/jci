@@ -132,6 +132,12 @@ class ObjectBuilder
 		return $user;	
 	}
 
+	protected function formatDate($date){
+		$date = explode("/", $date); 
+		$newDate =  $date[2] . '-' . $date[1] . '-' . $date[0];
+		return $newDate;
+	}
+
 	/**
 	*	@return user entity
 	*	@todo ver o os valores default de status e situation
@@ -139,8 +145,7 @@ class ObjectBuilder
 	public function getEntity(){
 		$user = new Entity;
 		$this->getLegalPerson($user);
-		$this->getUser($user);
-		$user->setEstablishmentDate(new \DateTime($this->request->get('establishmentDate')));
+		$user->setEstablishmentDate(new \DateTime($this->formatDate($this->request->get('establishmentDate')) ));
 		$user->setSite($this->request->get('site'));
 		
 		//por default, a situação e status é false?

@@ -21,8 +21,8 @@ abstract class User
     }
 
     /**
-     *@Id @Column(type="integer")
-     *@GeneratedValue
+     * @Id @Column(type="integer")
+     * @GeneratedValue
      **/
     protected $id = null;
 
@@ -47,20 +47,18 @@ abstract class User
     protected $password;
 
     /**
-     *@Column(type="integer")
+     * @Column(type="string", length=10, nullable=true)
      **/
     protected $phone;
 
     /**
-     *@Column(type="string")
+     * @Column(type="string")
      **/
     protected $howYouKnow;
 
     /** Relação do publico atendido.
      * @ManyToMany(targetEntity="PublicServed", inversedBy="users", cascade={"merge"})
      * @JoinTable(name="users_public")
-     *
-     * @JoinColumn (nullable = true)
      *
      * @var ArrayCollection<PublicServed>
      **/
@@ -70,14 +68,12 @@ abstract class User
      * @ManyToMany(targetEntity="Field", inversedBy="users", cascade={"merge"})
      * @JoinTable(name="users_fields")
      *
-     * @JoinColumn (nullable = true)
-     *
      * @var ArrayCollection<Field>
      **/
     protected $actingArea;
 
     /**
-     *@Column(type="integer")
+     * @Column(type="integer")
      **/
     protected $cep;
 

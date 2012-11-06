@@ -11,7 +11,7 @@ class VolunteerNaturalPerson extends Volunteer
 		parent::__construct();	
     }
 	/**
-	* @Column(type="integer", unique = true, nullable=false) 
+	* @Column(type="string", length=11, nullable=false)
 	* @var int
 	*/
 	protected $cpf;
