@@ -188,6 +188,11 @@ class Field
     public function getDonations(){
     	return $this->donations->toArray();
     }
+
+    //Método que facilita na hora do cruzamento de dados
+    public function __toString(){
+        return $this->name;
+    }
 }
 
 ?>

@@ -81,5 +81,26 @@ class UserDAODoctrine extends DAODoctrine implements UserDAO{
 		$users = $query->getResult();
 		return $users;
 	}
+
+	public function getUsersByUserField($user){
+
+		$arrayFields = $user->getActingArea();
+
+		$i = 0;
+
+		$dql = 'SELECT u FROM user u JOIN u.actingArea a WHERE ';
+		foreach($arrayFields as $field){
+				$dql = $dql . 'a.id = ' . $field->getId();
+				if($i < ( count($arrayFields) - 1 ) ){
+					$dql = $dql . ' OR ';
+				$i++;
+				}
+		}
+
+		$query = $this->entityManager->createQuery($dql);
+		
+		$users = $query->getResult();
+		return $users;
+	}
 }
 ?>
