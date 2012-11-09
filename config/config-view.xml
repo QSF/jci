@@ -75,4 +75,19 @@
 			<file>action.public.js</file>
 		</JS>
 	</page>
+	<page content="Quem-Somos">
+		<CSS>
+			<file>print.css</file>
+		</CSS>
+	</page>
+	<page content="O-Que-Fazemos">
+		<CSS>
+			<file>print.css</file>
+		</CSS>
+	</page>
+	<page content="Home">
+		<CSS>
+			<file>print.css</file>
+		</CSS>
+	</page>
 </pages>

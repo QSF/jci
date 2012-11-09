@@ -32,6 +32,7 @@ function listFields($var,$user){
 	<ul>
 	<?php 
 		foreach ($var->getChildren() as $child){
+			listFields($child,$user);
 			array_push($arrayFields, array("id" => $child->getId(), "name" => $child->getName()));
 		}  ?>
 	</ul>  

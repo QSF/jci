@@ -3,8 +3,6 @@
 //include_once LIB_PATH.'/tfpdf/tfpdf.php';
 include_once LIB_PATH.'/fpdf/fpdf.php';
 
-
-
 class PdfGenerator{
 
 	private $moderator;
@@ -19,10 +17,10 @@ class PdfGenerator{
 		$pdf->SetFont('Arial','',8);
 		$pdf->SetMargins(2, 3);
 		
-		$pdf->Link(10,8,10,10,"./index.php");
 		$pdf->SetAuthor('JCI - Londrina');
 		$pdf -> SetTitle('Cruzamento de dados - JCI Londrina');
-		$pdf->Image("./img/logo.jpg", 6, 1, 10);
+		$link = "./index.php";
+		$pdf->Image("./img/logo.jpg", 6, 1, 10,5,'JPG', $link);
 
 
 		$pdf->setXY(6,7);
@@ -123,20 +121,18 @@ class PdfGenerator{
 		$typeUserPortuguese = $this->getTypeUserPortuguese($userTarget);
 		
 		$pdf->SetFont('Arial','',14);		
-
+		$pdf->Ln();
 		$typeUserLabel = $typeUserPortuguese .": ". utf8_decode($userTarget->getName());
 		$pdf->write(1, $typeUserLabel);
 
 		$pdf->Ln();
-
-		$pdf->SetFont('Arial','',12);
+		$pdf->SetFont('Arial','',14);
 
 		$fields = "Áreas de Atuação: ". implode(', ', $userTarget->getActingArea());
 		$pdf->write(1, utf8_decode($fields));
 
 		$pdf->Ln();
-
-		$y = 10;
+		$y = 12;
 		$pdf->SetFont('Arial','B',10);
 		$pdf->setXY(2-($pdf->GetStringWidth("Pos")/2),$y);
 		$pdf->cell(1,1,"Pos",0,0,'C');
@@ -152,10 +148,9 @@ class PdfGenerator{
 
 		$pdf->setXY(15.9-($pdf->GetStringWidth("Campos")/2),$y);
 		$pdf->cell(4,1,"Campos",0,0,'C',false);
-
-		$pdf->Line(2,$y,20,$y);
+		
 		$i = 1;
-		$y=11;
+		$y++;
 		$pdf->SetFont('Arial','',8);
 		//$vetor = $this->populateArray();
 	
@@ -254,5 +249,4 @@ class PdfGenerator{
 			$this->Cell(10,1,$msgHeader,0,0,'L',0);
 		}
 	}
-
 ?>

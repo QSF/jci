@@ -10,3 +10,5 @@ Comita => git commit -m "mensagem"
 Manda pro repositório github => git push origin develop
 Atualizando seu branch local com o do  repositório => git pull origin develop
 Para ver os commits dar git log
+
+http://rogerdudler.github.com/git-guide/index.pt_BR.html --mto bom! .. leticia

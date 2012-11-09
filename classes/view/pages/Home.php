@@ -25,7 +25,7 @@
   <p>Tamires encerra seu discurso e sua participação no projeto com um testemunho: "Quando entrei neste projeto não sabia o que estava por vir mas 
   sabia que ali, aqui, estaria uma grande oportunidade que iria ajudar no meu futuro. Obrigada membros da JCI por me possibilitar ser uma filha, 
   uma aluna, uma cidadã melhor."</p><br/>
-  <hr>
+<!--   <hr>
   <p>Aliquam imperdiet justo sit amet augue rutrum non tristique diam pulvinar. Integer vulputate porta ipsum ac bibendum. Donec interdum mi eget nibh iaculis eget pretium magna eleifend. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla odio est, vehicula quis fringilla eu, varius in purus. Integer placerat, metus a faucibus viverra, libero enim posuere neque, et porta urna neque quis nibh. Aliquam a tortor ut tortor fermentum ultricies tincidunt id felis. Vestibulum quis quam dolor, a molestie turpis. Aliquam feugiat lacus ut lacus dapibus vulputate non in magna. Pellentesque ut lacus vel erat egestas laoreet non non elit.</p>
   <table>
     <thead>
@@ -53,4 +53,4 @@
       </tr>
     </tbody>
   </table>
-  <p>Mauris tempor accumsan eros eu pharetra. Nulla consectetur hendrerit nisl ut tempus. Curabitur elit erat, commodo consectetur auctor eget, auctor et erat. Donec posuere dui tincidunt turpis tempus eget tincidunt nibh fermentum. Nunc eu vehicula sapien. Suspendisse urna leo, auctor sed rhoncus mollis, tincidunt rhoncus nunc. Aliquam erat volutpat. Integer et arcu a odio semper consectetur sed at elit. Etiam adipiscing pretium nulla, sed dapibus magna tincidunt interdum. Maecenas non fermentum nulla. Proin mollis accumsan libero, et rhoncus lorem interdum at. Etiam adipiscing venenatis mauris, eget laoreet tortor placerat vel. Donec in dolor lorem. Curabitur vehicula mi eget velit blandit vestibulum. Mauris volutpat nisi a tellus venenatis dignissim.</p>
+  <p>Mauris tempor accumsan eros eu pharetra. Nulla consectetur hendrerit nisl ut tempus. Curabitur elit erat, commodo consectetur auctor eget, auctor et erat. Donec posuere dui tincidunt turpis tempus eget tincidunt nibh fermentum. Nunc eu vehicula sapien. Suspendisse urna leo, auctor sed rhoncus mollis, tincidunt rhoncus nunc. Aliquam erat volutpat. Integer et arcu a odio semper consectetur sed at elit. Etiam adipiscing pretium nulla, sed dapibus magna tincidunt interdum. Maecenas non fermentum nulla. Proin mollis accumsan libero, et rhoncus lorem interdum at. Etiam adipiscing venenatis mauris, eget laoreet tortor placerat vel. Donec in dolor lorem. Curabitur vehicula mi eget velit blandit vestibulum. Mauris volutpat nisi a tellus venenatis dignissim.</p> -->
