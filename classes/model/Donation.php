@@ -20,6 +20,12 @@ class Donation
     protected $date;
 
     /**
+    * @Column(type="string")
+    * @var String
+    */
+    protected $moreInfo;
+
+    /**
     * @Column(type="string", nullable=true)
     * @var string
     */
@@ -67,15 +73,6 @@ class Donation
      **/
     protected $field;
 
-    /**
-     * @PrePersist
-     *
-     *  Função que seta o tempo da doação com o horário atual.
-     **/
-    public function beforePersist(){
-        $this->setDate(new DateTime());
-    }
-
     public function getId(){
         return $this->id;
     }
@@ -84,12 +81,24 @@ class Donation
         $this->id = $id;
     }
 
+    public function getDate(){
+        return $this->date;
+    }
+
     public function setDate($date){
         $this->date = $date;
     }
 
-    public function getDate(){
-        return $this->date;
+    public function getMoreInfo(){
+        return $this->moreInfo;
+    }
+
+    public function setMoreInfo($moreInfo){
+        $this->moreInfo = $moreInfo;
+    }
+
+    public function getFeedBackVolunteer(){
+        return $this->feedBackVolunteer;
     }
 
     public function setFeedBackVolunteer($feedBackVolunteer){
@@ -97,16 +106,16 @@ class Donation
         $this->setDateFeedBackVolunteer(new DateTime);
     }
 
-    public function getFeedBackVolunteer(){
-        return $this->feedBackVolunteer;
+    public function getDateFeedBackVolunteer(){
+        return $this->dateFeedBackVolunteer;
     }
 
     public function setDateFeedBackVolunteer($dateFeedBackVolunteer){
         $this->dateFeedBackVolunteer = $dateFeedBackVolunteer;
     }
 
-    public function getDateFeedBackVolunteer(){
-        return $this->dateFeedBackVolunteer;
+    public function getFeedBackEntity(){
+        return $this->feedBackEntity;
     }
 
     public function setFeedBackEntity($feedBackEntity){
@@ -114,48 +123,44 @@ class Donation
         $this->setDateFeedEntity(new DateTime);
     }
 
-    public function getFeedBackEntity(){
-        return $this->feedBackEntity;
+    public function getDateFeedEntity(){
+        return $this->dateFeedBackEntity;
     }
 
     public function setDateFeedEntity($dateFeedBackEntity){
         $this->dateFeedBackEntity = $dateFeedBackEntity;
     }
 
-    public function getDateFeedEntity(){
-        return $this->dateFeedBackEntity;
+    public function getVolunteer(){
+        return $this->volunteer;
     }
 
     public function setVolunteer(Volunteer $volunteer = null){
         $this->volunteer = $volunteer;
     }
 
-    public function getVolunteer(){
-        return $this->volunteer;
+    public function getEntity(){
+        return $this->entity;
     }
 
     public function setEntity(Entity $entity = null){
         $this->entity = $entity;
     }
 
-    public function getEntity(){
-        return $this->entity;
+    public function getModerator(){
+        return $this->moderator;
     }
 
     public function setModerator(Moderator $moderator = null){
         $this->moderator = $moderator;
     }
 
-    public function getModerator(){
-        return $this->moderator;
+    public function getField(){
+        return $this->field;
     }
 
     public function setField(Field $field = null){
         $this->field = $field;
-    }
-
-    public function getField(){
-        return $this->field;
     }
 }
 

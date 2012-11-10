@@ -325,18 +325,25 @@ class ObjectBuilder
 		
 		$dao = ServiceLocator::getInstance()->getDAO("DAO");
 		$volunteer = $dao->findById($volunteer);
-		if ($volunteer == null){
+
+		if ($volunteer == null){//para saber qual tipo de Voluntário foi selecionado.
 			$volunteer = new VolunteerNaturalPerson;
 			$volunteer->setId($volunteerId);
 			$volunteer = $dao->findById($volunteer);
 		}
+
 		$entity = $dao->findById($entity);
+
 		$field = $this->getSingleField();
 		$field = $dao->findById($field);
+
 		$date = date('Y-m-d', strtotime($this->request->get('date')));
 		$date = new \DateTime($date);
 
-		echo $volunteer->getName();
+		$moreInfo = $this->request->get('moreInfo');
+		if ($moreInfo === null)
+			$moreInfo = "";
+
 		if($field === null || $volunteer === null || $entity === null || $date === null){
 			return null;
 		}
@@ -344,6 +351,7 @@ class ObjectBuilder
 		$donation->setVolunteer($volunteer);
 		$donation->setEntity($entity);
 		$donation->setDate($date);
+		$donation->setMoreInfo($moreInfo);
 
 		return $donation;
 	}
