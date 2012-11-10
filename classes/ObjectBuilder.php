@@ -165,7 +165,7 @@ class ObjectBuilder
 	*/
 	public function getModerator(){
 		$user = new Moderator;
-		
+		$user->setLogin($this->request->get("user_id"));
 		$user->setLogin($this->request->get("login"));
 
 		$user->setPassword(md5($this->request->get("password")));
