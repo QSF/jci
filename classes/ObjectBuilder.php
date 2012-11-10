@@ -341,6 +341,7 @@ class ObjectBuilder
 		$date = new \DateTime($date);
 
 		$moreInfo = $this->request->get('moreInfo');
+		
 		if ($moreInfo === null)
 			$moreInfo = "";
 

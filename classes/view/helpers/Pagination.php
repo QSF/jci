@@ -23,4 +23,4 @@
 
 	<?php } //end if da paginação ?>
 
-<?php } // end if da função?>	
+<?php } // end função?>	

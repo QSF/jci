@@ -16,7 +16,7 @@ class DonationController extends ApplicationController{
 		$donationId = $this->request->get("id_donation");
 
 		if ($donationId === null){
-			$this->view->assignError('Erro ao excluir, doação não existe!');
+			$this->view->assignError('Erro ao remover, doação não existe!');
 			//carregar no log de erros, com informações para o dev.
 			$view->display("404");
 			return;
@@ -30,14 +30,14 @@ class DonationController extends ApplicationController{
 		$donation = $this->dao->findById($donation);
 
 		if ($donation === null){
-			$this->view->assignError('Erro, doação não encontrado!');
+			$this->view->assignError('Erro, doação não encontrada!');
 			$this->view->display('Home');
 			return;
 		}
 		
 		if ($this->getUserPermission($donation)){//tem permissão de deletar
 			$this->dao->delete($donation);
-			$this->view->assignSuccess("Doação deletado com sucesso!");
+			$this->view->assignSuccess("Doação removida com sucesso!");
 		}else {
 			$this->view->assignError('Erro, permissão negada!');
 		}
@@ -79,13 +79,10 @@ class DonationController extends ApplicationController{
 			$this->view->display("404");
 			return;
 		}
-		echo "CHEGUEI";
 		$loggedUser = $this->request->getUserSession();
 		$loggedUser = $this->dao->findById($loggedUser);
 		$donation->setModerator($loggedUser);
 		
-
-		echo "AQUI";
 		$this->dao->insert($donation);
 
 		$this->view->assignSuccess("Doação registrada com sucesso!");
@@ -122,6 +119,7 @@ class DonationController extends ApplicationController{
 		$donations = $donationDAO->findAll();
 
 		$this->view->assign("donations",$donations);
+		$this->view->assign("isModerator",true);//é moderador.
 
 		$this->view->display("DonationList");
 	}
@@ -135,19 +133,17 @@ class DonationController extends ApplicationController{
 			$this->view->display("404");
 			return;
 		}
-		if ($this->request->get("id_donation") == null) 
-			echo "null";
+
 		$donation->setId($this->request->get("id_donation"));
 		$oldDonation = $this->dao->findById($donation);
-		if ($oldDonation == null)
-			echo "NULLLLL";
+
 		if ($this->getUserPermission($oldDonation)){
 			//$this->dao->clear();
 			$loggedUser = $this->request->getUserSession();
 			$loggedUser = $this->dao->findById($loggedUser);
 			$donation->setModerator($loggedUser);
 			$this->dao->update($donation);
-			$this->view->assignSuccess("Doação editado!");	
+			$this->view->assignSuccess("Doação editada com sucesso!");	
 		}else {
 			$this->view->assignError("Falha de permissão!");	
 		}
@@ -159,6 +155,43 @@ class DonationController extends ApplicationController{
 		//pega o usuário da sessão
 		$loggedUser = $this->request->getUserSession();
 		return $loggedUser->getId() == $donation->getModerator()->getId();
+	}
+
+	/**
+	*	Método que exibi a lista de doações de um usuário.
+	*/
+	protected function redirectUserDonations($user){
+		if ($user === null){
+			$this->view->assignError('Usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
+
+		$user = $this->dao->findById($user);
+		$donations = $user->getDonations();
+
+		$this->view->assign("donations",$donations);
+
+		$this->view->assign("isModerator",$this->isModerator());//é moderador.
+
+		$this->view->display("DonationList");
+	}
+
+	/**
+	*	Lista todas as doações do usuário logado
+	*	@see self::redirectUserDonations.
+	*/
+	public function redirectLoggedUserDonations(){
+		$this->redirectUserDonations($this->request->getUserSession());
+	}
+
+	/**
+	*	@return true se o usuário logado é moderador.
+	*	@return false caso contrário.
+	*/
+	protected function isModerator(){
+		return !($this->request->getUserType() != 'Moderador');
 	}
 }
 ?>

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Controller que realiza a busca por usuarios
  * 
@@ -20,17 +19,10 @@ class UsersController extends ApplicationController{
 		$this->view = ServiceLocator::getInstance()->getView("listVoluntiers");
 	}
 
-
-
-
 	public function findUsers(){
 		$users = $this->dao->findVolunteers();
 		$this->view->assign(listVolunteers,$users);
 		$this->view->display("viewUsers");
 	}
-
-
-
-
 }
 
