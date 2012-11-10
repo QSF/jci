@@ -39,5 +39,4 @@
 	<?php } ?>
 	<br/>
 	<?php } //end foreach dos usuarios?>
-
 	<?php echoPagination($pagesNum, $currentPage, $url);?>

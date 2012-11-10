@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
@@ -13,9 +14,13 @@
   <![endif]-->
   <link rel="stylesheet" href="./assets/css/normalize.css/normalize.css" media="all">
   <link rel="stylesheet" href="./assets/css/960-Grid-System/code/css/960.css" media="all">
-  <link rel="stylesheet" href="./assets/css/bootstrap.css" media="all">
+  
   <link rel="stylesheet" href="./assets/css/all.css" media="all">
   <link rel="stylesheet" href="./assets/css/print.css" media="print">
+
+  <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css" media="all">
+  <script src= "./assets/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+
   <!--[if IE 8]><link rel="stylesheet" href="./assets/css/ie8.css" media="all"><![endif]-->
   <!--[if IE 7]><link rel="stylesheet" href="./assets/css/ie7.css" media="all"><![endif]-->
   <!--[if IE 6]><link rel="stylesheet" href="./assets/css/ie6.css" media="all"><![endif]-->
