@@ -128,7 +128,7 @@ class DAODoctrine implements DAO{
 		return $this->resultPaginated($dql, $positionResults, $maxResults, false);
 	}
 
-
+	
 	public function clear(){
 		$this->entityManager->clear();
 	}

@@ -114,9 +114,15 @@ class DonationController extends ApplicationController{
 	}
 
 	public function redirectManage(){
-		$donationDAO = ServiceLocator::getInstance()->getDAO('DonationDAO');
+		$page = $this->getPage("page");
 
-		$donations = $donationDAO->findAll();
+		$pagePosition = $page * $this->maxResults;
+
+		$donationDAO = ServiceLocator::getInstance()->getDAO('DonationDAO');
+		//procura de acordo com a paginação.
+		$donations = $donationDAO->findDonations($pagePosition, $this->maxResults);
+
+		$this->assignPagination($page, $donations, null);
 
 		$this->view->assign("donations",$donations);
 		$this->view->assign("isModerator",true);//é moderador.

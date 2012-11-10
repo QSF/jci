@@ -33,6 +33,7 @@ function printSingleDonation($var){?>
 	<p><b>Voluntário:</b></p> <?php echo $var->getVolunteer()->getName()?> 
 	<p><b>Entidade:  </b></p> <?php echo $var->getEntity()->getName()?>
 	<p><b>Moderador: </b></p> <?php echo $var->getModerator()->getLogin()?>
+	<p><b>Área: </b> <?php echo $var->getField()->getName()?></p>
 	<p><b>Mais informações:</b></p>
 	<?php echo $var->getMoreInfo();
 }?>
