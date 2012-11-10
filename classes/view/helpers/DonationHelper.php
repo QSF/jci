@@ -1,5 +1,24 @@
 <?php 
 /**
+*	Função que exibe os feedbacks
+*/
+function printFeedBack($var){ ?>
+	<?php if ($var->getDateFeedBackVolunteer() != null) {?>
+	<p>***FeedBack Voluntário***</p> 
+	<b>Data do feedBack: </b><?php echo $var->getDateFeedBackVolunteer()->format('d/m/Y H:i:s'); ?>
+	<p><?php echo $var->getFeedBackVolunteer(); ?></p> 
+	<?php } ?>
+
+	<?php if ($var->getDateFeedBackEntity() != null) { ?>
+	<p>***FeedBack Entidade***</p> 
+	<b>Data do feedBack: </b><?php echo $var->getDateFeedBackEntity()->format('d/m/Y H:i:s'); ?>
+	<p><?php echo $var->getFeedBackEntity(); ?></p> 
+	<?php } ?>
+<?php
+}?>
+
+<?php
+/**
 *	Função que exibe os dados de uma doação.
 */
 function printSingleDonation($var){?>
@@ -21,6 +40,7 @@ function printDonation($var, $isModerador){?>
 	if ($isModerador) { //é página de Moderador?>
 		<br><a href="./index.php?controller=donation&action=redirectUpdate&id_donation=<?php echo $var->getId();?>">Editar</a>
 		<a href="./index.php?controller=donation&action=delete&id_donation=<?php echo $var->getId();?>">Excluir</a>
+		<?php printFeedBack($var); ?>
 	<?php }else { ?>
 		<br><a href="./index.php?controller=donation&action=redirectFeedBack&id_donation=<?php echo $var->getId();?>">Realizar feedback</a>
 	<?php }//end if é Moderador
@@ -41,7 +61,7 @@ function listDonations($donations,$isModerador){	?>
 	    	$hasDonation = true;
 		}?>
 	<?php if ($hasDonation) {?>
-	<hr>
+		<hr>
 	<?php } ?>
 	</ul> 
 <?php 

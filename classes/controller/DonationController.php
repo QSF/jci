@@ -24,8 +24,6 @@ class DonationController extends ApplicationController{
 
 		$donation = new Donation();
 		$donation->setId($donationId);
-	
-		//$this->authorize($user);
 
 		$donation = $this->dao->findById($donation);
 
@@ -124,6 +122,9 @@ class DonationController extends ApplicationController{
 		$this->view->display("DonationList");
 	}
 
+	/**
+	*	Método que atualiza uma doação.
+	*/
 	public function update(){
 		
 		$donation = $this->request->getDonation();
@@ -193,5 +194,97 @@ class DonationController extends ApplicationController{
 	protected function isModerator(){
 		return !($this->request->getUserType() != 'Moderador');
 	}
+
+	/**
+	*	Redireciona para uma página que realiza um feeedBack
+	*/
+	public function redirectFeedBack(){
+		//carrega a doação da URL
+		$donationId = $this->request->get('id_donation');
+
+		if($donationId === null){
+			$this->view->assignError('Doação não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
+		$donation = new Donation;
+		$donation->setId($donationId);
+		$donation = $this->dao->findById($donation);
+
+		if($donation === null){
+			$this->view->assignError('Doação não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
+
+		//pega o feedback de acordo com o tipo usuário (entidade ou Voluntário).
+		$userType = $this->request->getUserType();
+
+		if(strpos($userType,"Volunteer") !== false){
+			$userType = 'Volunteer';
+		}
+		$method = 'getFeedBack' . $userType;
+		$feedBack = $donation->{$method}();
+
+		//pega a doação(pela url) e o feedback(session)
+		//carrega a doação e o feedback(de acordo com a session) que será 'editado'
+		$this->view->assign("donation",$donation);
+		$this->view->assign("feedBack",$feedBack);
+
+		$this->view->display("FeedBackForm");
+	}
+
+	/**
+	*	Método que realiza um feedback.
+	*/
+	public function doFeedBack(){
+		//carrega a doação da URL
+		$donationId = $this->request->get('id_donation');
+
+		if($donationId === null){
+			$this->view->assignError('Doação não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
+
+		$donation = new Donation;
+		$donation->setId($donationId);
+		$donation = $this->dao->findById($donation);
+
+		if($donation === null){
+			$this->view->assignError('Doação não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
+
+		$feedBack = $this->request->get('feedBack');
+
+		if($feedBack === null){
+			$this->view->assignError('Erro ao realizar o feedBack!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
+
+		//seta o feedback de acordo com o tipo usuário (entidade ou Voluntário).
+		$userType = $this->request->getUserType();
+
+		if(strpos($userType,"Volunteer") !== false){
+			$userType = 'Volunteer';
+		}
+		$method = 'setFeedBack' . $userType;
+		$donation->{$method}($feedBack);
+
+		//atualiza a doação com o novo feedBack.
+		$this->dao->update($donation);
+		$this->view->assignSuccess("Feedback realizado com sucesso!");	
+
+		$this->view->display("Home");
+	}
+
 }
 ?>

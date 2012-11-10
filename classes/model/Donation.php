@@ -123,11 +123,11 @@ class Donation
         $this->setDateFeedEntity(new DateTime);
     }
 
-    public function getDateFeedEntity(){
+    public function getDateFeedBackEntity(){
         return $this->dateFeedBackEntity;
     }
 
-    public function setDateFeedEntity($dateFeedBackEntity){
+    public function setDateFeedBackEntity($dateFeedBackEntity){
         $this->dateFeedBackEntity = $dateFeedBackEntity;
     }
 
