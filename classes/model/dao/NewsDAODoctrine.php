@@ -1,4 +1,5 @@
 <?php
+require_once (DAO_PATH . "/NewsDAO.php");
 
 class NewsDAODoctrine extends DAODoctrine implements NewsDAO{
 	/**
