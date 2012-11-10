@@ -106,6 +106,8 @@ class DonationController extends ApplicationController{
 		}
 
 		$this->view->assign("donation",$donation);
+		//Tem que arrumar a parte de listar para poder exibir o campo existente.
+		$this->view->assign("field",$donation->getField());
 		$this->view->assign("action","update");
 
 		$this->redirectCreate();
@@ -227,7 +229,7 @@ class DonationController extends ApplicationController{
 		}
 		$method = 'getFeedBack' . $userType;
 		$feedBack = $donation->{$method}();
-
+		echo 'feedBack: ' . $feedBack;
 		//pega a doação(pela url) e o feedback(session)
 		//carrega a doação e o feedback(de acordo com a session) que será 'editado'
 		$this->view->assign("donation",$donation);

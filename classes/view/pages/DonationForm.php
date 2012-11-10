@@ -21,9 +21,9 @@
 <input type="date" name="date">
 
 <label for="moreInfo">Mais infomações:</label>
-<textarea class="input-block-level" cols="100" rows="5" name="moreInfo" value="<?php echo $donation->getMoreInfo()?>"></textarea>
+<textarea class="input-block-level" cols="100" rows="5" name="moreInfo"><?php echo $donation->getMoreInfo()?></textarea>
 
 <input type="hidden" name="id_donation" value="<?php echo $donation->getId();?>">
 
-<input type="submit" value="Realizar doação"/>
+<input type="submit" class="btn" value="Realizar doação" >
 </form>

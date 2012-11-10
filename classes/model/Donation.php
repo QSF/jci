@@ -120,7 +120,7 @@ class Donation
 
     public function setFeedBackEntity($feedBackEntity){
         $this->feedBackEntity = $feedBackEntity;
-        $this->setDateFeedEntity(new DateTime);
+        $this->setDateFeedBackEntity(new DateTime);
     }
 
     public function getDateFeedBackEntity(){
