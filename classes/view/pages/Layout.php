@@ -65,13 +65,13 @@
     <div class="container_12" id="content">
       <div class="grid_8">
         <div class="box">
-    	  <div id="success_msg" class="messages">
-		    <ul><?php foreach($successMessage as $msg){?><li> <?php echo $msg;}?></ul>
-		  </div>
-		  <div id="error_msg" class="messages">
-			<ul><?php  foreach($errorMessage as $msg){?><li> <?php echo $msg;}?></ul>
-		  </div>
-		  <?php include PAGES_PATH."/".$content.".php"; ?>
+      	  <div id="success_msg" class="messages">
+  		      <ul><?php foreach($successMessage as $msg){?><li class="success"> <?php echo $msg;}?></ul>
+  		    </div>
+    		  <div id="error_msg" class="messages">
+    			 <ul><?php  foreach($errorMessage as $msg){?><li class="error"> <?php echo $msg;}?></ul>
+    		  </div>
+		      <?php include PAGES_PATH."/".$content.".php"; ?>
         </div>
       </div>
       <div class="grid_4">
