@@ -1,0 +1,2 @@
+10/11/2012
+Quando o moderador edita alguma entidade esta fica validada, mesmo que antes não estava.
