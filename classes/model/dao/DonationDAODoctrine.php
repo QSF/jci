@@ -17,7 +17,7 @@ class DonationDAODoctrine extends DAODoctrine implements DonationDAO{
 	*	@param $maxResults Número máximo de resultados.
 	*/
 	public function findDonations($positionResults, $maxResults){
-		$dql = "SELECT d FROM Donation" ." d". " ORDER BY d.date DESC";
+		$dql = "SELECT d FROM Donation d ORDER BY d.date DESC";
 		return $this->resultPaginated($dql, $positionResults, $maxResults, false);
 	}
 }

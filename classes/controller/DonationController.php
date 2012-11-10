@@ -131,6 +131,50 @@ class DonationController extends ApplicationController{
 	}
 
 	/**
+	*	Método que exibi a lista de doações de um usuário.
+	*/
+	protected function redirectUserDonations($user){
+		$page = $this->getPage("page");
+
+		$pagePosition = $page * $this->maxResults;
+
+		if ($user === null){
+			$this->view->assignError('Usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
+
+		$user = $this->dao->findById($user);
+		//pegar apenas uma parte, sendo que a ordem é invertida
+		$donations = array_slice(array_reverse($user->getDonations()), $pagePosition, $this->maxResults) ;
+		
+		$this->assignPagination($page, $user->getDonations(), null);
+
+		$this->view->assign("donations",$donations);
+
+		$this->view->assign("isModerator",$this->isModerator());//verifica se é moderador.
+
+		$this->view->display("DonationList");
+	}
+
+	/**
+	*	Lista todas as doações do usuário logado
+	*	@see self::redirectUserDonations.
+	*/
+	public function redirectLoggedUserDonations(){
+		$this->redirectUserDonations($this->request->getUserSession());
+	}
+
+	/**
+	*	@return true se o usuário logado é moderador.
+	*	@return false caso contrário.
+	*/
+	protected function isModerator(){
+		return !($this->request->getUserType() != 'Moderador');
+	}
+
+	/**
 	*	Método que atualiza uma doação.
 	*/
 	public function update(){
@@ -164,43 +208,6 @@ class DonationController extends ApplicationController{
 		//pega o usuário da sessão
 		$loggedUser = $this->request->getUserSession();
 		return $loggedUser->getId() == $donation->getModerator()->getId();
-	}
-
-	/**
-	*	Método que exibi a lista de doações de um usuário.
-	*/
-	protected function redirectUserDonations($user){
-		if ($user === null){
-			$this->view->assignError('Usuário não existe!');
-			//carregar no log de erros, com informações para o dev.
-			$view->display("404");
-			return;
-		}
-
-		$user = $this->dao->findById($user);
-		$donations = $user->getDonations();
-
-		$this->view->assign("donations",$donations);
-
-		$this->view->assign("isModerator",$this->isModerator());//é moderador.
-
-		$this->view->display("DonationList");
-	}
-
-	/**
-	*	Lista todas as doações do usuário logado
-	*	@see self::redirectUserDonations.
-	*/
-	public function redirectLoggedUserDonations(){
-		$this->redirectUserDonations($this->request->getUserSession());
-	}
-
-	/**
-	*	@return true se o usuário logado é moderador.
-	*	@return false caso contrário.
-	*/
-	protected function isModerator(){
-		return !($this->request->getUserType() != 'Moderador');
 	}
 
 	/**
