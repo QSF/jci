@@ -15,7 +15,5 @@ interface UserDAO extends DAO{
 	*	@todo Jogar exceptions	
 	*/
 	public function findByEmail($email);
-
-	public function findAllPaginated($userType, $positionResults, $maxResults);
 }
 ?>
