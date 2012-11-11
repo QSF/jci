@@ -29,5 +29,5 @@
 		Gerência de Notícias
 	</a></li>
 	<li><a href="./index.php?controller=login&action=logout">Logout</a></li>
-
+</div>
 </ul>

@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>JCI - Londrina</title>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
   <?php foreach($arrayJS as $js) { ?>
   <script type="text/javascript" src="./assets/js/<?php echo $js?>"></script>
   <?php } ?>
@@ -19,7 +21,11 @@
   <link rel="stylesheet" href="./assets/css/print.css" media="print">
 
   <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css" media="all">
+  
+  <!--<script src= "./assets/bootstrap/js/jquery-1.8.2.min.js" type="text/javascript"></script>-->
   <script src= "./assets/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+  <script src= "./assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+  <!--<script src= "./assets/bootstrap/js/bootstrap-dropdown.js" type="text/javascript"></script>-->
 
   <!--[if IE 8]><link rel="stylesheet" href="./assets/css/ie8.css" media="all"><![endif]-->
   <!--[if IE 7]><link rel="stylesheet" href="./assets/css/ie7.css" media="all"><![endif]-->
@@ -89,6 +95,7 @@
       <?php include PAGES_PATH."/Footer.php"; ?>
     </div>
   </div>
+
   <!--
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
   <script src="./assets/js/setup.js"></script> -->
