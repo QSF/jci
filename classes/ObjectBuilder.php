@@ -37,8 +37,13 @@ class ObjectBuilder
 		$user->setName                ( $this->request->get('name')					      );
 		$user->setEmail				  ( $this->request->get('email')					  );
 		$password = $this->request->get('password');
-		if ($password != null)//evita caso for edição.
-			$user->setPassword 		  ( md5($password)									  );
+		$changePassword = $this->request->get('changePassword');
+		if ($changePassword == null)//Ou é cadastro, ou não selecionou que quer manter a senha.
+			$password = md5($password);
+		else
+			$password = $this->request->get('oldPassword');//maior gambi, certo era ver a senha atual, ou mexer com js.
+		
+		$user->setPassword 			  ( 	$password									  );
 		$user->setPhone				  ( $this->dropCharacter($this->request->get('phone')));
 		$user->setHowYouKnow		  ( $this->request->get('howYouKnow')			      );
 		$this->setPublicServed		  ( $user            							      );
