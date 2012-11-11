@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="./assets/css/all.css" media="all">
   <link rel="stylesheet" href="./assets/css/print.css" media="print">
 
-  <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css" media="all">
+  <link rel="stylesheet" href="./assets/css/bootstrap.css" media="all">
   
   <!--<script src= "./assets/bootstrap/js/jquery-1.8.2.min.js" type="text/javascript"></script>-->
   <script src= "./assets/bootstrap/js/bootstrap.js" type="text/javascript"></script>

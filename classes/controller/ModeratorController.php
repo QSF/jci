@@ -90,9 +90,5 @@ class ModeratorController extends ApplicationController
 
 		$this->display("UsersList");
 	}
-
-	public function generateReport(){
-		
-	}	
 }
 ?>
