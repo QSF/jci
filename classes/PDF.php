@@ -3,6 +3,8 @@
 //include_once LIB_PATH.'/tfpdf/tfpdf.php';
 include_once LIB_PATH.'/fpdf/fpdf.php';
 
+
+
 class PdfGenerator{
 
 	private $moderator;
@@ -12,15 +14,14 @@ class PdfGenerator{
 	}
 
 	public function defineHeader($pdf){
-		
+
 		$pdf->AddPage();
 		$pdf->SetFont('Arial','',8);
 		$pdf->SetMargins(2, 3);
-		
+
 		$pdf->SetAuthor('JCI - Londrina');
 		$pdf -> SetTitle('Cruzamento de dados - JCI Londrina');
-		$link = "./index.php";
-		$pdf->Image("./assets/img/logo-pdf.jpg", 6, 1, 10,5,'JPG', $link);
+		$pdf->Image("./assets/img/logo-pdf.jpg", 6, 1, 10);
 
 
 		$pdf->setXY(6,7);
@@ -37,6 +38,7 @@ class PdfGenerator{
 		$pdf = new PDF("P","cm","A4", $this->moderator);
 		$this->defineHeader($pdf);
 
+		$pdf->Ln();
 		/***  Fiel Area ***/
 		$pdf->SetFont('Arial','',14);
 		$str1 = utf8_decode("Área de Atuação: ".$field->getName());
@@ -70,12 +72,11 @@ class PdfGenerator{
 		$pdf->cell(6,1,"Email",0,0,'C');
 
 		/***  Linha Horizontais ***/	
-		
-		$pdf->Line(2,13,20,13);
+
 		$y = 13;
 
 		for($i = 0; $i < count($listVolunteer) || $i < count($listEntities); $i++){
-			
+
 			if(array_key_exists($i, $listEntities)){
 
 				/***  Nome da Entidade Iterada ***/
@@ -107,7 +108,7 @@ class PdfGenerator{
 			}
 
 			$y++;
-			$pdf->Line(2,$y,20,$y);
+
 		}
 
 
@@ -117,22 +118,23 @@ class PdfGenerator{
 	public function generateReportUser($userTarget, $listUsers){
 		$pdf = new PDF("P","cm","A4", $this->moderator);
 		$this->defineHeader($pdf);
-		
+
 		$typeUserPortuguese = $this->getTypeUserPortuguese($userTarget);
-		
+
 		$pdf->SetFont('Arial','',14);		
+
 		$pdf->Ln();
 		$typeUserLabel = $typeUserPortuguese .": ". utf8_decode($userTarget->getName());
 		$pdf->write(1, $typeUserLabel);
 
+		$pdf->SetFont('Arial','',12);
 		$pdf->Ln();
-		$pdf->SetFont('Arial','',14);
-
 		$fields = "Áreas de Atuação: ". implode(', ', $userTarget->getActingArea());
 		$pdf->write(1, utf8_decode($fields));
 
 		$pdf->Ln();
-		$y = 12;
+
+		$y = 11.3;
 		$pdf->SetFont('Arial','B',10);
 		$pdf->setXY(2-($pdf->GetStringWidth("Pos")/2),$y);
 		$pdf->cell(1,1,"Pos",0,0,'C');
@@ -140,7 +142,7 @@ class PdfGenerator{
 		$pdf->setXY(2.9-($pdf->GetStringWidth("Nome")/2),$y);
 		$pdf->cell(6.9,1,"Nome",0,0,'C');
 
-		$pdf->setXY(8-($pdf->GetStringWidth("Email")/2),$y);
+		$pdf->setXY(7.7-($pdf->GetStringWidth("Email")/2),$y);
 		$pdf->cell(6,1,"Email",0,0,'C');
 		//Cell(float w [, float h [, string txt [, mixed border [, int ln [, string align [, boolean fill [, mixed link]]]]]]])
 		$pdf->setXY(13.9-($pdf->GetStringWidth("Telefone")/2),$y);
@@ -148,12 +150,12 @@ class PdfGenerator{
 
 		$pdf->setXY(15.9-($pdf->GetStringWidth("Campos")/2),$y);
 		$pdf->cell(4,1,"Campos",0,0,'C',false);
-		
+
 		$i = 1;
 		$y++;
 		$pdf->SetFont('Arial','',8);
 		//$vetor = $this->populateArray();
-	
+
 		$pdf->SetFillColor(0,127,255);
 		foreach($listUsers as $user){
 
@@ -172,7 +174,7 @@ class PdfGenerator{
 
 			//echo $pdf->GetStringWidth($elem['email'])/2;
 			$pdf->SetFont('Arial','B',10);
-			$pdf->setXY(8 - ($pdf->GetStringWidth('Email')/2),$y);
+			$pdf->setXY(7.7 - ($pdf->GetStringWidth('Email')/2),$y);
 			$pdf->SetFont('Arial','',8);
 			$emailUTF8 = utf8_decode($user->getEmail());
 			$pdf->cell(6,1,$emailUTF8,0,0,'C',false);
@@ -198,7 +200,7 @@ class PdfGenerator{
 		$pdf->Output();
 
 	}
-	
+
 	private function getSameFields($userTarget, $userReport){
 
 		$fieldsTargetId = array();
@@ -249,4 +251,5 @@ class PdfGenerator{
 			$this->Cell(10,1,$msgHeader,0,0,'L',0);
 		}
 	}
+
 ?>
