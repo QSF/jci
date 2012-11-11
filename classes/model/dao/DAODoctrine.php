@@ -2,6 +2,8 @@
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 require_once (DAO_PATH . "/DAO.php");
 
 /** Classe geral do DAO utiliando o ORM doctrine.
@@ -111,6 +113,22 @@ class DAODoctrine implements DAO{
 		return $this->getRepository()->findAll();
 	}
 
+	protected function resultPaginated($dql, $positionResults, $maxResults, $joinCollection){
+		$query = $this->entityManager->createQuery($dql)
+	                       	->setFirstResult($positionResults)
+	                        ->setMaxResults($maxResults);
+
+		$paginator = new Paginator($query, $fetchJoinCollection = $joinCollection);
+
+		return $paginator;
+	}
+
+	public function findAllPaginated($type, $positionResults, $maxResults){
+		$dql = "SELECT u FROM " . $type ." u". " ORDER BY u.name";
+		return $this->resultPaginated($dql, $positionResults, $maxResults, false);
+	}
+
+	
 	public function clear(){
 		$this->entityManager->clear();
 	}

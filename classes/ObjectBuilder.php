@@ -31,19 +31,29 @@ class ObjectBuilder
 	*	@todo implementar field
 	*/
 	protected function getUser($user){
-			$notification = $this->request->get('receivedNotification') == null ? false : true;
-			$user->setReceiveNotification ( $notification	);
-			$user->setName ( $this->request->get('name')	);
-			$user->setEmail	( $this->request->get('email')	);
-			$password = $this->request->get('password');
-			if ($password != null)//evita caso for edição.
-			$user->setPassword ( md5($password)	);
-			$user->setPhone	( $this->dropCharacter($this->request->get('phone')));
-			$user->setHowYouKnow	( $this->request->get('howYouKnow')	);
-			$this->setPublicServed	( $user );
-			$this->setActingArea	(	$user	);
-			$user->setCep ( $this->dropCharacter($this->request->get('cep')) );	
-}
+
+		$notification = $this->request->get('receivedNotification') == null ? false : true;
+
+		$user->setReceiveNotification ( $notification						);
+		$user->setName                ( $this->request->get('name')			);
+		$user->setEmail				  ( $this->request->get('email')		);
+		$user->setPassword 			  ( md5($this->request->get('password')));
+	
+		$user->setPhone				  ($this->dropCharacter($this->request->get('phone'))); //$this->request->get('phone')	
+		$user->setHowYouKnow		  ( $this->request->get('howYouKnow'));
+		$user->setCep 				  ( $this->dropCharacter($this->request->get('cep')));		
+		$user->setReceiveNotification ( $notification								      );
+		$user->setName                ( $this->request->get('name')					      );
+		$user->setEmail				  ( $this->request->get('email')					  );
+		$password = $this->request->get('password');
+		if ($password != null)//evita caso for edição.
+			$user->setPassword 		  ( md5($password)									  );
+		$user->setPhone				  ( $this->dropCharacter($this->request->get('phone')));
+		$user->setHowYouKnow		  ( $this->request->get('howYouKnow')			      );
+		$this->setPublicServed		  ( $user            							      );
+		$this->setActingArea		  (	$user				 						      );
+		$user->setCep 				  ( $this->dropCharacter($this->request->get('cep'))  );		
+	}
 
 	/**
 	 *	Método que pega a lista de público, selecionada pelo usuário, da request.
@@ -173,12 +183,18 @@ class ObjectBuilder
 		return $user;
 	}
 
+	protected function formatDate($date){
+		$date = explode("/", $date); 
+		$newDate =  $date[2] . '-' . $date[1] . '-' . $date[0];
+		return $newDate;
+	}
+
 	/**
 	*	@return user moderador
 	*/
 	public function getModerator(){
 		$user = new Moderator;
-		
+		$user->setLogin($this->request->get("user_id"));
 		$user->setLogin($this->request->get("login"));
 
 		$user->setPassword(md5($this->request->get("password")));
@@ -324,6 +340,50 @@ class ObjectBuilder
 		$attribute = str_replace("/", "", $attribute);
 		$attribute = str_replace(" ", "", $attribute);
 		return $attribute;
+	}
+
+	public function getDonation(){
+		$donation = new Donation;
+		$entity = new Entity;
+		$volunteer = new VolunteerLegalPerson; //aqui pode ser qlq tipo de usuário, o ideal seria volunteer mais é abstrata
+		
+		$volunteerId = $this->request->get('id_voluntario');
+		$volunteer->setId($volunteerId);
+		$entityId = $this->request->get('id_entidade');
+		$entity->setId($entityId);
+		
+		$dao = ServiceLocator::getInstance()->getDAO("DAO");
+		$volunteer = $dao->findById($volunteer);
+
+		if ($volunteer == null){//para saber qual tipo de Voluntário foi selecionado.
+			$volunteer = new VolunteerNaturalPerson;
+			$volunteer->setId($volunteerId);
+			$volunteer = $dao->findById($volunteer);
+		}
+
+		$entity = $dao->findById($entity);
+
+		$field = $this->getSingleField();
+		$field = $dao->findById($field);
+
+		$date = date('Y-m-d', strtotime($this->request->get('date')));
+		$date = new \DateTime($date);
+
+		$moreInfo = $this->request->get('moreInfo');
+		
+		if ($moreInfo === null)
+			$moreInfo = "";
+
+		if($field === null || $volunteer === null || $entity === null || $date === null){
+			return null;
+		}
+		$donation->setField($field);
+		$donation->setVolunteer($volunteer);
+		$donation->setEntity($entity);
+		$donation->setDate($date);
+		$donation->setMoreInfo($moreInfo);
+
+		return $donation;
 	}
 }
 

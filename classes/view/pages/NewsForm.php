@@ -6,17 +6,17 @@
 	<input type="hidden" name="author_id" value="<?php if($news->getAuthor() !== null) echo $news->getAuthor()->getId()?>"/>
 
 	<label for="title" >
-		Título</label><br/>
+		Título</label>
 	<input type="text" name="title" id="title" 
-	value = "<?php echo $news->getTitle() ;?>"/><br/>
+	value = "<?php echo $news->getTitle() ;?>"/>
+	<br/><br/>
+	<label for="content">Conteúdo</label>
+	<textarea name="content" style="width:250px;height:300px;"><?php echo $news->getContent(); ?></textarea>
 
-	<label for="content">Conteúdo</label><br/>
-	<textarea name="content" style="width:250px;height:300px;"><?php echo $news->getContent(); ?></textarea><br/>
-
-	<label for="public">Mensagem Pública?</label><br/>
-	<input type="checkbox" id="public" name="public" value="yes" 
-	<?php if($news->getPublic()) echo "checked=yes";?> />
+	
+    <label for="public" class="checkbox">
+      <input type="checkbox" id="public" name="public" value="yes" <?php if($news->getPublic()) echo "checked=yes";?>> Mensagem Pública?
+    </label>
 	<br/>
-
-	<input type="submit" value="Enviar"/>
+	<button class="btn" type="submit">Enviar</button>
 </form>

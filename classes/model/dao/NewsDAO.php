@@ -1,6 +1,6 @@
 <?php 
 
-interface NewsDAO extends VolunteerDAO{
+interface NewsDAO extends DAO{
 }
 
 ?>

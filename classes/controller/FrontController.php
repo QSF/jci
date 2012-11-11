@@ -55,7 +55,6 @@
 
 		//try{
 			include_once CONTROLLER_PATH.DIRECTORY_SEPARATOR.$controllerName.".php";
-			
 			if(class_exists($controllerName) ){
 				$controllerObject = new $controllerName($this->request);
 

@@ -41,5 +41,7 @@ interface DAO{
 	*	@return null caso não há objetos.
 	*/
 	public function findAll();
+
+	public function findAllPaginated($type, $positionResults, $maxResults);
 }
 ?>

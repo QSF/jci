@@ -117,6 +117,11 @@ class RegistrationController extends ApplicationController{
 		//A ação vai ser criar.
 		$this->view->assign("publicArray",$publicArray);
 
+		if ($userType == 'Entity'){
+			$this->view->assign("situation",$user->getSituation());
+
+		}
+
 		$page = $userType."Form";
 		$this->view->display($page);
 	}

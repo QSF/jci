@@ -6,7 +6,8 @@
     <option value="email">E-mail</option>
   </select><br/>
 
-
-  <input type="text" name="searchField" id="searchField"/><br/>
-	<input type="submit" value="Procurar" id="searchButton"/>
+  <div class="input-append">
+    <input class="span3" type="text" name="searchField" id="searchField" placeholder="Escreva aqui…">
+    <button class="btn" type="submit" id="searchButton">Procurar</button>
+  </div>
 </form>

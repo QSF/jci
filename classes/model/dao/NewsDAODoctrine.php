@@ -1,9 +1,9 @@
 <?php
+require_once (DAO_PATH . "/NewsDAO.php");
 
-class NewsDAODoctrine extends UserDAODoctrine implements VolunteerDAO{
+class NewsDAODoctrine extends DAODoctrine implements NewsDAO{
 	/**
-	*	@return repository repositório da tabela volunteer.
-	*	@todo ver se este método realmente será preciso, ou seja, utilizado em algum método desta classe.
+	*	@return repository repositório da tabela news.
 	*/
 	protected function getRepository(){
 		return $this->entityManager->getRepository('News');

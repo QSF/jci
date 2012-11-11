@@ -14,7 +14,8 @@ require_once (VIEW_PATH . "/AdministratorView.php");
 class ViewFactory implements Register
 {
 
-	/** Método que instancia os objetos View
+	/** 
+	*   Método que instancia os objetos View
 	*	
 	* 	Este método cria um objeto do tipo $name+View.
 	*	Ex: Se $name = DAO e o nome do costrutor é Entity
