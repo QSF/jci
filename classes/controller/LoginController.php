@@ -1,6 +1,5 @@
 <?php
 
-
 /**
 * Controller que realiza o login independente do usuario
 *
@@ -17,8 +16,9 @@ class LoginController extends ApplicationController
 		$user = $dao->findByEmail($username);
 
 		if ($user != null ){
-			if(!($user instanceof Entity && $user->getSituation() == false))
-				$this->setSession($user);
+			if($user instanceof Entity && $user->getSituation() == false)
+				$this->view->assignError("Erro. Entidade ainda não foi aceita.");
+			else $this->setSession($user);
 		}
 		else
 			$this->view->assignError("Nome de usuário ou senha inválidos");
@@ -41,8 +41,6 @@ class LoginController extends ApplicationController
 		else{
 			$this->view->assignError("Nome de usuário ou senha inválidos");
 		}
-
-
 	}
 
 	public function getForm(){

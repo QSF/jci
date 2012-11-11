@@ -1,6 +1,6 @@
 //Aqui ficarão alguns problemas de retorno para usuário, como coisas poucas intuitivas, msg ruins(ou sem msg)
+###arrumado### Se uma entidade que não está válida tentar logar, nenhuma msg é exibida.
 Ao digitar em algum textarea, precisamos mostrar quantos caracteres que faltam.
 No perfil de um usuário, falta colocar para listar campo e público.
 Ao editar um perfil, o nome do botão aparece cadastrar.
-Se uma entidade que não está válida tentar logar, nenhuma msg é exibida.
 Ao validar uma entidade, nenhuma msg de sucesso é mostrada.
