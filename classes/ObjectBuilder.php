@@ -40,8 +40,6 @@ class ObjectBuilder
 	
 		$user->setPhone				  ($this->dropCharacter($this->request->get('phone'))); //$this->request->get('phone')	
 		$user->setHowYouKnow		  ( $this->request->get('howYouKnow'));
-		$user->setPublic			  ( $this->getPublic() );
-		//temos que implementar o field
 		$user->setCep 				  ( $this->dropCharacter($this->request->get('cep')));		
 		$user->setReceiveNotification ( $notification								      );
 		$user->setName                ( $this->request->get('name')					      );
@@ -182,6 +180,12 @@ class ObjectBuilder
 		$receivedNotification = $this->request->get('receivedNewsletter') != null ? true : false;
 		$user->setNewsletter($receivedNotification);
 		return $user;
+	}
+
+	protected function formatDate($date){
+		$date = explode("/", $date); 
+		$newDate =  $date[2] . '-' . $date[1] . '-' . $date[0];
+		return $newDate;
 	}
 
 	/**

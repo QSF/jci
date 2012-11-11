@@ -39,7 +39,7 @@ class Entity extends User{
 	protected $newsletter;
 
 	/** 
-	 * @Column(type="string", length=11, nullable=false)
+	 * @Column(type="string", length=14, nullable=false)
 	 * @var int
 	 */
 	protected $cnpj;
