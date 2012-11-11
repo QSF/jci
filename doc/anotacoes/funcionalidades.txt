@@ -1,2 +1,3 @@
 //Aqui anota as funcionalidades que foram deixadas(por exemplo mandar email)
+Informar para os moderadores as ações mais importantes, como feedback, exclusão de conta e situação (via email).
 Não pode permitir que o admin remova sua conta.
