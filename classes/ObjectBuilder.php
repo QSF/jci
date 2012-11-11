@@ -146,10 +146,7 @@ class ObjectBuilder
 		$user->setEstablishmentDate(new \DateTime($date));
 		$user->setSite($this->request->get('site'));
 
-		$situation =  $this->request->get('situation');
-/*		if ($situation == null){
-			$situation = false;
-		}*/
+		$situation =  $this->request->get('situation') != null ? true : false;
 		$user->setSituation($situation);
 		$user->setStatus(false);
 
