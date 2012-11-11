@@ -32,11 +32,6 @@ class Entity extends User{
 	 * @var boolean 
 	 */
 	protected $status = false;
-	/** 
-	 * @Column(type="boolean") 
-	 * @var boolean 
-	 */
-	protected $newsletter;
 
 	/** 
 	 * @Column(type="string", length=14, nullable=false)
@@ -44,7 +39,7 @@ class Entity extends User{
 	 */
 	protected $cnpj;
 	/** 
-	 * @Column(type="string") 
+	 * @Column(type="string", nullable=false) 
 	 * @var string
 	 */
 	protected $companyName;
@@ -54,7 +49,7 @@ class Entity extends User{
 	 */
 	protected $stateRegistration;
 	/** 
-	 * @Column(type="integer")
+	 * @Column(type="string", length=10, nullable=true)
 	 * @var int
 	 */
 	protected $ownerPhone;

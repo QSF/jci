@@ -33,15 +33,6 @@ class ObjectBuilder
 	protected function getUser($user){
 
 		$notification = $this->request->get('receivedNotification') == null ? false : true;
-
-		$user->setReceiveNotification ( $notification						);
-		$user->setName                ( $this->request->get('name')			);
-		$user->setEmail				  ( $this->request->get('email')		);
-		$user->setPassword 			  ( md5($this->request->get('password')));
-	
-		$user->setPhone				  ($this->dropCharacter($this->request->get('phone'))); //$this->request->get('phone')	
-		$user->setHowYouKnow		  ( $this->request->get('howYouKnow'));
-		$user->setCep 				  ( $this->dropCharacter($this->request->get('cep')));		
 		$user->setReceiveNotification ( $notification								      );
 		$user->setName                ( $this->request->get('name')					      );
 		$user->setEmail				  ( $this->request->get('email')					  );
@@ -70,7 +61,7 @@ class ObjectBuilder
 			if($public != null){
 				$user->addPublic($public);
 			}
-				
+
 		}
 	}
 
@@ -97,12 +88,6 @@ class ObjectBuilder
 	*/
 	protected function getLegalPerson($user){
 		$this->getUser($user);
-		$user->setCnpj 				($this->dropCharacter($this->request->get('cnpj')));
-
-
-		$user->setCompanyName 		( $this->request->get('companyName')		);
-		$user->setStateRegistration ( $this->request->get('stateRegistration')	);
-		$user->setOwnerPhone($this->dropCharacter($this->request->get('ownerPhone')));	
 		$user->setCnpj 				( $this->dropCharacter($this->request->get('cnpj'))             );
 		$user->setCompanyName 		( $this->request->get('companyName')		                    );
 		$user->setStateRegistration ( $this->dropCharacter($this->request->get('stateRegistration')));
@@ -116,11 +101,7 @@ class ObjectBuilder
 	protected function getNaturalPerson($user){
 		$this->getUser($user);
 		$user->setCpf($this->dropCharacter($this->request->get('cpf')));
-
-	
 	}
-
-	
 
 	/** Método que monta um user de acordo com os dados de voluntario passados em uma requisição.
 	*
@@ -135,7 +116,7 @@ class ObjectBuilder
 	*/
 	public function getVolunteerLegalPerson(){
 		$user = new VolunteerLegalPerson;
-		
+
 		$this->getLegalPerson($user);
 		$this->getVolunteer($user);
 
@@ -147,7 +128,7 @@ class ObjectBuilder
 	*/
 	public function getVolunteerNaturalPerson(){
 		$user = new VolunteerNaturalPerson;
-		
+
 		$this->getNaturalPerson($user);
 		$this->getVolunteer($user);
 
@@ -161,32 +142,15 @@ class ObjectBuilder
 	public function getEntity(){
 		$user = new Entity;
 		$this->getLegalPerson($user);
-
-		$this->getUser($user);
-		//seta a data como mm/dd/ano para o bd
-		//$date = new \DateTime($this->request->get('establishmentDate'));
-		$date = date('m-d-Y', strtotime($this->request->get('establishmentDate')));
-		$date = new \DateTime($date);
-
-		$user->setEstablishmentDate($date);
-
-		$user->setEstablishmentDate(new \DateTime($this->formatDate($this->request->get('establishmentDate')) ));
+		$date = date('Y-m-d', strtotime($this->request->get('establishmentDate')) );
+		$user->setEstablishmentDate(new \DateTime($date));
 		$user->setSite($this->request->get('site'));
-		
+
 		$situation =  $this->request->get('situation') != null ? true : false;
 		$user->setSituation($situation);
 		$user->setStatus(false);
-		
 
-		$receivedNotification = $this->request->get('receivedNewsletter') != null ? true : false;
-		$user->setNewsletter($receivedNotification);
 		return $user;
-	}
-
-	protected function formatDate($date){
-		$date = explode("/", $date); 
-		$newDate =  $date[2] . '-' . $date[1] . '-' . $date[0];
-		return $newDate;
 	}
 
 	/**
@@ -346,12 +310,12 @@ class ObjectBuilder
 		$donation = new Donation;
 		$entity = new Entity;
 		$volunteer = new VolunteerLegalPerson; //aqui pode ser qlq tipo de usuário, o ideal seria volunteer mais é abstrata
-		
+
 		$volunteerId = $this->request->get('id_voluntario');
 		$volunteer->setId($volunteerId);
 		$entityId = $this->request->get('id_entidade');
 		$entity->setId($entityId);
-		
+
 		$dao = ServiceLocator::getInstance()->getDAO("DAO");
 		$volunteer = $dao->findById($volunteer);
 
@@ -370,7 +334,7 @@ class ObjectBuilder
 		$date = new \DateTime($date);
 
 		$moreInfo = $this->request->get('moreInfo');
-		
+
 		if ($moreInfo === null)
 			$moreInfo = "";
 
