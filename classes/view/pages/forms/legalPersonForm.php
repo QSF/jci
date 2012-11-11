@@ -1,3 +1,4 @@
+
 <label for="cnpj">CNPJ</label>
 <input type="text" id="idCnpj" name="cnpj" value="<?php echo $user->getCnpj()?>"/>
 
@@ -9,9 +10,3 @@
 
 <label for="ownerPhone">Telefone do responsável</label>
 <input type="text" id="idOwnerPhone" name="ownerPhone"  value="<?php echo $user->getOwnerPhone()?>" />
-
-
-
-
-
-
