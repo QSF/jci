@@ -1,1 +1,2 @@
 //Aqui ficarão os erros de verdade, bugs comprometedores, quando não está funcionando do jeito certo.
+Não exclui nenhum usuário que participe de uma doação (O esquema era fazer um lance de desativar o cadastro apenas).

@@ -35,7 +35,7 @@ class Entity extends User{
 
 	/** 
 	* @Column(type="string", length=14, nullable=false)
-	* @var int
+	* @var string
 	*/
 	protected $cnpj;
 	/** 
