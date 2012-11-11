@@ -149,9 +149,6 @@ class ObjectBuilder
 		$user->setSituation($situation);
 		$user->setStatus(false);
 
-
-		$receivedNotification = $this->request->get('receivedNewsletter') != null ? true : false;
-		$user->setNewsletter($receivedNotification);
 		return $user;
 	}
 

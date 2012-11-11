@@ -32,11 +32,6 @@ class Entity extends User{
 	 * @var boolean 
 	 */
 	protected $status = false;
-	/** 
-	 * @Column(type="boolean") 
-	 * @var boolean 
-	 */
-	protected $newsletter;
 
 	/** 
 	 * @Column(type="string", length=14, nullable=false)
