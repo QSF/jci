@@ -37,7 +37,7 @@ abstract class User
     protected $name;
 
     /**
-     *@Column(type="string")
+     *@Column(type="string", unique=true)
      **/
     protected $email;
 
@@ -47,7 +47,7 @@ abstract class User
     protected $password;
 
     /**
-     * @Column(type="string", length=10, nullable=true)
+     * @Column(type="string", length=10)
      **/
     protected $phone;
 
@@ -73,7 +73,7 @@ abstract class User
     protected $actingArea;
 
     /**
-     * @Column(type="integer")
+     * @Column(type="integer", nullable=false)
      **/
     protected $cep;
 

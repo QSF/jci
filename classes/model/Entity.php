@@ -54,7 +54,7 @@ class Entity extends User{
 	 */
 	protected $stateRegistration;
 	/** 
-	 * @Column(type="integer")
+	 * @Column(type="string", length=10, nullable=true)
 	 * @var int
 	 */
 	protected $ownerPhone;

@@ -160,8 +160,6 @@ class ObjectBuilder
 	public function getEntity(){
 		$user = new Entity;
 		$this->getLegalPerson($user);
-
-		$this->getUser($user);
 		//seta a data como mm/dd/ano para o bd
 		//$date = new \DateTime($this->request->get('establishmentDate'));
 		$date = date('m-d-Y', strtotime($this->request->get('establishmentDate')));
