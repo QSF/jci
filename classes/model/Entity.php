@@ -44,7 +44,7 @@ class Entity extends User{
 	 */
 	protected $cnpj;
 	/** 
-	 * @Column(type="string") 
+	 * @Column(type="string", nullable=false) 
 	 * @var string
 	 */
 	protected $companyName;
