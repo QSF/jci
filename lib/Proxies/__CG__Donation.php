@@ -42,12 +42,6 @@ class Donation extends \Donation implements \Doctrine\ORM\Proxy\Proxy
     }
 
     
-    public function beforePersist()
-    {
-        $this->__load();
-        return parent::beforePersist();
-    }
-
     public function getId()
     {
         $this->__load();
@@ -60,22 +54,28 @@ class Donation extends \Donation implements \Doctrine\ORM\Proxy\Proxy
         return parent::setId($id);
     }
 
-    public function setDate($date)
-    {
-        $this->__load();
-        return parent::setDate($date);
-    }
-
     public function getDate()
     {
         $this->__load();
         return parent::getDate();
     }
 
-    public function setFeedBackVolunteer($feedBackVolunteer)
+    public function setDate($date)
     {
         $this->__load();
-        return parent::setFeedBackVolunteer($feedBackVolunteer);
+        return parent::setDate($date);
+    }
+
+    public function getMoreInfo()
+    {
+        $this->__load();
+        return parent::getMoreInfo();
+    }
+
+    public function setMoreInfo($moreInfo)
+    {
+        $this->__load();
+        return parent::setMoreInfo($moreInfo);
     }
 
     public function getFeedBackVolunteer()
@@ -84,10 +84,10 @@ class Donation extends \Donation implements \Doctrine\ORM\Proxy\Proxy
         return parent::getFeedBackVolunteer();
     }
 
-    public function setDateFeedBackVolunteer($dateFeedBackVolunteer)
+    public function setFeedBackVolunteer($feedBackVolunteer)
     {
         $this->__load();
-        return parent::setDateFeedBackVolunteer($dateFeedBackVolunteer);
+        return parent::setFeedBackVolunteer($feedBackVolunteer);
     }
 
     public function getDateFeedBackVolunteer()
@@ -96,10 +96,10 @@ class Donation extends \Donation implements \Doctrine\ORM\Proxy\Proxy
         return parent::getDateFeedBackVolunteer();
     }
 
-    public function setFeedBackEntity($feedBackEntity)
+    public function setDateFeedBackVolunteer($dateFeedBackVolunteer)
     {
         $this->__load();
-        return parent::setFeedBackEntity($feedBackEntity);
+        return parent::setDateFeedBackVolunteer($dateFeedBackVolunteer);
     }
 
     public function getFeedBackEntity()
@@ -108,22 +108,22 @@ class Donation extends \Donation implements \Doctrine\ORM\Proxy\Proxy
         return parent::getFeedBackEntity();
     }
 
-    public function setDateFeedEntity($dateFeedBackEntity)
+    public function setFeedBackEntity($feedBackEntity)
     {
         $this->__load();
-        return parent::setDateFeedEntity($dateFeedBackEntity);
+        return parent::setFeedBackEntity($feedBackEntity);
     }
 
-    public function getDateFeedEntity()
+    public function getDateFeedBackEntity()
     {
         $this->__load();
-        return parent::getDateFeedEntity();
+        return parent::getDateFeedBackEntity();
     }
 
-    public function setVolunteer(\Volunteer $volunteer)
+    public function setDateFeedBackEntity($dateFeedBackEntity)
     {
         $this->__load();
-        return parent::setVolunteer($volunteer);
+        return parent::setDateFeedBackEntity($dateFeedBackEntity);
     }
 
     public function getVolunteer()
@@ -132,10 +132,10 @@ class Donation extends \Donation implements \Doctrine\ORM\Proxy\Proxy
         return parent::getVolunteer();
     }
 
-    public function setEntity(\Entity $entity)
+    public function setVolunteer(\Volunteer $volunteer = NULL)
     {
         $this->__load();
-        return parent::setEntity($entity);
+        return parent::setVolunteer($volunteer);
     }
 
     public function getEntity()
@@ -144,10 +144,10 @@ class Donation extends \Donation implements \Doctrine\ORM\Proxy\Proxy
         return parent::getEntity();
     }
 
-    public function setModerator(\Moderator $moderator)
+    public function setEntity(\Entity $entity = NULL)
     {
         $this->__load();
-        return parent::setModerator($moderator);
+        return parent::setEntity($entity);
     }
 
     public function getModerator()
@@ -156,10 +156,10 @@ class Donation extends \Donation implements \Doctrine\ORM\Proxy\Proxy
         return parent::getModerator();
     }
 
-    public function setField(\Field $field)
+    public function setModerator(\Moderator $moderator = NULL)
     {
         $this->__load();
-        return parent::setField($field);
+        return parent::setModerator($moderator);
     }
 
     public function getField()
@@ -168,10 +168,16 @@ class Donation extends \Donation implements \Doctrine\ORM\Proxy\Proxy
         return parent::getField();
     }
 
+    public function setField(\Field $field = NULL)
+    {
+        $this->__load();
+        return parent::setField($field);
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'date', 'feedBackVolunteer', 'dateFeedBackVolunteer', 'feedBackEntity', 'dateFeedBackEntity', 'volunteer', 'entity', 'moderator', 'field');
+        return array('__isInitialized__', 'id', 'date', 'moreInfo', 'feedBackVolunteer', 'dateFeedBackVolunteer', 'feedBackEntity', 'dateFeedBackEntity', 'volunteer', 'entity', 'moderator', 'field');
     }
 
     public function __clone()

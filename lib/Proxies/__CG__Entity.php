@@ -90,18 +90,6 @@ class Entity extends \Entity implements \Doctrine\ORM\Proxy\Proxy
         return parent::getStatus();
     }
 
-    public function setNewsletter($newsletter)
-    {
-        $this->__load();
-        return parent::setNewsletter($newsletter);
-    }
-
-    public function getNewsletter()
-    {
-        $this->__load();
-        return parent::getNewsletter();
-    }
-
     public function setCnpj($cnpj)
     {
         $this->__load();
@@ -333,7 +321,7 @@ class Entity extends \Entity implements \Doctrine\ORM\Proxy\Proxy
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'receiveNotification', 'name', 'email', 'password', 'phone', 'howYouKnow', 'cep', 'public', 'actingArea', 'establishmentDate', 'site', 'situation', 'status', 'newsletter', 'cnpj', 'companyName', 'stateRegistration', 'ownerPhone', 'donations');
+        return array('__isInitialized__', 'id', 'receiveNotification', 'name', 'email', 'password', 'phone', 'howYouKnow', 'cep', 'public', 'actingArea', 'establishmentDate', 'site', 'situation', 'status', 'cnpj', 'companyName', 'stateRegistration', 'ownerPhone', 'donations');
     }
 
     public function __clone()
