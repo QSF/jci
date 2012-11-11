@@ -83,12 +83,6 @@ class Entity extends User{
     public function getStatus(){
 		return $this->status;
 	}
-    public function setNewsletter($newsletter){
-		$this->newsletter = $newsletter;
-	}
-    public function getNewsletter(){
-		return $this->newsletter;
-	}
 	
 	public function setCnpj($cnpj)
 	{

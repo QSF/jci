@@ -1,4 +1,5 @@
 <?php 
+	$arrayAttributes['Receber Noticias da JCI'] = ($user->getReceiveNotification())? "Sim" : "Não";
 	$arrayAttributes['Nome'] = $user->getName();
 	$arrayAttributes['E-mail'] = $user->getEmail();
 	$arrayAttributes['Telefone'] = $user->getPhone();
