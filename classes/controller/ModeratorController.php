@@ -48,6 +48,7 @@ class ModeratorController extends ApplicationController
 		$dao->validateEntity($entity);
 
 		//Variavel que precisa ser setada para mostrar a acao de validar no UsersList
+		$this->view->assignSuccess("Entidade Validada com sucesso!",true);
 		$this->view->assign("validateAction",true);
 
 		$this->view->display("Home");
