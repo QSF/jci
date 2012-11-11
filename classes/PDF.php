@@ -20,7 +20,7 @@ class PdfGenerator{
 		$pdf->SetAuthor('JCI - Londrina');
 		$pdf -> SetTitle('Cruzamento de dados - JCI Londrina');
 		$link = "./index.php";
-		$pdf->Image("./img/logo.jpg", 6, 1, 10,5,'JPG', $link);
+		$pdf->Image("./assets/img/logo-pdf.jpg", 6, 1, 10,5,'JPG', $link);
 
 
 		$pdf->setXY(6,7);
