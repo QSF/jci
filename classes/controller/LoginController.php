@@ -65,6 +65,8 @@ class LoginController extends ApplicationController
 
 		if ($user != null)
 			$this->setSession($user);
+		else
+			$this->view->assignError("Nome de usuário ou senha inválidos");
 		
 		$this->view->display("Home");
 
@@ -77,10 +79,7 @@ class LoginController extends ApplicationController
 		if($user == null){
 			$dao = ServiceLocator::getInstance()->getDAO("AdministratorDAO");
 			$user = $dao->findByLogin($username);
-
 		}
-
-		$this->view->assignError("Nome de usuário ou senha inválidos");
 		return $user;
 	}
 
