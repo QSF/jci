@@ -12,7 +12,7 @@ class VolunteerNaturalPerson extends Volunteer
     }
 	/**
 	* @Column(type="string", length=11, nullable=false)
-	* @var int
+	* @var string
 	*/
 	protected $cpf;
 

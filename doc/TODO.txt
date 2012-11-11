@@ -1,2 +1,0 @@
-*Passar CEP e CNPJ para string
-*Filtrar entrada do usuario

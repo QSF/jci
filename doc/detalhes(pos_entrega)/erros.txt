@@ -1,0 +1,1 @@
+//Aqui ficarão os erros de verdade, bugs comprometedores, quando não está funcionando do jeito certo.

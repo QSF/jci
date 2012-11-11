@@ -1,8 +1,0 @@
-Arquivo com os detalhes do sistema que precisam ser feitos.
-
-#Ao editar uma entida, ela volta a não ser válida.
-#Quando um usuário for editado ou removido, o mesmo deve ser avisado via email.
-#Deixar em um aquivo XML as msgs padrões do sistema, assim o pessoal da jci poderá mudar facilmente.
-#Mudar o nome do botão no formulário de editar(está como cadastro)
-#Moderador não confirma senha
-#menu dropdown

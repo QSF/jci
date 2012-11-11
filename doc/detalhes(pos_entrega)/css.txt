@@ -1,0 +1,2 @@
+//Aqui estarão os "erros" de CSS, como falta de padronizáção, bug, etc.
+Colocar o calendário HTML5

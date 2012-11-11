@@ -1,0 +1,2 @@
+//Aqui ficarão alguns problemas de retorno para usuário, como coisas poucas intuitivas, msg ruins(ou sem msg)
+Ao digitar em algum textarea, precisamos mostrar quantos caracteres que faltam.

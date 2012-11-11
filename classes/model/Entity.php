@@ -34,24 +34,24 @@ class Entity extends User{
 	protected $status = false;
 
 	/** 
-	 * @Column(type="string", length=14, nullable=false)
-	 * @var int
-	 */
+	* @Column(type="string", length=14, nullable=false)
+	* @var int
+	*/
 	protected $cnpj;
 	/** 
-	 * @Column(type="string", nullable=false) 
-	 * @var string
-	 */
+	* @Column(type="string", nullable=false) 
+	* @var string
+	**/
 	protected $companyName;
 	/** 
-	 * @Column(type="string", length=10, nullable=false)
-	 * @var int
-	 */
+	* @Column(type="string", length=10, nullable=false)
+	* @var string
+	*/
 	protected $stateRegistration;
-	/** 
-	 * @Column(type="string", length=10, nullable=true)
-	 * @var int
-	 */
+	/**
+	* @Column(type="string", length=10, nullable=false)
+	* @var string
+	*/
 	protected $ownerPhone;
 
 	/**
