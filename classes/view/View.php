@@ -117,9 +117,7 @@ abstract class View{
 
       $arrayCSS = $this->arrayCSS;
   		$arrayJS = $this->arrayJS;
-
-      //método extract serve para pegar as variaveis de uma map e transformar num variavel
-     // extract($customView);
+      
       extract($this->paramArray);
       
   		include PAGES_PATH."/".$this->layoutName.".php";
