@@ -87,7 +87,8 @@ class ObjectBuilder
 		}
 	}
 
-	/** Método que monta um user de acordo com os dados de legal person passados em uma requisição.
+	/** 
+	*	Método que monta um user de acordo com os dados de legal person passados em uma requisição.
 	*
 	*	@param user usuário que receberá os valores dos campos de legal person
 	*/
@@ -99,7 +100,8 @@ class ObjectBuilder
 		$user->setOwnerPhone 		( $this->dropCharacter($this->request->get('ownerPhone'))       );
 	}
 
-	/** Método que monta um user de acordo com os dados de natural person passados em uma requisição.
+	/** 
+	*	Método que monta um user de acordo com os dados de natural person passados em uma requisição.
 	*
 	*	@param user usuário que receberá os valores dos campos de Natural person
 	*/
@@ -108,7 +110,8 @@ class ObjectBuilder
 		$user->setCpf($this->dropCharacter($this->request->get('cpf')));
 	}
 
-	/** Método que monta um user de acordo com os dados de voluntario passados em uma requisição.
+	/** 
+	*	Método que monta um user de acordo com os dados de voluntario passados em uma requisição.
 	*
 	*	@param user usuário que receberá os valores dos campos de volunteer
 	*/
@@ -276,10 +279,18 @@ class ObjectBuilder
 		return $public;
 	}
 
+	/**
+	*	Método que retorna um publico na hora de atualizar.
+	*	@return public.
+	*/
 	public function getUpdatePublic(){
 		return $this->getPublic(true);
 	}
 
+	/**
+	*	Método que retorna um publico na hora de criar.
+	*	@return public.
+	*/
 	public function getCreatePublic(){
 		return $this->getPublic(false);
 	}
@@ -311,6 +322,11 @@ class ObjectBuilder
 		return $attribute;
 	}
 
+	/**
+	*	Método que retorna uma doação de um formulário.
+	*	@return $donation.
+	*	@return null caso os dados estejam incompletos.
+	*/
 	public function getDonation(){
 		$donation = new Donation;
 		$entity = new Entity;

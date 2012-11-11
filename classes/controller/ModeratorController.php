@@ -23,7 +23,7 @@ class ModeratorController extends ApplicationController
 		//Saber qual a posição que essas páginas estão no DAO
 		$pagePosition = $page * $this->maxResults;
 		$dao = ServiceLocator::getInstance()->getDAO("EntityDAO");
-		$users = $dao-> getEntitiesNegativeSituation($pagePosition, $this->maxResults);
+		$users = $dao->getEntitiesNegativeSituation($pagePosition, $this->maxResults);
 
 		$this->request->setRequestAction("moderator", "getEntitiesWaitingApproval");
 		$this->assignPagination($page, $users, null);

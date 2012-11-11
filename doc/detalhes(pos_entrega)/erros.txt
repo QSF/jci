@@ -1,3 +1,4 @@
 //Aqui ficarão os erros de verdade, bugs comprometedores, quando não está funcionando do jeito certo.
-Quando um moderador edita uma entidade, sua senha fica como vazia.
+###Bug arrumado### Quando um moderador edita uma entidade, sua senha fica como vazia. 
+###Bug arrumado### As Entidades que ainda não foram aceitas estão aparecendo na lista de entidades para intermediar doações.
 Não exclui nenhum usuário que participe de uma doação (O esquema era fazer um lance de desativar o cadastro apenas).

@@ -52,7 +52,7 @@ class DonationController extends ApplicationController{
 		$this->view->assign("volunteers", $volunteers);
 
 		$entityDao = ServiceLocator::getInstance()->getDAO("EntityDAO");
-		$entities = $entityDao->findAll();
+		$entities = $entityDao->findAllEntitiesApproved();//deve pegar apenas as entidade aprovadas
 		$this->view->assign("entities",$entities);
 
 		$fieldDao = ServiceLocator::getInstance()->getDAO("FieldDAO");

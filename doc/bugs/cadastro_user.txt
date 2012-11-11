@@ -1,6 +1,7 @@
 Ao cadastrarm um user e não selecionar campo ou publico aparece este erro no topo da página
 	Warning: Invalid argument supplied for foreach() in /srv/www/htdocs/jci/classes/ObjectBuilder.php on line 75
+	#O problema aqui é que o usuário deverá escolher um campo/publico.
 
-Arrumar no cadastro de user: quando clica num campo que tem filho, aparece o filho no lugar errado e css zuado.
+Arrumar no cadastro de user: quando clica num campo que tem filho, aparece o filho no lugar errado e css zuado.(Guilherme está arrumando em outro branch)
 
  
