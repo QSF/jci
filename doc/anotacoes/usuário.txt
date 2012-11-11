@@ -3,6 +3,8 @@
 ###arrumado### Ao validar uma entidade, nenhuma msg de sucesso é mostrada.
 ###arrumado### Ao editar um perfil, o nome do botão aparece cadastrar.
 ###arrumado### Caso um login de Admin ou moderador falhe, duas msgs são exibidas.
+Criar um campo para o usuário escolher o quantidade de itens exibidor por página.
+Colocar um link para voltar ao topo em uma listagem.
 Enviar email para a entidade aguardar e posterior se ela foi aceita ou não.
-No perfil de um usuário, falta colocar para listar campo e público.
+No perfil de um usuário, falta colocar para listar campo e público(Aproveitar que o estilo do perfil será mudado).
 Ao digitar em algum textarea, precisamos mostrar quantos caracteres que faltam.

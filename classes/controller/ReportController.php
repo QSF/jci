@@ -55,7 +55,7 @@ class ReportController extends ApplicationController{
 		//Todos os campos serão exibidos na view.
 		$this->view->assign("fields", $fields);
 
-		$this->display("generateReport");
+		$this->display("GenerateReport");
 	}
 
 
