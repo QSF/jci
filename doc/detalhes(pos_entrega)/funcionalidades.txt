@@ -1,0 +1,2 @@
+//Aqui anota as funcionalidades que foram deixadas(por exemplo mandar email)
+Não pode permitir que o admin remova sua conta.

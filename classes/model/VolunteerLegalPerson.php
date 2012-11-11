@@ -10,24 +10,25 @@ class VolunteerLegalPerson extends Volunteer
 	 public function __construct(){
 		parent::__construct();	
     }
+    
 	/** 
 	* @Column(type="string", length=14, nullable=false)
 	* @var int
 	*/
 	protected $cnpj;
 	/** 
-	* @Column(type="string") 
+	* @Column(type="string", nullable=false) 
 	* @var string
 	**/
 	protected $companyName;
 	/** 
-	* @Column(type="integer") 
-	* @var int
+	* @Column(type="string", length=10, nullable=false)
+	* @var string
 	*/
 	protected $stateRegistration;
 	/**
-	* @Column(type="integer")
-	* @var int
+	* @Column(type="string", length=10, nullable=false)
+	* @var string
 	*/
 	protected $ownerPhone;
 
