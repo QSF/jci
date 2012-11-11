@@ -1,11 +1,11 @@
 <h3>Lista de Usuários</h3>
 
 <?php include HELPER_PATH."/Pagination.php";?>
-<?php foreach($users as $user){ ?>
+<?php foreach($moderators as $moderator){ ?>
   <span class="manage-list">
 	<label>
-	<a style="text-decoration: none;" href="./index.php?controller=registration&action=read&user_id=<?php echo $user->getId()?>
-				&profile=<?php echo get_class($user)?>">
+	<a style="text-decoration: none;" href="./index.php?controller=registration&action=read&user_id=<?php echo $moderator->getId()?>
+				&profile=<?php echo get_class($moderator)?>">
 		<?php echo $user->getName()?>
 	</a>
 
@@ -18,12 +18,12 @@
 	</a>
 
 	&nbsp;&nbsp;
-	<?php if(! isset($hideReport)) {?>
+	
 	<a href="./index.php?controller=report&action=generateReportUser&user_id=<?php echo $user->getId();?>
 		&user_type=<?php echo get_class($user);?>">
 		Gerar Relatório
 	</a>
-	<?php } ?>
+
 	&nbsp;&nbsp;
 
 	
