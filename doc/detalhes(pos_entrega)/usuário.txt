@@ -1,2 +1,4 @@
 //Aqui ficarão alguns problemas de retorno para usuário, como coisas poucas intuitivas, msg ruins(ou sem msg)
 Ao digitar em algum textarea, precisamos mostrar quantos caracteres que faltam.
+No perfil de um usuário, falta colocar para listar campo e público.
+Ao editar um perfil, o nome do botão aparece cadastrar.

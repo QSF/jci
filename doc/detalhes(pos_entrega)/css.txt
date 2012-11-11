@@ -3,3 +3,4 @@ Colocar o calendário HTML5
 Com o moderador logado, na hora de procurar um usuário, o campo de digitar está de um tamanho muito estranho.
 No enviar notícias, o editar pega uma parte dos anuncios do lado.
 Lista uma notícia com um título muito grande fica estranho.
+A parte de listar o publico com checkbox está sem o label e em outra fonte.
