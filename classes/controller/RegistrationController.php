@@ -56,10 +56,11 @@ class RegistrationController extends ApplicationController{
 			$view->display("404");
 			return;
 		}
+
 		$userUpdate->setId($this->request->get("user_id"));
 		$this->dao->clear();
 		$this->dao->update($userUpdate);
-
+		$this->dao->clear();
 		$this->view->assignSuccess("Usuário editado");
 		$this->display("Home");
 
@@ -119,7 +120,8 @@ class RegistrationController extends ApplicationController{
 
 		if ($userType == 'Entity'){
 			$this->view->assign("situation",$user->getSituation());
-
+			echo "BUCEETAAAAA";
+			echo $user->getSituation() ? 'true' : 'false';
 		}
 
 		$page = $userType."Form";
