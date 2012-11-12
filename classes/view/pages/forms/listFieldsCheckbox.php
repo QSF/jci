@@ -20,7 +20,7 @@
 function listFields($var,$user){
 	$arrayFields = array(); 
 	?>
-	
+	<label class="checkbox">
 	<input type="checkbox" name="actingArea[]" value="<?php echo $var->getID();?>" 
 	id="checkbox<?php echo $var->getId()?>" class="actingArea"
 	<?php if( hasId($var->getId(),$user->getActingArea()) ){
