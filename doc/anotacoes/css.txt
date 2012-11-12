@@ -1,7 +1,7 @@
 //Aqui estarão os "erros" de CSS, como falta de padronizáção, bug, etc.
 
 Colocar o calendário HTML5
-Listar uma notícia com um título muito grande fica estranho.
+
 *A parte de listar o publico com checkbox está sem o label e em outra fonte.
 
 
@@ -13,3 +13,5 @@ Com o moderador logado, na hora de procurar um usuário, o campo de digitar est�
 *A parte de listar o CAMPO com checkbox está sem o label e em outra fonte.
 
 No enviar notícias, o editor pega uma parte dos anuncios do lado.
+
+Listar uma notícia com um título muito grande fica estranho.

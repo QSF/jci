@@ -213,10 +213,10 @@ width:100%; /* largura */
   background-image: url('../img/error.png');
 }
 
-.manage-list label {
-  display: inline-block;
+.news {
+/*  display: inline-block;
   margin-right: 100px;
   margin-left: 10px;
-  width: 200px;
+  width: 200px;*/
   font-weight: bolder;
 }
