@@ -1,5 +1,4 @@
 <ul>
-
 	<?php require_once(PAGES_PATH . '/menu/AccountMenu.php');?>
 	<li><a href="./index.php?controller=report&action=redirectSet">Cruzamento de dados(relatório)	</a></li>
 	<li><a href="./index.php?controller=moderator&action=redirectManage">Gerência de conteúdo</a></li>
@@ -27,5 +26,4 @@
 		Gerência de Notícias
 	</a>
 	<li><a href="./index.php?controller=login&action=logout">Logout</a></li>
-</div>
 </ul>
