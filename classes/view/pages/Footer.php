@@ -1,24 +1,17 @@
 <div class="grid_4">
-        <a href="./index.php?controller=login&action=getForm&type=Admin">Área da Administração</a>
-
-      </div>
-      <div class="grid_4">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-      <div class="grid_4">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
+  <br><a href="./index.php?controller=login&action=getForm&type=Admin">Área da Administração</a>
+</div>
+<div class="grid_4">
+  <p>A Junior Chamber International é uma organização mundial de jovens cidadãos ativos com mais de 200 mil membros em 115 paises.</p>
+</div>
+<div class="grid_4">
+  <br>
+  <address>
+    <strong>JCI Londrina.</strong><br>
+    Rua Deputado Fernando Ferrari, 160<br>
+    Londrina, PR<br>
+    BRASIL<br>
+    <abbr title="Phone">P:</abbr> (43) 9999-9999<br>
+    <a href="mailto:#">jcilondrina@gmail.com</a>
+  </address>
+</div>

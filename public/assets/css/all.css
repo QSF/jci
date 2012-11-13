@@ -251,3 +251,7 @@ width:100%; /* largura */
   border-top-color: #F37121 !important;
   border-bottom-color: #F37121 !important;
 }
+
+.perfil {
+  padding-bottom: 8px;
+}

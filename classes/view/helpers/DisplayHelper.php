@@ -5,17 +5,18 @@
 	}
 
 	function displayAttribute($array){
-		echo "<table style=\"border:0;border-style: none;\" cellpadding=\"5\" >";
 		foreach($array as $key=>$value){
 			if($value !== null && $value !== ""){
-				echo '<tr>';
-				echo '<td>' . $key . '</td>';
-				echo '<td>' . $value . '</td>';
-				echo '</tr>';
+				?>
+				<div class="grid_5 alpha bolder perfil">
+					<?php echo $key; ?>
+				</div>
+				<div class="grid_3 omega perfil">
+					<?php echo $value; ?>
+				</div>
+				<hr> 
+				<?php
 			}
-
-
 		}
-		echo '</table>';
 	}
 ?>
