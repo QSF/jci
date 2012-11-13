@@ -6,7 +6,7 @@
 <input type="text" id="idSite" name="site" value="<?php echo $user->getSite() ?>" />
 
 <?php if ($user->getId() != null && $user->getSituation()){?>
-	<input type="hidden" id="idSituation" name="situation" value="true"/>;
+	<input type="hidden" id="idSituation" name="situation" value="true"/>
 <?php } ?>
 
 

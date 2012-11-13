@@ -57,12 +57,13 @@ class RegistrationController extends ApplicationController{
 			return;
 		}
 
+		echo get_class($userUpdate);
+
 		$userUpdate->setId($this->request->get("user_id"));
 		$this->dao->clear();
 		$this->dao->update($userUpdate);
 		$this->view->assignSuccess("Usuário editado");
 		$this->display("Home");
-
 	}
 
 	/**

@@ -162,10 +162,9 @@ class ObjectBuilder
 	}
 
 	/**
-	*	@return user moderador
+	*	Método que pega os dados de um moderador ou admin de uma requisição post(os dados são os mesmos.)
 	*/
-	public function getModerator(){
-		$user = new Moderator;
+	protected function getModAdmin($user){
 		$user->setLogin($this->request->get("login"));
 
 		$password = $this->request->get('password');
@@ -179,7 +178,14 @@ class ObjectBuilder
 		$user->setPassword($password);
 
 		$user->setEmail($this->request->get("email"));
+	}
 
+	/**
+	*	@return user moderador
+	*/
+	public function getModerator(){
+		$user = new Moderator;
+		$this->getModAdmin($user);
 		return $user;
 	}
 
@@ -187,7 +193,9 @@ class ObjectBuilder
 	*	@return user Administrator
 	*/
 	public function getAdministrator(){
-		return $this->getModerator();
+		$user = new Administrator;
+		$this->getModAdmin($user);
+		return $user;
 	}
 
 	/** 

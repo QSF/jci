@@ -11,6 +11,7 @@
 <form action="./index.php?controller=registration&action=<?php echo $action?>" method="post">
 <input type="hidden" name="user" value="Administrator"/>
 <input type="hidden" name="user_id" value="<?php if(isset($user))echo $user->getId()?>"/>
+<input type="hidden" name="login" value="<?php if(isset($user))echo $user->getLogin()?>"/>
 
 	<?php if ($action == 'update') {//exibe se quer ou não alterar a senha?>
 		<label class="checkbox">
