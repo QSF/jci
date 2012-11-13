@@ -25,7 +25,7 @@
     <ul class="dropdown-menu">
       <li><a href="./index.php?controller=donation&action=redirectManage">Gerênciar Doações</a></li>
       <li><a href="./index.php?controller=donation&action=redirectCreate">Intermediar Doações	</a></li>
-      <li><a href="./index.php?controller=report&action=redirectSet">Cruzamento de dados(relatório)	</a></li>
+      <li><a href="./index.php?controller=report&action=redirectSet">Cruzamento de dados	</a></li>
     </ul>
   </li>
 
@@ -38,16 +38,3 @@
   </li>
 	<li><a href="./index.php?controller=login&action=logout">Logout</a></li>
 </ul>
-
-<!-- 
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Dropdown <b class="caret"></b> 
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-            </ul>
-          </li> -->

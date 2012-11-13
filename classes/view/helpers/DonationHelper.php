@@ -2,7 +2,7 @@
 /**
 *	Função que exibe o feedback do voluntario
 */
-function printFeedBackVolunteer($var){ ?>
+function printFeedBackVolunteer($var,$userId){ ?>
 	<?php if ($var->getDateFeedBackVolunteer() != null) {?>
 	<p>***FeedBack Voluntário***</p> 
 	<b>Data do feedBack: </b><?php echo $var->getDateFeedBackVolunteer()->format('d/m/Y H:i:s'); ?>
@@ -42,7 +42,7 @@ function printSingleDonation($var){?>
 /**
 *	Função que exibe uma doação por completa, com links e tudo mais.
 */
-function printDonation($var, $isModerador){?>
+function printDonation($var, $isModerador, $userId){?>
 	<?php
 	printSingleDonation($var);
 	if ($isModerador) { //é página de Moderador?>
@@ -54,6 +54,13 @@ function printDonation($var, $isModerador){?>
 		?>
 	<?php }else { ?>
 		<br><a href="./index.php?controller=donation&action=redirectFeedBack&id_donation=<?php echo $var->getId();?>">Realizar feedback</a>
+		<?php if ($var->getDateFeedBackVolunteer() != null && $userId == $var->getVolunteer()->getId()) 
+			printFeedBackVolunteer($var);
+		?>
+
+		<?php if ($var->getDateFeedBackEntity() != null && $userId == $var->getEntity()->getId()) 
+			printFeedBackEntity($var);
+		?>
 	<?php }//end if é Moderador
 }
 ?>
@@ -62,11 +69,11 @@ function printDonation($var, $isModerador){?>
 /**
 *	Função que lista várias doações, com os links.
 */
-function listDonations($donations,$isModerador){	?>
+function listDonations($donations,$isModerador,$userId){	?>
 	<?php 
 		$hasDonation = false; //para colocar a linha no final.
 		foreach ($donations as $var){?>
-			<hr><?php printDonation($var,$isModerador) ?>
+			<hr><?php printDonation($var,$isModerador,$userId) ?>
 	    <?php 
 	    	$hasDonation = true;
 		}?>

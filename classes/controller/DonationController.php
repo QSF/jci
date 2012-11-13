@@ -125,7 +125,7 @@ class DonationController extends ApplicationController{
 		$this->assignPagination($page, $donations, null);
 
 		$this->view->assign("donations",$donations);
-		$this->view->assign("isModerator",true);//é moderador.
+		$this->view->assign("isModerator",$this->isModerator());//verifica se é moderador.
 
 		$this->view->display("DonationList");
 	}
@@ -133,7 +133,7 @@ class DonationController extends ApplicationController{
 	/**
 	*	Método que exibi a lista de doações de um usuário.
 	*/
-	protected function redirectUserDonations($user){
+	protected function redirectDonations($user){
 		$page = $this->getPage("page");
 
 		$pagePosition = $page * $this->maxResults;
@@ -152,6 +152,7 @@ class DonationController extends ApplicationController{
 		$this->assignPagination($page, $user->getDonations(), null);
 
 		$this->view->assign("donations",$donations);
+		$this->view->assign("userId",$user->getId());
 
 		$this->view->assign("isModerator",$this->isModerator());//verifica se é moderador.
 
@@ -160,10 +161,68 @@ class DonationController extends ApplicationController{
 
 	/**
 	*	Lista todas as doações do usuário logado
-	*	@see self::redirectUserDonations.
+	*	@see self::redirectDonations.
 	*/
 	public function redirectLoggedUserDonations(){
-		$this->redirectUserDonations($this->request->getUserSession());
+		$this->redirectDonations($this->request->getUserSession());
+	}
+
+	/**
+	*	Método que exibi a lista de doações de um usuário não realizou feedback.
+	*/
+	protected function redirectFeedBacks($user){
+		$page = $this->getPage("page");
+
+		$pagePosition = $page * $this->maxResults;
+
+		if ($user === null){
+			$this->view->assignError('Usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
+
+		$user = $this->dao->findById($user);
+
+		if ($user === null){
+			$this->view->assignError('Usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$view->display("404");
+			return;
+		}
+
+		$userType = get_class($user);
+
+		if(strpos($userType,"Volunteer") !== false){
+			$userType = 'Volunteer';
+		}
+
+		$donations = array();
+		$method = 'getFeedBack' . $userType;
+
+		foreach ($user->getDonations() as $donation)
+			if ($donation->{$method}() === null)//somente as doações que não possuem feedbacks.
+				array_push($donations, $donation);
+
+		//pegar apenas uma parte, sendo que a ordem é invertida
+		$donations = array_slice(array_reverse($donations), $pagePosition, $this->maxResults);
+		
+		$this->assignPagination($page, $user->getDonations(), null);
+
+		$this->view->assign("donations",$donations);
+		$this->view->assign("userId",$user->getId());
+
+		$this->view->assign("isModerator",$this->isModerator());//verifica se é moderador.
+
+		$this->view->display("DonationList");
+	}
+
+	/**
+	*	Lista todas as doações que o usuário logado participa e que ainda não fez o feedback.
+	*	@see self::redirectFeedBacks.
+	*/
+	public function redirectLoggedUserFeedBack(){
+		$this->redirectFeedBacks($this->request->getUserSession());
 	}
 
 	/**
@@ -242,7 +301,7 @@ class DonationController extends ApplicationController{
 		}
 		$method = 'getFeedBack' . $userType;
 		$feedBack = $donation->{$method}();
-		echo 'feedBack: ' . $feedBack;
+
 		//pega a doação(pela url) e o feedback(session)
 		//carrega a doação e o feedback(de acordo com a session) que será 'editado'
 		$this->view->assign("donation",$donation);
