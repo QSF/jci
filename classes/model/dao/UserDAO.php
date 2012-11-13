@@ -15,5 +15,16 @@ interface UserDAO extends DAO{
 	*	@todo Jogar exceptions	
 	*/
 	public function findByEmail($email);
+
+	/** 
+	*	Método que retorna o objeto equivalente à uma coluna do banco que possui o id passado.
+	*
+	*
+	*	@param $id id do usuário que será procurado.
+	*	@return object objeto referente a tupla com este id na tabela.
+	*	@return null caso não tenha nenhuma tupla com este id.
+	*
+	*/
+	public function findOneById($id);
 }
 ?>

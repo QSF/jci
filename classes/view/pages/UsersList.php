@@ -41,9 +41,11 @@
 					title="Validar Entidade">
 		<i class="icon-thumbs-up"></i>
 	</a>
-	
+	&nbsp;&nbsp;
 	<?php } ?>
-
+		
+	<a href="./index.php?controller=donation&action=redirectUserDonations&user_id=<?php echo $user->getId()?>&user_type=<?php echo get_class($user)?>" title="Veja o histórico de doações">
+	Doações</a>
 	
 	</div>
 	</div>

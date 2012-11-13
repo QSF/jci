@@ -18,7 +18,7 @@ class DonationController extends ApplicationController{
 		if ($donationId === null){
 			$this->view->assignError('Erro ao remover, doação não existe!');
 			//carregar no log de erros, com informações para o dev.
-			$view->display("404");
+			$this->view->display("404");
 			return;
 		}
 
@@ -93,7 +93,7 @@ class DonationController extends ApplicationController{
 		if($donationId === null){
 			$this->view->assignError('Doação não existe!');
 			//carregar no log de erros, com informações para o dev.
-			$view->display("404");
+			$this->view->display("404");
 			return;
 		}
 		$donation->setId($donationId);
@@ -101,7 +101,7 @@ class DonationController extends ApplicationController{
 		if($donation === null){
 			$this->view->assignError('Doação não existe!');
 			//carregar no log de erros, com informações para o dev.
-			$view->display("404");
+			$this->view->display("404");
 			return;
 		}
 
@@ -133,19 +133,28 @@ class DonationController extends ApplicationController{
 	/**
 	*	Método que exibi a lista de doações de um usuário.
 	*/
-	protected function redirectDonations($user){
+	protected function redirectDonations($id){
 		$page = $this->getPage("page");
 
 		$pagePosition = $page * $this->maxResults;
 
-		if ($user === null){
+		if ($id === null){
 			$this->view->assignError('Usuário não existe!');
 			//carregar no log de erros, com informações para o dev.
-			$view->display("404");
+			$this->view->display("404");
 			return;
 		}
 
-		$user = $this->dao->findById($user);
+		$userDao = ServiceLocator::getInstance()->getDAO('UserDAO');
+
+		$user = $userDao->findOneById($id);
+
+		if ($user === null){
+			$this->view->assignError('Usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display("404");
+			return;
+		}
 		//pegar apenas uma parte, sendo que a ordem é invertida
 		$donations = array_slice(array_reverse($user->getDonations()), $pagePosition, $this->maxResults) ;
 		
@@ -164,30 +173,133 @@ class DonationController extends ApplicationController{
 	*	@see self::redirectDonations.
 	*/
 	public function redirectLoggedUserDonations(){
-		$this->redirectDonations($this->request->getUserSession());
+		$this->redirectDonations($this->request->getUserSession()->getId());
+	}
+
+	/**
+	*	Lista todas as doações que o usuário participa.
+	*	@see self::redirectDonations.
+	*/
+	public function redirectUserDonations(){
+		$userId = $this->request->get("user_id");
+
+		if ($userId === null){
+			$this->view->assignError('Usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display("404");
+			return;
+		}
+
+		$this->redirectDonations($userId);
+	}
+
+	/**
+	*	Lista todas as doações que é feita com este campo, ou seu campo pai.
+	*/
+	public function redirectFieldDonations(){
+		$page = $this->getPage("page");
+
+		$pagePosition = $page * $this->maxResults;
+
+		$fieldId = $this->request->get("id");
+
+		if ($fieldId === null){
+			$this->view->assignError('Campo não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display("404");
+			return;
+		}
+
+		$field = new Field;
+		$field->setId($fieldId);
+
+		$donationDAO = ServiceLocator::getInstance()->getDAO('DonationDAO');
+		//procura de acordo com a paginação.
+		$donations = $donationDAO->findByField($field, $pagePosition, $this->maxResults);
+
+		if ($this->request->get('listParent') != null){//lista os pais
+			while ($field->getParent() != null){
+				$field = $field->getParent();
+				array_push($donations, $donationDAO->findByField($field, $pagePosition, $this->maxResults) );				
+			}
+		}
+		
+		$this->assignPagination($page, $donations, null);
+
+		$this->view->assign("donations",$donations);
+		$this->view->assign("isModerator",$this->isModerator());//verifica se é moderador.
+
+		$this->view->display("DonationList");
+	}
+
+	/**
+	*	Redireciona para uma página de busca de doações por entidade
+	*/
+	public function redirectSearchEntity(){
+		$entityDao = ServiceLocator::getInstance()->getDAO("EntityDAO");
+		$entities = $entityDao->findAllEntitiesApproved();//deve pegar apenas as entidade aprovadas
+
+		$this->view->assign("users",$entities);
+
+		$user = new Entity;
+		$this->view->assign("user",$user);
+
+		$page = 'DonationSearchUser';
+		$this->view->display($page);
+	}
+
+	/**
+	*	Redireciona para uma página de busca de doações por voluntário 
+	*/
+	public function redirectSearchVolunteer(){
+		$volunteerDao = ServiceLocator::getInstance()->getDAO("VolunteerDAO");
+		$volunteers = $volunteerDao->findAll();
+
+		$this->view->assign("users", $volunteers);
+
+		$user = new Entity;
+		$this->view->assign("user",$user);
+
+		$page = 'DonationSearchUser';
+		$this->view->display($page);
+	}
+
+	/**
+	*	Redireciona para uma página de busca de doações por campo(área de atuação)
+	*/
+	public function redirectSearchField(){
+		$fieldDao = ServiceLocator::getInstance()->getDAO("FieldDAO");
+		$fields = $fieldDao->findAllMacros();//pega todos os campos macros
+		$this->view->assign("fields", $fields);
+
+		$page = 'DonationSearchField';
+		$this->view->display($page);
 	}
 
 	/**
 	*	Método que exibi a lista de doações de um usuário não realizou feedback.
 	*/
-	protected function redirectFeedBacks($user){
+	protected function redirectFeedBacks($id){
 		$page = $this->getPage("page");
 
 		$pagePosition = $page * $this->maxResults;
 
-		if ($user === null){
+		if ($id === null){
 			$this->view->assignError('Usuário não existe!');
 			//carregar no log de erros, com informações para o dev.
-			$view->display("404");
+			$this->view->display("404");
 			return;
 		}
 
-		$user = $this->dao->findById($user);
+		$userDao = ServiceLocator::getInstance()->getDAO('UserDAO');
+
+		$user = $userDao->findOneById($id);
+
 
 		if ($user === null){
 			$this->view->assignError('Usuário não existe!');
 			//carregar no log de erros, com informações para o dev.
-			$view->display("404");
+			$this->view->display("404");
 			return;
 		}
 
@@ -222,7 +334,24 @@ class DonationController extends ApplicationController{
 	*	@see self::redirectFeedBacks.
 	*/
 	public function redirectLoggedUserFeedBack(){
-		$this->redirectFeedBacks($this->request->getUserSession());
+		$this->redirectFeedBacks($this->request->getUserSession()->getId());
+	}
+
+	/**
+	*	Lista todas as doações que o usuário participa e que ainda não fez o feedback.
+	*	@see self::redirectFeedBacks.
+	*/
+	public function redirectUserFeedBack(){
+		$userId = $this->request->get("user_id");
+
+		if ($userId === null){
+			$this->view->assignError('Usuário não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display("404");
+			return;
+		}
+
+		$this->redirectFeedBacks($userId);
 	}
 
 	/**
@@ -279,7 +408,7 @@ class DonationController extends ApplicationController{
 		if($donationId === null){
 			$this->view->assignError('Doação não existe!');
 			//carregar no log de erros, com informações para o dev.
-			$view->display("404");
+			$this->view->display("404");
 			return;
 		}
 		$donation = new Donation;
@@ -289,7 +418,7 @@ class DonationController extends ApplicationController{
 		if($donation === null){
 			$this->view->assignError('Doação não existe!');
 			//carregar no log de erros, com informações para o dev.
-			$view->display("404");
+			$this->view->display("404");
 			return;
 		}
 
@@ -320,7 +449,7 @@ class DonationController extends ApplicationController{
 		if($donationId === null){
 			$this->view->assignError('Doação não existe!');
 			//carregar no log de erros, com informações para o dev.
-			$view->display("404");
+			$this->view->display("404");
 			return;
 		}
 
@@ -331,7 +460,7 @@ class DonationController extends ApplicationController{
 		if($donation === null){
 			$this->view->assignError('Doação não existe!');
 			//carregar no log de erros, com informações para o dev.
-			$view->display("404");
+			$this->view->display("404");
 			return;
 		}
 
@@ -340,7 +469,7 @@ class DonationController extends ApplicationController{
 		if($feedBack === null){
 			$this->view->assignError('Erro ao realizar o feedBack!');
 			//carregar no log de erros, com informações para o dev.
-			$view->display("404");
+			$this->view->display("404");
 			return;
 		}
 

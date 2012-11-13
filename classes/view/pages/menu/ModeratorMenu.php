@@ -23,9 +23,17 @@
   <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Doações <b class="caret"></b></a>
     <ul class="dropdown-menu">
-      <li><a href="./index.php?controller=donation&action=redirectManage">Gerênciar Doações</a></li>
-      <li><a href="./index.php?controller=donation&action=redirectCreate">Intermediar Doações	</a></li>
-      <li><a href="./index.php?controller=report&action=redirectSet">Cruzamento de dados	</a></li>
+      <li class="dropdown-submenu ">
+      <a href="#">Filtrar</a>
+      <ul class="dropdown-menu">
+        <li><a href="./index.php?controller=donation&action=redirectSearchEntity">Entidade</a></li>
+        <li><a href="./index.php?controller=donation&action=redirectSearchVolunteer">Voluntario</a></li>
+        <li><a href="./index.php?controller=donation&action=redirectSearchField">Campos</a></li>  
+      </ul>
+      <li><a href="./index.php?controller=donation&action=redirectManage">Gerênciar Doações        </a></li>
+      <li><a href="./index.php?controller=donation&action=redirectCreate">Intermediar Doações	     </a></li>
+      <li><a href="./index.php?controller=report&action=redirectSet">Cruzamento de dados	         </a></li>
+
     </ul>
   </li>
 
