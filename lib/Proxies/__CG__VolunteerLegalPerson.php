@@ -282,10 +282,22 @@ class VolunteerLegalPerson extends \VolunteerLegalPerson implements \Doctrine\OR
         return parent::setCep($cep);
     }
 
+    public function getActive()
+    {
+        $this->__load();
+        return parent::getActive();
+    }
+
+    public function setActive($active)
+    {
+        $this->__load();
+        return parent::setActive($active);
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'receiveNotification', 'name', 'email', 'password', 'phone', 'howYouKnow', 'cep', 'public', 'actingArea', 'experience', 'donations', 'cnpj', 'companyName', 'stateRegistration', 'ownerPhone');
+        return array('__isInitialized__', 'id', 'receiveNotification', 'name', 'email', 'password', 'phone', 'howYouKnow', 'active', 'cep', 'public', 'actingArea', 'experience', 'donations', 'cnpj', 'companyName', 'stateRegistration', 'ownerPhone');
     }
 
     public function __clone()

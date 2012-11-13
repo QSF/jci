@@ -138,6 +138,12 @@ class Field extends \Field implements \Doctrine\ORM\Proxy\Proxy
         return parent::getDonations();
     }
 
+    public function __toString()
+    {
+        $this->__load();
+        return parent::__toString();
+    }
+
 
     public function __sleep()
     {

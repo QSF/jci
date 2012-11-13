@@ -330,10 +330,22 @@ class Entity extends \Entity implements \Doctrine\ORM\Proxy\Proxy
         return parent::setCep($cep);
     }
 
+    public function getActive()
+    {
+        $this->__load();
+        return parent::getActive();
+    }
+
+    public function setActive($active)
+    {
+        $this->__load();
+        return parent::setActive($active);
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'receiveNotification', 'name', 'email', 'password', 'phone', 'howYouKnow', 'cep', 'public', 'actingArea', 'establishmentDate', 'site', 'situation', 'status', 'newsletter', 'cnpj', 'companyName', 'stateRegistration', 'ownerPhone', 'donations');
+        return array('__isInitialized__', 'id', 'receiveNotification', 'name', 'email', 'password', 'phone', 'howYouKnow', 'active', 'cep', 'public', 'actingArea', 'establishmentDate', 'site', 'situation', 'status', 'cnpj', 'companyName', 'stateRegistration', 'ownerPhone', 'donations');
     }
 
     public function __clone()

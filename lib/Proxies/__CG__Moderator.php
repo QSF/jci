@@ -126,10 +126,28 @@ class Moderator extends \Moderator implements \Doctrine\ORM\Proxy\Proxy
         return parent::getDonations();
     }
 
+    public function getName()
+    {
+        $this->__load();
+        return parent::getName();
+    }
+
+    public function getActive()
+    {
+        $this->__load();
+        return parent::getActive();
+    }
+
+    public function setActive($active)
+    {
+        $this->__load();
+        return parent::setActive($active);
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'login', 'password', 'email', 'donations', 'news');
+        return array('__isInitialized__', 'id', 'login', 'password', 'email', 'active', 'donations', 'news');
     }
 
     public function __clone()
