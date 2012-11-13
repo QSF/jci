@@ -166,5 +166,58 @@ class ModeratorController extends ApplicationController{
 		$this->view->assign("users", $users);
 		$this->display("UsersList");
 	}
+
+	/**
+	*	Método que redireciona para uma página de busca de usuário com filtro por público atendido.
+	*/
+	public function redirectSearchPublic(){
+		$fieldDao = ServiceLocator::getInstance()->getDAO("PublicServedDAO");
+		$publics = $fieldDao->findAll();
+		$this->view->assign("publics", $publics);
+
+		$page = 'UserSearchPublic';
+		$this->view->display($page);
+	}
+
+	/**
+	*	Método que busca usuário de acordo com o público passado.
+	*/
+	public function searchByPublic(){
+
+		$page = $this->getPage();
+
+		$pagePosition = $page * $this->maxResults;
+
+		$publicId = $this->request->get("id");
+
+		if ($publicId === null){
+			$this->view->assignError('Público não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display("404");
+			return;
+		}
+
+		$public = new Field;
+		$public->setId($publicId);
+
+		$public = $this->dao->findById($public);
+
+		if ($public == null){
+			$this->view->assignError('Público não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display("404");
+			return;	
+		}
+
+		$userDao = ServiceLocator::getInstance()->getDAO("UserDAO");
+
+		$users = $userDao->findUsersByPublic($public, $pagePosition, $this->maxResults);
+
+		$attributes['id'] = $publicId;
+		$this->assignPagination($page, $users, $attributes);
+
+		$this->view->assign("users", $users);
+		$this->display("UsersList");
+	}
 }
 ?>

@@ -22,7 +22,8 @@ class DAODoctrine implements DAO{
  		$this->initEntityManager();
  	}
 
- 	/** Método que instancia um entity manager.
+ 	/** 
+	*	Método que instancia um entity manager.
 	*	Baseado na configuração geral do bd(database-config.php) o entity manger é criado.
 	*	@see config/database-config.php
 	*/
@@ -45,7 +46,8 @@ class DAODoctrine implements DAO{
 		$this->entityManager = EntityManager::create($dbParams, $config);
  	}
  	
-	/** Método que persiste um objeto no banco.
+	/** 
+	*	Método que persiste um objeto no banco.
 	*	Este método dá um persiste e depois faz o flush, apenas isso.
 	*	É necessário tomar cuidado com as entidades gerenciadas pelo entity manager.
 	*	@param $object objeto a ser persistido.
@@ -55,7 +57,8 @@ class DAODoctrine implements DAO{
 		$this->entityManager->flush();
 	}
 
-	/** Método que deleta uma tupla da tabela de acordo com o objeto passado por parâmetro.
+	/** 
+	*	Método que deleta uma tupla da tabela de acordo com o objeto passado por parâmetro.
 	*	Executa o EntityManage::remove() e depois faz o flush.
 	*	É necessário tomar cuidado com as entidades gerenciadas pelo entity manager.
 	*	@param $object objeto que contém o id(chave primária) da tupla que será buscada.
@@ -65,7 +68,8 @@ class DAODoctrine implements DAO{
 		$this->entityManager->flush();
 	}
 
-	/** Método que atualiza um objeto no banco.
+	/** 
+	*	Método que atualiza um objeto no banco.
 	* 	O método merge é utilizado para atualizar o objeto no banco de dados, depois o flush é chamado.
 	*
 	*	É necessário tomar cuidado com as entidades gerenciadas pelo entity manager.
@@ -76,7 +80,8 @@ class DAODoctrine implements DAO{
 		$this->entityManager->flush();
 	}
 
-	/** Método que retorna o objeto equivalente à uma coluna do banco que possui o id passado.
+	/** 
+	*	Método que retorna o objeto equivalente à uma coluna do banco que possui o id passado.
 	*
 	*	É necessário tomar cuidado com as entidades gerenciadas pelo entity manager.
 	*
@@ -89,7 +94,8 @@ class DAODoctrine implements DAO{
 		return $this->entityManager->find(get_class($object),$object->getId());
 	}
 
-	/** Método que retorna um repository de acordo com o tipo da entidade.
+	/** 
+	*	Método que retorna um repository de acordo com o tipo da entidade.
 	*
 	*	@return repository repositório de acordo com o nome de uma tabela
 	*	@return null se for da classe DAODoctrine.
@@ -100,7 +106,8 @@ class DAODoctrine implements DAO{
 		return null;
 	}
 
-	/** Método que retorna todos os objeto de uma determinada tabela(a 'dona' do dao)
+	/** 
+	*	Método que retorna todos os objeto de uma determinada tabela(a 'dona' do dao)
 	*
 	*	Faz o uso do método getRepository.
 	*

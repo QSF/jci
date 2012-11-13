@@ -116,5 +116,19 @@ class UserDAODoctrine extends DAODoctrine implements UserDAO{
 		$users = $query->getResult();
 		return $users;
 	}
+
+	/**
+	*	Método que buscas os usuários(de forma paginada) por um determinado publico passado de parâmetro.
+	*
+	*	@param $public publico no qual servirá de filtro.
+	*	@return $users lista de usuário com este público.	
+	*	@param $positionResults Posição inicial dos resultados.
+	*	@param $maxResults Número máximo de resultados.
+	*/
+	public function findUsersByPublic($public, $positionResults, $maxResults){
+
+		$dql = 'SELECT u FROM user u JOIN u.public a WHERE a.id = '. $public->getId();
+		return $this->resultPaginated($dql, $positionResults, $maxResults, false);
+	}
 }
 ?>

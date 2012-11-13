@@ -7,12 +7,13 @@
       <li><a href="./index.php?controller=Moderator&action=findAll&userType=Volunteer">Voluntários</a></li>
       <li><a href="./index.php?controller=Moderator&action=findAll&userType=Entity">Entidades</a></li>
       <li><a href="./index.php?controller=Moderator&action=directDisplay&page=Search">Procurar Usuários</a></li>
+      <li><a href="./index.php?controller=Moderator&action=getEntitiesWaitingApproval">Validar Entidade</a></li>
       <li class="dropdown-submenu ">
       <a href="#">Filtrar</a>
       <ul class="dropdown-menu">
         <li><a href="./index.php?controller=Moderator&action=redirectSearchField">Campos</a></li>  
+        <li><a href="./index.php?controller=Moderator&action=redirectSearchPublic">Público</a></li>  
       </ul>
-      <li><a href="./index.php?controller=Moderator&action=getEntitiesWaitingApproval">Validar Entidade</a></li>
     </ul>
   </li>
 
