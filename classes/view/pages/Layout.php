@@ -51,7 +51,6 @@
           <li><a href="./index.php"><i class="icon-home icon-white"></i> Home</a></li>
           <li><a href="./index.php?controller=Application&action=directDisplay&page=Quem-Somos">Quem somos?</a></li>
           <li><a href="./index.php?controller=Application&action=directDisplay&page=O-Que-Fazemos">O que fazemos?</a></li>
-          <li><a href="#">Notícias</a></li>
           <li><a href="./index.php?controller=Application&action=directDisplay&page=Contato">Contato</a></li>
           <!-- <li><a class="active" href="#">...</a></li> -->
         </ul>
