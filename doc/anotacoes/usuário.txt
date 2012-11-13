@@ -6,5 +6,5 @@
 Criar um campo para o usuário escolher o quantidade de itens exibidor por página.
 Colocar um link para voltar ao topo em uma listagem.
 Enviar email para a entidade aguardar e posterior se ela foi aceita ou não.
-No perfil de um usuário, falta colocar para listar campo e público(Aproveitar que o estilo do perfil será mudado).
+No perfil de um usuário, falta colocar para listar campo e público(Acho que Guilherme arrumou).
 Ao digitar em algum textarea, precisamos mostrar quantos caracteres que faltam.

@@ -1,5 +1,5 @@
 <?php if(!isset($user)){
-		$user = new Moderator;
+		$user = new Administrator;
 		$action="create";}?>
 
 <?php if ($action == 'create')
@@ -9,11 +9,8 @@
 ?>
 
 <form action="./index.php?controller=registration&action=<?php echo $action?>" method="post">
-<input type="hidden" name="user" value="Moderator"/>
+<input type="hidden" name="user" value="Administrator"/>
 <input type="hidden" name="user_id" value="<?php if(isset($user))echo $user->getId()?>"/>
-
-	<label for="name">Nome de Usuário</label>
-	<input type="text" id="idLogin" name="login" value="<?php echo $user->getLogin()?>"/>
 
 	<?php if ($action == 'update') {//exibe se quer ou não alterar a senha?>
 		<label class="checkbox">

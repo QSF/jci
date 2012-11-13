@@ -166,14 +166,28 @@ class ObjectBuilder
 	*/
 	public function getModerator(){
 		$user = new Moderator;
-		$user->setLogin($this->request->get("user_id"));
 		$user->setLogin($this->request->get("login"));
 
-		$user->setPassword(md5($this->request->get("password")));
+		$password = $this->request->get('password');
+		$changePassword = $this->request->get('changePassword');
+
+		if ($changePassword == null)//Ou é cadastro, ou não selecionou que quer manter a senha.
+			$password = md5($password);
+		else
+			$password = $this->request->get('oldPassword');//maior gambi, certo era ver a senha atual, ou mexer com js.
+		
+		$user->setPassword($password);
 
 		$user->setEmail($this->request->get("email"));
 
 		return $user;
+	}
+
+	/**
+	*	@return user Administrator
+	*/
+	public function getAdministrator(){
+		return $this->getModerator();
 	}
 
 	/** 
