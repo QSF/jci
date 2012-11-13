@@ -26,9 +26,10 @@ class DonationDAODoctrine extends DAODoctrine implements DonationDAO{
 	*	@param $field campo que serve como filtro.
 	*	@return $donations lista de doações que é feita com este campo.
 	*/
-	public function findByField($field,$positionResults, $maxResults){
-		$dql = 'SELECT d FROM Donation d JOIN d.field f WHERE f.id ='  . $field->getId();
-		return $this->resultPaginated($dql, $positionResults, $maxResults, false);
+	public function findByField($field){
+		$dql = 'SELECT d FROM Donation d JOIN d.field f WHERE f.id ='  . $field->getId() . 'ORDER BY d.date DESC';
+		$query = $this->entityManager->createQuery($dql);
+		return $query->getResult();
 	}
 }
 

@@ -213,17 +213,29 @@ class DonationController extends ApplicationController{
 		$field = new Field;
 		$field->setId($fieldId);
 
+		$field = $this->dao->findById($field);
+		if ($field == null){
+			$this->view->assignError('Campo não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display("404");
+			return;	
+		}
+
 		$donationDAO = ServiceLocator::getInstance()->getDAO('DonationDAO');
 		//procura de acordo com a paginação.
-		$donations = $donationDAO->findByField($field, $pagePosition, $this->maxResults);
+		$donations = $donationDAO->findByField($field);
+		$donations = array_reverse($donations);
 
 		if ($this->request->get('listParent') != null){//lista os pais
 			while ($field->getParent() != null){
 				$field = $field->getParent();
-				array_push($donations, $donationDAO->findByField($field, $pagePosition, $this->maxResults) );				
+				echo 'Field: ' . $field->getName();
+				foreach (array_reverse($donationDAO->findByField($field)) as $donation) {
+					array_push($donations,  $donation);
+				}
 			}
 		}
-		
+		$donations = array_slice($donations, $pagePosition, $this->maxResults) ;
 		$this->assignPagination($page, $donations, null);
 
 		$this->view->assign("donations",$donations);

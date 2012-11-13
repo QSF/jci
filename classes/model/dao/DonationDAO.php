@@ -14,11 +14,9 @@ interface DonationDAO extends DAO{
 	/**
 	*	Método que procura doações dado um determinado campo
 	*	@param $field campo que serve como filtro.
-	*	@param $positionResults Posição inicial dos resultados.
-	*	@param $maxResults Número máximo de resultados.
 	*	@return $donations lista de doações que é feita com este campo.
 	*/
-	public function findByField($field,$positionResults, $maxResults);
+	public function findByField($field);
 }
 
 ?>
