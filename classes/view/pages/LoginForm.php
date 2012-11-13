@@ -1,3 +1,4 @@
+<br><br>
 <form class="form-horizontal" action="./index.php?controller=login&action=<?php echo $action?>" method="post">
   <div class="control-group">
     <label class="control-label" for="inputEmail"><?php echo $nameDisplay ?></label>
