@@ -203,7 +203,7 @@ class ModeratorController extends ApplicationController{
 			return;
 		}
 
-		$public = new Field;
+		$public = new PublicServed;
 		$public->setId($publicId);
 
 		$public = $this->dao->findById($public);
@@ -214,7 +214,6 @@ class ModeratorController extends ApplicationController{
 			$this->view->display("404");
 			return;	
 		}
-
 		$userDao = ServiceLocator::getInstance()->getDAO("UserDAO");
 
 		$users = $userDao->findUsersByPublic($public, $pagePosition, $this->maxResults);
