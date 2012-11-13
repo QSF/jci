@@ -230,9 +230,24 @@ width:100%; /* largura */
   font-weight: bolder;
 }
 
-.login {
+.center-user-menu {
+  margin-top: 0px;
   margin-bottom: 0px;
   vertical-align: middle;
   line-height: 42px;
   font-weight: bolder;
+}
+
+.orange{
+  color: #F37121;
+}
+
+.center-caret {
+  vertical-align: middle !important;
+  margin-top: 0px !important;
+}
+
+.orange-caret{
+  border-top-color: #F37121 !important;
+  border-bottom-color: #F37121 !important;
 }
