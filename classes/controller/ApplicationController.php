@@ -38,7 +38,7 @@ class ApplicationController{
 		$this->request = $request;
 
 		//Setando como 10 o valor do maximo de paginas
-		$this->maxResults = 10;
+		$this->maxResults = 2;
 		//$request->getUserType serve para saber o tipo de usuario e montar a view customizada
 		$this->view = ServiceLocator::getInstance()->getView($this->request->getUserType());
 	}

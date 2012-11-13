@@ -152,16 +152,18 @@ class ModeratorController extends ApplicationController{
 				$field = $field->getParent();
 				$parentUsers = $userDao->getUsersByField($field);
 				foreach ($users as $user) {
-					array_push($users,  $user);
+					if (!in_array($user, $users))//ver se um user já não está no array de users
+						array_push($users,  $user);
 				}
 			}
 		}
-		$users = array_slice($users, $pagePosition, $this->maxResults);
 
 		// $this->request->setRequestAction("moderator", "searchByField");
 		$attributes['id'] = $fieldId;
 		$this->assignPagination($page, $users, $attributes);
 
+		$users = array_slice($users, $pagePosition, $this->maxResults);
+		$this->view->assign("users", $users);
 		$this->display("UsersList");
 	}
 }
