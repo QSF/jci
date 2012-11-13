@@ -10,10 +10,6 @@
 
 
 </ul>
-<div id="childFields"> </div>
-
-<script type="text/javascript"> var arrayJSONChildren = 
-<?php echo utf8_decode(json_encode($arrayFieldsChild));?> </script>
 
 <?php
 
@@ -32,10 +28,9 @@ function listFields($var,$user){
 	<ul>
 	<?php 
 		foreach ($var->getChildren() as $child){
-			//listFields($child,$user);
-			array_push($arrayFields, array("id" => $child->getId(), "name" => $child->getName()));
+			listFields($child,$user);
 		}  ?>
 	</ul>  
 
 	<?php 
-	return $arrayFields; } ?>
+	return $arrayFields; } ?>	

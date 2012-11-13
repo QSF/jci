@@ -2,8 +2,6 @@
 
 Colocar o calendário HTML5
 
-*A parte de listar o publico com checkbox está sem o label e em outra fonte.
-
 
 
 CORRIGIDOS:

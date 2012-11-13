@@ -14,7 +14,7 @@ define("CONFIG_PATH"		, realpath('../config') 						);
 define("HELPER_PATH"		, realpath('../classes/view/helpers')			);    
 
 
-define("emailJCI", "gjhenrique@gmail.com");
+define("EmailJCI", "gjhenrique@gmail.com");
 
 //arquivo que configura o doctrine
 require_once "bootstrap.php";
