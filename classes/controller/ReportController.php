@@ -23,7 +23,7 @@ function fieldCompare($a,$b){
 function pontuationCompare($a,$b){
 	if($a['pontuation']  == $b['pontuation'])
 		return 0;
-		
+
 	   return ($a['pontuation'] < $b['pontuation'] ? 1 : -1);
 }
 
@@ -49,7 +49,7 @@ class ReportController extends ApplicationController{
 	* Esse método seta a variável fields na view e redireciona para generateReport
 	*/
 	public function redirectSet(){
-		
+
 		$fieldDao = ServiceLocator::getInstance()->getDAO("FieldDAO");
 		$fields = $fieldDao->findAllMacros();//pega todos os campos macros
 		//Todos os campos serão exibidos na view.
@@ -75,29 +75,32 @@ class ReportController extends ApplicationController{
 		$dao = ServiceLocator::getInstance()->getDAO("DAO");
 		$field = $dao->findById($field);
 
-		$userDao = ServiceLocator::getInstance()->getDAO("UserDAO");
-
-		//Pegando usuários que tem o mesmo campo
-		$users = $userDao->getUsersByField($field);
+		//@optimise 
+		// Componetizar adicao de usuarios por campo para nao precisar repetir codigo
+		$users = $this->getUsersByField($field);
 
 		//dois arrays para manipulação dos dados
 		$volunteersArray = array();
 		$entitiesArray = array();
 
-		//Separando as entidades dos voluntários
-		foreach($users as $user){
-			if(get_class($user) == "Entity"){
-				array_push($entitiesArray,$user);
-			}
-			else{
-				array_push($volunteersArray,$user);
-			}
-		}
+		$this->separateUsers($volunteersArray, $entitiesArray, $users);
 
-		//Ordenando por numero de campos que o usuario tem
-		//Quanto mais campos, mais baixo no ranking fica
-		usort($entitiesArray, 'fieldCompare');
-		usort($volunteersArray, 'fieldCompare');
+		$this->sortArrayReportField($entitiesArray, $volunteersArray);
+
+		if($field->getParent() != null ){
+
+			$parentField = $field->getParent();
+			$parentUsers = $this->getUsersByField($parentField);
+
+			$volunteersParentArray = array();
+			$entitiesParentArray = array();
+
+			$this->separateUsers($volunteersParentArray, $entitiesParentArray, $parentUsers);
+			$this->sortArrayReportField($entitiesParentArray, $volunteersParentArray);
+
+			$this->pushArray($volunteersArray, $volunteersParentArray, $dao);
+			$this->pushArray($entitiesArray, $entitiesParentArray, $dao);
+		} 
 
 		//Verificando se é moderator
 		$moderator = $this->request->getUserSession();
@@ -106,6 +109,43 @@ class ReportController extends ApplicationController{
 
 		$pdf = new PdfGenerator($moderator);
 		$pdf->generateReportField($volunteersArray, $entitiesArray, $field); 
+	}
+
+	private function pushArray(&$arrayAdded, $array, $dao){
+		foreach($array as $user){
+			if(! in_array($user, $arrayAdded)){
+				array_push($arrayAdded, $user);
+			}
+		}
+	}
+
+	private function sortArrayReportField(&$entitiesArray, &$volunteersArray){
+		//Ordenando por numero de campos que o usuario tem
+		//Quanto mais campos, mais baixo no ranking fica
+		usort($entitiesArray, 'fieldCompare');
+		usort($volunteersArray, 'fieldCompare');
+	}
+
+	private function separateUsers(& $volunteerArray, & $entityArray, $users){
+		//Separando as entidades dos voluntários
+		foreach($users as $user){
+			if(get_class($user) == "Entity"){
+				array_push($entityArray,$user);
+			}
+			else{
+				array_push($volunteerArray,$user);
+			}
+		}
+	}
+
+	private function getUsersByField($field){
+
+		$userDao = ServiceLocator::getInstance()->getDAO("UserDAO");
+
+		//Pegando usuários que tem o mesmo campo
+		$users = $userDao->getUsersByField($field);
+
+		return $users;		
 	}
 
 	/** Método que gera relatório por usuários
@@ -161,7 +201,7 @@ class ReportController extends ApplicationController{
 		//$this->evaluateCEP($usersPontuation, $user);
 
 		usort($usersPontuation,'pontuationCompare');
-		
+
 		$users = array();
 
 		foreach($usersPontuation as $userIter)
@@ -172,14 +212,14 @@ class ReportController extends ApplicationController{
 	}
 
 	private function countPontuationField( &$usersPontuation, $user){
-		
+
 		$fieldsUserTarget = $user->getActingArea();
 		$fieldsTargetId = array();
 
 		foreach($fieldsUserTarget as $field){
 			array_push($fieldsTargetId, $field->getId());
 		}
-		
+
 		foreach($usersPontuation as &$pontuationArray){
 			$userReport = $pontuationArray['user'];
 
@@ -187,7 +227,7 @@ class ReportController extends ApplicationController{
 			foreach($userReport->getActingArea() as $field){
 
 				if(in_array($field->getId(), $fieldsTargetId))
-					
+
 					if($field->getParent() != null)
 						$pontuationArray['pontuation'] += 2000;
 					else
@@ -232,5 +272,5 @@ class ReportController extends ApplicationController{
 			}
 		}
 	}
-		
+
 }

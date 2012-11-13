@@ -1,5 +1,5 @@
 <label for="stablishmentDate">Data de fundação</label>
-<input type="text" value="<?php if($user->getEstablishmentDate()) echo $user->getEstablishmentDate()->format('d/m/Y') ?>" 
+<input type="date" value="<?php if($user->getEstablishmentDate()) echo $user->getEstablishmentDate()->format('d/m/Y') ?>" 
 	id="idStablishmentDate" name="establishmentDate"/>
 
 <label for="site"  >Site</label>

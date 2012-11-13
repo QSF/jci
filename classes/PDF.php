@@ -34,11 +34,10 @@ class PdfGenerator{
 	}
 
 	public function generateReportField($listVolunteer, $listEntities, $field){
-		//return $this->generateRelatorioUser();
+
 		$pdf = new PDF("P","cm","A4", $this->moderator);
 		$this->defineHeader($pdf);
 
-		$pdf->Ln();
 		/***  Fiel Area ***/
 		$pdf->SetFont('Arial','',14);
 		$str1 = utf8_decode("Área de Atuação: ".$field->getName());
@@ -61,20 +60,20 @@ class PdfGenerator{
 		$pdf->setXY(2-($pdf->GetStringWidth("Nome")/2),12);
 		$pdf->cell(4,1,"Nome",0,0,'C');
 
-		$pdf->setXY(5.65-($pdf->GetStringWidth("E-mail")/2),12);
-		$pdf->cell(6,1,"Email",0,0,'C');
+		$pdf->setXY(5.65-($pdf->GetStringWidth("Campo")/2),12);
+		$pdf->cell(6,1,"Campo",0,0,'C');
 
 		/***  Nome e Email do Voluntário ***/	
 		$pdf->setXY(11.5-($pdf->GetStringWidth("Nome")/2),12);
 		$pdf->cell(4,1,"Nome",0,0,'C');
 
-		$pdf->setXY(15.3-($pdf->GetStringWidth("E-mail")/2),12);
-		$pdf->cell(6,1,"Email",0,0,'C');
+		$pdf->setXY(15.3-($pdf->GetStringWidth("Campo")/2),12);
+		$pdf->cell(6,1,"Campo",0,0,'C');
 
 		/***  Linha Horizontais ***/	
 
 		$y = 13;
-
+		$pdf->Line(2,$y,19.3,$y);
 		for($i = 0; $i < count($listVolunteer) || $i < count($listEntities); $i++){
 
 			if(array_key_exists($i, $listEntities)){
@@ -87,9 +86,9 @@ class PdfGenerator{
 
 				/***  Email da Entidade Iterada ***/
 				$pdf->SetFont('Arial','B',10);
-				$pdf->setXY(5.65 - ($pdf->GetStringWidth('Email')/2),$y);
+				$pdf->setXY(5.65 - ($pdf->GetStringWidth('Campo')/2),$y);
 				$pdf->SetFont('Arial','',9);
-				$pdf->cell(6,1,utf8_decode($listEntities[$i]->getEmail()),0,0,'C',false);
+				$pdf->cell(6,1,utf8_decode($this->returnStringFields($listEntities[$i]->getActingArea())),0,0,'C',false);
 			}
 
 			if(array_key_exists($i, $listVolunteer)){
@@ -102,17 +101,20 @@ class PdfGenerator{
 
 				/***  Email da Entidade Iterada ***/
 				$pdf->SetFont('Arial','B',10);
-				$pdf->setXY(15.3 - ($pdf->GetStringWidth('Email')/2),$y);
+				$pdf->setXY(15.3 - ($pdf->GetStringWidth('Campo')/2),$y);
 				$pdf->SetFont('Arial','',9);
-				$pdf->cell(6,1,utf8_decode($listVolunteer[$i]->getEmail()),0,0,'C',false);
+				$pdf->cell(6,1,utf8_decode($this->returnStringFields($listVolunteer[$i]->getActingArea())),0,0,'C',false);
 			}
 
 			$y++;
+			$pdf->Line(2,$y,19.3,$y);
 
 		}
-
-
 		$pdf->Output();
+	}
+
+	private function returnStringFields($fields){
+		return implode(', ',$fields);
 	}
 
 	public function generateReportUser($userTarget, $listUsers){
