@@ -42,6 +42,12 @@ class News extends \News implements \Doctrine\ORM\Proxy\Proxy
     }
 
     
+    public function onPersist()
+    {
+        $this->__load();
+        return parent::onPersist();
+    }
+
     public function getId()
     {
         $this->__load();
@@ -102,10 +108,22 @@ class News extends \News implements \Doctrine\ORM\Proxy\Proxy
         return parent::setAuthor($author);
     }
 
+    public function getDate()
+    {
+        $this->__load();
+        return parent::getDate();
+    }
+
+    public function setDate($date)
+    {
+        $this->__load();
+        return parent::setDate($date);
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'title', 'public', 'content', 'author');
+        return array('__isInitialized__', 'id', 'title', 'public', 'content', 'date', 'author');
     }
 
     public function __clone()

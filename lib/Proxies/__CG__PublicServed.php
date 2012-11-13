@@ -84,6 +84,12 @@ class PublicServed extends \PublicServed implements \Doctrine\ORM\Proxy\Proxy
         return parent::setName($name);
     }
 
+    public function __toString()
+    {
+        $this->__load();
+        return parent::__toString();
+    }
+
 
     public function __sleep()
     {

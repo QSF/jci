@@ -18,7 +18,7 @@
 <?php require_once VIEW_PATH . "/pages/forms/listFields.php"; ?>
 
 <label for="date">Data de fundação</label>
-<input type="date" name="date">
+<input type="date" name="date" value="<?php $donation->getDate()->format('m/d/Y') ?>">
 
 <label for="moreInfo">Mais infomações:</label>
 <textarea class="input-block-level" cols="100" rows="5" name="moreInfo"><?php echo $donation->getMoreInfo()?></textarea>

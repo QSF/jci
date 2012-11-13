@@ -5,6 +5,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
 * @Entity
 * @Table(name = "news")
+* @HasLifecycleCallbacks
 */
 class News{
 
@@ -34,6 +35,20 @@ class News{
      * @JoinColumn(name="author_id", referencedColumnName="id")
      **/
     protected $author;
+
+    /**
+    * @Column(type="datetime", nullable = true)
+    * @var TimeStamp
+    */
+    protected $date;
+
+    /**
+    *   @PrePersist
+    *   Método que seta a data como atual.
+    */
+    public function onPersist(){
+         $this->date = new \DateTime("now");
+    }
 
     public function getId(){
         return $this->id;
@@ -73,6 +88,14 @@ class News{
 
     public function setAuthor($author){
         $this->author = $author;
+    }
+
+    public function getDate(){
+        return $this->date;
+    }
+
+    public function setDate($date){
+        $this->date = $date;
     }
 }
 

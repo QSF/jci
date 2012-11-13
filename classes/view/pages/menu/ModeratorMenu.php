@@ -12,7 +12,7 @@
       <a href="#">Filtrar</a>
       <ul class="dropdown-menu">
         <li><a href="./index.php?controller=Moderator&action=redirectSearchField">Campos</a></li>  
-        <li><a href="./index.php?controller=Moderator&action=redirectSearchPublic">Público</a></li>  
+        <li><a href="./index.php?controller=Moderator&action=redirectSearchPublic">Público Alvo</a></li>  
       </ul>
     </ul>
   </li>
