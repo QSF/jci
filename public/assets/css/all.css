@@ -85,9 +85,14 @@ th, td {
   color: #999;
 }
 
-#navigation ul,
-#user ul {
+#navigation ul {
   height: 42px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#user ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -119,14 +124,32 @@ th, td {
 
 #navigation li a,
 #navigation li a:link,
-#navigation li a:visited,
-#user li a,
-#user li a:link,
-#user li a:visited {
+#navigation li a:visited{
   display: block;
   padding: 0 10px;
 }
 
+#user li > a,
+#user li > a:link,
+#user li > a:visited {
+  display: block;
+    
+}
+
+#user li{
+  padding: 0 10px;  
+}
+
+
+/*#user li a,
+#user li a:link,
+#user li a:visited {
+padding-bottom: 20px;
+padding-left: 3px;
+padding-right: 20px;
+padding-top: 3px;
+}
+*/
 #navigation li a:hover,
 #navigation li a:active,
 #navigation li a.active {
