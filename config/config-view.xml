@@ -7,12 +7,8 @@
 			<file>additional-methods.min.js</file>
 			<file>jquery.maskedinput-1.3.js</file>
 			<file>jquery.validate.js</file>
-			<file>jquery.click-calendario-1.0.js</file>
 			<file>loadChildFields.js</file>	
 		</JS>
-		<CSS>
-			<file>jquery.click-calendario-1.0.css</file>
-		</CSS>
 	</page>
 	<page content="VolunteerNaturalPersonForm">
 		<JS>
@@ -21,12 +17,8 @@
 			<file>additional-methods.min.js</file>
 			<file>jquery.maskedinput-1.3.js</file>
 			<file>jquery.validate.js</file>
-			<file>jquery.click-calendario-1.0.js</file>	
 			<file>loadChildFields.js</file>
 		</JS>
-		<CSS>
-			<file>jquery.click-calendario-1.0.css</file>
-		</CSS>
 	</page>
 	<page content="VolunteerLegalPersonForm">
 		<JS>
@@ -35,12 +27,8 @@
 			<file>additional-methods.min.js</file>
 			<file>jquery.maskedinput-1.3.js</file>
 			<file>jquery.validate.js</file>
-			<file>jquery.click-calendario-1.0.js</file>
 			<file>loadChildFields.js</file>	
 		</JS>
-		<CSS>
-			<file>jquery.click-calendario-1.0.css</file>
-		</CSS>
 	</page>
 	<page content="ModeratorForm">
 		<JS>
@@ -48,13 +36,8 @@
 			<file>jquery.validate.min.js</file>
 			<file>additional-methods.min.js</file>
 			<file>jquery.maskedinput-1.3.js</file>
-			<file>jquery.validate.js</file>
-			<file>jquery.click-calendario-1.0.js</file>
-			<file>loadChildFields.js</file>	
+			<file>jquery.validate.js</file>	
 		</JS>
-		<CSS>
-			<file>jquery.click-calendario-1.0.css</file>
-		</CSS>
 	</page>
 	<page content="NewsForm">
 		<JS>
