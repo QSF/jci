@@ -65,7 +65,7 @@ class NewsController extends ApplicationController{
 			$emailTo = $user->getEmail();
 			$title = $news->getTitle();
 			$content = $news->getContent();
-			$emailFrom = "From:". emailJCI;
+			$emailFrom = "From:". EmailJCI;
 			//Tem que configurar o servidor de e-mail para funcionar
 			//$this->sendEmail($emailTo, $title, $content, $emailFrom);
 		}
