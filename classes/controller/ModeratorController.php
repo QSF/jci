@@ -150,6 +150,7 @@ class ModeratorController extends ApplicationController{
 		if ($this->request->get('listParent') != null){//lista os pais
 			while ($field->getParent() != null){
 				$field = $field->getParent();
+				$parentUsers = $userDao->getUsersByField($field);
 				foreach ($users as $user) {
 					array_push($users,  $user);
 				}
@@ -157,7 +158,9 @@ class ModeratorController extends ApplicationController{
 		}
 		$users = array_slice($users, $pagePosition, $this->maxResults);
 
-		$this->assignPagination($page, $users, null);
+		// $this->request->setRequestAction("moderator", "searchByField");
+		$attributes['id'] = $fieldId;
+		$this->assignPagination($page, $users, $attributes);
 
 		$this->display("UsersList");
 	}
