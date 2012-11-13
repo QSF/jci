@@ -20,6 +20,17 @@ class DonationDAODoctrine extends DAODoctrine implements DonationDAO{
 		$dql = "SELECT d FROM Donation d ORDER BY d.date DESC";
 		return $this->resultPaginated($dql, $positionResults, $maxResults, false);
 	}
+
+	/**
+	*	Método que procura doações dado um determinado campo
+	*	@param $field campo que serve como filtro.
+	*	@return $donations lista de doações que é feita com este campo.
+	*/
+	public function findByField($field){
+		$dql = 'SELECT d FROM Donation d JOIN d.field f WHERE f.id ='  . $field->getId() . 'ORDER BY d.date DESC';
+		$query = $this->entityManager->createQuery($dql);
+		return $query->getResult();
+	}
 }
 
 ?>

@@ -12,7 +12,8 @@ use Doctrine\ORM\Query\ResultSetMapping;
 */
 class UserDAODoctrine extends DAODoctrine implements UserDAO{
 
-	/** Método que retorna o objeto equivalente à uma coluna do banco que possui o email passado.
+	/** 
+	*	Método que retorna o objeto equivalente à uma coluna do banco que possui o email passado.
 	*
 	*
 	*	@param $email email do usuário que será procurado.
@@ -33,6 +34,36 @@ class UserDAODoctrine extends DAODoctrine implements UserDAO{
 
 		$query = $this->entityManager->createNativeQuery('SELECT id,email,user_type FROM user WHERE email = ?', $rsm);
 		$query->setParameter(1, $email);
+
+		//pega o tipo do usuário e o seu id
+		$result = $query->getResult();
+
+		if ($result == null)//caso não tenha ninguém com este email, return null.
+			return null;
+
+		$this->entityManager->detach($result[0]);//tem que estar unmanaged para buscar completo.
+		//o $result[0] é o objeto retornado.
+		return  $this->findById($result[0]);
+	}
+
+	/** 
+	*	Método que retorna o objeto equivalente à uma coluna do banco que possui o id passado.
+	*
+	*
+	*	@param $id id do usuário que será procurado.
+	*	@return object objeto referente a tupla com este id na tabela.
+	*	@return null caso não tenha nenhuma tupla com este id.
+	*
+	*/
+	public function findOneById($id){
+		$rsm = new ResultSetMapping;
+		$rsm->addEntityResult('User', 'u');
+		$rsm->addFieldResult('u', 'id', 'id');
+		$rsm->addMetaResult('u', 'user_type', 'user_type'); //discriminator
+		$rsm->setDiscriminatorColumn('u', 'user_type');
+
+		$query = $this->entityManager->createNativeQuery('SELECT id,user_type FROM user WHERE id = ?', $rsm);
+		$query->setParameter(1, $id);
 
 		//pega o tipo do usuário e o seu id
 		$result = $query->getResult();
