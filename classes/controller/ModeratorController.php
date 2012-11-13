@@ -151,7 +151,7 @@ class ModeratorController extends ApplicationController{
 			while ($field->getParent() != null){
 				$field = $field->getParent();
 				$parentUsers = $userDao->getUsersByField($field);
-				foreach ($users as $user) {
+				foreach ($parentUsers as $user) {
 					if (!in_array($user, $users))//ver se um user já não está no array de users
 						array_push($users,  $user);
 				}

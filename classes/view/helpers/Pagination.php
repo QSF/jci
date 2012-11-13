@@ -1,6 +1,7 @@
 <?php
 
 	function echoPagination($pagesNum, $currentPage, $url){
+		echo "<div class=\"pagination\">";
 		if($pagesNum > 1){ //Area da Paginação ?>
 		<ul>
 		<?php $url= $url."&page=";?>
