@@ -7,8 +7,17 @@
  * Esse controller também faz uso da paginação.
  */
 
-class ModeratorController extends ApplicationController
-{
+class ModeratorController extends ApplicationController{
+
+	/** 
+	* Dao que realiza o crud que nossas classes irão usar
+	*/
+	private $dao;
+
+	public function __construct(Request $request){
+		parent::__construct($request);	
+		$this->dao = ServiceLocator::getInstance()->getDAO("DAO");
+	}
 
 	/** 
 	* Método que mostra as entidades que estão esperando validação
@@ -88,6 +97,67 @@ class ModeratorController extends ApplicationController
 		$attributes['searchOption'] = $searchOption;
 		$attributes['searchField'] = $searchWord;
 		$this->assignPagination($page, $users, $attributes);
+
+		$this->display("UsersList");
+	}
+
+	/**
+	*	Método que redireciona para uma página de busca de usuário com filtro por área de atuação(campo)
+	*/
+	public function redirectSearchField(){
+		$fieldDao = ServiceLocator::getInstance()->getDAO("FieldDAO");
+		$fields = $fieldDao->findAllMacros();//pega todos os campos macros
+		$this->view->assign("fields", $fields);
+
+		$page = 'UserSearchField';
+		$this->view->display($page);
+	}
+
+	/**
+	*	Método que busca usuário de acordo com o campo passado.
+	*/
+	public function searchByField(){
+
+		$page = $this->getPage();
+
+		$pagePosition = $page * $this->maxResults;
+
+		$fieldId = $this->request->get("id");
+
+		if ($fieldId === null){
+			$this->view->assignError('Campo não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display("404");
+			return;
+		}
+
+		$field = new Field;
+		$field->setId($fieldId);
+
+		$field = $this->dao->findById($field);
+
+		if ($field == null){
+			$this->view->assignError('Campo não existe!');
+			//carregar no log de erros, com informações para o dev.
+			$this->view->display("404");
+			return;	
+		}
+
+		$userDao = ServiceLocator::getInstance()->getDAO("UserDAO");
+
+		$users = $userDao->getUsersByField($field);
+
+		if ($this->request->get('listParent') != null){//lista os pais
+			while ($field->getParent() != null){
+				$field = $field->getParent();
+				foreach ($users as $user) {
+					array_push($users,  $user);
+				}
+			}
+		}
+		$users = array_slice($users, $pagePosition, $this->maxResults);
+
+		$this->assignPagination($page, $users, null);
 
 		$this->display("UsersList");
 	}

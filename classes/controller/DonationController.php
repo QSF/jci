@@ -229,7 +229,6 @@ class DonationController extends ApplicationController{
 		if ($this->request->get('listParent') != null){//lista os pais
 			while ($field->getParent() != null){
 				$field = $field->getParent();
-				echo 'Field: ' . $field->getName();
 				foreach (array_reverse($donationDAO->findByField($field)) as $donation) {
 					array_push($donations,  $donation);
 				}
