@@ -2,7 +2,7 @@
 /**
 *	Função que exibe o feedback do voluntario
 */
-function printFeedBackVolunteer($var,$userId){ ?>
+function printFeedBackVolunteer($var){ ?>
 	<?php if ($var->getDateFeedBackVolunteer() != null) {?>
 	<p>***FeedBack Voluntário***</p> 
 	<b>Data do feedBack: </b><?php echo $var->getDateFeedBackVolunteer()->format('d/m/Y H:i:s'); ?>
@@ -46,8 +46,8 @@ function printDonation($var, $isModerador, $userId){?>
 	<?php
 	printSingleDonation($var);
 	if ($isModerador) { //é página de Moderador?>
-		<br><a href="./index.php?controller=donation&action=redirectUpdate&id_donation=<?php echo $var->getId();?>"><i class="icon-edit"></i></a>
-		<a href="./index.php?controller=donation&action=delete&id_donation=<?php echo $var->getId();?>"><i class="icon-remove"></i></a>
+		<br><a href="./index.php?controller=donation&action=redirectUpdate&id_donation=<?php echo $var->getId();?>" title="Editar"><i class="icon-edit"></i></a>
+		<a href="./index.php?controller=donation&action=delete&id_donation=<?php echo $var->getId();?>" title="Remover"><i class="icon-remove"></i></a>
 		<?php
 		printFeedBackVolunteer($var);
 		printFeedBackEntity($var); 

@@ -1,5 +1,7 @@
 <h3>Lista de Usuários</h3>
 
+<?php echoPagination($pagesNum, $currentPage, $url);?>
+
 <?php include HELPER_PATH."/Pagination.php";?>
 <?php foreach($users as $user){ ?>
 	<div class="grid_8 alpha omega bolder">

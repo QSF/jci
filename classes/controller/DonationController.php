@@ -230,7 +230,7 @@ class DonationController extends ApplicationController{
 	*	@return false caso contrário.
 	*/
 	protected function isModerator(){
-		return !($this->request->getUserType() != 'Moderador');
+		return $this->request->getUserType() == 'Moderator';
 	}
 
 	/**
