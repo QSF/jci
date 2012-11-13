@@ -56,6 +56,11 @@ abstract class User
      **/
     protected $howYouKnow;
 
+    /**
+    * @Column(type="boolean")
+    */
+    protected $active;
+
     /** Relação do publico atendido.
      * @ManyToMany(targetEntity="PublicServed", inversedBy="users", cascade={"merge"})
      * @JoinTable(name="users_public")
@@ -231,6 +236,14 @@ abstract class User
 
     public function setCep($cep){
         $this->cep = $cep;
+    }
+
+    public function getActive(){
+        return $this->active;
+    }
+
+    public function setActive($active){
+        $this->active = $active;
     }
 }
 

@@ -35,6 +35,11 @@ class Moderator{
     protected $email;
 
     /**
+    * @Column(type="boolean")
+    */
+    protected $active;
+
+    /**
      * @OneToMany(targetEntity="Donation", mappedBy="moderator")
      **/
 	protected $donations;
@@ -135,6 +140,14 @@ class Moderator{
 
     public function getName(){
         return $this->login;
+    }
+
+    public function getActive(){
+        return $this->active;
+    }
+
+    public function setActive($active){
+        $this->active = $active;
     }
 
 }
