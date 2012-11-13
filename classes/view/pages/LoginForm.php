@@ -2,7 +2,7 @@
   <div class="control-group">
     <label class="control-label" for="inputEmail"><?php echo $nameDisplay ?></label>
     <div class="controls">
-      <input type="text" id="inputEmail" name="<?php echo $inputType?>">
+      <input type="text" id="inputEmail" name="<?php echo $inputType?>" placeholder="<?php echo $nameDisplay ?>">
     </div>
   </div>
   <div class="control-group">
@@ -16,7 +16,7 @@
 <!--       <label class="checkbox">
         <input type="checkbox"> Lembrar
       </label> -->
-      <button type="submit" class="btn">Login</button>
+      <button type="submit" class="btn">Logar</button>
     </div>
   </div>
 </form>
