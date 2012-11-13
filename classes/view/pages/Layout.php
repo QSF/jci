@@ -5,6 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>JCI - Londrina</title>
 
+
+  <link rel="shortcut icon" href="./assets/img/favicon.png" type="image/x-icon">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
   <?php foreach($arrayJS as $js) { ?>
   <script type="text/javascript" src="./assets/js/<?php echo $js?>"></script>
