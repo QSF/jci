@@ -21,12 +21,13 @@
 
 	&nbsp;&nbsp;
 	
+	<?php if(! isset($hideReport)) {?>	
 	<a href="./index.php?controller=report&action=generateReportUser&user_id=<?php echo $user->getId();?>
 		&user_type=<?php echo get_class($user);?>" title="Gerar Relatório">
 		<i class="icon-print"></i>
 	</a>
-
 	&nbsp;&nbsp;
+	<?php } ?>	
 
 	
 	<a style="text-decoration: none;" href="./index.php?controller=registration&action=redirectUserDelete&user_id=<?php echo $user->getId();?>

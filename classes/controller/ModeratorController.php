@@ -76,6 +76,12 @@ class ModeratorController extends ApplicationController{
 		$attributes['userType'] = $userType;
 		$this->assignPagination($page, $users, $attributes);
 
+		//Se o tipo de usuario for o moderador
+		//ele não pode mostrar a opção de gerar relatório
+		if($userType == "Moderator"){
+			$this->view->assign("hideReport", true);
+		}
+
 		$this->display("UsersList");
 	}
 
@@ -90,7 +96,7 @@ class ModeratorController extends ApplicationController{
 		$dao = ServiceLocator::getInstance()->getDAO("UserDAO");
 		if($searchOption == 'documents'){}
 			//$this->setDocuments();
-		
+
 		$users = $dao->search($searchWord, $searchOption, $pagePosition, $this->maxResults);
 
 		$this->request->setRequestAction("moderator", "search");

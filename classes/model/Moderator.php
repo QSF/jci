@@ -133,6 +133,10 @@ class Moderator{
         return $this->donations->toArray();
     }
 
+    public function getName(){
+        return $this->login;
+    }
+
 }
 
 ?>

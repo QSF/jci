@@ -126,6 +126,12 @@ class Moderator extends \Moderator implements \Doctrine\ORM\Proxy\Proxy
         return parent::getDonations();
     }
 
+    public function getName()
+    {
+        $this->__load();
+        return parent::getName();
+    }
+
 
     public function __sleep()
     {

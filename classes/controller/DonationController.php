@@ -150,10 +150,16 @@ class DonationController extends ApplicationController{
 		$user = $userDao->findOneById($id);
 
 		if ($user === null){
-			$this->view->assignError('Usuário não existe!');
-			//carregar no log de erros, com informações para o dev.
-			$this->view->display("404");
-			return;
+			$user = new Moderator;
+			$user->setId($id);
+			$user = $this->dao->findById($user);			
+
+			if ($user === null){
+				$this->view->assignError('Usuário não existe!');
+				//carregar no log de erros, com informações para o dev.
+				$this->view->display("404");
+				return;
+			}
 		}
 		//pegar apenas uma parte, sendo que a ordem é invertida
 		$donations = array_slice(array_reverse($user->getDonations()), $pagePosition, $this->maxResults) ;
