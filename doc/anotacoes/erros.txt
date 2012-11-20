@@ -1,4 +1,5 @@
 //Aqui ficarão os erros de verdade, bugs comprometedores, quando não está funcionando do jeito certo.
 ###Bug arrumado### Quando um moderador edita uma entidade, sua senha fica como vazia. 
 ###Bug arrumado### As Entidades que ainda não foram aceitas estão aparecendo na lista de entidades para intermediar doações.
+Ao editar uma doação, o feedback some. Isso ocorre devido ao getDonation ser usado tb para a edição.
 Não exclui nenhum usuário que participe de uma doação (O esquema era fazer um lance de desativar o cadastro apenas).
