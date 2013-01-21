@@ -1,7 +1,7 @@
 <?php 
 //este arquivo será incluso no index. Ele possui todas as configurações do nosso projeto.
 define("LIB_PATH"    		, realpath('../lib')          					);
-define("PUBLIC_PATH"        , $_SERVER['SERVER_NAME']."/public"          	);
+define("PUBLIC_PATH"        , $_SERVER['SERVER_NAME']."/jci/public"          	);
 define("VIEW_PATH"    		, realpath('../classes/view') 					); 
 define("CONTROLLER_PATH"    , realpath('../classes/controller') 			);
 define("MODEL_PATH"			, realpath('../classes/model')      			); 

@@ -5,7 +5,6 @@
  * @TODO: Incluir de uma forma mais elegante
  */
 require_once("../config/config.php");  
-
 /**
  * Script inicial que lida com autorização de visualização de páginas e
  * despacha para as ações designadas através do front controller.

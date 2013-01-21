@@ -21,8 +21,7 @@ class PdfGenerator{
 
 		$pdf->SetAuthor('JCI - Londrina');
 		$pdf -> SetTitle('Cruzamento de dados - JCI Londrina');
-		$pdf->Image("./assets/img/logo-pdf.jpg", 6, 1, 10);
-
+		$pdf->Image("./assets/img/logo-pdf.jpg", 6, 1, 10, 0, 'JPG',PUBLIC_PATH."/index.php");
 
 		$pdf->setXY(6,7);
 		$pdf->SetFont('Arial','B',22);
@@ -72,38 +71,45 @@ class PdfGenerator{
 
 		/***  Linha Horizontais ***/	
 
+
 		$y = 13;
 		$pdf->Line(2,$y,19.3,$y);
 		for($i = 0; $i < count($listVolunteer) || $i < count($listEntities); $i++){
 
 			if(array_key_exists($i, $listEntities)){
 
+				$entity = $listEntities[$i];
 				/***  Nome da Entidade Iterada ***/
 				$pdf->SetFont('Arial','B',10);
 				$pdf->setXY(2 - ($pdf->GetStringWidth("Nome")/2),$y);
 				$pdf->SetFont('Arial','',9);
-				$pdf->cell(4,1,utf8_decode($listEntities[$i]->getName()),0,0,'C',false);
+
+
+				$pdf->cell(4,1,utf8_decode($entity->getName()),0,0,'C',false,$this->returnStringURLUser($entity));
 
 				/***  Email da Entidade Iterada ***/
 				$pdf->SetFont('Arial','B',10);
 				$pdf->setXY(5.65 - ($pdf->GetStringWidth('Campo')/2),$y);
 				$pdf->SetFont('Arial','',9);
-				$pdf->cell(6,1,utf8_decode($this->returnStringFields($listEntities[$i]->getActingArea())),0,0,'C',false);
+
+				$pdf->cell(6,1,utf8_decode($this->returnStringFields($entity->getActingArea())),0,0,'C',false);
 			}
 
 			if(array_key_exists($i, $listVolunteer)){
 
+				$volunteer = $listVolunteer[$i];
 				/***  Nome da Entidade Iterada ***/
 				$pdf->SetFont('Arial','B',10);
 				$pdf->setXY(11.5 - ($pdf->GetStringWidth("Nome")/2),$y);
 				$pdf->SetFont('Arial','',9);
-				$pdf->cell(4,1,utf8_decode($listVolunteer[$i]->getName()),0,0,'C',false);
+
+				$pdf->cell(4,1,utf8_decode($volunteer->getName()),0,0,'C',false, $this->returnStringURLUser($entity));
 
 				/***  Email da Entidade Iterada ***/
 				$pdf->SetFont('Arial','B',10);
 				$pdf->setXY(15.3 - ($pdf->GetStringWidth('Campo')/2),$y);
 				$pdf->SetFont('Arial','',9);
-				$pdf->cell(6,1,utf8_decode($this->returnStringFields($listVolunteer[$i]->getActingArea())),0,0,'C',false);
+				$pdf->cell(6,1,utf8_decode($this->returnStringFields($volunteer->getActingArea())),0,0,'C',false);
 			}
 
 			$y++;
@@ -115,6 +121,16 @@ class PdfGenerator{
 
 	private function returnStringFields($fields){
 		return implode(', ',$fields);
+	}
+
+	private function returnStringURLField($field){
+		return PUBLIC_PATH."/index.php?controller=Report&action=generateReportField&id=".$field->getId();
+	}
+
+	private function returnStringURLUser($user){
+		$actionUser = PUBLIC_PATH."/index.php?controller=registration&action=read&user_id=";
+		$link = $actionUser . $user->getId() ."&profile=".get_class($user);
+		return $link;
 	}
 
 	public function generateReportUser($userTarget, $listUsers){
@@ -131,8 +147,9 @@ class PdfGenerator{
 
 		$pdf->SetFont('Arial','',12);
 		$pdf->Ln();
-		$fields = "Áreas de Atuação: ". implode(', ', $userTarget->getActingArea());
-		$pdf->write(1, utf8_decode($fields));
+		$labelFields = "Áreas de Atuação: ";
+		$pdf->write(1, utf8_decode($labelFields));
+		$this->writeFieldsWithLink($userTarget->getActingArea(), $pdf);
 
 		$pdf->Ln();
 
@@ -172,8 +189,7 @@ class PdfGenerator{
 			$pdf->setXY(2.9 - ($pdf->GetStringWidth("Nome")/2),$y);
 			$pdf->SetFont('Arial','',8);
 			$nameUTF8 = utf8_decode($user->getName());
-			$pdf->cell(6.9,1,$nameUTF8,0,0,'C',false);
-
+			$pdf->cell(6.9,1,$nameUTF8,0,0,'C',false, $this->returnStringURLUser($user));
 			//echo $pdf->GetStringWidth($elem['email'])/2;
 			$pdf->SetFont('Arial','B',10);
 			$pdf->setXY(7.7 - ($pdf->GetStringWidth('Email')/2),$y);
@@ -201,6 +217,18 @@ class PdfGenerator{
 
 		$pdf->Output();
 
+	}
+
+	private function writeFieldsWithLink($fields, &$pdf){
+		$len = count($fields);
+		$i = 0;
+		foreach($fields as $field){
+			$label = $field->getName();
+			if($i != $len-1)
+			 	$label = $label . ", ";
+			$pdf->write(1, utf8_decode($label), $this->returnStringURLField($field));
+			$i++;
+		}
 	}
 
 	private function getSameFields($userTarget, $userReport){
