@@ -12,7 +12,9 @@
 </ul>
 
 <?php
-
+	
+// Helper que lista os campos macros.
+// Os campos filhos serão atualizados por AJAX
 function listFields($var,$user){
 	$arrayFields = array(); 
 	?>
@@ -25,12 +27,8 @@ function listFields($var,$user){
 	?> >
 	<?php echo $var->getName() ?>
 	</label>
-	<ul>
-	<?php 
-		foreach ($var->getChildren() as $child){
-			listFields($child,$user);
-		}  ?>
-	</ul>  
-
+	<div id="children_<?php echo $var->getId() ?>"></div>
 	<?php 
 	return $arrayFields; } ?>	
+
+

@@ -76,7 +76,8 @@ class ApplicationController{
 	  *
 	  */
 	protected function displayJSON($arrayJSON){
-
+		// echo $arrayJSON;
+		echo json_encode($arrayJSON);
 	}
 
 	/**

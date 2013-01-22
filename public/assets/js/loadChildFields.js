@@ -1,8 +1,47 @@
 //$(function(){
 $(document).ready(function(){
 
-	$(".actingArea").click(function(){
-		
+	$(".checkbox").click(function(event){
+
+    parentId = event.target.value;
+    
+    if($("#checkbox"+parentId).is(":checked")){
+      $.ajax({
+      url: "./index.php?controller=field&action=findChildrenJSON",
+      type: "GET",
+      dataType: "json",
+      data: {"field_id": parentId},
+      success: function(data){
+        var container = $('#children_'+parentId);
+        var html = '<div id=cb'+parentId+'>';
+        console.log(data);
+        for( var key in data){
+
+          var name = data[key];
+          console.log(name);
+          html += 
+            '<label class="checkbox">'+
+              '<input type="checkbox" id="checkbox'+key+'" value="'+key+'" />'+
+              name+
+            '</label>';      
+        }
+
+          html += '</div>';
+          console.log(html);
+          container.append($(html));
+      },
+      error: function(error){
+           console.log(error);
+      }
+
+      });
+    }
+    else{
+      $("#children_"+parentId).children().remove();
+    }  
+  });
+});
+/*		
 			parentId = event.target.value;
 			if($("#checkbox"+parentId).is(":checked")){
 				var container = $('#childFields');
@@ -20,5 +59,4 @@ $(document).ready(function(){
   			else{
   				$("#cb"+parentId).remove();
   			}
-	});
-});
+*/

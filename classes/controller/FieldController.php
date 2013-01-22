@@ -159,5 +159,22 @@ class FieldController extends ApplicationController{
 		$page = 'ManageFields';
 		$this->view->display($page);
 	}
+
+	public function findChildrenJSON(){
+		$macroFieldId = $this->request->get('field_id');
+
+		$macroField = new Field();
+		$macroField->setiD($macroFieldId);
+		$macroField = $this->dao->findById($macroField);
+
+		$childrenFields = $macroField->getChildren();
+		$childrenArray = [];
+		
+		foreach($childrenFields as $child){
+			$childrenArray[$child->getId()] = utf8_encode($child->getName());
+		}
+
+		$this->displayJSON($childrenArray);
+	}
 }
 ?>

@@ -34,6 +34,5 @@
 <?php require_once VIEW_PATH."/pages/forms/listFieldsCheckbox.php"; ?>
 
 
-
 <label for="cep">CEP</label>
 <input type="text" id="idCep" name="cep" value="<?php echo $user->getCep()?>"/>
