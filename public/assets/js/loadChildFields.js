@@ -21,7 +21,8 @@ $(document).ready(function(){
           console.log(name);
           html += 
             '<label class="checkbox">'+
-              '<input type="checkbox" id="checkbox'+key+'" value="'+key+'" />'+
+            '<input type="checkbox" '+ 
+            'id="checkbox'+key+'" value="'+key+'" name="actingArea[]"/>'+
               name+
             '</label>';      
         }
