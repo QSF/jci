@@ -72,15 +72,31 @@ class Request{
 	 * @return Retorna o atributo da requisição
 	 */
 	public function get($name){
+		$requestContent = null;
+
 		//checando se existe atributo no método GET 
 		if(isset($this->requestArrayGET[$name]))
-			return $this->requestArrayGET[$name];
+			$requestContent = $this->requestArrayGET[$name];
 
 		//checando se existe atributo no método POST
 		else if (isset($this->requestArrayPOST[$name]))
-			return $this->requestArrayPOST[$name];
+			$requestContent = $this->requestArrayPOST[$name];
 
-		return null;
+		// Checa se a entrada tem que ser obrigatoriamente um HTML
+		// Único tipo de entrada que se encaixa nesse perfil é o de conteúdo das notícias
+		if($this->isHTMLInput($name)){
+			return $requestContent;
+		}
+
+		// Checa se o objeto retornado é um array
+		if(is_array($requestContent)){
+			return $this->returnRequestArray($requestContent);
+		}
+		
+		// O único tipo restante é o de string
+	   	$requestContent = htmlentities($requestContent);
+
+		return $requestContent;
 	}
 	
 	/**
@@ -258,5 +274,24 @@ class Request{
 		$builder = new ObjectBuilder($this);
 		return $builder->getDonation();
 	}
+
+	private function isHTMLInput($name)
+	{
+		$traces = debug_backtrace();
+		// Checa se o método chamado foi buildNews e se o nome da requisição é "content"
+		$isHTML = ( ($traces[2]["function"] === "buildNews") && ($name === "content") )? true : false; 
+		return $isHTML;
+	}
+
+	private function returnRequestArray($requestContent){
+		// Por enquanto, os únicos objetos da requisição que são arrays são o public e o fields
+		// Cuidado!!! Pode se tornar um problema quando tiver um array de array
+		$arrayInput = array();
+		foreach($requestContent as $requestUnit){
+			array_push($arrayInput, htmlentities($requestUnit));
+		}
+		return $arrayInput;
+	}
+
 }
 ?>
