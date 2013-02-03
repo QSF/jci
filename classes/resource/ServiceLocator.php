@@ -3,9 +3,9 @@
 /*Inclue as classes que possuem o factory. Precisa ver o melhor lugar para deixar os factorys*/
 require_once (REGISTERS_PATH . "/ViewFactory.php");
 require_once (REGISTERS_PATH . "/DAODoctrineFactory.php");
+require_once (REGISTERS_PATH . "/LogFactory.php");
 require_once (RESOURCE_PATH  . "/ResourceRegisters.php");
 require_once (RESOURCE_PATH  . "/Cache.php");
-
 
 /** Classe responsável por instanciar nossos recursos.
 *
@@ -65,6 +65,7 @@ class ServiceLocator
 		//instancia as factorys
 		$this->resourceRegisters->add('DAO', new DAODoctrineFactory());
 		$this->resourceRegisters->add('View', new ViewFactory());
+		$this->resourceRegisters->add('Log', new LogFactory());
 	}
 
 	/** Método que pegamos uma instância do nosso service locator.
@@ -131,6 +132,10 @@ class ServiceLocator
 	*/
 	public function getView($name){
 		return $this->getResource($name,'View');
+	}
+
+	public function getLog($name) {
+		return $this->getResource($name, 'Log');
 	}
 }
 ?>

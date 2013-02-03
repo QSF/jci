@@ -16,6 +16,9 @@
 		</form>
 	</div>
 	<div class="grid_6 omega">
+		<!-- Favor Gustavo arrumar isso, pois não sei mexer em css -->
+		<ul>
+			<li> <a href="./index.php?controller=Application&action=directDisplay&page=passwordRecoveryForm">Esqueci minha senha</a></li>
 		<ul>
 		  <li class="dropdown">
 		    <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <h2 class="center-user-menu orange">Junte-se a nós<b class="caret orange-caret center-caret"></b></h2></a>

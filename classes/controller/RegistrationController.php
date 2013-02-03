@@ -46,7 +46,7 @@ class RegistrationController extends ApplicationController{
 	* @todo Estudas sobre o lance de gerenciamento e cascata para retirar o clear.
 	* @todo Checar o usuário que é passado.
 	*/
-	public function update(){
+	public function update() {
 		
 		//TODO: checar se o usuário tem permissão de editar
 		$userUpdate = $this->request->getUser();
