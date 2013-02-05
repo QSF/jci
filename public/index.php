@@ -20,12 +20,18 @@ session_start();
 //Encapsulando a requição
 $request = new Request();
 
-//$auth = new Authorization($request);
-//Passando um filtro para checar se o usuário tem permissão 
-//$auth->authorizate();
+$frontController = new FrontController($request);
 
-$front_controller = new FrontController($request);
-$front_controller->dispatch();
+$frontController->changeVoidURL();
+
+$auth = new Authorization($request);
+//Passando um filtro para checar se o usuário tem permissão 
+$authorize = $auth->authorizate();
+if(! $authorize){
+	$request->dontAllowAccess();
+}
+
+$frontController->dispatch();
 
 ?>
 

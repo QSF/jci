@@ -160,6 +160,9 @@ class FieldController extends ApplicationController{
 		$this->view->display($page);
 	}
 
+	/** 
+	* Retorna por AJAX os filhos do field passado por id
+	*/
 	public function findChildrenJSON(){
 		$macroFieldId = $this->request->get('field_id');
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hierarchy>
+
+	<role name="ADMINISTRATOR">
+		<role-name>MODERATOR</role-name>
+	</role>
+	
+	<role name="MODERATOR">
+		<role-name>USER</role-name>
+	</role>
+
+	<role name="USER">
+		<role-name>GUEST</role-name>
+	</role>
+
+</hierarchy>

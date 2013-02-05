@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<security>
+
+	<all>
+		<controller>DONATION</controller>
+	</all>
+
+	<controller name="REGISTRATION">
+		
+		<action name="READLOGGEDUSER" />
+		
+		<action name="REDIRECTLOGGEDUSERUPDATE" />
+		<action name="REDIRECTLOGGEDUSERDELETE" />
+
+		<action name="UPDATE">
+			<check_id />
+			<exception action="DENY">
+				<user>MODERATOR</user>
+			</exception>
+		</action>
+		
+		<action name="DELETE">
+			<check_id />
+			<exception action="DENY">
+				<user_type>MODERATOR</user_type>
+			</exception>
+		</action>
+
+	</controller>
+
+</security>

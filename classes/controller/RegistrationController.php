@@ -48,12 +48,11 @@ class RegistrationController extends ApplicationController{
 	*/
 	public function update(){
 		
-		//TODO: checar se o usuário tem permissão de editar
 		$userUpdate = $this->request->getUser();
 		if ($userUpdate === null){
 			$this->view->assignError('Erro ao editar!');
 			//carregar no log de erros, com informações para o dev.
-			$view->display("404");
+			$this->view->display("404");
 			return;
 		}
 
@@ -88,7 +87,7 @@ class RegistrationController extends ApplicationController{
 		$user = new $userType();
 		$user->setId($userId);
 
-		$this->authorize($user);
+		// $this->authorize($user);
 
 		$user = $this->dao->findById($user);
 
@@ -124,7 +123,7 @@ class RegistrationController extends ApplicationController{
 	*	@see self::redirectUpate
 	*/
 	public function redirectLoggedUserUpdate(){
-		$userType = $this->request->getUserType();//e se for guest?
+		$userType = $this->request->getUserType();
 		$user = $this->request->getUserSession();
 		$this->redirectUpdate($userType, $user->getId());
 	}
@@ -163,7 +162,7 @@ class RegistrationController extends ApplicationController{
 		$user = new $userType();
 		$user->setId($userId);
 	
-		$this->authorize($user);
+		// $this->authorize($user);
 
 		$user = $this->dao->findById($user);
 
@@ -220,7 +219,7 @@ class RegistrationController extends ApplicationController{
 		$user = new $userType();
 		$user->setId($userId);
 		//confirmar se é permitido ou não.
-		$this->authorize($user);
+		// $this->authorize($user);
 		//o user precisa ser carregado para informar o nome do usuário ná página de deleção
 		$user = $this->dao->findById($user);
 
@@ -327,11 +326,6 @@ class RegistrationController extends ApplicationController{
 		$userType = $this->request->get("profile");
 
 		$this->doRead($userType, $userId);
-	}
-
-	public function authorize($user){
-		//Futuramente terá autorizacao
-		//To pensando em fazer por sql
 	}
 
 }

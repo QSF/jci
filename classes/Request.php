@@ -114,6 +114,7 @@ class Request{
 	}
 	
 	public function getControllerName(){
+
 		return $this->controllerName;
 	}
 	
@@ -291,6 +292,11 @@ class Request{
 			array_push($arrayInput, htmlentities($requestUnit));
 		}
 		return $arrayInput;
+	}
+
+	public function dontAllowAccess(){
+		$this->setControllerName("application");
+		$this->setActionName("dontAllow");
 	}
 
 }

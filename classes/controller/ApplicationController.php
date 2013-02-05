@@ -136,5 +136,10 @@ class ApplicationController{
 		$subject = "JCI - Londrina: ". $subject;
 		mail($mailTo, $subject, $message, $headers);
 	}
+
+	public function dontAllow(){
+		$this->view->assignError("Você não tem permissão para ver essa página");
+		$this->display("Home");
+	}
 }
 ?>

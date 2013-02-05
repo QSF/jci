@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<security>
+	
+	<all>
+		<controller>APPLICATION</controller>
+		<controller>GUEST</controller>
+		<controller>LOGIN</controller>
+	</all>
+
+	<controller name="REGISTRATION">
+		
+		<action name="REDIRECTCREATE">
+			<!-- Não permite redirecionar para o formulário ou criar moderadores sem estar logado -->
+			<exception>
+				<user>MODERATOR</user>
+			</exception>
+		</action>
+
+		<action name="CREATE">
+			<exception>
+				<page>MODERATORFORM</page>
+			</exception>
+		</action>
+
+	</controller>
+
+</security>

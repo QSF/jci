@@ -63,12 +63,6 @@ class DonationController extends ApplicationController{
 		$this->view->display($page);
 	}
 
-
-	public function authorize($user){
-		//Futuramente terá autorizacao
-		//To pensando em fazer por sql
-	}
-
 	public function create(){
 		$donation = $this->request->getDonation();
 		if ($donation === null){

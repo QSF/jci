@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<security>
+
+	<all>
+		<controller>DONATION</controller>
+		<controller>MODERATOR</controller>
+		<controller>REGISTRATION</controller>
+		<controller>REPORT</controller>
+		<controller>USERS</controller>
+		<controller>PUBLIC</controller>
+		<controller>NEWS</controller>
+		<controller>FIELD</controller>
+	</all>
+
+	<controller name="REGISTRATION">
+
+		<action name="UPDATE">
+
+			<allow/>
+			<exception action="CHECK_ID">
+				<user>MODERATOR</user>
+			</exception>
+
+		</action>
+
+		<action name="DELETE">
+
+			<allow/>
+			<exception action="CHECK_ID">
+				<user_type>MODERATOR</user_type>
+			</exception>
+
+		</action>
+
+		<action name="CREATE">
+
+			<allow/>
+			<exception action="DENY">
+				<user>MODERATOR</user>
+			</exception>
+
+		</action>
+
+	</controller>
+
+	<controller name="MODERATOR">
+
+		<action name="FINDALL">
+
+			<allow/>
+			<exception action="DENY">
+				<userType>MODERATOR</userType>
+			</exception>
+
+		</action>
+
+	</controller>
+</security>
