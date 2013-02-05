@@ -11,17 +11,25 @@
 		
 		<action name="REDIRECTCREATE">
 			<!-- Não permite redirecionar para o formulário ou criar moderadores sem estar logado -->
+			<allow/>
 			<exception>
 				<user>MODERATOR</user>
 			</exception>
 		</action>
 
 		<action name="CREATE">
+			<allow/>
 			<exception>
 				<page>MODERATORFORM</page>
 			</exception>
 		</action>
 
+	</controller>
+
+	<controller name="FIELD">
+		<action name="FINDCHILDRENJSON">
+			<allow/>
+		</action>
 	</controller>
 
 </security>

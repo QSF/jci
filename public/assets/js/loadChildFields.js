@@ -13,7 +13,7 @@ $(document).ready(function(){
       data: {"field_id": parentId},
       success: function(data){
         var container = $('#children_'+parentId);
-        var html = '<div id=cb'+parentId+'>';
+        var html = '<div class=checkbox-filho id=cb'+parentId+'>';
         console.log(data);
         for( var key in data){
 

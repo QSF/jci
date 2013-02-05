@@ -255,3 +255,7 @@ width:100%; /* largura */
 .perfil {
   padding-bottom: 8px;
 }
+
+.checkbox-filho{
+  padding-left: 20px;
+}
