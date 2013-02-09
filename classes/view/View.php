@@ -110,7 +110,6 @@ abstract class View{
      *@param content
      */
   	public function display($content = "Home"){
-
       $errorMessage = $this->errorMessage;
       $successMessage = $this->successMessage;
       $this->loadResources($content);
@@ -119,7 +118,6 @@ abstract class View{
   		$arrayJS = $this->arrayJS;
       
       extract($this->paramArray);
-      
   		include PAGES_PATH."/".$this->layoutName.".php";
   	}
 
@@ -135,7 +133,6 @@ abstract class View{
     public function loadResources($content){
       //carrega o arquivo xml passado
       $resources = simplexml_load_file(CONFIG_PATH."/config-view.xml");
-
       foreach($resources->children() as $page)
 
         if($page["content"] == $content)

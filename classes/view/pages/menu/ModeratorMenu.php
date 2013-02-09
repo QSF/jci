@@ -22,6 +22,7 @@
     <ul class="dropdown-menu">
       <li><a href="./index.php?controller=public&action=redirectManage">Público Alvo</a></li>
       <li><a href="./index.php?controller=field&action=redirectManage">Campos</a></li>
+      <li><a href="./index.php?controller=PageManager&action=getPageList">Páginas</a></li>
     </ul>
   </li>
 
