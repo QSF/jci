@@ -44,7 +44,15 @@
 	</a>
 	&nbsp;&nbsp;
 	<?php } ?>
-		
+	
+	<?php if(isset($activateAction) && $activateAction === true) {?>
+	<a style="text-decoration: none;" href="./index.php?controller=moderator&action=activateUser&user_id=<?php echo $user->getId()?>
+		&user_type=<?php echo get_class($user);?>" title="Ativar Usuários">
+		<i class="icon-retweet"></i>
+	</a>
+	&nbsp;&nbsp;
+	<?php } ?>
+
 	<a href="./index.php?controller=donation&action=redirectUserDonations&user_id=<?php echo $user->getId()?>&user_type=<?php echo get_class($user)?>" title="Veja o histórico de doações">
 	Doações</a>
 	

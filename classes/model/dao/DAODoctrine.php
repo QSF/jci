@@ -131,12 +131,24 @@ class DAODoctrine implements DAO{
 	}
 
 	public function findAllPaginated($type, $positionResults, $maxResults){
-		$typeName = "name";
 
-		if($type == "Moderator")
+		if($type == "Moderator"){
 			$typeName = "login";
+			$additionalWhereClauses = null;
+		}
+		else{
+			$typeName = "name";
+			$additionalWhereClauses = " u.inactive = false ";
+		}
 		
-		$dql = "SELECT u FROM " . $type ." u". " ORDER BY u." . $typeName;
+		$dql = "SELECT u FROM " . $type . " u";
+
+		if($additionalWhereClauses){
+			$dql = $dql . " WHERE " . $additionalWhereClauses;
+		}
+
+		$dql = $dql . " ORDER BY u." . $typeName;
+
 		return $this->resultPaginated($dql, $positionResults, $maxResults, false);
 	}
 

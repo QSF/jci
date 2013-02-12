@@ -3,6 +3,7 @@
 
 	<all>
 		<controller>REGISTRATION</controller>
+		<controller>MODERATOR</controller>
 	</all>
 
 </security>

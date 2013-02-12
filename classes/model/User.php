@@ -77,6 +77,11 @@ abstract class User
      **/
     protected $cep;
 
+    /**
+    * @Column(type="boolean")
+    */
+    protected $inactive = false;
+
     //encapsulamento do public
     public function addPublic (PublicServed $public){
         if ($public === null)
@@ -231,6 +236,14 @@ abstract class User
 
     public function setCep($cep){
         $this->cep = $cep;
+    }
+
+    public function isInactive(){
+        return $this->inactive;
+    }
+
+    public function setInactive($inactive){
+        $this->inactive = $inactive;
     }
 }
 

@@ -189,16 +189,34 @@ class RegistrationController extends ApplicationController{
 			$logOut = true;
 		}
 
-		$this->dao->delete($user);
+		// Checa se o usuário tem doações
+		if($this->checkEmptyUserDonation($user)){
+
+			$this->dao->delete($user);
+			$this->view->assignSuccess("Usuário deletado com sucesso!");
+
+		}
+		else{
+			// Se for moderador não pode ser desativado
+			if(get_class($user) == "Moderator"){
+
+				$logOut = false;
+				$this->view->assignError("Moderador ainda tem doações!");
+			}
+			else{
+
+				$userDAO = ServiceLocator::getInstance()->getDAO("UserDAO");
+				$userDAO->desactivateUser($user);
+				$this->view->assignSuccess("Usuário desativado com sucesso!");
+			}
+		}
 
 		if ($logOut){//realiza logout(pode chamar o método do LoginController)
 			session_destroy();
 			$_SESSION = array();
 			//informar por email, ou alguma coisa assim.
-			$this->view->assignSuccess("Usuário deletado com sucesso!");
 			$this->redirect("Home");
 		}
-		$this->view->assignSuccess("Usuário deletado com sucesso!");
 		$this->display("Home");
 	}
 
@@ -326,6 +344,19 @@ class RegistrationController extends ApplicationController{
 		$userType = $this->request->get("profile");
 
 		$this->doRead($userType, $userId);
+	}
+
+	/**
+	* Checa se o usuário tem alguma doação.
+	*
+	*/
+	private function checkEmptyUserDonation($user){
+
+		if( get_class($user) == "Administrator")
+			return true;
+
+		// Checa se o usuário é moderador ou administrador
+		return (count($user->getDonations()) == 0 )? true : false;
 	}
 
 }

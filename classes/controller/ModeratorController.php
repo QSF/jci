@@ -224,5 +224,43 @@ class ModeratorController extends ApplicationController{
 		$this->view->assign("users", $users);
 		$this->display("UsersList");
 	}
+
+	public function getInactiveUsers(){
+		//Pegando pagina enviada pelo usuario no AppController
+		$page = $this->getPage();
+
+		//Saber qual a posição que essas páginas estão no DAO
+		$pagePosition = $page * $this->maxResults;
+		$dao = ServiceLocator::getInstance()->getDAO("UserDAO");
+		$users = $dao->findInactiveUsers($pagePosition, $this->maxResults);
+
+		// $this->request->setRequestAction("moderator", "getEntitiesWaitingApproval");
+		$this->assignPagination($page, $users, null);
+
+		$this->view->assign("activateAction",true);
+
+
+		//Variavel que precisa ser setada para mostrar a acao de validar no UsersList
+		// $this->view->assign("validateAction",true);
+
+		$this->display("UsersList");
+	}
+
+	public function activateUser(){
+
+		$userId = $this->request->get("user_id");
+		$userType = $this->request->get("user_type");
+		
+		$user = new $userType();
+		$user->setId($userId);
+		
+		$dao = ServiceLocator::getInstance()->getDAO("UserDAO");
+		$dao->activateUser($user);
+
+		//Variavel que precisa ser setada para mostrar a acao de validar no UsersList
+		$this->view->assignSuccess("Usuário reativado com sucesso!",true);
+		
+		$this->view->display("Home");
+	}
 }
 ?>

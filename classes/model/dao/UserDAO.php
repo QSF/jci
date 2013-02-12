@@ -26,5 +26,28 @@ interface UserDAO extends DAO{
 	*
 	*/
 	public function findOneById($id);
+
+	/** 
+	*	Método que retorna os usuários
+	*
+	*	@return Lista de usuários que tem a coluna inactive como falso
+	*/
+	public function findInactiveUsers($positionResults, $maxResults);
+
+	/** 
+	*	Método que ativa o usuário
+	*	Seta a coluna do inactive como false
+	*
+	*	@param usuário que se setará o inactive
+	*/
+	public function activateUser($user);
+
+	/** 
+	*	Método que desativa os usuários
+	*	Seta a coluna inactive como true
+	*	
+	*	@param usuário que se setará o inactive
+	*/
+	public function desactivateUser($user);
 }
 ?>

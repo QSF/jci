@@ -20,7 +20,7 @@ class EntityDAODoctrine extends UserDAODoctrine implements EntityDAO{
 	*/
 	public function getEntitiesNegativeSituation($positionResults, $maxResults){
 
-		$dql = "SELECT e FROM Entity e  WHERE e.situation = false";
+		$dql = "SELECT e FROM Entity e  WHERE e.situation = false AND e.inactive = false";
 
 		return $this->resultPaginated($dql, $positionResults, $maxResults, false);
 	}
@@ -31,7 +31,7 @@ class EntityDAODoctrine extends UserDAODoctrine implements EntityDAO{
 	*/
 	public function findAllEntitiesApproved(){
 
-		$dql = "SELECT e FROM Entity e  WHERE e.situation = true";
+		$dql = "SELECT e FROM Entity e  WHERE e.inactive = false AND e.situation = true";
 		$query = $this->entityManager->createQuery($dql);
 
 		return $query->getResult();
